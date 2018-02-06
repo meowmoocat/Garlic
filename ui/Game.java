@@ -1,10 +1,13 @@
 package ui;
 
+//this is the class for game it will have most of the functionality
+
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+@SuppressWarnings("serial")
 public class Game extends JFrame
 {
 	private static final int FRAME_WIDTH = 800;
@@ -15,6 +18,8 @@ public class Game extends JFrame
 		gameFrame();
 	}
 	
+	
+	//creates the frame for the board, text, and info panels
 	public void gameFrame()
 	{
 		SwingUtilities.invokeLater(new Runnable(){
