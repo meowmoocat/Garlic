@@ -6,7 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BorderLayoutDemo implements ActionListener{
+public class BorderLayoutDemo{
 	public static boolean RIGHT_TO_LEFT = false;
 
 	public static void addComponentsToPane(Container pane) {
@@ -108,11 +108,5 @@ public class BorderLayoutDemo implements ActionListener{
 				createAndShowGUI();
 			}
 		});
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-
 	}
 }
