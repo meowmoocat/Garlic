@@ -15,7 +15,6 @@ public class InformationPanel {
 	
 	static JScrollPane scrollPane = new JScrollPane(textArea);  
 	
-	 static JPanel panel2 = new JPanel();
 	final static JFrame frame = new JFrame("Information Panel");  
 	
 	private static AListener listener = new AListener();
