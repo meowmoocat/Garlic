@@ -41,20 +41,8 @@ public class TextPanel extends JPanel
 				textField.setText("");
 			}
 		});
-
 	}
 
-	//	public String getString()
-	//	{
-	//		String text = textField.getText();
-	////		textArea.append(text + "\n");
-	////		textField.selectAll();
-	////
-	////		//Make sure the new text is visible, even if there
-	////		//was a selection in the text area.
-	////		textArea.setCaretPosition(textArea.getDocument().getLength());
-	//		
-	//		return text;
-	//	}
+
 
 }

@@ -25,6 +25,7 @@ public class BoardPanel extends JPanel
 	private static final int SQUARES_WIDTH = 24;//width = 24
 	private static final int SQUARES_HEIGHT = 25;//height = 25
 	
+	public String[][] board = new String[SQUARES_HEIGHT][SQUARES_WIDTH];
 	private BufferedImage boardImage;
 	JPanel bPanel = new JPanel();
 	
@@ -45,20 +46,21 @@ public class BoardPanel extends JPanel
 		try
 		{
 			FileReader fileRead = new FileReader(squaresFile);
-			
+
+			@SuppressWarnings("resource")
 			BufferedReader br = new BufferedReader(fileRead);
-			
+
+			int i=0;
+
 			while((line = br.readLine()) != null)
 			{
-				for(int i=0; i<SQUARES_WIDTH; i++)
+				String[] tempArray = line.split(" ");
+				
+				for(int j=0; j<SQUARES_WIDTH; j++)
 				{
-					for(int j=0; j<SQUARES_HEIGHT; j++)
-					{
-						System.out.println("line: " + line);
-						System.out.println("i "+i+", j "+j);
-					}
+					board[i][j] = tempArray[j];
 				}
-				System.out.println("s");
+				i++;
 			}
 		}
 		catch(FileNotFoundException e)
@@ -68,6 +70,16 @@ public class BoardPanel extends JPanel
 		catch(IOException e)
 		{
 			System.out.println("error reading file!!");
+		}
+		
+		//test
+		for(int i=0; i<SQUARES_HEIGHT; i++)
+		{
+			for(int j=0; j<SQUARES_WIDTH; j++)
+			{
+				System.out.print(" " + board[i][j]);
+			}
+			System.out.println("");
 		}
 	}
 	
