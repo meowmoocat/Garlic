@@ -31,7 +31,7 @@ public class InfoPanel extends JPanel
 		
 		textArea.setEditable(false);
 		
-		this.add(textArea, BorderLayout.EAST);
+		this.add(scrollPane, BorderLayout.EAST);
 		
 	}
 	
