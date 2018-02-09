@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 public class InfoPanel extends JPanel
 {
 	
-	static JTextArea textArea = new JTextArea(200, 25);
+	static JTextArea textArea = new JTextArea(35, 30);
 	static JScrollPane scrollPane = new JScrollPane(textArea);
 	
 	
@@ -22,7 +22,6 @@ public class InfoPanel extends JPanel
 	
 	private void infoP()
 	{
-		
 		
 		scrollPane.setHorizontalScrollBarPolicy
 			(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
