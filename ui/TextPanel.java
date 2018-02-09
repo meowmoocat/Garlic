@@ -14,34 +14,50 @@ import javax.swing.SwingConstants;
 
 public class TextPanel extends JPanel
 {
-	JPanel tPanel;
+	
 	JTextField textField;
 	private static final int TEXT_WIDTH = 600;
 	private static final int TEXT_HEIGHT = 100;
 	
 	public TextPanel()
 	{
+		
 		textP();
-	}
+	}//textarea
 	
 	private void textP()
 	{
-		tPanel = new JPanel(new FlowLayout(SwingConstants.LEADING, 10, 10));
-		add(tPanel);
-
+//		tPanel = new JPanel(new FlowLayout(SwingConstants.LEADING, 10, 10));
+		
 		textField = new JTextField(50);
 		
-		textField.setText("Enter text here!!");
+		textField.setText("");
 
-		JTextArea textArea = new JTextArea(/*TEXT_WIDTH, TEXT_HEIGHT*/);
 
-		textArea.setFont(new Font("Serif", Font.ITALIC, 30));
-		textArea.setEditable(false);
-//		JScrollPane scrollPane = new JScrollPane(textArea);
-//		pane.add(scrollPane, BorderLayout.LINE_END);
 		
-		tPanel.add(textField, BorderLayout.LINE_END);
+		this.add(textField, BorderLayout.SOUTH);
+
+
+		//action listener that moves text to text area when return is pressed
+		textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 
 	}
+	
+//	public String getString()
+//	{
+//		String text = textField.getText();
+////		textArea.append(text + "\n");
+////		textField.selectAll();
+////
+////		//Make sure the new text is visible, even if there
+////		//was a selection in the text area.
+////		textArea.setCaretPosition(textArea.getDocument().getLength());
+//		
+//		return text;
+//	}
 
 }

@@ -10,14 +10,13 @@ import javax.swing.SwingUtilities;
 @SuppressWarnings("serial")
 public class Game extends JFrame
 {
-	private static final int FRAME_WIDTH = 800;
-	private static final int FRAME_HEIGHT = 800;
+	private static final int FRAME_WIDTH = 1000;
+	private static final int FRAME_HEIGHT = 700;
 	
 	public Game()
 	{
 		gameFrame();
 	}
-	
 	
 	//creates the frame for the board, text, and info panels
 	public void gameFrame()
