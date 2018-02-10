@@ -24,6 +24,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+//import ui.Weapons;
+
 @SuppressWarnings("serial")
 public class BoardPanel extends JPanel
 {
@@ -36,20 +38,25 @@ public class BoardPanel extends JPanel
 	private static final int TOTAL_SQUARES_HEIGHT = 25;//height = 25
 	
 	public String[][] board = new String[TOTAL_SQUARES_HEIGHT][TOTAL_SQUARES_WIDTH];
-	private BufferedImage boardImage;
-	private BufferedImage dagger;
-	private BufferedImage candlestick;
-	private BufferedImage rope;
-	private BufferedImage pipe;
-	private BufferedImage revolver;
-	private BufferedImage spanner;
+	
 	JPanel bPanel = new JPanel();
+	
+	private BufferedImage boardImage;
+	
+	//images for weapons
+	public BufferedImage dagger;
+	public BufferedImage candlestick;
+	public BufferedImage rope;
+	public BufferedImage pipe;
+	public BufferedImage revolver;
+	public BufferedImage spanner;
 	
 	public BoardPanel()
 	{
 		add(bPanel);
 		boardP();
-		squares();
+//		squares();			keeping for reference
+		
 		weaponsReadIn();
 	}
 	
@@ -112,6 +119,44 @@ public class BoardPanel extends JPanel
 			System.out.println("Could not find the image file "
 								+ ex.toString());
 		}
+	}
+	
+	
+	
+	public void paintComponent(Graphics g, int x, int y)
+	{
+		super.paintComponents(g);
+		Graphics2D g2 = (Graphics2D) g;
+		
+		g2.drawImage(boardImage, 0, 0, BOARD_WIDTH, BOARD_HEIGHT,
+						this);
+		
+		Color scarlettColour= new Color(255, 0, 0);
+		Color mustardColour= new Color(255, 255, 0);
+		Color whiteColour= new Color(255, 255, 255);
+		Color greenColour= new Color(50, 205, 50);
+		Color peacockColour= new Color(0, 191, 255);
+		Color plumColour= new Color(148, 0, 211);
+		
+		g2.setColor(scarlettColour);
+	    g2.fill(new Ellipse2D.Float(191, 542, 20, 20));
+	    g2.setColor(mustardColour);
+	    g2.fill(new Ellipse2D.Float(40, 390, 20, 20));
+	    g2.setColor(whiteColour);
+	    g2.fill(new Ellipse2D.Float(233, 23, 20, 20));
+	    g2.setColor(greenColour);
+	    g2.fill(new Ellipse2D.Float(342, 23, 20, 20));
+	    g2.setColor(peacockColour);
+	    g2.fill(new Ellipse2D.Float(534, 151, 20, 20));
+	    g2.setColor(plumColour);
+	    g2.fill(new Ellipse2D.Float(534, 433, 20, 20));
+	    
+	    g2.drawImage(dagger, 80, 70, 30, 30, this);
+	    g2.drawImage(candlestick, 80, 515, 30, 30, this);
+	    g2.drawImage(rope, 320, 515, 30, 30, this);
+	    g2.drawImage(pipe, 500, 70, 30, 30, this);
+	    g2.drawImage(revolver, 250, 70, 30, 30, this);
+		g2.drawImage(spanner, 500, 200, 30, 30, this);
 	}
 	
 	public void weaponsReadIn()
@@ -177,41 +222,19 @@ public class BoardPanel extends JPanel
 		}
 	}
 	
-	public void paintComponent(Graphics g)
+	public void paintComponentWeapons(Graphics w)
 	{
-		super.paintComponents(g);
-		Graphics2D g2 = (Graphics2D) g;
+		super.paintComponent(w);
+		Graphics2D w2 = (Graphics2D) w;
 		
-		g2.drawImage(boardImage, 0, 0, BOARD_WIDTH, BOARD_HEIGHT,
-						this);
-		
-		Color scarlettColour= new Color(255, 0, 0);
-		Color mustardColour= new Color(255, 255, 0);
-		Color whiteColour= new Color(255, 255, 255);
-		Color greenColour= new Color(50, 205, 50);
-		Color peacockColour= new Color(0, 191, 255);
-		Color plumColour= new Color(148, 0, 211);
-		
-		g2.setColor(scarlettColour);
-	    g2.fill(new Ellipse2D.Float(191, 542, 20, 20));
-	    g2.setColor(mustardColour);
-	    g2.fill(new Ellipse2D.Float(40, 390, 20, 20));
-	    g2.setColor(whiteColour);
-	    g2.fill(new Ellipse2D.Float(233, 23, 20, 20));
-	    g2.setColor(greenColour);
-	    g2.fill(new Ellipse2D.Float(342, 23, 20, 20));
-	    g2.setColor(peacockColour);
-	    g2.fill(new Ellipse2D.Float(534, 151, 20, 20));
-	    g2.setColor(plumColour);
-	    g2.fill(new Ellipse2D.Float(534, 433, 20, 20));
 	    
-	    g2.drawImage(dagger, 80, 70, 30, 30, this);
-	    g2.drawImage(candlestick, 80, 515, 30, 30, this);
-	    g2.drawImage(rope, 320, 515, 30, 30, this);
-	    g2.drawImage(pipe, 500,70,30,30,this);
-	    g2.drawImage(revolver, 250, 70, 30, 30, this);
-		g2.drawImage(spanner, 500, 200, 30, 30, this);
+	    w2.drawImage(dagger, 80, 70, 30, 30, this);
+	    w2.drawImage(candlestick, 80, 515, 30, 30, this);
+	    w2.drawImage(rope, 320, 515, 30, 30, this);
+	    w2.drawImage(pipe, 500,70,30,30,this);
+	    w2.drawImage(revolver, 250, 70, 30, 30, this);
+		w2.drawImage(spanner, 500, 200, 30, 30, this);
 	}
-	
+
 	
 }
