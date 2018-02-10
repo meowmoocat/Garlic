@@ -50,6 +50,7 @@ public class BoardPanel extends JPanel
 		add(bPanel);
 		boardP();
 		squares();
+		weaponsReadIn();
 	}
 	
 	public void squares()
@@ -111,7 +112,10 @@ public class BoardPanel extends JPanel
 			System.out.println("Could not find the image file "
 								+ ex.toString());
 		}
-		
+	}
+	
+	public void weaponsReadIn()
+	{
 		try
 		{
 			dagger = ImageIO.read(this.getClass().
