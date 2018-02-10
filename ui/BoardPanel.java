@@ -37,6 +37,12 @@ public class BoardPanel extends JPanel
 	
 	public String[][] board = new String[TOTAL_SQUARES_HEIGHT][TOTAL_SQUARES_WIDTH];
 	private BufferedImage boardImage;
+	private BufferedImage dagger;
+	private BufferedImage candlestick;
+	private BufferedImage rope;
+	private BufferedImage pipe;
+	private BufferedImage revolver;
+	private BufferedImage spanner;
 	JPanel bPanel = new JPanel();
 	
 	public BoardPanel()
@@ -105,6 +111,66 @@ public class BoardPanel extends JPanel
 			System.out.println("Could not find the image file "
 								+ ex.toString());
 		}
+		
+		try
+		{
+			dagger = ImageIO.read(this.getClass().
+					getResource("\\Images\\knife.jpg"));		
+		}catch(IOException ex)
+		{
+			System.out.println("Could not find the image file "
+					+ ex.toString());
+		}
+		
+		try
+		{
+			candlestick = ImageIO.read(this.getClass().
+					getResource("\\Images\\candlestick.png"));		
+		}catch(IOException ex)
+		{
+			System.out.println("Could not find the image file "
+					+ ex.toString());
+		}
+		
+		try
+		{
+			rope = ImageIO.read(this.getClass().
+					getResource("\\Images\\rope.jpg"));		
+		}catch(IOException ex)
+		{
+			System.out.println("Could not find the image file "
+					+ ex.toString());
+		}
+		
+		try
+		{
+			pipe = ImageIO.read(this.getClass().
+					getResource("\\Images\\lead pipe.jpg"));		
+		}catch(IOException ex)
+		{
+			System.out.println("Could not find the image file "
+					+ ex.toString());
+		}
+		
+		try
+		{
+			revolver = ImageIO.read(this.getClass().
+					getResource("\\Images\\revolver.jpg"));		
+		}catch(IOException ex)
+		{
+			System.out.println("Could not find the image file "
+					+ ex.toString());
+		}
+		
+		try
+		{
+			spanner = ImageIO.read(this.getClass().
+					getResource("\\Images\\spanner.jpg"));		
+		}catch(IOException ex)
+		{
+			System.out.println("Could not find the image file "
+					+ ex.toString());
+		}
 	}
 	
 	public void paintComponent(Graphics g)
@@ -134,6 +200,13 @@ public class BoardPanel extends JPanel
 	    g2.fill(new Ellipse2D.Float(534, 151, 20, 20));
 	    g2.setColor(plumColour);
 	    g2.fill(new Ellipse2D.Float(534, 433, 20, 20));
+	    
+	    g2.drawImage(dagger, 80, 70, 30, 30, this);
+	    g2.drawImage(candlestick, 80, 515, 30, 30, this);
+	    g2.drawImage(rope, 320, 515, 30, 30, this);
+	    g2.drawImage(pipe, 500,70,30,30,this);
+	    g2.drawImage(revolver, 250, 70, 30, 30, this);
+		g2.drawImage(spanner, 500, 200, 30, 30, this);
 	}
 	
 	
