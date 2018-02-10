@@ -16,28 +16,27 @@ import javax.swing.JTextArea;
 @SuppressWarnings("serial")
 public class InfoPanel extends JPanel
 {
-	
-	static JTextArea textArea = new JTextArea(35, 30);
-	static JScrollPane scrollPane = new JScrollPane(textArea);
-	
-	
+
+	static JTextArea textArea = new JTextArea(35, 30);		//set dimensions
+	static JScrollPane scrollPane = new JScrollPane(textArea);//create scrolls bars for text area
+
+
 	public InfoPanel()
 	{
 		infoP();
 	}
-	
+
+	//adds scroll bars to text area
 	private void infoP()
 	{
-		
-		scrollPane.setHorizontalScrollBarPolicy
-			(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setVerticalScrollBarPolicy
-			(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		
-		textArea.setEditable(false);
-		
-		this.add(scrollPane, BorderLayout.EAST);
-		
+
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+		textArea.setEditable(false);				//so people can't cheat!!
+
+		this.add(scrollPane, BorderLayout.EAST);	
+
 	}
-	
+
 }
