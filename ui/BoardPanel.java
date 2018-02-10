@@ -5,8 +5,10 @@ package ui;
 //rooms and tiles
 //player/weapon positions
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -104,6 +106,10 @@ public class BoardPanel extends JPanel
 		
 		g2.drawImage(boardImage, 0, 0, BOARD_WIDTH, BOARD_HEIGHT,
 						this);
+		g2.setColor(Color.red);
+	    g2.fill(new Ellipse2D.Float(191, 542, 20, 20));
+	    g2.setColor(Color.yellow);
+	    g2.fill(new Ellipse2D.Float(40, 390, 20, 20));
 	}
 	
 	
