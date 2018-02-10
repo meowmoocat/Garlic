@@ -106,10 +106,26 @@ public class BoardPanel extends JPanel
 		
 		g2.drawImage(boardImage, 0, 0, BOARD_WIDTH, BOARD_HEIGHT,
 						this);
-		g2.setColor(Color.red);
+		
+		Color scarlettColour= new Color(255, 0, 0);
+		Color mustardColour= new Color(255, 255, 0);
+		Color whiteColour= new Color(255, 255, 255);
+		Color greenColour= new Color(50, 205, 50);
+		Color peacockColour= new Color(0, 191, 255);
+		Color plumColour= new Color(148, 0, 211);
+		
+		g2.setColor(scarlettColour);
 	    g2.fill(new Ellipse2D.Float(191, 542, 20, 20));
-	    g2.setColor(Color.yellow);
+	    g2.setColor(mustardColour);
 	    g2.fill(new Ellipse2D.Float(40, 390, 20, 20));
+	    g2.setColor(whiteColour);
+	    g2.fill(new Ellipse2D.Float(233, 23, 20, 20));
+	    g2.setColor(greenColour);
+	    g2.fill(new Ellipse2D.Float(342, 23, 20, 20));
+	    g2.setColor(peacockColour);
+	    g2.fill(new Ellipse2D.Float(534, 151, 20, 20));
+	    g2.setColor(plumColour);
+	    g2.fill(new Ellipse2D.Float(534, 433, 20, 20));
 	}
 	
 	
