@@ -24,10 +24,12 @@ public class BoardPanel extends JPanel
 	private static final int BOARD_WIDTH = 600;
 	private static final int BOARD_HEIGHT = 600;
 	
-	private static final int SQUARES_WIDTH = 24;//width = 24
-	private static final int SQUARES_HEIGHT = 25;//height = 25
+	private static final int SQUARES_CORRIDOR_MOVEMENT = 22;	//approx pixels of each corridor square
 	
-	public String[][] board = new String[SQUARES_HEIGHT][SQUARES_WIDTH];
+	private static final int TOTAL_SQUARES_WIDTH = 24;//width = 24
+	private static final int TOTAL_SQUARES_HEIGHT = 25;//height = 25
+	
+	public String[][] board = new String[TOTAL_SQUARES_HEIGHT][TOTAL_SQUARES_WIDTH];
 	private BufferedImage boardImage;
 	JPanel bPanel = new JPanel();
 	
@@ -58,7 +60,7 @@ public class BoardPanel extends JPanel
 			{
 				String[] tempArray = line.split(" ");
 				
-				for(int j=0; j<SQUARES_WIDTH; j++)
+				for(int j=0; j<TOTAL_SQUARES_WIDTH; j++)
 				{
 					board[i][j] = tempArray[j];
 				}
@@ -75,9 +77,9 @@ public class BoardPanel extends JPanel
 		}
 		
 		//test
-		for(int i=0; i<SQUARES_HEIGHT; i++)
+		for(int i=0; i<TOTAL_SQUARES_HEIGHT; i++)
 		{
-			for(int j=0; j<SQUARES_WIDTH; j++)
+			for(int j=0; j<TOTAL_SQUARES_WIDTH; j++)
 			{
 				System.out.print(" " + board[i][j]);
 			}
