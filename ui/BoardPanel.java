@@ -41,6 +41,13 @@ public class BoardPanel extends JPanel
 	public BufferedImage pipe;
 	public BufferedImage revolver;
 	public BufferedImage spanner;
+	
+	Color scarlettColour= new Color(255, 0, 0);	//sets colours for each character
+	Color mustardColour= new Color(255, 255, 0);
+	Color whiteColour= new Color(255, 255, 255);
+	Color greenColour= new Color(50, 205, 50);
+	Color peacockColour= new Color(0, 191, 255);
+	Color plumColour= new Color(148, 0, 211);
 
 	public BoardPanel()
 	{
@@ -65,7 +72,7 @@ public class BoardPanel extends JPanel
 		try
 		{
 			boardImage = ImageIO.read(this.getClass().
-					getResource("\\Images\\cluedo board.jpg"));		
+					getResource("cluedo board.jpg"));		
 		}catch(IOException ex)
 		{
 			System.out.println("Could not find the image file "
@@ -77,17 +84,12 @@ public class BoardPanel extends JPanel
 
 	public void paintComponent(Graphics g)
 	{
-		super.paintComponents(g);
+		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
 		g2.drawImage(boardImage, 0, 0, BOARD_WIDTH, BOARD_HEIGHT, this);
 
-		Color scarlettColour= new Color(255, 0, 0);	//sets colours for each character
-		Color mustardColour= new Color(255, 255, 0);
-		Color whiteColour= new Color(255, 255, 255);
-		Color greenColour= new Color(50, 205, 50);
-		Color peacockColour= new Color(0, 191, 255);
-		Color plumColour= new Color(148, 0, 211);
+
 
 
 		//draws icon for players in their required locations
@@ -106,11 +108,11 @@ public class BoardPanel extends JPanel
 
 
 		//puts weapons in rooms!!!
-		g2.drawImage(dagger, 80, 70, 30, 30, this);
-		g2.drawImage(candlestick, 80, 515, 30, 30, this);
-		g2.drawImage(rope, 320, 515, 30, 30, this);
+		g2.drawImage(dagger, 80, 50, 30, 30, this);
+		g2.drawImage(candlestick, 80, 440, 30, 30, this);
+		g2.drawImage(rope, 320, 420, 30, 30, this);
 		g2.drawImage(pipe, 500, 70, 30, 30, this);
-		g2.drawImage(revolver, 250, 70, 30, 30, this);
+		g2.drawImage(revolver, 250, 150, 30, 30, this);
 		g2.drawImage(spanner, 500, 200 + MOVE_Y, 30, 30, this);
 
 	}
@@ -204,7 +206,7 @@ public class BoardPanel extends JPanel
 		try
 		{
 			dagger = ImageIO.read(this.getClass().
-					getResource("\\Images\\knife.jpg"));		
+					getResource("knife.jpg"));		
 		}catch(IOException ex)
 		{
 			System.out.println("Could not find the image file "
@@ -214,7 +216,7 @@ public class BoardPanel extends JPanel
 		try
 		{
 			candlestick = ImageIO.read(this.getClass().
-					getResource("\\Images\\candlestick.png"));		
+					getResource("candlestick.png"));		
 		}catch(IOException ex)
 		{
 			System.out.println("Could not find the image file "
@@ -224,7 +226,7 @@ public class BoardPanel extends JPanel
 		try
 		{
 			rope = ImageIO.read(this.getClass().
-					getResource("\\Images\\rope.jpg"));		
+					getResource("rope.jpg"));		
 		}catch(IOException ex)
 		{
 			System.out.println("Could not find the image file "
@@ -234,7 +236,7 @@ public class BoardPanel extends JPanel
 		try
 		{
 			pipe = ImageIO.read(this.getClass().
-					getResource("\\Images\\lead pipe.jpg"));		
+					getResource("lead pipe.jpg"));		
 		}catch(IOException ex)
 		{
 			System.out.println("Could not find the image file "
@@ -244,7 +246,7 @@ public class BoardPanel extends JPanel
 		try
 		{
 			revolver = ImageIO.read(this.getClass().
-					getResource("\\Images\\revolver.jpg"));		
+					getResource("revolver.jpg"));		
 		}catch(IOException ex)
 		{
 			System.out.println("Could not find the image file "
@@ -254,7 +256,7 @@ public class BoardPanel extends JPanel
 		try
 		{
 			spanner = ImageIO.read(this.getClass().
-					getResource("\\Images\\spanner.jpg"));		
+					getResource("spanner.jpg"));		
 		}catch(IOException ex)
 		{
 			System.out.println("Could not find the image file "
