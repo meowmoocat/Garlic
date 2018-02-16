@@ -2,31 +2,24 @@ package src.Garlic;
 
 
 
-public class Cluedo {
+package src.Garlic;
 
-    private final static Tokens tokens = new Tokens();
-    private final static Weapons weapons = new Weapons();
-    final static UI ui = new UI(tokens,weapons);
+import java.util.Random;
 
-    private void testUI() {
-        String command;
-       
-        Token white = tokens.get("White");
-        Weapon dagger = weapons.get("Dagger");
-        do {
-            command = ui.getCommand();
-            ui.displayString(command);
-            white.moveBy(new Coordinates(0,+1));
-            dagger.moveBy(new Coordinates(+1,0));
-            ui.display();
-        } while (!command.equals("quit"));
-        
-      
-    }
+public class Roll {
+	
+	 static String roll = "";
+	public static void roll() {
+		   Random dice = new Random();
+           do {
+             Moves.ui.displayString("type roll to roll dice");
+           	 roll = Moves.ui.getCommand();
+           }while(!roll.equals("roll"));
+          
+           int n = dice.nextInt(10) + 2;
+   		String numberAsString = Integer.toString(n);
+   		Moves.ui.displayString(numberAsString);
+          
+	}
 
-    public static void main(String[] args) {
-        Cluedo game = new Cluedo();
-        game.testUI();
-        System.exit(0);
-    }
 }
