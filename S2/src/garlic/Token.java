@@ -8,6 +8,7 @@ public class Token {
 	private final Color color;
 	private final Coordinates position;
 	private final int turn;
+	private String playerName="";
 
 	Token(String name, int turn , Color color, Coordinates position) {
 		this.name = name;
@@ -39,6 +40,16 @@ public class Token {
 
 	public boolean hasName(String name) {
 		return this.name.toLowerCase().equals(name.toLowerCase().trim());
+	}
+	
+	public void setPlayerName(String pName)
+	{
+		this.playerName = pName;
+	}
+	
+	public String getPlayerName()
+	{
+		return playerName;
 	}
 
 }

@@ -29,6 +29,18 @@ public class Tokens implements Iterable<Token>, Iterator<Token> {
 		}
 		return null;
 	}
+	
+	public Token getName(String name)
+	{
+		for (Token character : characters)
+		{
+			if (character.hasName(name))
+			{
+				return character;
+			}
+		}
+		return null;
+	}
 
 	public boolean hasNext() {
 		return iterator.hasNext();
