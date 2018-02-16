@@ -139,4 +139,4 @@ public class Moves
 		} while (!command.equals("quit") && numPlayers<6);
 
 	}
-
+}
