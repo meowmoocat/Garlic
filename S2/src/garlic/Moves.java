@@ -1,16 +1,34 @@
-package garlic;
+package src.Garlic;
+
+import java.util.Random;
 
 public class Moves 
 {
 
-	private final Tokens tokens = new Tokens();
-	private final Weapons weapons = new Weapons();
-	private final UI ui = new UI(tokens,weapons);
+	private final static Tokens tokens = new Tokens();
+	private final static Weapons weapons = new Weapons();
+	final static UI ui = new UI(tokens,weapons);
+	String roll = "";
 
 	Moves()
 	{
 		inputNames();
+		roll();
 		turns();
+		
+	}
+
+	private void roll() {
+		Random dice = new Random();
+        do {
+          Moves.ui.displayString("type roll to roll dice");
+        	 roll = Moves.ui.getCommand();
+        }while(!roll.equals("roll"));
+       
+        int n = dice.nextInt(10) + 2;
+		String numberAsString = Integer.toString(n);
+		Moves.ui.displayString(numberAsString);
+		
 	}
 
 	private void turns()
@@ -25,7 +43,7 @@ public class Moves
 				turn = tokens.get(i);
 				command = ui.getCommand();
 				ui.displayString(command);
-
+				
 				if(command.equals("d")) turn.moveBy(new Coordinates(0,+1));
 				if(command.equals("l")) turn.moveBy(new Coordinates(-1,0));
 				if(command.equals("r")) turn.moveBy(new Coordinates(+1,0));
@@ -122,4 +140,3 @@ public class Moves
 
 	}
 
-}
