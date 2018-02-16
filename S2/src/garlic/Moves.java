@@ -61,8 +61,6 @@ public class Moves
 			ui.displayString(command);
 			command=command.toLowerCase();
 
-			numPlayers++;
-
 			while( !command.equals("white") && !command.equals("scarlett") && ! command.equals("plum") 
 					&& !command.equals("peacock") && !command.equals("mustard") && !command.equals("green") 
 					&& !command.equals("quit")) 
@@ -74,52 +72,53 @@ public class Moves
 				command=command.toLowerCase();
 			}
 
-			ui.displayString("Enter your player name: ");
-			personName = ui.getCommand();
-			ui.displayString(personName);
-			personName=personName.toLowerCase();
-			System.out.println(command);
-			System.out.println(personName);
-			System.out.println(numPlayers);
+			if(!command.equals("quit")){
+				ui.displayString("Enter your player name: ");
+				personName = ui.getCommand();
+				numPlayers++;
+				ui.displayString(personName);
+				personName=personName.toLowerCase();
+				System.out.println(command);
+				System.out.println(personName);
+				System.out.println(numPlayers);
 
 
-			if(command.equals("white")) {
+				if(command.equals("white")) {
 
-				white.setPlayerName(personName);
-				ui.displayString("Player White is: "+white.getPlayerName());
+					white.setPlayerName(personName);
+					ui.displayString("Player White is: "+white.getPlayerName());
 
-			}else if(command.equals("scarlett")) {
+				}else if(command.equals("scarlett")) {
 
-				scarlett.setPlayerName(personName);
-				ui.displayString("Player Scarlett is: "+scarlett.getPlayerName());
+					scarlett.setPlayerName(personName);
+					ui.displayString("Player Scarlett is: "+scarlett.getPlayerName());
 
-			}else if(command.equals("plum")) {
+				}else if(command.equals("plum")) {
 
-				plum.setPlayerName(personName);
-				ui.displayString("Player Plum is: "+plum.getPlayerName());
+					plum.setPlayerName(personName);
+					ui.displayString("Player Plum is: "+plum.getPlayerName());
 
-			}else if(command.equals("peacock")) {
+				}else if(command.equals("peacock")) {
 
-				peacock.setPlayerName(personName);
-				ui.displayString("Player Peacock is: "+peacock.getPlayerName());
+					peacock.setPlayerName(personName);
+					ui.displayString("Player Peacock is: "+peacock.getPlayerName());
 
-			}else if(command.equals("mustard")) {
+				}else if(command.equals("mustard")) {
 
-				mustard.setPlayerName(personName);
-				ui.displayString("Player Mustard is: "+mustard.getPlayerName());
+					mustard.setPlayerName(personName);
+					ui.displayString("Player Mustard is: "+mustard.getPlayerName());
 
-			}else if(command.equals("green")) {
+				}else if(command.equals("green")) {
 
-				green.setPlayerName(personName);
-				ui.displayString("Player Green is: "+green.getPlayerName());
+					green.setPlayerName(personName);
+					ui.displayString("Player Green is: "+green.getPlayerName());
 
+				}
 			}
 
 			ui.display();
 
 		} while (!command.equals("quit") && numPlayers<6);
-
-		numPlayers--;
 
 	}
 
