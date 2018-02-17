@@ -23,11 +23,12 @@ public class Moves
 				
 				//there is a null pointer exception here, I think from characters not in the game
 				try {
-					ui.displayString("\n" + token.getName());
+					ui.displayString("\n" + token.getName() + " " + token.getTurn());
 					do {
 						ui.displayString(token.getPlayerName() + " enter start to start your turn");
 						command = ui.getCommand();
-					}while(!command.equals("start") && !command.equals("Start"));
+						if(command.equals("quit")) quit(token);
+					}while(!command.equals("start") && !command.equals("Start") && !command.equals("quit"));
 					
 					if(token.getTurn() > 0)
 					{
@@ -36,12 +37,10 @@ public class Moves
 						
 					}
 					
-					i++;
-					
-					
 					do {
 						ui.displayString(token.getPlayerName() + " enter end to end your turn");
 						command = ui.getCommand();
+						if(command.equals("quit")) quit(token);
 					}while(!command.equals("end"));
 					
 					
@@ -50,10 +49,16 @@ public class Moves
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+				i++;
 			}
-		} while (!command.equals("quit"));
+		} while (!command.equals("end game"));
 		
+	}
+
+	private void quit(Token token)
+	{
+		token.setTurn(0);
+		ui.displayString(token.getName() + " has quit!!!");
 	}
 
 	private int dice()
@@ -92,6 +97,9 @@ public class Moves
 				if(command.equals("u")) moveToken.moveBy(new Coordinates(0,-1));
 
 				ui.display();
+				
+				if(command.equals("quit")) quit(moveToken);
+				
 			}while(checkMoveInput(command));
 
 			return moveToken(moveToken, diceMoves-1);
@@ -124,8 +132,7 @@ public class Moves
 				command = command.toLowerCase();
 				if(checkNameInput(command))
 				{
-					ui.displayString("Error entering character!!"
-							+ "\nEnter the name of the character you would like to be?(Example: White)");
+					ui.displayString("Error entering character!!");
 				}
 			}while(checkNameInput(command));
 			
@@ -145,7 +152,7 @@ public class Moves
 					token.setTurn(numPlayers);
 				}
 				
-//				TO DO???
+//				TODO ???
 //				ui.displayString("Player White is: " + white.getPlayerName());
 
 			}
