@@ -85,7 +85,7 @@ public class Moves
 			do
 			{
 				command = ui.getCommand();
-				ui.displayString(command);
+				ui.displayString(command + ", moves left " + (diceMoves-1));
 				if(command.equals("d")) moveToken.moveBy(new Coordinates(0,+1));
 				if(command.equals("l")) moveToken.moveBy(new Coordinates(-1,0));
 				if(command.equals("r")) moveToken.moveBy(new Coordinates(+1,0));
@@ -104,7 +104,6 @@ public class Moves
 				&& !command.equals("d") && !command.equals("l")
 				&& !command.equals("r") && !command.equals("u"));
 	}
-
 
 	
 	//TO DO clean this up
