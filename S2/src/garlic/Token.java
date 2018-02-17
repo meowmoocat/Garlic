@@ -7,13 +7,17 @@ public class Token {
 	private final String name;
 	private final Color color;
 	private final Coordinates position;
-	private final int turn;
+	private int turn;
 	private String playerName="";
 
-	Token(String name, int turn , Color color, Coordinates position) {
+	Token(String name, Color color, Coordinates position) {
 		this.name = name;
 		this.color = color;
 		this.position = position;
+	}
+	
+	public void setTurn(int turn)
+	{
 		this.turn = turn;
 	}
 

@@ -10,19 +10,19 @@ public class Tokens implements Iterable<Token>, Iterator<Token> {
 	private Iterator<Token> iterator;
 
 	Tokens() {
-		characters.add(new Token("Scarlett", 0, Color.RED, new Coordinates(7,24)));
-		characters.add(new Token("Mustard", 1, Color.YELLOW, new Coordinates(0,17)));
-		characters.add(new Token("White", 2, Color.WHITE, new Coordinates(9,0)));
-		characters.add(new Token("Green", 3, Color.GREEN, new Coordinates(14,0)));
-		characters.add(new Token("Peacock", 4, new Color(0, 191, 255), new Coordinates(23,6)));
-		characters.add(new Token("Plum", 5, new Color(148, 0, 211), new Coordinates(23,19)));
+		characters.add(new Token("scarlett", Color.RED, new Coordinates(7,24)));
+		characters.add(new Token("mustard", Color.YELLOW, new Coordinates(0,17)));
+		characters.add(new Token("white", Color.WHITE, new Coordinates(9,0)));
+		characters.add(new Token("green", Color.GREEN, new Coordinates(14,0)));
+		characters.add(new Token("peacock", new Color(0, 191, 255), new Coordinates(23,6)));
+		characters.add(new Token("plum", new Color(148, 0, 211), new Coordinates(23,19)));
 	}
 
 	public Token get(int i)
 	{
 		for (Token character : characters)
 		{
-			if (character.getTurn()==i)
+			if (character.getTurn() == i)
 			{
 				return character;
 			}

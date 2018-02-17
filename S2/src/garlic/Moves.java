@@ -1,4 +1,4 @@
-package src.Garlic;
+package garlic;
 
 import java.util.Random;
 
@@ -8,135 +8,157 @@ public class Moves
 	private final static Tokens tokens = new Tokens();
 	private final static Weapons weapons = new Weapons();
 	final static UI ui = new UI(tokens,weapons);
-	String roll = "";
+	
 
 	Moves()
 	{
 		inputNames();
-		roll();
-		turns();
-		
-	}
 
-	private void roll() {
-		Random dice = new Random();
-        do {
-          Moves.ui.displayString("type roll to roll dice");
-        	 roll = Moves.ui.getCommand();
-        }while(!roll.equals("roll"));
-       
-        int n = dice.nextInt(10) + 2;
-		String numberAsString = Integer.toString(n);
-		Moves.ui.displayString(numberAsString);
-		
-	}
-
-	private void turns()
-	{
 		String command = "";
-		//		Token turn = tokens.get("White");
-		Weapon dagger = weapons.get("Dagger");
 		do {
-			int i = 0;
-			for(Token turn : tokens)
+			int i = 1;
+			for(Token token : tokens)
 			{
-				turn = tokens.get(i);
+				token = tokens.get(i);
+				
+				//there is a null pointer exception here, I think from characters not in the game
+				try {
+					ui.displayString("\n" + token.getName());
+					do {
+						ui.displayString(token.getPlayerName() + " enter start to start your turn");
+						command = ui.getCommand();
+					}while(!command.equals("start") && !command.equals("Start"));
+					
+					if(token.getTurn() > 0)
+					{
+						int diceNum = dice();						//TO DO: add condition here for if they want to stay in room
+						moveToken(token, diceNum);
+						
+					}
+					
+					i++;
+					
+					
+					do {
+						ui.displayString(token.getPlayerName() + " enter end to end your turn");
+						command = ui.getCommand();
+					}while(!command.equals("end"));
+					
+					
+				}catch (Exception e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		} while (!command.equals("quit"));
+		
+	}
+
+	private int dice()
+	{
+		String startRoll = "";
+		do {
+			ui.displayString("Type roll to roll dice");
+			startRoll = ui.getCommand();
+		} while(!startRoll.equals("roll"));
+		
+		Random dice = new Random();
+		int roll = dice.nextInt(10) + 2;
+		String rollAsString = Integer.toString(roll);
+		ui.displayString(rollAsString);
+
+		return roll;
+	}
+	
+	private int moveToken(Token moveToken, int diceMoves)		//recursive function for move it counts down dice number
+	{
+		String command;
+		
+		if(diceMoves == 0)
+		{
+			return 0;
+		}
+		else
+		{
+			do
+			{
 				command = ui.getCommand();
 				ui.displayString(command);
-				
-				if(command.equals("d")) turn.moveBy(new Coordinates(0,+1));
-				if(command.equals("l")) turn.moveBy(new Coordinates(-1,0));
-				if(command.equals("r")) turn.moveBy(new Coordinates(+1,0));
-				if(command.equals("u")) turn.moveBy(new Coordinates(0,-1));
-				i++;
+				if(command.equals("d")) moveToken.moveBy(new Coordinates(0,+1));
+				if(command.equals("l")) moveToken.moveBy(new Coordinates(-1,0));
+				if(command.equals("r")) moveToken.moveBy(new Coordinates(+1,0));
+				if(command.equals("u")) moveToken.moveBy(new Coordinates(0,-1));
+
 				ui.display();
-			}
+			}while(checkMoveInput(command));
 
-
-			dagger.moveBy(new Coordinates(+1,0));
-
-			ui.display();
-		} while (!command.equals("quit"));
+			return moveToken(moveToken, diceMoves-1);
+		}
 	}
 
+	private boolean checkMoveInput(String command)
+	{
+		return (!command.equals("quit")
+				&& !command.equals("d") && !command.equals("l")
+				&& !command.equals("r") && !command.equals("u"));
+	}
+
+
+	
+	//TO DO clean this up
 	private void inputNames()
 	{
-		String personName;
+		
 		String command;
 		int numPlayers=0;
 
-		Token white = tokens.getName("White");
-		Token scarlett = tokens.getName("Scarlett");
-		Token plum = tokens.getName("Plum");
-		Token peacock = tokens.getName("Peacock");
-		Token mustard = tokens.getName("Mustard");
-		Token green = tokens.getName("Green");
-
 		do {
 
-			ui.displayString("Enter the name of the character you would like to be?\n(Example: White)\n(Enter quit into command if you are finished entering players!!)");
-			command = ui.getCommand();
-			ui.displayString(command);
-			command=command.toLowerCase();
-
-			while( !command.equals("white") && !command.equals("scarlett") && ! command.equals("plum") 
-					&& !command.equals("peacock") && !command.equals("mustard") && !command.equals("green") 
-					&& !command.equals("quit")) 
-			{
-				ui.displayString("Error entering character type!!"
-						+ "\nEnter the name of the character you would like to be?(Example: White)");
+			do {
+				ui.displayString("Enter the name of the character you would like to be?"
+						+ "\n(Example: White)"
+						+ "\n(Enter finish into command if you are finished entering players!!)");
 				command = ui.getCommand();
 				ui.displayString(command);
-				command=command.toLowerCase();
-			}
+				command = command.toLowerCase();
+				if(checkNameInput(command))
+				{
+					ui.displayString("Error entering character!!"
+							+ "\nEnter the name of the character you would like to be?(Example: White)");
+				}
+			}while(checkNameInput(command));
+			
 
-			if(!command.equals("quit")){
+			if(!command.equals("finish")){
+				
 				ui.displayString("Enter your player name: ");
-				personName = ui.getCommand();
+				String personName = ui.getCommand();
 				numPlayers++;
 				ui.displayString(personName);
-				personName=personName.toLowerCase();
-				System.out.println(command);
-				System.out.println(personName);
-				System.out.println(numPlayers);
+				personName = personName.toLowerCase();
 
-
-				if(command.equals("white")) {
-
-					white.setPlayerName(personName);
-					ui.displayString("Player White is: "+white.getPlayerName());
-
-				}else if(command.equals("scarlett")) {
-
-					scarlett.setPlayerName(personName);
-					ui.displayString("Player Scarlett is: "+scarlett.getPlayerName());
-
-				}else if(command.equals("plum")) {
-
-					plum.setPlayerName(personName);
-					ui.displayString("Player Plum is: "+plum.getPlayerName());
-
-				}else if(command.equals("peacock")) {
-
-					peacock.setPlayerName(personName);
-					ui.displayString("Player Peacock is: "+peacock.getPlayerName());
-
-				}else if(command.equals("mustard")) {
-
-					mustard.setPlayerName(personName);
-					ui.displayString("Player Mustard is: "+mustard.getPlayerName());
-
-				}else if(command.equals("green")) {
-
-					green.setPlayerName(personName);
-					ui.displayString("Player Green is: "+green.getPlayerName());
-
+				for(Token token : tokens)
+				{
+					token = tokens.getName(command);
+					token.setPlayerName(personName);
+					token.setTurn(numPlayers);
 				}
+				
+//				TO DO???
+//				ui.displayString("Player White is: " + white.getPlayerName());
+
 			}
 
-			ui.display();
+		} while (!command.equals("finish") && numPlayers<6);
 
-		} while (!command.equals("quit") && numPlayers<6);
-
+	}
+	
+	private boolean checkNameInput(String command)
+	{
+		return (!command.equals("white") && !command.equals("scarlett") && ! command.equals("plum") 
+					&& !command.equals("peacock") && !command.equals("mustard") && !command.equals("green") 
+					&& !command.equals("finish"));
 	}
 }

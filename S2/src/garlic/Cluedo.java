@@ -2,9 +2,9 @@ package garlic;
 
 public class Cluedo {
 
-	private final Tokens tokens = new Tokens();
-	private final Weapons weapons = new Weapons();
-	private final UI ui = new UI(tokens,weapons);
+//	private final Tokens tokens = new Tokens();
+//	private final Weapons weapons = new Weapons();
+//	private final UI ui = new UI(tokens,weapons);
 	
 	private void testUI() {
 		
