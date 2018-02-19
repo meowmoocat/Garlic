@@ -32,7 +32,7 @@ public class Moves
 					
 					if(token.getTurn() > 0)
 					{
-						int diceNum = dice();						//TO DO: add condition here for if they want to stay in room
+						int diceNum = dice();					//TODO: add condition here for if they want to stay in room
 						moveToken(token, diceNum);
 						
 					}
@@ -123,7 +123,7 @@ public class Moves
 
 		do {
 
-			do {
+			do {//TODO and not already another character 
 				ui.displayString("Enter the name of the character you would like to be?"
 						+ "\n(Example: White)"
 						+ "\n(Enter finish into command if you are finished entering players!!)");
@@ -163,8 +163,18 @@ public class Moves
 	
 	private boolean checkNameInput(String command)
 	{
-		return (!command.equals("white") && !command.equals("scarlett") && ! command.equals("plum") 
+		boolean characterTaken = false;
+		for(Token token : tokens)
+		{
+			if((command.equals(token.getName().toLowerCase())) && !token.getPlayerName().equals(""))
+			{
+				System.out.println(token.getName() + " " + token.getPlayerName());
+				characterTaken = true;
+			}
+		}
+		
+		return ((!command.equals("white") && !command.equals("scarlett") && ! command.equals("plum") 
 					&& !command.equals("peacock") && !command.equals("mustard") && !command.equals("green") 
-					&& !command.equals("finish"));
+					&& !command.equals("finish")) || characterTaken);
 	}
 }
