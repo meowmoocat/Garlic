@@ -166,6 +166,37 @@ public class Moves
 //				ui.displayString("Player White is: " + white.getPlayerName());
 
 			}
+			
+			//code to make sure there isn't to few players
+			//TODO needs fixing doesn't work if enter finish twice in a row and too few players
+			while(command.equals("finish") && numPlayers<2){
+				
+				do {//TODO and not already another character 
+					ui.displayString("Not enough players!!"+"\nEnter the name of the character you would like to be?"
+							+ "\n(Example: White)");
+					command = ui.getCommand();
+					ui.displayString(command);
+					command = command.toLowerCase();
+					if(checkNameInput(command))
+					{
+						ui.displayString("Error entering character!!");
+					}
+				}while(checkNameInput(command));
+
+				ui.displayString("Enter your player name: ");
+				String personName = ui.getCommand();
+				numPlayers++;
+				ui.displayString(personName);
+				personName = personName.toLowerCase();
+
+				for(Token token : tokens)
+				{
+					token = tokens.getName(command);
+					token.setPlayerName(personName);
+					token.setTurn(numPlayers);
+				}
+
+			}
 
 		} while (!command.equals("finish") && numPlayers<6);
 
