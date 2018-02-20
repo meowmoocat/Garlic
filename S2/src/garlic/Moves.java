@@ -131,11 +131,10 @@ public class Moves
 		String command;
 		int numPlayers=0;
 
-		while(numPlayers <= 2)
-		{
-			do 
-			{
 
+		do 
+		{
+			
 				//code to make sure there isn't to few players
 				//TODO needs fixing doesn't work if enter finish twice in a row and too few players
 
@@ -174,13 +173,10 @@ public class Moves
 
 				}
 
-				if(numPlayers<6 && numPlayers>1) System.out.println("&& true");
-				if(numPlayers < 6) System.out.println(numPlayers + " < 6 = true");
-				if(!command.equals("finish")) System.out.println("!c == finish, true");
+				if(numPlayers<2) ui.displayString("Not enough players!!");
 
-			} while (!command.equals("finish") && numPlayers<6);
-			ui.displayString("Not enough players!!");
-		}
+		} while ((!command.equals("finish") && numPlayers<6) || numPlayers < 2);
+
 	}
 
 
