@@ -8,7 +8,7 @@ public class Moves
 	private final static Tokens tokens = new Tokens();
 	private final static Weapons weapons = new Weapons();
 	final static UI ui = new UI(tokens,weapons);
-	
+
 
 	Moves()
 	{
@@ -20,7 +20,7 @@ public class Moves
 			for(Token token : tokens)
 			{
 				token = tokens.get(i);
-				
+
 				//there is a null pointer exception here, I think from characters not in the game
 				try {
 					ui.displayString("\n" + token.getName() + " " + token.getTurn());
@@ -29,21 +29,21 @@ public class Moves
 						command = ui.getCommand();
 						if(command.equals("quit")) quit(token);
 					}while(!command.equals("start") && !command.equals("Start") && !command.equals("quit"));
-					
+
 					if(token.getTurn() > 0)
 					{
 						int diceNum = dice();					//TODO: add condition here for if they want to stay in room
 						moveToken(token, diceNum);
-						
+
 					}
-					
+
 					do {
 						ui.displayString(token.getPlayerName() + " enter end to end your turn");
 						command = ui.getCommand();
 						if(command.equals("quit")) quit(token);
 					}while(!command.equals("end"));
-					
-					
+
+
 				}catch (Exception e)
 				{
 					// TODO Auto-generated catch block
@@ -52,7 +52,7 @@ public class Moves
 				i++;
 			}
 		} while (!command.equals("end game"));
-		
+
 	}
 
 	private void quit(Token token)
@@ -68,7 +68,7 @@ public class Moves
 			ui.displayString("Type roll to roll dice");
 			startRoll = ui.getCommand();
 		} while(!startRoll.equals("roll"));
-		
+
 		Random dice = new Random();
 		int roll = dice.nextInt(10) + 2;
 		String rollAsString = Integer.toString(roll);
@@ -76,12 +76,12 @@ public class Moves
 
 		return roll;
 	}
-	
+
 	private int moveToken(Token moveToken, int diceMoves)		//recursive function for move it counts down dice number
 	{
 		String command;
 		int validMove = 1;
-		
+
 		if(diceMoves == 0)
 		{
 			return 0;
@@ -93,7 +93,7 @@ public class Moves
 				ui.displayString("Type u for up, d for down, r for right, l for left");
 				ui.displayString("Moves left " + diceMoves);
 				command = ui.getCommand().toLowerCase();
-				
+
 				if(command.equals("d")) 
 					validMove = moveToken.moveBy(new Coordinates(0,+1));
 				if(command.equals("l")) 
@@ -104,13 +104,13 @@ public class Moves
 					validMove = moveToken.moveBy(new Coordinates(0,-1));
 
 				ui.display();
-				
+
 				if(checkMoveInput(command) || validMove == 0)
 					ui.displayString("Invalid move");
 				if(command.equals("quit")) quit(moveToken);
 			}while(checkMoveInput(command) || validMove == 0);
 
-			
+
 			ui.displayString("Moves remaining " + (diceMoves-1));
 			return moveToken(moveToken, diceMoves-validMove);
 		}
@@ -123,56 +123,25 @@ public class Moves
 				&& !command.equals("r") && !command.equals("u"));
 	}
 
-	
+
 	//TO DO clean this up
 	private void inputNames()
 	{
-		
+
 		String command;
 		int numPlayers=0;
 
-		do {
+		while(numPlayers <= 2)
+		{
+			do 
+			{
 
-			do {//TODO and not already another character 
-				ui.displayString("Enter the name of the character you would like to be?"
-						+ "\n(Example: White)"
-						+ "\n(Enter finish into command if you are finished entering players!!)");
-				command = ui.getCommand();
-				ui.displayString(command);
-				command = command.toLowerCase();
-				if(checkNameInput(command))
-				{
-					ui.displayString("Error entering character!!");
-				}
-			}while(checkNameInput(command));
-			
+				//code to make sure there isn't to few players
+				//TODO needs fixing doesn't work if enter finish twice in a row and too few players
 
-			if(!command.equals("finish")){
-				
-				ui.displayString("Enter your player name: ");
-				String personName = ui.getCommand();
-				numPlayers++;
-				ui.displayString(personName);
-				personName = personName.toLowerCase();
-
-				for(Token token : tokens)
-				{
-					token = tokens.getName(command);
-					token.setPlayerName(personName);
-					token.setTurn(numPlayers);
-				}
-				
-//				TODO ???
-//				ui.displayString("Player White is: " + white.getPlayerName());
-
-			}
-			
-			//code to make sure there isn't to few players
-			//TODO needs fixing doesn't work if enter finish twice in a row and too few players
-			while(command.equals("finish") && numPlayers<2){
-				
-				do {//TODO and not already another character 
-					ui.displayString("Not enough players!!"+"\nEnter the name of the character you would like to be?"
+				//			"Not enough players!!"
+				do { 
+					ui.displayString("\nEnter the name of the character you would like to be?"
 							+ "\n(Example: White)");
 					command = ui.getCommand();
 					ui.displayString(command);
@@ -183,25 +152,38 @@ public class Moves
 					}
 				}while(checkNameInput(command));
 
-				ui.displayString("Enter your player name: ");
-				String personName = ui.getCommand();
-				numPlayers++;
-				ui.displayString(personName);
-				personName = personName.toLowerCase();
 
-				for(Token token : tokens)
+				if(!command.equals("finish"))
 				{
-					token = tokens.getName(command);
-					token.setPlayerName(personName);
-					token.setTurn(numPlayers);
+
+					ui.displayString("Enter your player name: ");
+					String personName = ui.getCommand();
+					numPlayers++;
+					ui.displayString(personName);
+					personName = personName.toLowerCase();
+
+					for(Token token : tokens)
+					{
+						token = tokens.getName(command);
+						token.setPlayerName(personName);
+						token.setTurn(numPlayers);
+					}
+
+					//				TODO ???
+					//				ui.displayString("Player White is: " + white.getPlayerName());
+
 				}
 
-			}
+				if(numPlayers<6 && numPlayers>1) System.out.println("&& true");
+				if(numPlayers < 6) System.out.println(numPlayers + " < 6 = true");
+				if(!command.equals("finish")) System.out.println("!c == finish, true");
 
-		} while (!command.equals("finish") && numPlayers<6);
-
+			} while (!command.equals("finish") && numPlayers<6);
+			ui.displayString("Not enough players!!");
+		}
 	}
-	
+
+
 	private boolean checkNameInput(String command)
 	{
 		boolean characterTaken = false;
@@ -209,11 +191,10 @@ public class Moves
 		{
 			if((command.equals(token.getName().toLowerCase())) && !token.getPlayerName().equals(""))
 			{
-				System.out.println(token.getName() + " " + token.getPlayerName());
 				characterTaken = true;
 			}
 		}
-		
+
 		return ((!command.equals("white") && !command.equals("scarlett") && ! command.equals("plum") 
 					&& !command.equals("peacock") && !command.equals("mustard") && !command.equals("green") 
 					&& !command.equals("finish")) || characterTaken);
