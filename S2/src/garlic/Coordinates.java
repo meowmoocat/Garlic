@@ -10,22 +10,28 @@ public class Coordinates {
 		this.row = row;
 	}
 
-	public void add(Coordinates coordinates) {
+	public int add(Coordinates coordinates) {
 
+		int hasItMoved = 1;
+		
 		prevCol=col;
 		prevRow=row;
 
-		System.out.println(prevCol);
-		System.out.println(prevRow);
-
 		col = col + coordinates.getCol();
 		row = row + coordinates.getRow();
-
-		System.out.println(col);
-		System.out.println(row);
-
+		
 		checkBorders();
+		
+		System.out.println("prevCol: " + prevCol+ ", prevRow: "+ prevRow);
+		System.out.println("Col: " + col+ ", row: "+ row);
 
+		
+		if(prevCol == col && prevRow == row)
+		{
+			hasItMoved = 0;
+		}
+
+		return hasItMoved;
 	}
 
 	private void checkBorders() {

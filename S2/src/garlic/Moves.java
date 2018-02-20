@@ -80,6 +80,7 @@ public class Moves
 	private int moveToken(Token moveToken, int diceMoves)		//recursive function for move it counts down dice number
 	{
 		String command;
+		int validMove = 1;
 		
 		if(diceMoves == 0)
 		{
@@ -89,20 +90,29 @@ public class Moves
 		{
 			do
 			{
-				command = ui.getCommand();
-				ui.displayString(command + ", moves remaining " + (diceMoves-1));
-				if(command.equals("d")) moveToken.moveBy(new Coordinates(0,+1));
-				if(command.equals("l")) moveToken.moveBy(new Coordinates(-1,0));
-				if(command.equals("r")) moveToken.moveBy(new Coordinates(+1,0));
-				if(command.equals("u")) moveToken.moveBy(new Coordinates(0,-1));
+				ui.displayString("Type u for up, d for down, r for right, l for left");
+				ui.displayString("Moves left " + diceMoves);
+				command = ui.getCommand().toLowerCase();
+				
+				if(command.equals("d")) 
+					validMove = moveToken.moveBy(new Coordinates(0,+1));
+				if(command.equals("l")) 
+					validMove = moveToken.moveBy(new Coordinates(-1,0));
+				if(command.equals("r")) 
+					validMove = moveToken.moveBy(new Coordinates(+1,0));
+				if(command.equals("u")) 
+					validMove = moveToken.moveBy(new Coordinates(0,-1));
 
 				ui.display();
 				
+				if(checkMoveInput(command) || validMove == 0)
+					ui.displayString("Invalid move");
 				if(command.equals("quit")) quit(moveToken);
-				
-			}while(checkMoveInput(command));
+			}while(checkMoveInput(command) || validMove == 0);
 
-			return moveToken(moveToken, diceMoves-1);
+			
+			ui.displayString("Moves remaining " + (diceMoves-1));
+			return moveToken(moveToken, diceMoves-validMove);
 		}
 	}
 

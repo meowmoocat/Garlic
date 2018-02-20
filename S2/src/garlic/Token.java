@@ -21,8 +21,8 @@ public class Token {
 		this.turn = turn;
 	}
 
-	public void moveBy(Coordinates move) {
-		position.add(move);
+	public int moveBy(Coordinates move) {
+		return position.add(move);
 	}
 
 	public String getName() {
