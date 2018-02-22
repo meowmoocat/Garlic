@@ -26,7 +26,7 @@ public class Moves
 					ui.displayString("\n" + token.getName() + " " + token.getTurn());
 					do {
 						ui.displayString(token.getPlayerName() + " enter start to start your turn");
-						command = ui.getCommand();
+						command = ui.getCommand().toLowerCase().trim();
 						if(command.equals("quit")) quit(token);
 					}while(!command.equals("start") && !command.equals("Start") && !command.equals("quit"));
 
@@ -39,7 +39,7 @@ public class Moves
 
 					do {
 						ui.displayString(token.getPlayerName() + " enter end to end your turn");
-						command = ui.getCommand();
+						command = ui.getCommand().toLowerCase().trim();
 						if(command.equals("quit")) quit(token);
 					}while(!command.equals("end"));
 
@@ -66,7 +66,7 @@ public class Moves
 		String startRoll = "";
 		do {
 			ui.displayString("Type roll to roll dice");
-			startRoll = ui.getCommand();
+			startRoll = ui.getCommand().toLowerCase().trim();
 		} while(!startRoll.equals("roll"));
 
 		Random dice = new Random();
@@ -92,7 +92,7 @@ public class Moves
 			{
 				ui.displayString("Type u for up, d for down, r for right, l for left");
 				ui.displayString("Moves left " + diceMoves);
-				command = ui.getCommand().toLowerCase();
+				command = ui.getCommand().toLowerCase().trim();
 
 				if(command.equals("d")) 
 					validMove = moveToken.moveBy(new Coordinates(0,+1));
@@ -134,46 +134,45 @@ public class Moves
 
 		do 
 		{
-			
-				//code to make sure there isn't to few players
-				//TODO needs fixing doesn't work if enter finish twice in a row and too few players
 
-				//			"Not enough players!!"
-				do { 
-					ui.displayString("\nEnter the name of the character you would like to be?"
-							+ "\n(Example: White)");
-					command = ui.getCommand();
-					ui.displayString(command);
-					command = command.toLowerCase();
-					if(checkNameInput(command))
-					{
-						ui.displayString("Error entering character!!");
-					}
-				}while(checkNameInput(command));
+			//code to make sure there isn't to few players
+			//TODO needs fixing doesn't work if enter finish twice in a row and too few players
 
-
-				if(!command.equals("finish"))
+			//			"Not enough players!!"
+			do { 
+				ui.displayString("\nEnter the name of the character you would like to be?"
+						+ "\n(Example: White)");
+				command = ui.getCommand().toLowerCase().trim();
+				ui.displayString(command);
+				command = command.toLowerCase().trim();
+				if(checkNameInput(command))
 				{
+					ui.displayString("Error entering character!!");
+				}
+			}while(checkNameInput(command));
 
-					ui.displayString("Enter your player name: ");
-					String personName = ui.getCommand();
-					numPlayers++;
-					ui.displayString(personName);
-					personName = personName.toLowerCase();
 
-					for(Token token : tokens)
-					{
-						token = tokens.getName(command);
-						token.setPlayerName(personName);
-						token.setTurn(numPlayers);
-					}
+			if(!command.equals("finish"))
+			{
 
-					//				TODO ???
-					//				ui.displayString("Player White is: " + white.getPlayerName());
+				ui.displayString("Enter your player name: ");
+				String personName = ui.getCommand().toLowerCase().trim();
+				numPlayers++;
+				ui.displayString(personName);
 
+				for(Token token : tokens)
+				{
+					token = tokens.getName(command);
+					token.setPlayerName(personName);
+					token.setTurn(numPlayers);
 				}
 
-				if(numPlayers<2) ui.displayString("Not enough players!!");
+				//				TODO ???
+				//				ui.displayString("Player White is: " + white.getPlayerName());
+
+			}
+
+			if(numPlayers<2) ui.displayString("Not enough players!!");
 
 		} while ((!command.equals("finish") && numPlayers<6) || numPlayers < 2);
 
@@ -185,14 +184,14 @@ public class Moves
 		boolean characterTaken = false;
 		for(Token token : tokens)
 		{
-			if((command.equals(token.getName().toLowerCase())) && !token.getPlayerName().equals(""))
+			if((command.equals(token.getName().toLowerCase().trim())) && !token.getPlayerName().equals(""))
 			{
 				characterTaken = true;
 			}
 		}
 
 		return ((!command.equals("white") && !command.equals("scarlett") && ! command.equals("plum") 
-					&& !command.equals("peacock") && !command.equals("mustard") && !command.equals("green") 
-					&& !command.equals("finish")) || characterTaken);
+				&& !command.equals("peacock") && !command.equals("mustard") && !command.equals("green") 
+				&& !command.equals("finish")) || characterTaken);
 	}
 }
