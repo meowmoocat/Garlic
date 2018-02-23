@@ -43,13 +43,10 @@ public class Token {
 	}
 
 	public int moveBy(Coordinates move) {
-		System.out.println("pos row: " + position.getRow() +", col: " +position.getCol());
 		return position.add(move);
 	}
 	public void middleRoom(Coordinates move)
 	{
-		System.out.println("move row: " + move.getRow() +", col: " +move.getCol());
-		System.out.println("pos row: " + position.getRow() +", col: " +position.getCol());
 		position.moveToRoom(move);
 	}
 
