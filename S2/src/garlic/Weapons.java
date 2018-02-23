@@ -9,12 +9,12 @@ public class Weapons implements Iterable<Weapon>, Iterator<Weapon> {
 	private Iterator<Weapon> iterator;
 
 	Weapons() {
-		weapons.add(new Weapon("Rope",new Coordinates(2,2)));
-		weapons.add(new Weapon("Dagger",new Coordinates(12,3)));
-		weapons.add(new Weapon("Wrench",new Coordinates(20,4)));
-		weapons.add(new Weapon("Pistol",new Coordinates(2,12)));
-		weapons.add(new Weapon("Candlestick",new Coordinates(3,20)));
-		weapons.add(new Weapon("Lead Pipe",new Coordinates(12,20)));
+		weapons.add(new Weapon("Book", new Coordinates(2,5)));
+		weapons.add(new Weapon("Bored",new Coordinates(11,3)));
+		weapons.add(new Weapon("Gradcap",new Coordinates(20,4)));
+		weapons.add(new Weapon("Librocop",new Coordinates(11,20)));
+		weapons.add(new Weapon("Microscope",new Coordinates(0,21)));
+		weapons.add(new Weapon("Seagull",new Coordinates(2,9)));
 	}
 
 	public Weapon get(String name) {
