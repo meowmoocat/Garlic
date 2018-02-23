@@ -45,8 +45,8 @@ class BoardPanel extends JPanel {
 		Graphics2D g2 =(Graphics2D) g;
 		g2.drawImage(boardImage, 0, 0, FRAME_WIDTH, FRAME_HEIGHT, this);
 		for (Token token : tokens) {
-//			if(token.getTurn() !=0)
-//			{
+			if(token.getTurn() !=0)
+			{
 				int x = Math.round(token.getPosition().getCol()*COL_SCALE + COL_OFFSET);
 				int y = Math.round(token.getPosition().getRow()*ROW_SCALE + ROW_OFFSET);
 				g2.setColor(Color.BLACK);
@@ -55,7 +55,7 @@ class BoardPanel extends JPanel {
 				Ellipse2D.Double ellipseColour = new Ellipse2D.Double(x+2,y+2,2*TOKEN_RADIUS-4,2*TOKEN_RADIUS-4);
 				g2.setColor(token.getColor());
 				g2.fill(ellipseColour);
-//			}
+			}
 		}
 		for (Weapon weapon : weapons) {
 			int x = Math.round(weapon.getPosition().getCol()*COL_SCALE + COL_OFFSET);
