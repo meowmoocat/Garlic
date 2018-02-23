@@ -74,7 +74,7 @@ public class Moves
 		} while(!startRoll.equals("roll"));
 
 		Random dice = new Random();
-		int roll = dice.nextInt(10) + 2;
+		int roll = dice.nextInt(11) + 2;
 		String rollAsString = Integer.toString(roll);
 		ui.displayString(rollAsString);
 
