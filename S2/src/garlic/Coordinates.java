@@ -1,9 +1,12 @@
 package garlic;
 
 public class Coordinates {
-
+	
+	
+	
+	
 	private int row, col;
-	private int prevRow,prevCol;
+	
 
 	Coordinates(int col, int row) {
 		this.col = col;
@@ -12,19 +15,17 @@ public class Coordinates {
 
 	public int add(Coordinates coordinates) {
 
+		//this gets taken away if the token has moved
 		int hasItMoved = 1;
 		
-		prevCol=col;
-		prevRow=row;
+		int prevCol=col;
+		int prevRow=row;
 
 		col = col + coordinates.getCol();
 		row = row + coordinates.getRow();
 		
-		checkBorders();
+		checkBorders(prevRow, prevCol);
 		
-		System.out.println("prevCol: " + prevCol+ ", prevRow: "+ prevRow);
-		System.out.println("Col: " + col+ ", row: "+ row);
-
 		
 		if(prevCol == col && prevRow == row)
 		{
@@ -34,7 +35,20 @@ public class Coordinates {
 		return hasItMoved;
 	}
 
-	private void checkBorders() {
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public void moveToRoom(Coordinates move) {
+		row = move.getRow();
+		col = move.getCol();
+	}
+	
+	public void checkBorders(int prevRow, int prevCol) {
 
 		if(prevCol==7 && prevRow==24 && col==7 && row==25 ) {
 			col=prevCol;
@@ -226,7 +240,7 @@ public class Coordinates {
 			row=prevRow;
 		}
 		if(prevCol==0 && prevRow==7 && col==-1 && row==7 ) {
-			col=prevCol;
+			col=prevCol; 
 			row=prevRow;
 		}
 		if(prevCol==1 && prevRow==7 && col==1 && row==6 ) {
@@ -747,12 +761,5 @@ public class Coordinates {
 		}
 
 	}
-
-	public int getRow() {
-		return row;
-	}
-
-	public int getCol() {
-		return col;
-	}
+	
 }

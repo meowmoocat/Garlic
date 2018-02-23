@@ -8,6 +8,7 @@ public class Weapon {
 	Weapon(String name, Coordinates position) {
 		this.name = name;
 		this.position = position;
+
 	}
 
 	public void moveBy(Coordinates move) {
@@ -23,6 +24,6 @@ public class Weapon {
 	}
 
 	public boolean hasName(String name) {
-		return this.name.toLowerCase().equals(name.toLowerCase().trim());
+		return this.name.toLowerCase().equals(name);
 	}
 }
