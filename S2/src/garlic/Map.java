@@ -17,8 +17,8 @@ public class Map
 		
 		for(Room room : room)
 		{
-//			System.out.println("door row: "+room.getDoor1().getRow());
-//			System.out.println("door col: "+room.getDoor1().getCol());
+			System.out.println("door row: "+room.getDoor1().getRow());
+			System.out.println("door col: "+room.getDoor1().getCol());
 			if((row == room.getDoor1().getRow() && col == room.getDoor1().getCol()) 
 					|| (row == room.getDoor2().getRow() && col == room.getDoor2().getCol()) 
 					|| (row == room.getDoor3().getRow() && col == room.getDoor3().getCol())

@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class Moves 
 {
-
+	
+	private final static Map map = new Map();
 	private final static Tokens tokens = new Tokens();
 	private final static Weapons weapons = new Weapons();
 	final static UI ui = new UI(tokens,weapons);
@@ -103,8 +104,10 @@ public class Moves
 				if(command.equals("u")) 
 					validMove = moveToken.moveBy(new Coordinates(0,-1));
 
+				map.enterRoom(moveToken, moveToken.getPosition().getRow(), moveToken.getPosition().getCol());
+				
 				ui.display();
-
+				
 				if(checkMoveInput(command) || validMove == 0)
 					ui.displayString("Invalid move");
 				if(command.equals("quit")) quit(moveToken);
@@ -140,8 +143,8 @@ public class Moves
 
 			//			"Not enough players!!"
 			do { 
-				ui.displayString("\nEnter the name of the character you would like to be?"
-						+ "\n(Example: White)");
+				ui.displayString("\nEnter the name of the character you would like to be?");
+				displayCharactersLeft();
 				command = ui.getCommand().toLowerCase().trim();
 				ui.displayString(command);
 				command = command.toLowerCase().trim();
@@ -162,7 +165,7 @@ public class Moves
 
 				for(Token token : tokens)
 				{
-//					token = tokens.getName(command);
+					token = tokens.getCharacterName(command);
 					token.setPlayerName(personName);
 					token.setTurn(numPlayers);
 				}
@@ -178,7 +181,15 @@ public class Moves
 
 	}
 
-
+	private void displayCharactersLeft()
+	{
+		for(Token token : tokens)
+		{
+			if(token.getTurn() == 0)
+				ui.displayString(token.getName());
+		}
+	}
+	
 	private boolean checkNameInput(String command)
 	{
 		boolean characterTaken = false;
