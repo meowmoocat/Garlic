@@ -2,10 +2,10 @@ package garlic;
 
 
 public class Room {
-	
+
 	private final String name;
 	private final Coordinates weaponPosition;
-	
+
 	private final Coordinates door1;
 	private final Coordinates door2;
 	private final Coordinates door3;
@@ -13,7 +13,7 @@ public class Room {
 	private final Coordinates secretPassage;
 
 
-	
+
 	Room(String name,Coordinates weaponPosition, 
 			Coordinates door1, Coordinates door2,
 			Coordinates door3, Coordinates door4, Coordinates secretPassage)
@@ -27,7 +27,7 @@ public class Room {
 		this.door4 = door4;
 		this.secretPassage = secretPassage;
 	}
-	
+
 	public String getName()
 	{
 		return name;

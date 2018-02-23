@@ -36,7 +36,7 @@ public class Token {
 		this.agSciPosition = agSciPosition;
 		this.oBrienPosition = oBrienPosition;
 	}
-	
+
 	public void setTurn(int turn)
 	{
 		this.turn = turn;
@@ -56,7 +56,7 @@ public class Token {
 	public String getName() {
 		return name;
 	}
-	
+
 	public int getTurn()
 	{
 		return turn;
@@ -73,17 +73,17 @@ public class Token {
 	public boolean hasName(String name) {
 		return this.name.toLowerCase().equals(name.toLowerCase().trim());
 	}
-	
+
 	public void setPlayerName(String pName)
 	{
 		this.playerName = pName;
 	}
-	
+
 	public String getPlayerName()
 	{
 		return playerName;
 	}
-	
+
 	public Coordinates getCompSciPosition() {
 		return compSciPosition;
 	}

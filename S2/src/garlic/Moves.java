@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Moves 
 {
-	
+
 	private final static Map map = new Map();
 	private final static Tokens tokens = new Tokens();
 	private final static Weapons weapons = new Weapons();
@@ -106,9 +106,9 @@ public class Moves
 					validMove = moveToken.moveBy(new Coordinates(0,-1));
 
 				map.enterRoom(moveToken, moveToken.getPosition().getRow(), moveToken.getPosition().getCol());
-				
+
 				ui.display();
-				
+
 				if(checkMoveInput(command) || validMove == 0)
 					ui.displayString("Invalid move");
 				if(command.equals("quit")) diceMoves = quit(moveToken);
@@ -190,7 +190,7 @@ public class Moves
 				ui.displayString(token.getName());
 		}
 	}
-	
+
 	private boolean checkNameInput(String command)
 	{
 		boolean characterTaken = false;

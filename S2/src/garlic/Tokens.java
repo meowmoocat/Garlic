@@ -47,7 +47,7 @@ public class Tokens implements Iterable<Token>, Iterator<Token> {
 		}
 		return null;
 	}
-	
+
 	public Token getCharacterName(String name)
 	{
 		for (Token character : characters)

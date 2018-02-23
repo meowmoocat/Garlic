@@ -1,12 +1,12 @@
 package garlic;
 
 public class Coordinates {
-	
-	
-	
-	
+
+
+
+
 	private int row, col;
-	
+
 
 	Coordinates(int col, int row) {
 		this.col = col;
@@ -17,16 +17,16 @@ public class Coordinates {
 
 		//this gets taken away if the token has moved
 		int hasItMoved = 1;
-		
+
 		int prevCol=col;
 		int prevRow=row;
 
 		col = col + coordinates.getCol();
 		row = row + coordinates.getRow();
-		
+
 		checkBorders(prevRow, prevCol);
-		
-		
+
+
 		if(prevCol == col && prevRow == row)
 		{
 			hasItMoved = 0;
@@ -47,7 +47,7 @@ public class Coordinates {
 		row = move.getRow();
 		col = move.getCol();
 	}
-	
+
 	public void checkBorders(int prevRow, int prevCol) {
 
 		if(prevCol==7 && prevRow==24 && col==7 && row==25 ) {
@@ -761,5 +761,5 @@ public class Coordinates {
 		}
 
 	}
-	
+
 }
