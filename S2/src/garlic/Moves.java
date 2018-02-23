@@ -35,7 +35,6 @@ public class Moves
 					{
 						int diceNum = dice();					//TODO: add condition here for if they want to stay in room
 						moveToken(token, diceNum);
-
 					}
 
 					do {
@@ -56,10 +55,11 @@ public class Moves
 
 	}
 
-	private void quit(Token token)
+	private int quit(Token token)
 	{
 		token.setTurn(0);
 		ui.displayString(token.getName() + " has quit!!!");
+		return 0;
 	}
 
 	private int dice()
@@ -110,7 +110,7 @@ public class Moves
 				
 				if(checkMoveInput(command) || validMove == 0)
 					ui.displayString("Invalid move");
-				if(command.equals("quit")) quit(moveToken);
+				if(command.equals("quit")) diceMoves = quit(moveToken);
 			}while(checkMoveInput(command) || validMove == 0);
 
 
