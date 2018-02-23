@@ -83,6 +83,14 @@ public class Token {
 	{
 		return playerName;
 	}
+	
+	public int getTokenCol() {
+		return position.getCol();
+	}
+	
+	public int getTokenRow() {
+		return position.getRow();
+	}
 
 	public Coordinates getCompSciPosition() {
 		return compSciPosition;
