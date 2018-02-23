@@ -24,36 +24,30 @@ public class Moves
 				{
 					token = tokens.get(i);
 
-					//there is a null pointer exception here, I think from characters not in the game
-					try {
-						ui.refreshInfoPanel();
-						ui.displayString("\n" + token.getName() + " " + token.getTurn());
-						do {
-							ui.displayString(token.getPlayerName() + " enter start to start your turn");
-							command = ui.getCommand().toLowerCase().trim();
-							
-							if(command.equals("quit")) quit(token);
-							
-						}while(!command.equals("start") && !command.equals("Start") && !command.equals("quit"));
 
-						if(!command.equals("quit"))
-						{
-							int diceNum = dice();					//TODO: add condition here for if they want to stay in room
-							moveToken(token, diceNum);
-						}
+					ui.refreshInfoPanel();
+					ui.displayString("\n" + token.getName() + " " + token.getTurn());
+					do {
+						ui.displayString(token.getPlayerName() + " enter start to start your turn");
+						command = ui.getCommand().toLowerCase().trim();
 
-						do {
-							ui.displayString(token.getPlayerName() + " enter end to end your turn");
-							command = ui.getCommand().toLowerCase().trim();
-							if(command.equals("quit")) quit(token);
-						}while(!command.equals("end"));
+						if(command.equals("quit")) quit(token);
 
+					}while(!command.equals("start") && !command.equals("Start") && !command.equals("quit"));
 
-					}catch (Exception e)
+					if(!command.equals("quit"))
 					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						int diceNum = dice();					//TODO: add condition here for if they want to stay in room
+						moveToken(token, diceNum);
 					}
+
+					do {
+						ui.displayString(token.getPlayerName() + " enter end to end your turn");
+						command = ui.getCommand().toLowerCase().trim();
+						if(command.equals("quit")) quit(token);
+					}while(!command.equals("end"));
+
+
 					i++;
 				}
 			}
