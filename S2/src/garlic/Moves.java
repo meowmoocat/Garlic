@@ -20,11 +20,9 @@ public class Moves
 			int i = 1;
 			for(Token token : tokens)
 			{
-				if(token.getTurn() > 0)
-				{
-					token = tokens.get(i);
+				token = tokens.get(i);
 
-
+				try {
 					ui.refreshInfoPanel();
 					ui.displayString("\n" + token.getName() + " " + token.getTurn());
 					do {
@@ -37,7 +35,7 @@ public class Moves
 
 					if(!command.equals("quit"))
 					{
-						int diceNum = dice();					//TODO: add condition here for if they want to stay in room
+						int diceNum = dice();	//TODO: add condition here for if they want to stay in room
 						moveToken(token, diceNum);
 					}
 
@@ -46,10 +44,12 @@ public class Moves
 						command = ui.getCommand().toLowerCase().trim();
 						if(command.equals("quit")) quit(token);
 					}while(!command.equals("end"));
-
-
-					i++;
+				} catch (NullPointerException e) {
+					//nothing to do if it's null!
 				}
+
+				i++;
+
 			}
 		} while (!command.equals("end game"));
 
@@ -71,7 +71,7 @@ public class Moves
 		} while(!startRoll.equals("roll"));
 
 		Random dice = new Random();
-		int roll = dice.nextInt(110) + 2;
+		int roll = dice.nextInt(11) + 2;
 		String rollAsString = Integer.toString(roll);
 		ui.displayString(rollAsString);
 
@@ -179,7 +179,8 @@ public class Moves
 			}
 
 			if(numPlayers<2) ui.displayString("Not enough players!!");
-
+			
+			ui.display();
 		} while ((!command.equals("finish") && numPlayers<6) || numPlayers < 2);
 
 	}
