@@ -1,4 +1,4 @@
-package src.Garlic;
+package garlic;
 
 import java.util.Random;
 
@@ -34,11 +34,10 @@ public class Moves
 							if(command.equals("quit")) quit(token);
 						}while(!command.equals("start") && !command.equals("Start") && !command.equals("quit"));
 
-					if(token.getTurn() > 0)
-					{
+
 						int diceNum = dice();					//TODO: add condition here for if they want to stay in room
 						moveToken(token, diceNum);
-					}
+
 
 						do {
 							ui.displayString(token.getPlayerName() + " enter end to end your turn");
@@ -58,6 +57,8 @@ public class Moves
 		} while (!command.equals("end game"));
 
 	}
+	
+	
 
 	private int quit(Token token)
 	{
@@ -95,54 +96,10 @@ public class Moves
 		int col=moveToken.getTokenCol();
 		int row=moveToken.getTokenRow();
 
-		//Comp Sci
-		if(col==1 && row==1 || col==2 && row==1 || col==3 && row==1|| col==1 && row==2 || col==2 && row==2 || col==3 && row==2) {//Entering room comp Sci building
-			validMove= moveToken.moveBy(new Coordinates(0,+2));
-			return 0;// will make the amount of turns a player has to 0
-		}
-		//O'Reilly Hall
-		if(col==10 && row==6 || col==11 && row==6 || col==12 && row==6|| col==10 && row==7 || col==11 && row==7 || col==12 && row==7) {//Entering room comp Sci building
-			validMove= moveToken.moveBy(new Coordinates(0,-2));
-			return 0;// will make the amount of turns a player has to 0
-		}
-		//Engineering
-		if(col==20 && row==3 || col==21 && row==3 || col==22 && row==3|| col==20 && row==4 || col==21 && row==4 || col==22 && row==4) {//Entering room comp Sci building
-			validMove= moveToken.moveBy(new Coordinates(0,+2));
-			return 0;// will make the amount of turns a player has to 0
-		}
-		//Sutherland
-		if(col==20 && row==10 || col==21 && row==10 || col==22 && row==10|| col==20 && row==11 || col==21 && row==11 || col==22 && row==11) {//Entering room comp Sci building
-			validMove= moveToken.moveBy(new Coordinates(0,+2));
-			return 0;// will make the amount of turns a player has to 0
-		}
-		//Quinn
-		if(col==18 && row==15 || col==19 && row==15 || col==18 && row==16|| col==19 && row==16 || col==18 && row==17 || col==19 && row==17) {//Entering room comp Sci building
-			validMove= moveToken.moveBy(new Coordinates(+2,0));
-			return 0;// will make the amount of turns a player has to 0
-		}
-		//Newman
-		if(col==10 && row==21 || col==11 && row==21 || col==12 && row==21|| col==10 && row==22 || col==11 && row==22 || col==12 && row==22) {//Entering room comp Sci building
-			validMove= moveToken.moveBy(new Coordinates(0,+2));
-			return 0;// will make the amount of turns a player has to 0
-		}
-		//Library
-		if(col==9 && row==19 || col==10 && row==19 || col==11 && row==19|| col==12 && row==19 || col==13 && row==19 || col==14 && row==19) {//Entering room comp Sci building
-			validMove= moveToken.moveBy(new Coordinates(0,+2));
-			return 0;// will make the amount of turns a player has to 0
-		}
-		//Ag Science
-		if(col==2 && row==19 || col==3 && row==19 || col==4 && row==19|| col==2 && row==20 || col==3 && row==20 || col==4 && row==20) {//Entering room comp Sci building
-			validMove= moveToken.moveBy(new Coordinates(0,+2));
-			return 0;// will make the amount of turns a player has to 0
-		}
-		//O'brien
-		if(col==2 && row==11 || col==3 && row==11 || col==4 && row==11|| col==2 && row==12 || col==3 && row==12 || col==4 && row==12) {//Entering room comp Sci building
-			validMove= moveToken.moveBy(new Coordinates(0,+2));
-			return 0;// will make the amount of turns a player has to 0
-		}
+//		testhere
 
-		else
-		{
+//		else
+//		{
 			do
 			{
 				ui.displayString("Type u for up, d for down, r for right, l for left");
@@ -168,7 +125,7 @@ public class Moves
 			}while(checkMoveInput(command) || validMove == 0);
 
 			return moveToken(moveToken, diceMoves-validMove);
-		}
+//		}
 	}
 
 	private boolean checkMoveInput(String command)
