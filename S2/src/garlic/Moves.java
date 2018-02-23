@@ -93,7 +93,7 @@ public class Moves
 			do
 			{
 				ui.displayString("Type u for up, d for down, r for right, l for left");
-				ui.displayString("Moves left " + diceMoves);
+				ui.displayString("Moves remaining " + diceMoves);
 				command = ui.getCommand().toLowerCase().trim();
 
 				if(command.equals("d")) 
@@ -114,8 +114,6 @@ public class Moves
 				if(command.equals("quit")) diceMoves = quit(moveToken);
 			}while(checkMoveInput(command) || validMove == 0);
 
-
-			ui.displayString("Moves remaining " + (diceMoves-1));
 			return moveToken(moveToken, diceMoves-validMove);
 		}
 	}
