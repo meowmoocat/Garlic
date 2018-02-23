@@ -30,47 +30,38 @@ public class Map
 //					{
 						if(room.getName().equals("Computer Science"))
 						{
-							System.out.println(token.getCompSciPosition());
 							token.middleRoom(token.getCompSciPosition());
 						}
 						if(room.getName().equals("O'Reilly Hall"))
 						{
-							System.out.println(token.getOReillyHallPosition());
 							token.middleRoom(token.getOReillyHallPosition());
 						}
 						if(room.getName().equals("Engineering"))
 						{
-							System.out.println(token.getEngineeringPosition());
 							token.middleRoom(token.getEngineeringPosition());
 						}	
 						if(room.getName().equals("Sutherland"))
 						{
-							System.out.println(token.getSutherlandPosition());
 							token.middleRoom(token.getSutherlandPosition());
 						}
 						if(room.getName().equals("Quinn"))
 						{
-							System.out.println(token.getQuinnPosition());
 							token.middleRoom(token.getQuinnPosition());
 						}
 						if(room.getName().equals("Newman"))
 						{
-							System.out.println(token.getNewmanPosition());
 							token.middleRoom(token.getNewmanPosition());
 						}
 						if(room.getName().equals("Library"))
 						{
-							System.out.println(token.getLibraryPosition());
 							token.middleRoom(token.getLibraryPosition());
 						}
 						if(room.getName().equals("Ag Science"))
 						{
-							System.out.println(token.getAgSciPosition());
 							token.middleRoom(token.getAgSciPosition());
 						}
 						if(room.getName().equals("O'Brien"))
 						{
-							System.out.println(token.getOBrienPosition());
 							token.middleRoom(token.getOBrienPosition());
 						}
 //					}
@@ -78,6 +69,8 @@ public class Map
 			}
 		}
 	}
+	
+	
 
 //	public void checkBorders(int row, int col, int prevRow, int prevCol) {
 //
