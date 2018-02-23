@@ -1,9 +1,12 @@
 package garlic;
 
 public class Coordinates {
-
+	
+	
+	
+	
 	private int row, col;
-	private int prevRow,prevCol;
+	
 
 	Coordinates(int col, int row) {
 		this.col = col;
@@ -12,20 +15,17 @@ public class Coordinates {
 
 	public int add(Coordinates coordinates) {
 
+		//this gets taken away if the token has moved
 		int hasItMoved = 1;
 		
-		prevCol=col;
-		prevRow=row;
+		int prevCol=col;
+		int prevRow=row;
 
 		col = col + coordinates.getCol();
 		row = row + coordinates.getRow();
 		
-		checkBorders();
-		EnterRoom();
+		checkBorders(prevRow, prevCol);
 		
-		System.out.println("prevCol: " + prevCol+ ", prevRow: "+ prevRow);
-		System.out.println("Col: " + col+ ", row: "+ row);
-
 		
 		if(prevCol == col && prevRow == row)
 		{
@@ -34,277 +34,21 @@ public class Coordinates {
 
 		return hasItMoved;
 	}
-public void EnterRoom() {
-		String command = "";
 
-		if(col==6 && row==19) {//Ag Science building
+	public int getRow() {
+		return row;
+	}
 
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
+	public int getCol() {
+		return col;
+	}
 
-			if(command.equals("1")) {
-				col=2;
-				row=22;
-			}
-
-			else if(command.equals("2")) {
-				col=6;
-				row=19;
-			}
-
-
-		}
-
-		if(col==4 && row==6) {//Comp Sci Building
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=3;
-				row=2;
-			}
-
-			else if(command.equals("2")) {
-				col=5;
-				row=6;
-			}
-
-
-		}
-
-		if(col==9 && row==7) {//O'Reily Hall
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=12;
-				row=6;
-			}
-
-			else if(command.equals("2")) {
-				col=9;
-				row=8;
-			}
-
-
-		}
-		if(col==14 && row==7) {//O'Reilly Hall
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=12;
-				row=6;
-			}
-
-			else if(command.equals("2")) {
-				col=14;
-				row=7;
-			}
-		}
-		if(col==15 && row==5) {//O'Reilly Hall
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=12;
-				row=6;
-			}
-
-			else if(command.equals("2")) {
-				col=15;
-				row=5;
-			}
-		}
-
-		if(col==8 && row==5) {//O'Reilly Hall
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=12;
-				row=6;
-			}
-
-			else if(command.equals("2")) {
-				col=14;
-				row=7;
-			}
-
-		}
-
-		if(col==18 && row==4 ) {//Engineering
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=20;
-				row=3;
-			}
-
-			else if(command.equals("2")) {
-				col=18;
-				row=4;
-			}
-
-
-		}
-
-		if(col==18 && row==9 ) {//Sutherland
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=20;
-				row=11;
-			}
-
-			else if(command.equals("2")) {
-				col=18;
-				row=9;
-			}
-
-		}
-		if(col==17 && row==16 ) {//Quinn
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=20;
-				row=16;
-			}
-
-			else if(command.equals("2")) {
-				col=17;
-				row=16;
-			}
-		}
-
-		if(col==20 && row==14 ) {//Quinn
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=20;
-				row=16;
-			}
-
-			else if(command.equals("2")) {
-				col=20;
-				row=14;
-			}
-		}
-
-
-
-		if(col==17 && row==21) {//Newman
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=20;
-				row=22;
-			}
-
-			else if(command.equals("2")) {
-				col=17;
-				row=21;
-			}
-		}
-
-		if(col==14 && row==20) {//library
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=12;
-				row=21;
-			}
-
-			else if(command.equals("2")) {
-				col=14;
-				row=20;
-			}
-		}
-
-		if(col==12 && row==18) {//library
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=12;
-				row=21;
-			}
-
-			else if(command.equals("2")) {
-				col=12;
-				row=18;
-			}
-		}
-
-		if(col==11 && row==18) {//library
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=12;
-				row=21;
-			}
-
-			else if(command.equals("2")) {
-				col=13;
-				row=18;
-			}
-		}
-
-		if(col==6 && row==15) {//O'Brien
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=3;
-				row=11;
-			}
-
-			else if(command.equals("2")) {
-				col=6;
-				row=15;
-			}
-		}
-
-		if(col==7 && row==12) {//O'Brien
-
-			Moves.ui.displayString("Enter 1 to enter the room or 2 to exit the room");
-			command = Moves.ui.getCommand();
-
-			if(command.equals("1")) {
-				col=3;
-				row=11;
-			}
-
-			else if(command.equals("2")) {
-				col=7;
-				row=12;
-			}
-		}
-
+	public void moveToRoom(Coordinates move) {
+		row = move.getRow();
+		col = move.getCol();
 	}
 	
-	private void checkBorders() {
+	public void checkBorders(int prevRow, int prevCol) {
 
 		if(prevCol==7 && prevRow==24 && col==7 && row==25 ) {
 			col=prevCol;
@@ -496,7 +240,7 @@ public void EnterRoom() {
 			row=prevRow;
 		}
 		if(prevCol==0 && prevRow==7 && col==-1 && row==7 ) {
-			col=prevCol;
+			col=prevCol; 
 			row=prevRow;
 		}
 		if(prevCol==1 && prevRow==7 && col==1 && row==6 ) {
@@ -1017,12 +761,5 @@ public void EnterRoom() {
 		}
 
 	}
-
-	public int getRow() {
-		return row;
-	}
-
-	public int getCol() {
-		return col;
-	}
+	
 }
