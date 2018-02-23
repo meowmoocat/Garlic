@@ -14,7 +14,6 @@ public class Map
 
 	public void enterRoom(Token token, int row, int col) {
 
-		System.out.println("\nrow: "+row+", col: "+col);
 		
 		for(Room room : room)
 		{

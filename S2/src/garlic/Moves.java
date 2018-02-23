@@ -162,7 +162,7 @@ public class Moves
 
 				for(Token token : tokens)
 				{
-					token = tokens.getName(command);
+//					token = tokens.getName(command);
 					token.setPlayerName(personName);
 					token.setTurn(numPlayers);
 				}
