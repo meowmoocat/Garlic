@@ -20,17 +20,19 @@ public class Moves
 			int i = 1;
 			for(Token token : tokens)
 			{
-				token = tokens.get(i);
+				if(token.getTurn() > 0)
+				{
+					token = tokens.get(i);
 
-				//there is a null pointer exception here, I think from characters not in the game
-				try {
-					ui.refreshInfoPanel();
-					ui.displayString("\n" + token.getName() + " " + token.getTurn());
-					do {
-						ui.displayString(token.getPlayerName() + " enter start to start your turn");
-						command = ui.getCommand().toLowerCase().trim();
-						if(command.equals("quit")) quit(token);
-					}while(!command.equals("start") && !command.equals("Start") && !command.equals("quit"));
+					//there is a null pointer exception here, I think from characters not in the game
+					try {
+						ui.refreshInfoPanel();
+						ui.displayString("\n" + token.getName() + " " + token.getTurn());
+						do {
+							ui.displayString(token.getPlayerName() + " enter start to start your turn");
+							command = ui.getCommand().toLowerCase().trim();
+							if(command.equals("quit")) quit(token);
+						}while(!command.equals("start") && !command.equals("Start") && !command.equals("quit"));
 
 					if(token.getTurn() > 0)
 					{
@@ -38,19 +40,20 @@ public class Moves
 						moveToken(token, diceNum);
 					}
 
-					do {
-						ui.displayString(token.getPlayerName() + " enter end to end your turn");
-						command = ui.getCommand().toLowerCase().trim();
-						if(command.equals("quit")) quit(token);
-					}while(!command.equals("end"));
+						do {
+							ui.displayString(token.getPlayerName() + " enter end to end your turn");
+							command = ui.getCommand().toLowerCase().trim();
+							if(command.equals("quit")) quit(token);
+						}while(!command.equals("end"));
 
 
-				}catch (Exception e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					}catch (Exception e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					i++;
 				}
-				i++;
 			}
 		} while (!command.equals("end game"));
 
