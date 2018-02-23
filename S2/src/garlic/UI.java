@@ -5,8 +5,8 @@ import javax.swing.*;
 
 public class UI {
 
-	private static final int FRAME_WIDTH = 1200;
-	private static final int FRAME_HEIGHT = 800;
+	private static final int FRAME_WIDTH = 1095;
+	private static final int FRAME_HEIGHT = 700;
 
 	private final BoardPanel boardPanel;
 	private final InfoPanel infoPanel = new InfoPanel();
@@ -16,7 +16,7 @@ public class UI {
 		JFrame frame = new JFrame();
 		boardPanel = new BoardPanel(characters, weapons);
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		frame.setTitle("Cluedo");
+		frame.setTitle("UCD Cluedo");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.add(boardPanel, BorderLayout.LINE_START);
 		frame.add(infoPanel, BorderLayout.LINE_END);
