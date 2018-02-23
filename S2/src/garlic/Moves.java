@@ -24,6 +24,7 @@ public class Moves
 
 				//there is a null pointer exception here, I think from characters not in the game
 				try {
+					ui.refreshInfoPanel();
 					ui.displayString("\n" + token.getName() + " " + token.getTurn());
 					do {
 						ui.displayString(token.getPlayerName() + " enter start to start your turn");
@@ -143,7 +144,7 @@ public class Moves
 
 			//			"Not enough players!!"
 			do { 
-				ui.displayString("\nEnter the name of the character you would like to be?");
+				ui.displayString("\nEnter the name of the character you would like to be?\nEnter finish when done.");
 				displayCharactersLeft();
 				command = ui.getCommand().toLowerCase().trim();
 				ui.displayString(command);
