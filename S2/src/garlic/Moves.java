@@ -5,7 +5,6 @@ import java.util.Random;
 public class Moves 
 {
 
-	private final static Map map = new Map();
 	private final static Tokens tokens = new Tokens();
 	private final static Weapons weapons = new Weapons();
 	final static UI ui = new UI(tokens,weapons);
@@ -24,7 +23,7 @@ public class Moves
 
 				//there is a null pointer exception here, I think from characters not in the game
 				try {
-					ui.displayString("\n" + token.getName());
+					ui.displayString("\n" + token.getName() + " " + token.getTurn());
 					do {
 						ui.displayString(token.getPlayerName() + " enter start to start your turn");
 						command = ui.getCommand().toLowerCase().trim();
@@ -35,6 +34,7 @@ public class Moves
 					{
 						int diceNum = dice();					//TODO: add condition here for if they want to stay in room
 						moveToken(token, diceNum);
+
 					}
 
 					do {
@@ -55,11 +55,10 @@ public class Moves
 
 	}
 
-	private int quit(Token token)
+	private void quit(Token token)
 	{
 		token.setTurn(0);
 		ui.displayString(token.getName() + " has quit!!!");
-		return 0;
 	}
 
 	private int dice()
@@ -92,7 +91,7 @@ public class Moves
 			do
 			{
 				ui.displayString("Type u for up, d for down, r for right, l for left");
-				ui.displayString("Moves remaining " + diceMoves);
+				ui.displayString("Moves left " + diceMoves);
 				command = ui.getCommand().toLowerCase().trim();
 
 				if(command.equals("d")) 
@@ -104,15 +103,15 @@ public class Moves
 				if(command.equals("u")) 
 					validMove = moveToken.moveBy(new Coordinates(0,-1));
 
-				map.enterRoom(moveToken, moveToken.getPosition().getRow(), moveToken.getPosition().getCol());
-				
 				ui.display();
 
 				if(checkMoveInput(command) || validMove == 0)
 					ui.displayString("Invalid move");
-				if(command.equals("quit")) diceMoves = quit(moveToken);
+				if(command.equals("quit")) quit(moveToken);
 			}while(checkMoveInput(command) || validMove == 0);
 
+
+			ui.displayString("Moves remaining " + (diceMoves-1));
 			return moveToken(moveToken, diceMoves-validMove);
 		}
 	}
@@ -132,69 +131,60 @@ public class Moves
 		String command;
 		int numPlayers=0;
 
+
 		do 
 		{
-				//code to make sure there isn't to few players
-				//TODO needs fixing doesn't work if enter finish twice in a row and too few players
 
-				//			"Not enough players!!"
-				do { 
-					ui.displayString("\nEnter the name of the character you would like to be?");
-					displayCharactersLeft();
-					command = ui.getCommand().toLowerCase().trim();
-					ui.displayString(command);
-					command = command.toLowerCase();
-					if(checkNameInput(command))
-					{
-						ui.displayString("Error entering character!!");
-					}
-				}while(checkNameInput(command));
+			//code to make sure there isn't to few players
+			//TODO needs fixing doesn't work if enter finish twice in a row and too few players
 
-
-				if(!command.equals("finish"))
+			//			"Not enough players!!"
+			do { 
+				ui.displayString("\nEnter the name of the character you would like to be?"
+						+ "\n(Example: White)");
+				command = ui.getCommand().toLowerCase().trim();
+				ui.displayString(command);
+				command = command.toLowerCase().trim();
+				if(checkNameInput(command))
 				{
+					ui.displayString("Error entering character!!");
+				}
+			}while(checkNameInput(command));
 
-					ui.displayString("Enter your player name: ");
-					String personName = ui.getCommand();
-					numPlayers++;
-					ui.displayString(personName);
-					personName = personName.toLowerCase().trim();
 
-					for(Token token : tokens)
-					{
-						token = tokens.getCharacterName(command);
-						token.setPlayerName(personName);
-						token.setTurn(numPlayers);
-					}
+			if(!command.equals("finish"))
+			{
 
-//				TODO ???
-//				ui.displayString("Player White is: " + white.getPlayerName());
+				ui.displayString("Enter your player name: ");
+				String personName = ui.getCommand().toLowerCase().trim();
+				numPlayers++;
+				ui.displayString(personName);
 
+				for(Token token : tokens)
+				{
+					token = tokens.getName(command);
+					token.setPlayerName(personName);
+					token.setTurn(numPlayers);
 				}
 
-				if(numPlayers<2) ui.displayString("Not enough players!!");
+				//				TODO ???
+				//				ui.displayString("Player White is: " + white.getPlayerName());
+
+			}
+
+			if(numPlayers<2) ui.displayString("Not enough players!!");
 
 		} while ((!command.equals("finish") && numPlayers<6) || numPlayers < 2);
 
 	}
 
-	private void displayCharactersLeft()
-	{
-		for(Token token : tokens)
-		{
-			if(token.getTurn()==0)
-			{
-				ui.displayString(token.getName());
-			}
-		}
-	}
 
 	private boolean checkNameInput(String command)
 	{
 		boolean characterTaken = false;
 		for(Token token : tokens)
 		{
-			if((command.equals(token.getName().toLowerCase())) && !token.getPlayerName().equals(""))
+			if((command.equals(token.getName().toLowerCase().trim())) && !token.getPlayerName().equals(""))
 			{
 				characterTaken = true;
 			}
