@@ -7,12 +7,12 @@ package garlic;
  */
 
 public class Coordinates {
-	
-	
-	
-	
+
+
+
+
 	private int row, col;
-	
+
 
 	//creates instance of coordinates
 	Coordinates(int col, int row) {
@@ -25,15 +25,15 @@ public class Coordinates {
 
 		//this gets taken away if the token has moved
 		int hasItMoved = 1;
-		
+
 		int prevCol=col;
 		int prevRow=row;
 
 		col = col + coordinates.getCol();
 		row = row + coordinates.getRow();
-		
+
 		checkBorders(prevRow, prevCol);
-		
+
 		//checks if token has moved
 		if(prevCol == col && prevRow == row)
 		{
@@ -56,14 +56,14 @@ public class Coordinates {
 		row = move.getRow();
 		col = move.getCol();
 	}
-	
+
 	public void moveToExit(Coordinates move)
 	{
 		System.out.println("row: " + move.getRow() +", col: " +move.getCol());
 		row = move.getRow();
 		col = move.getCol();
 	}
-	
+
 	//checks token hasn't moved into a wall, if it has it puts the token back to where it came from
 	public void checkBorders(int prevRow, int prevCol) {
 
@@ -778,5 +778,5 @@ public class Coordinates {
 		}
 
 	}
-	
+
 }

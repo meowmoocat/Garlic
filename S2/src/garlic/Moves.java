@@ -83,7 +83,7 @@ public class Moves
 		String command;
 		int validMove = 1;
 
-		
+
 		if(diceMoves <= 0)
 		{
 			return 0;
@@ -180,7 +180,7 @@ public class Moves
 			}
 
 			if(numPlayers<2) ui.displayString("Not enough players!!");
-			
+
 			ui.display();
 		} while ((!command.equals("finish") && numPlayers<6) || numPlayers < 2);
 

@@ -21,7 +21,7 @@ public class Room {
 	private final Coordinates door2Exit;
 	private final Coordinates door3Exit;
 	private final Coordinates door4Exit;
-	
+
 
 
 	//creates instance of room with name, weapon coordinates, door coordinates, door exit coordinates and secret passage coordinates
@@ -50,7 +50,7 @@ public class Room {
 	{
 		return name;
 	}
-	
+
 	public Coordinates getWeaponPosition()
 	{
 		return weaponPosition;
@@ -60,27 +60,27 @@ public class Room {
 	{
 		return door1;
 	}
-	
+
 	public Coordinates getDoor2()
 	{
 		return door2;
 	}
-	
+
 	public Coordinates getDoor3()
 	{
 		return door3;
 	}
-	
+
 	public Coordinates getDoor4()
 	{
 		return door4;
 	}
-	
+
 	public Coordinates getSecretPassage()
 	{
 		return secretPassage;
 	}
-	
+
 	//returns coordinates to square outside door
 	public Coordinates getDoor1Exit()
 	{

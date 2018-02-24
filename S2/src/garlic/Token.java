@@ -54,24 +54,24 @@ public class Token {
 	public int moveBy(Coordinates move) {
 		return position.add(move);
 	}
-	
+
 	//moves token to middle of room
 	public void middleRoom(Coordinates move)
 	{
 		position.moveToRoom(move);
 	}
-	
+
 	//moves token to position to move out of the room
 	public void moveOutOfRoom(Coordinates move)
 	{
 		position.moveToExit(move);
 	}
-	
+
 	//returns the character name
 	public String getName() {
 		return name;
 	}
-	
+
 	//returns the turn value
 	public int getTurn()
 	{
@@ -92,7 +92,7 @@ public class Token {
 	public boolean hasName(String name) {
 		return this.name.toLowerCase().equals(name.toLowerCase().trim());
 	}
-	
+
 	//sets players name e.g. john
 	public void setPlayerName(String pName)
 	{
@@ -104,12 +104,12 @@ public class Token {
 	{
 		return playerName;
 	}
-	
+
 	//returns tokens column position
 	public int getTokenCol() {
 		return position.getCol();
 	}
-	
+
 	//returns tokens row position
 	public int getTokenRow() {
 		return position.getRow();
@@ -118,19 +118,19 @@ public class Token {
 	public Coordinates getCompSciPosition() {
 		return compSciPosition;
 	}
-	
+
 	public Coordinates getOReillyHallPosition() {
 		return oReillyHallPosition;
 	}
-	
+
 	public Coordinates getEngineeringPosition() {
 		return engineeringPosition;
 	}
-	
+
 	public Coordinates getSutherlandPosition() {
 		return sutherlandPosition;
 	}
-	
+
 	public Coordinates getQuinnPosition() {
 		return quinnPosition;
 	}
@@ -138,15 +138,15 @@ public class Token {
 	public Coordinates getNewmanPosition() {
 		return newmanPosition;
 	}
-	
+
 	public Coordinates getLibraryPosition() {
 		return libraryPosition;
 	}
-	
+
 	public Coordinates getAgSciPosition() {
 		return agSciPosition;
 	}
-	
+
 	public Coordinates getOBrienPosition() {
 		return oBrienPosition;
 	}

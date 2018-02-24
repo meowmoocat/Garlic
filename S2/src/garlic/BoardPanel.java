@@ -24,7 +24,7 @@ class BoardPanel extends JPanel {
 	private final Tokens tokens;
 	private final Weapons weapons;
 	private BufferedImage boardImage;
-	
+
 	public BufferedImage book;
 	public BufferedImage bored;
 	public BufferedImage gradcap;
@@ -88,7 +88,7 @@ class BoardPanel extends JPanel {
 		revalidate();
 		repaint();
 	}
-	
+
 	//reads in images for weapons
 	public void weaponsReadIn()
 	{
