@@ -153,7 +153,7 @@ public class Map
 						token.moveOutOfRoom(room.getSecretPassage());
 					}
 				}
-			}while(!command.equals("1") || !command.equals("secret"));
+			}while(!command.equals("1") && !command.equals("secret"));
 			return true;
 		}
 
@@ -172,7 +172,7 @@ public class Map
 						token.moveOutOfRoom(room.getSecretPassage());
 					}
 				}
-			}while(!command.equals("1") || !command.equals("secret"));
+			}while(!command.equals("1") && !command.equals("secret"));
 			return true;
 		}
 
@@ -190,7 +190,7 @@ public class Map
 						token.moveOutOfRoom(room.getDoor2Exit());
 					}
 				}
-			}while(!command.equals("1") || !command.equals("2"));
+			}while(!command.equals("1") && !command.equals("2"));
 			return true;
 		}
 		//		OReilly
@@ -213,7 +213,7 @@ public class Map
 						token.moveOutOfRoom(room.getDoor4Exit());
 					}
 				}
-			}while(!command.equals("1") || !command.equals("2") || !command.equals("3") || !command.equals("4"));
+			}while(!command.equals("1") && !command.equals("2") && !command.equals("3") && !command.equals("4"));
 			return true;
 		}
 
@@ -231,7 +231,7 @@ public class Map
 						token.moveOutOfRoom(room.getDoor2Exit());
 					}
 				}
-			}while(!command.equals("1") || !command.equals("2"));
+			}while(!command.equals("1") && !command.equals("2"));
 			return true;
 		}
 
@@ -249,7 +249,7 @@ public class Map
 						token.moveOutOfRoom(room.getDoor2Exit());
 					}
 				}
-			}while(!command.equals("1") || !command.equals("2"));
+			}while(!command.equals("1") && !command.equals("2"));
 			return true;
 		}
 		return false;
