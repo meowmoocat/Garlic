@@ -90,8 +90,14 @@ public class Moves
 		}
 		else if(map.exitRoom(moveToken, moveToken.getPosition().getRow(), moveToken.getPosition().getCol(), diceMoves))
 		{
-			
+			do
+			{
+			ui.displayString("Type 1 to exit door on left");
+			ui.displayString("Type 2 to exit door on ");
+			ui.displayString("Moves remaining " + diceMoves);
+			command = ui.getCommand().toLowerCase().trim();
 			return moveToken(moveToken, diceMoves-validMove);
+			}while(!command.equals("1"));
 		}
 		else
 		{

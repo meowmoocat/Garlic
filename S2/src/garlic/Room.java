@@ -11,12 +11,19 @@ public class Room {
 	private final Coordinates door3;
 	private final Coordinates door4;
 	private final Coordinates secretPassage;
+	private final Coordinates door1Exit;
+	private final Coordinates door2Exit;
+	private final Coordinates door3Exit;
+	private final Coordinates door4Exit;
+	
 
 
 
 	Room(String name,Coordinates weaponPosition, 
 			Coordinates door1, Coordinates door2,
-			Coordinates door3, Coordinates door4, Coordinates secretPassage)
+			Coordinates door3, Coordinates door4, Coordinates secretPassage,
+			Coordinates door1Exit, Coordinates door2Exit,
+			Coordinates door3Exit, Coordinates door4Exit)
 	{
 		this.name = name;
 		this.weaponPosition = weaponPosition;
@@ -26,6 +33,10 @@ public class Room {
 		this.door3 = door3;
 		this.door4 = door4;
 		this.secretPassage = secretPassage;
+		this.door1Exit = door1Exit;
+		this.door2Exit = door2Exit;
+		this.door3Exit = door3Exit;
+		this.door4Exit = door4Exit;
 	}
 
 	public String getName()
@@ -56,5 +67,21 @@ public class Room {
 	public Coordinates getSecretPassage()
 	{
 		return secretPassage;
+	}
+	public Coordinates getDoor1Exit()
+	{
+		return door1Exit;
+	}
+	public Coordinates getDoor2Exit()
+	{
+		return door2Exit;
+	}
+	public Coordinates getDoor3Exit()
+	{
+		return door3Exit;
+	}
+	public Coordinates getDoor4Exit()
+	{
+		return door4Exit;
 	}
 }
