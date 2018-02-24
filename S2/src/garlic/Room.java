@@ -1,6 +1,12 @@
 package garlic;
 
 
+/* created by
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 public class Room {
 
 	private final String name;
@@ -18,7 +24,7 @@ public class Room {
 	
 
 
-
+	//creates instance of room with name, weapon coordinates, door coordinates, door exit coordinates and secret passage coordinates
 	Room(String name,Coordinates weaponPosition, 
 			Coordinates door1, Coordinates door2,
 			Coordinates door3, Coordinates door4, Coordinates secretPassage,
@@ -39,10 +45,12 @@ public class Room {
 		this.door4Exit = door4Exit;
 	}
 
+	//returns weapon name
 	public String getName()
 	{
 		return name;
 	}
+	
 	public Coordinates getWeaponPosition()
 	{
 		return weaponPosition;
@@ -52,22 +60,28 @@ public class Room {
 	{
 		return door1;
 	}
+	
 	public Coordinates getDoor2()
 	{
 		return door2;
 	}
+	
 	public Coordinates getDoor3()
 	{
 		return door3;
 	}
+	
 	public Coordinates getDoor4()
 	{
 		return door4;
 	}
+	
 	public Coordinates getSecretPassage()
 	{
 		return secretPassage;
 	}
+	
+	//returns coordinates to square outside door
 	public Coordinates getDoor1Exit()
 	{
 		return door1Exit;
