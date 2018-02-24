@@ -1,5 +1,11 @@
 package garlic;
 
+/* created by
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -9,6 +15,7 @@ public class Rooms implements Iterable<Room>, Iterator<Room>
 	private final HashSet<Room> room = new HashSet<>();
 	//	weaponPosition, doors
 
+	//creates instance of rooms with coordinates entered for doors, -10,-10 and 0,0 are put in for doors that don't exist
 	Rooms()
 	{
 		room.add(new Room("Computer Science", new Coordinates(2,5), //coordinates weapons(for movement between rooms)
