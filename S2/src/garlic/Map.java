@@ -72,7 +72,7 @@ public class Map
 
 	//checks which room the tokens in
 	//then moves token to choosen door
-	public boolean exitRoom(Token token, int row, int col) {
+	public int exitRoom(Token token, int row, int col) {
 		String command = "";
 
 		//Comp Sci
@@ -84,14 +84,15 @@ public class Map
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("Computer Science")) {
 						token.moveOutOfRoom(room.getDoor1Exit());
+						return 1;
 					}
 					else if(command.equals("secret") && room.getName().equals("Computer Science"))
 					{
 						token.moveOutOfRoom(token.getNewmanPosition());
+						return 2;
 					}
 				}
 			}while(!command.equals("1") && !command.equals("secret"));
-			return true;
 		}
 
 		//engineering
@@ -103,14 +104,15 @@ public class Map
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("Engineering")) {
 						token.moveOutOfRoom(room.getDoor1Exit());
+						return 1;
 					}
 					else if(command.equals("secret") && room.getName().equals("Engineering"))
 					{
 						token.moveOutOfRoom(token.getAgSciPosition());
+						return 2;
 					}
 				}
 			}while(!command.equals("1") && !command.equals("secret"));
-			return true;
 		}
 
 		//library
@@ -122,17 +124,19 @@ public class Map
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("Library")) {
 						token.moveOutOfRoom(room.getDoor1Exit());
+						return 1;
 					}
 					else if(command.equals("2") && room.getName().equals("Library")) {
 						token.moveOutOfRoom(room.getDoor2Exit());
+						return 1;
 					}
 					else if(command.equals("3") && room.getName().equals("Library"))
 					{
 						token.moveOutOfRoom(room.getDoor3Exit());
+						return 1;
 					}
 				}
 			}while(!command.equals("1") && !command.equals("2") && !command.equals("3"));
-			return true;
 		}
 
 		//ag sci
@@ -145,14 +149,15 @@ public class Map
 					if(command.equals("1") && room.getName().equals("Ag Science")) {
 
 						token.moveOutOfRoom(room.getDoor1Exit());
+						return 1;
 					}
 					else if(command.equals("secret") && room.getName().equals("Ag Science"))
 					{
 						token.moveOutOfRoom(token.getEngineeringPosition());
+						return 2;
 					}
 				}
 			}while(!command.equals("1") && !command.equals("secret"));
-			return true;
 		}
 
 		//newman
@@ -164,14 +169,15 @@ public class Map
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("Newman")) {
 						token.moveOutOfRoom(room.getDoor1Exit());
+						return 1;
 					}
 					else if(command.equals("secret") && room.getName().equals("Newman"))
 					{
 						token.moveOutOfRoom(token.getCompSciPosition());
+						return 2;
 					}
 				}
 			}while(!command.equals("1") && !command.equals("secret"));
-			return true;
 		}
 
 		//OBrien
@@ -183,13 +189,14 @@ public class Map
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("O'Brien")) {
 						token.moveOutOfRoom(room.getDoor1Exit());
+						return 1;
 					}
 					else if(command.equals("2") && room.getName().equals("O'Brien")) {
 						token.moveOutOfRoom(room.getDoor2Exit());
+						return 1;
 					}
 				}
 			}while(!command.equals("1") && !command.equals("2"));
-			return true;
 		}
 		//		OReilly
 		if(row == token.getOReillyHallPosition().getRow() && col == token.getOReillyHallPosition().getCol())
@@ -200,19 +207,22 @@ public class Map
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("O'Reilly Hall")) {
 						token.moveOutOfRoom(room.getDoor1Exit());
+						return 1;
 					}
 					else if(command.equals("2") && room.getName().equals("O'Reilly Hall")) {
 						token.moveOutOfRoom(room.getDoor2Exit());
+						return 1;
 					}
 					else if(command.equals("3") && room.getName().equals("O'Reilly Hall")) {
 						token.moveOutOfRoom(room.getDoor3Exit());
+						return 1;
 					}
 					else if(command.equals("4") && room.getName().equals("O'Reilly Hall")) {
 						token.moveOutOfRoom(room.getDoor4Exit());
+						return 1;
 					}
 				}
 			}while(!command.equals("1") && !command.equals("2") && !command.equals("3") && !command.equals("4"));
-			return true;
 		}
 
 		//quinn
@@ -224,13 +234,14 @@ public class Map
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("Quinn")) {
 						token.moveOutOfRoom(room.getDoor1Exit());
+						return 1;
 					}
 					else if(command.equals("2") && room.getName().equals("Quinn")) {
 						token.moveOutOfRoom(room.getDoor2Exit());
+						return 1;
 					}
 				}
 			}while(!command.equals("1") && !command.equals("2"));
-			return true;
 		}
 
 		//sutherland
@@ -242,14 +253,15 @@ public class Map
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("Sutherland")) {
 						token.moveOutOfRoom(room.getDoor1Exit());
+						return 1;
 					}
 					else if(command.equals("2") && room.getName().equals("Sutherland")) {
 						token.moveOutOfRoom(room.getDoor2Exit());
+						return 1;
 					}
 				}
 			}while(!command.equals("1") && !command.equals("2"));
-			return true;
 		}
-		return false;
+		return 0;
 	}
 }
