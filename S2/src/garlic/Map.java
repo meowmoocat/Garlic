@@ -81,7 +81,7 @@ public class Map
 						 token.moveOutOfRoom(room.getSecretPassage());
 					}
 				}
-			}while(!command.equals("1"));
+			}while(!command.equals("1") || !command.equals("secret"));
 			return true;
 		}
 
@@ -99,7 +99,7 @@ public class Map
 						 token.moveOutOfRoom(room.getSecretPassage());
 					}
 				}
-			}while(!command.equals("1"));
+			}while(!command.equals("1") || !command.equals("secret"));
 			return true;
 		}
 		if(row == token.getLibraryPosition().getRow() && col == token.getLibraryPosition().getCol())
@@ -119,7 +119,7 @@ public class Map
 						 token.moveOutOfRoom(room.getDoor3Exit());
 					}
 				}
-			}while(!command.equals("1"));
+			}while(!command.equals("1") || !command.equals("2") || !command.equals("3"));
 			return true;
 		}
 		if(row == token.getAgSciPosition().getRow() && col == token.getAgSciPosition().getCol())
@@ -139,7 +139,7 @@ public class Map
 						 token.moveOutOfRoom(room.getSecretPassage());
 					}
 				}
-			}while(!command.equals("1"));
+			}while(!command.equals("1") || !command.equals("secret"));
 			return true;
 		}
 		if(row == token.getNewmanPosition().getRow() && col == token.getNewmanPosition().getCol())
@@ -156,7 +156,7 @@ public class Map
 						 token.moveOutOfRoom(room.getSecretPassage());
 					}
 				}
-			}while(!command.equals("1"));
+			}while(!command.equals("1") || !command.equals("secret"));
 			return true;
 		}
 		if(row == token.getOBrienPosition().getRow() && col == token.getOBrienPosition().getCol())
@@ -172,7 +172,7 @@ public class Map
 						token.moveOutOfRoom(room.getDoor2Exit());
 					}
 				}
-			}while(!command.equals("1"));
+			}while(!command.equals("1") || !command.equals("2"));
 			return true;
 		}
 		if(row == token.getOReillyHallPosition().getRow() && col == token.getOReillyHallPosition().getCol())
@@ -194,7 +194,7 @@ public class Map
 						token.moveOutOfRoom(room.getDoor4Exit());
 					}
 				}
-			}while(!command.equals("1"));
+			}while(!command.equals("1") || !command.equals("2") || !command.equals("3") || !command.equals("4"));
 			return true;
 		}
 		if(row == token.getQuinnPosition().getRow() && col == token.getQuinnPosition().getCol())
@@ -210,7 +210,7 @@ public class Map
 						token.moveOutOfRoom(room.getDoor2Exit());
 					}
 				}
-			}while(!command.equals("1"));
+			}while(!command.equals("1") || !command.equals("2"));
 			return true;
 		}
 		if(row == token.getSutherlandPosition().getRow() && col == token.getSutherlandPosition().getCol())
@@ -226,7 +226,7 @@ public class Map
 						token.moveOutOfRoom(room.getDoor2Exit());
 					}
 				}
-			}while(!command.equals("1"));
+			}while(!command.equals("1") || !command.equals("2"));
 			return true;
 		}
 		return false;
