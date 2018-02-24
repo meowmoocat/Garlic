@@ -90,15 +90,6 @@ public class Moves
 		}
 		else if(map.exitRoom(moveToken, moveToken.getPosition().getRow(), moveToken.getPosition().getCol(), diceMoves))
 		{
-			
-			do
-			{
-				int i=1;
-				
-				ui.displayString("fuck!");
-				command = ui.getCommand().toLowerCase().trim();
-			}while(!command.equals("bollix"));
-			
 			return moveToken(moveToken, diceMoves-validMove);
 		}
 		else
