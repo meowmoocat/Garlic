@@ -64,7 +64,7 @@ public class Map
 		return diceReturn;
 	}
 
-	public boolean exitRoom(Token token, int row, int col, int diceReturn) {
+	public boolean exitRoom(Token token, int row, int col) {
 		String command = "";
 
 		if(row == token.getCompSciPosition().getRow() && col == token.getCompSciPosition().getCol())

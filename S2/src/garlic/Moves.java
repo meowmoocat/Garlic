@@ -88,8 +88,8 @@ public class Moves
 		{
 			return 0;
 		}
-		else if(map.exitRoom(moveToken, moveToken.getPosition().getRow(), moveToken.getPosition().getCol(), diceMoves))
-		{
+		else if(map.exitRoom(moveToken, moveToken.getPosition().getRow(), moveToken.getPosition().getCol()))
+		{//calls method and returns true if they are ready to move
 			ui.display();
 			return moveToken(moveToken, diceMoves-validMove);
 		}
