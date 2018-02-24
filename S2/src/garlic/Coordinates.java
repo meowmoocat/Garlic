@@ -57,6 +57,12 @@ public class Coordinates {
 		col = move.getCol();
 	}
 	
+	public void moveToExit(Coordinates move)
+	{
+		row = move.getRow();
+		col = move.getCol();
+	}
+	
 	//checks token hasn't moved into a wall, if it has it puts the token back to where it came from
 	public void checkBorders(int prevRow, int prevCol) {
 

@@ -49,6 +49,10 @@ public class Token {
 	{
 		position.moveToRoom(move);
 	}
+	public void moveOutOfRoom(Coordinates move)
+	{
+		position.moveToExit(move);
+	}
 
 	public String getName() {
 		return name;

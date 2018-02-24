@@ -70,25 +70,43 @@ public class Map
 		if(row == token.getCompSciPosition().getRow() && col == token.getCompSciPosition().getCol())
 		{
 			do {
-				Moves.ui.displayString("Enter which door to exit");
+				Moves.ui.displayString("Enter which door to exit, 1 for door, secret for the secret passage");
 				command = Moves.ui.getCommand().toLowerCase().trim();
 				for(Room room : room) {
-					if(command.equals("1") && room.getName().equals("Computer Science")) {
-						token.moveBy(room.getDoor1Exit());
+					if(command.equals("1") && command.equals("secret") && room.getName().equals("Computer Science")) {
+						token.moveOutOfRoom(token.getCompSciPosition());
 					}
 				}
 			}while(!command.equals("1"));
 			return true;
 		}
 
-//		if(row == token.getEngineeringPosition().getRow() && col == token.getEngineeringPosition().getCol())
-//		{
-//			return 0;
-//		}
-//		if(row == token.getLibraryPosition().getRow() && col == token.getLibraryPosition().getCol())
-//		{
-//			return 0;
-//		}
+		if(row == token.getEngineeringPosition().getRow() && col == token.getEngineeringPosition().getCol())
+		{
+			do {
+				Moves.ui.displayString("Enter which door to exit, 1 for door, secret for the secret passage");
+				command = Moves.ui.getCommand().toLowerCase().trim();
+				for(Room room : room) {
+					if(command.equals("1") && room.getName().equals("Engineering")) {
+						token.moveOutOfRoom(token.getEngineeringPosition());
+					}
+				}
+			}while(!command.equals("1"));
+			return true;
+		}
+		if(row == token.getLibraryPosition().getRow() && col == token.getLibraryPosition().getCol())
+		{
+			do {
+				Moves.ui.displayString("Enter which door to exit");
+				command = Moves.ui.getCommand().toLowerCase().trim();
+				for(Room room : room) {
+					if(command.equals("1") && room.getName().equals("Computer Science")) {
+				//		token.moveBy(room.getDoor1Exit());
+					}
+				}
+			}while(!command.equals("1"));
+			return true;
+		}
 		if(row == token.getAgSciPosition().getRow() && col == token.getAgSciPosition().getCol())
 		{
 			do {
@@ -96,33 +114,77 @@ public class Map
 				command = Moves.ui.getCommand().toLowerCase().trim();
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("Ag Science")) {
-						token.moveBy(room.getDoor1Exit());
+	//					token.moveBy(room.getDoor1Exit());
 					}
 				}
 			}while(!command.equals("1"));
 			return true;
 		}
-//		if(row == token.getNewmanPosition().getRow() && col == token.getNewmanPosition().getCol())
-//		{
-//			return 0;
-//		}
-//		if(row == token.getOBrienPosition().getRow() && col == token.getOBrienPosition().getCol())
-//		{
-//			return 0;
-//		}
-//		if(row == token.getOReillyHallPosition().getRow() && col == token.getOReillyHallPosition().getCol())
-//		{
-//			return 0;
-//		}
-//		if(row == token.getQuinnPosition().getRow() && col == token.getQuinnPosition().getCol())
-//		{
-//			return 0;
-//		}
-//		if(row == token.getSutherlandPosition().getRow() && col == token.getSutherlandPosition().getCol())
-//		{
-//			return 0;
-//		}
-//		return 0;
+		if(row == token.getNewmanPosition().getRow() && col == token.getNewmanPosition().getCol())
+		{
+			do {
+				Moves.ui.displayString("Enter which door to exit");
+				command = Moves.ui.getCommand().toLowerCase().trim();
+				for(Room room : room) {
+					if(command.equals("1") && room.getName().equals("Computer Science")) {
+				//		token.moveBy(room.getDoor1Exit());
+					}
+				}
+			}while(!command.equals("1"));
+			return true;
+		}
+		if(row == token.getOBrienPosition().getRow() && col == token.getOBrienPosition().getCol())
+		{
+			do {
+				Moves.ui.displayString("Enter which door to exit");
+				command = Moves.ui.getCommand().toLowerCase().trim();
+				for(Room room : room) {
+					if(command.equals("1") && room.getName().equals("Computer Science")) {
+				//		token.moveBy(room.getDoor1Exit());
+					}
+				}
+			}while(!command.equals("1"));
+			return true;
+		}
+		if(row == token.getOReillyHallPosition().getRow() && col == token.getOReillyHallPosition().getCol())
+		{
+			do {
+				Moves.ui.displayString("Enter which door to exit");
+				command = Moves.ui.getCommand().toLowerCase().trim();
+				for(Room room : room) {
+					if(command.equals("1") && room.getName().equals("Computer Science")) {
+				//		token.moveBy(room.getDoor1Exit());
+					}
+				}
+			}while(!command.equals("1"));
+			return true;
+		}
+		if(row == token.getQuinnPosition().getRow() && col == token.getQuinnPosition().getCol())
+		{
+			do {
+				Moves.ui.displayString("Enter which door to exit");
+				command = Moves.ui.getCommand().toLowerCase().trim();
+				for(Room room : room) {
+					if(command.equals("1") && room.getName().equals("Computer Science")) {
+				//		token.moveBy(room.getDoor1Exit());
+					}
+				}
+			}while(!command.equals("1"));
+			return true;
+		}
+		if(row == token.getSutherlandPosition().getRow() && col == token.getSutherlandPosition().getCol())
+		{
+			do {
+				Moves.ui.displayString("Enter which door to exit");
+				command = Moves.ui.getCommand().toLowerCase().trim();
+				for(Room room : room) {
+					if(command.equals("1") && room.getName().equals("Computer Science")) {
+				//		token.moveBy(room.getDoor1Exit());
+					}
+				}
+			}while(!command.equals("1"));
+			return true;
+		}
 		return false;
 	}
 }
