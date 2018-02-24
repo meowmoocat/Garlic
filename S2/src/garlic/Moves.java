@@ -31,7 +31,7 @@ public class Moves
 				try { //nullpointer for tokens not in the game
 					
 					ui.refreshInfoPanel();
-					ui.displayString("\n" + token.getName() + " " + token.getTurn());
+					ui.displayString("\n" + token.getName());
 					
 					do {
 						
@@ -44,8 +44,9 @@ public class Moves
 
 					if(!command.equals("quit"))
 					{
+						boolean alreadyInARoom = false;
 						int diceNum = dice();	//TODO: add condition here for if they want to stay in room, later in gameplay
-						moveToken(token, diceNum);
+						moveToken(token, diceNum, alreadyInARoom);
 					}
 
 					do { //ends turn
@@ -90,21 +91,27 @@ public class Moves
 		return roll;
 	}
 
-	private int moveToken(Token moveToken, int diceMoves)		//recursive function for move it counts down dice number
+	private int moveToken(Token moveToken, int diceMoves, boolean alreadyInARoom)		//recursive function for move it counts down dice number
 	{
+		ui.display();
 		String command;
 		int validMove = 1;
 
+		if(alreadyInARoom)
+		{
+			diceMoves = 0;
+		}
 
 		if(diceMoves <= 0) //if no more moves left return 0 and exits method
 		{
 			return 0;
 		}
 		//else if, calls method and returns true if they are ready to move
-		else if(map.exitRoom(moveToken, moveToken.getPosition().getRow(), moveToken.getPosition().getCol()))
+		else if(map.exitRoom(moveToken, moveToken.getPosition().getRow(), moveToken.getPosition().getCol()) && !alreadyInARoom)
 		{
+			alreadyInARoom = true;
 			ui.display();
-			return moveToken(moveToken, diceMoves-validMove);
+			return moveToken(moveToken, diceMoves-validMove, alreadyInARoom);
 		}
 		else
 		{
@@ -134,7 +141,7 @@ public class Moves
 				if(command.equals("quit")) diceMoves = quit(moveToken);
 			}while(checkMoveInput(command) || validMove == 0);
 
-			return moveToken(moveToken, diceMoves-validMove);//recursive function, if it's a valid move removes 1 from diceMoves
+			return moveToken(moveToken, diceMoves-validMove, alreadyInARoom);//recursive function, if it's a valid move removes 1 from diceMoves
 		}
 	}
 

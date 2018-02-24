@@ -87,10 +87,10 @@ public class Map
 					}
 					else if(command.equals("secret") && room.getName().equals("Computer Science"))
 					{
-						token.moveOutOfRoom(room.getSecretPassage());
+						token.moveOutOfRoom(token.getNewmanPosition());
 					}
 				}
-			}while(!command.equals("1") || !command.equals("secret"));
+			}while(!command.equals("1") && !command.equals("secret"));
 			return true;
 		}
 
@@ -106,10 +106,10 @@ public class Map
 					}
 					else if(command.equals("secret") && room.getName().equals("Engineering"))
 					{
-						token.moveOutOfRoom(room.getSecretPassage());
+						token.moveOutOfRoom(token.getAgSciPosition());
 					}
 				}
-			}while(!command.equals("1") || !command.equals("secret"));
+			}while(!command.equals("1") && !command.equals("secret"));
 			return true;
 		}
 
@@ -131,7 +131,7 @@ public class Map
 						token.moveOutOfRoom(room.getDoor3Exit());
 					}
 				}
-			}while(!command.equals("1") || !command.equals("2") || !command.equals("3"));
+			}while(!command.equals("1") && !command.equals("2") && !command.equals("3"));
 			return true;
 		}
 
@@ -145,12 +145,10 @@ public class Map
 					if(command.equals("1") && room.getName().equals("Ag Science")) {
 
 						token.moveOutOfRoom(room.getDoor1Exit());
-						System.out.println("door1");
 					}
 					else if(command.equals("secret") && room.getName().equals("Ag Science"))
 					{
-						System.out.println("secret");
-						token.moveOutOfRoom(room.getSecretPassage());
+						token.moveOutOfRoom(token.getEngineeringPosition());
 					}
 				}
 			}while(!command.equals("1") && !command.equals("secret"));
@@ -169,7 +167,7 @@ public class Map
 					}
 					else if(command.equals("secret") && room.getName().equals("Newman"))
 					{
-						token.moveOutOfRoom(room.getSecretPassage());
+						token.moveOutOfRoom(token.getCompSciPosition());
 					}
 				}
 			}while(!command.equals("1") && !command.equals("secret"));
