@@ -129,13 +129,13 @@ public class Map
 				command = Moves.ui.getCommand().toLowerCase().trim();
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("Ag Science")) {
+						
 						token.moveOutOfRoom(room.getDoor1Exit());
-					}
-					else if(command.equals("2") && room.getName().equals("Ag Science")) {
-						token.moveOutOfRoom(room.getDoor2Exit());
+						System.out.println("door1");
 					}
 					else if(command.equals("secret") && room.getName().equals("Ag Science"))
 					{
+						System.out.println("secret");
 						 token.moveOutOfRoom(room.getSecretPassage());
 					}
 				}

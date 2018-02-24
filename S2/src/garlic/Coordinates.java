@@ -59,6 +59,7 @@ public class Coordinates {
 	
 	public void moveToExit(Coordinates move)
 	{
+		System.out.println("row: " + move.getRow() +", col: " +move.getCol());
 		row = move.getRow();
 		col = move.getCol();
 	}
