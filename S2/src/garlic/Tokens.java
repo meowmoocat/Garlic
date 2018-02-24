@@ -1,5 +1,11 @@
 package garlic;
 
+/* created by
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 import java.awt.Color;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -9,6 +15,7 @@ public class Tokens implements Iterable<Token>, Iterator<Token> {
 	private final HashSet<Token> characters = new HashSet<>();
 	private Iterator<Token> iterator;
 
+	//creates instance of character tokens
 	Tokens() {
 		characters.add(new Token("Scarlett", Color.RED, new Coordinates(7,24), //coordinates starting
 				new Coordinates(1,1), new Coordinates(10,6), new Coordinates(20,2), //compsci, O'Reilly, engineering
@@ -41,6 +48,7 @@ public class Tokens implements Iterable<Token>, Iterator<Token> {
 				new Coordinates(14,19), new Coordinates(4,20), new Coordinates(4,12)));
 	}
 
+	//loops through all characters and returns its token
 	public Token get(int i)
 	{
 		for (Token character : characters)
@@ -53,6 +61,7 @@ public class Tokens implements Iterable<Token>, Iterator<Token> {
 		return null;
 	}
 
+	//loops through all characters and returns characters name
 	public Token getCharacterName(String name)
 	{
 		for (Token character : characters)
