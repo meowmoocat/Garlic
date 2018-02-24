@@ -1,32 +1,34 @@
 package garlic;
 
 public class Coordinates {
-
-
-
-
+	
+	
+	
+	
 	private int row, col;
+	
 
-
+	//creates instance of coordinates
 	Coordinates(int col, int row) {
 		this.col = col;
 		this.row = row;
 	}
 
+	//moves token by position
 	public int add(Coordinates coordinates) {
 
 		//this gets taken away if the token has moved
 		int hasItMoved = 1;
-
+		
 		int prevCol=col;
 		int prevRow=row;
 
 		col = col + coordinates.getCol();
 		row = row + coordinates.getRow();
-
+		
 		checkBorders(prevRow, prevCol);
-
-
+		
+		//checks if token has moved
 		if(prevCol == col && prevRow == row)
 		{
 			hasItMoved = 0;
@@ -43,11 +45,13 @@ public class Coordinates {
 		return col;
 	}
 
+	//moves token to position in room
 	public void moveToRoom(Coordinates move) {
 		row = move.getRow();
 		col = move.getCol();
 	}
-
+	
+	//checks token hasn't moved into a wall, if it has it puts the token back to where it came from
 	public void checkBorders(int prevRow, int prevCol) {
 
 		if(prevCol==7 && prevRow==24 && col==7 && row==25 ) {
@@ -761,5 +765,5 @@ public class Coordinates {
 		}
 
 	}
-
+	
 }
