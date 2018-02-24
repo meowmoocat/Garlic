@@ -65,47 +65,64 @@ public class Map
 	}
 
 	public boolean exitRoom(Token token, int row, int col, int diceReturn) {
-
+		String command = "";
 
 		if(row == token.getCompSciPosition().getRow() && col == token.getCompSciPosition().getCol())
 		{
+			do {
+				Moves.ui.displayString("Enter which door to exit");
+				command = Moves.ui.getCommand().toLowerCase().trim();
+				for(Room room : room) {
+					if(command.equals("1") && room.getName().equals("Computer Science")) {
+						token.moveBy(room.getDoor1Exit());
+					}
+				}
+			}while(!command.equals("1"));
 			return true;
 		}
-		if(row == token.getEngineeringPosition().getRow() && col == token.getEngineeringPosition().getCol())
-		{
-			return true;
-		}
-		if(row == token.getLibraryPosition().getRow() && col == token.getLibraryPosition().getCol())
-		{
-			return true;
-		}
+
+//		if(row == token.getEngineeringPosition().getRow() && col == token.getEngineeringPosition().getCol())
+//		{
+//			return 0;
+//		}
+//		if(row == token.getLibraryPosition().getRow() && col == token.getLibraryPosition().getCol())
+//		{
+//			return 0;
+//		}
 		if(row == token.getAgSciPosition().getRow() && col == token.getAgSciPosition().getCol())
 		{
+			do {
+				Moves.ui.displayString("Enter which door to exit");
+				command = Moves.ui.getCommand().toLowerCase().trim();
+				for(Room room : room) {
+					if(command.equals("1") && room.getName().equals("Ag Science")) {
+						token.moveBy(room.getDoor1Exit());
+					}
+				}
+			}while(!command.equals("1"));
 			return true;
 		}
-		if(row == token.getNewmanPosition().getRow() && col == token.getNewmanPosition().getCol())
-		{
-			return true;
-		}
-		if(row == token.getOBrienPosition().getRow() && col == token.getOBrienPosition().getCol())
-		{
-			return true;
-		}
-		if(row == token.getOReillyHallPosition().getRow() && col == token.getOReillyHallPosition().getCol())
-		{
-			return true;
-		}
-		if(row == token.getQuinnPosition().getRow() && col == token.getQuinnPosition().getCol())
-		{
-			return true;
-		}
-		if(row == token.getSutherlandPosition().getRow() && col == token.getSutherlandPosition().getCol())
-		{
-			return true;
-		}
+//		if(row == token.getNewmanPosition().getRow() && col == token.getNewmanPosition().getCol())
+//		{
+//			return 0;
+//		}
+//		if(row == token.getOBrienPosition().getRow() && col == token.getOBrienPosition().getCol())
+//		{
+//			return 0;
+//		}
+//		if(row == token.getOReillyHallPosition().getRow() && col == token.getOReillyHallPosition().getCol())
+//		{
+//			return 0;
+//		}
+//		if(row == token.getQuinnPosition().getRow() && col == token.getQuinnPosition().getCol())
+//		{
+//			return 0;
+//		}
+//		if(row == token.getSutherlandPosition().getRow() && col == token.getSutherlandPosition().getCol())
+//		{
+//			return 0;
+//		}
+//		return 0;
 		return false;
 	}
-
-	
-	
 }
