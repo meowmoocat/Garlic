@@ -67,39 +67,39 @@ public class Map
 	public boolean exitRoom(Token token, int row, int col, int diceReturn) {
 
 
-		if(row == token.getCompSciPosition().getRow() && row == token.getCompSciPosition().getCol())
+		if(row == token.getCompSciPosition().getRow() && col == token.getCompSciPosition().getCol())
 		{
 			return true;
 		}
-		if(row == token.getEngineeringPosition().getRow() && row == token.getEngineeringPosition().getCol())
+		if(row == token.getEngineeringPosition().getRow() && col == token.getEngineeringPosition().getCol())
 		{
 			return true;
 		}
-		if(row == token.getLibraryPosition().getRow() && row == token.getLibraryPosition().getCol())
+		if(row == token.getLibraryPosition().getRow() && col == token.getLibraryPosition().getCol())
 		{
 			return true;
 		}
-		if(row == token.getAgSciPosition().getRow() && row == token.getAgSciPosition().getCol())
+		if(row == token.getAgSciPosition().getRow() && col == token.getAgSciPosition().getCol())
 		{
 			return true;
 		}
-		if(row == token.getNewmanPosition().getRow() && row == token.getNewmanPosition().getCol())
+		if(row == token.getNewmanPosition().getRow() && col == token.getNewmanPosition().getCol())
 		{
 			return true;
 		}
-		if(row == token.getOBrienPosition().getRow() && row == token.getOBrienPosition().getCol())
+		if(row == token.getOBrienPosition().getRow() && col == token.getOBrienPosition().getCol())
 		{
 			return true;
 		}
-		if(row == token.getOReillyHallPosition().getRow() && row == token.getOReillyHallPosition().getCol())
+		if(row == token.getOReillyHallPosition().getRow() && col == token.getOReillyHallPosition().getCol())
 		{
 			return true;
 		}
-		if(row == token.getQuinnPosition().getRow() && row == token.getQuinnPosition().getCol())
+		if(row == token.getQuinnPosition().getRow() && col == token.getQuinnPosition().getCol())
 		{
 			return true;
 		}
-		if(row == token.getSutherlandPosition().getRow() && row == token.getSutherlandPosition().getCol())
+		if(row == token.getSutherlandPosition().getRow() && col == token.getSutherlandPosition().getCol())
 		{
 			return true;
 		}

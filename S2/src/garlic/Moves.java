@@ -92,12 +92,11 @@ public class Moves
 		{
 			do
 			{
-			ui.displayString("Type 1 to exit door on left");
-			ui.displayString("Type 2 to exit door on ");
-			ui.displayString("Moves remaining " + diceMoves);
-			command = ui.getCommand().toLowerCase().trim();
+				ui.displayString("fuck!");
+				command = ui.getCommand().toLowerCase().trim();
+			}while(!command.equals("bollix"));
+			
 			return moveToken(moveToken, diceMoves-validMove);
-			}while(!command.equals("1"));
 		}
 		else
 		{
