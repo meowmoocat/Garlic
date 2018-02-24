@@ -1,5 +1,11 @@
 package garlic;
 
+/* created by
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.geom.Ellipse2D;
@@ -26,6 +32,7 @@ class BoardPanel extends JPanel {
 	public BufferedImage microscope;
 	public BufferedImage seagull;
 
+	//creates instance of board panel
 	BoardPanel(Tokens tokens, Weapons weapons) {
 		this.tokens = tokens;
 		this.weapons = weapons;
@@ -39,6 +46,7 @@ class BoardPanel extends JPanel {
 		weaponsReadIn();
 	}
 
+	//draws board, tokens and weapons
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -75,6 +83,7 @@ class BoardPanel extends JPanel {
 		}
 	}
 
+	//redraws images 
 	public void refresh() {
 		revalidate();
 		repaint();
