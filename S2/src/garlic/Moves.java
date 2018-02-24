@@ -90,7 +90,8 @@ public class Moves
 		}
 		else if(map.exitRoom(moveToken, moveToken.getPosition().getRow(), moveToken.getPosition().getCol(), diceMoves))
 		{
-			return 1;
+			
+			return moveToken(moveToken, diceMoves-validMove);
 		}
 		else
 		{
