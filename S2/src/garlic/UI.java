@@ -23,7 +23,7 @@ public class UI {
 		JFrame frame = new JFrame();
 		boardPanel = new BoardPanel(characters, weapons);
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		frame.setTitle("Cluedo");
+		frame.setTitle("UCD Cluedo");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.add(boardPanel, BorderLayout.LINE_START);
 		frame.add(infoPanel, BorderLayout.LINE_END);

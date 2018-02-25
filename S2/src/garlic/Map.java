@@ -79,40 +79,40 @@ public class Map
 		if(row == token.getCompSciPosition().getRow() && col == token.getCompSciPosition().getCol())
 		{
 			do {
-				Moves.ui.displayString("Enter which door to exit, 1 for door, secret for the secret passage");
+				Moves.ui.displayString("Enter which door to exit, 1 for door, passage for the secret passage");
 				command = Moves.ui.getCommand().toLowerCase().trim();
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("Computer Science")) {
 						token.moveOutOfRoom(room.getDoor1Exit());
 						return 1;
 					}
-					else if(command.equals("secret") && room.getName().equals("Computer Science"))
+					else if(command.equals("passage") && room.getName().equals("Computer Science"))
 					{
 						token.moveOutOfRoom(token.getNewmanPosition());
 						return 2;
 					}
 				}
-			}while(!command.equals("1") && !command.equals("secret"));
+			}while(!command.equals("1") && !command.equals("passage"));
 		}
 
 		//engineering
 		if(row == token.getEngineeringPosition().getRow() && col == token.getEngineeringPosition().getCol())
 		{
 			do {
-				Moves.ui.displayString("Enter which door to exit, 1 for door, secret for the secret passage");
+				Moves.ui.displayString("Enter which door to exit, 1 for door, passage for the secret passage");
 				command = Moves.ui.getCommand().toLowerCase().trim();
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("Engineering")) {
 						token.moveOutOfRoom(room.getDoor1Exit());
 						return 1;
 					}
-					else if(command.equals("secret") && room.getName().equals("Engineering"))
+					else if(command.equals("passage") && room.getName().equals("Engineering"))
 					{
 						token.moveOutOfRoom(token.getAgSciPosition());
 						return 2;
 					}
 				}
-			}while(!command.equals("1") && !command.equals("secret"));
+			}while(!command.equals("1") && !command.equals("passage"));
 		}
 
 		//library
@@ -143,7 +143,7 @@ public class Map
 		if(row == token.getAgSciPosition().getRow() && col == token.getAgSciPosition().getCol())
 		{
 			do {
-				Moves.ui.displayString("Enter which door to exit, 1 for door, secret for the secret passage");
+				Moves.ui.displayString("Enter which door to exit, 1 for door, passage for the secret passage");
 				command = Moves.ui.getCommand().toLowerCase().trim();
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("Ag Science")) {
@@ -151,40 +151,40 @@ public class Map
 						token.moveOutOfRoom(room.getDoor1Exit());
 						return 1;
 					}
-					else if(command.equals("secret") && room.getName().equals("Ag Science"))
+					else if(command.equals("passage") && room.getName().equals("Ag Science"))
 					{
 						token.moveOutOfRoom(token.getEngineeringPosition());
 						return 2;
 					}
 				}
-			}while(!command.equals("1") && !command.equals("secret"));
+			}while(!command.equals("1") && !command.equals("passage"));
 		}
 
 		//newman
 		if(row == token.getNewmanPosition().getRow() && col == token.getNewmanPosition().getCol())
 		{
 			do {
-				Moves.ui.displayString("Enter which door to exit, 1 for door, secret for the secret passage");
+				Moves.ui.displayString("Enter which door to exit, 1 for door, passage for the secret passage");
 				command = Moves.ui.getCommand().toLowerCase().trim();
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("Newman")) {
 						token.moveOutOfRoom(room.getDoor1Exit());
 						return 1;
 					}
-					else if(command.equals("secret") && room.getName().equals("Newman"))
+					else if(command.equals("passage") && room.getName().equals("Newman"))
 					{
 						token.moveOutOfRoom(token.getCompSciPosition());
 						return 2;
 					}
 				}
-			}while(!command.equals("1") && !command.equals("secret"));
+			}while(!command.equals("1") && !command.equals("passage"));
 		}
 
 		//OBrien
 		if(row == token.getOBrienPosition().getRow() && col == token.getOBrienPosition().getCol())
 		{
 			do {
-				Moves.ui.displayString("Enter which door to exit, 1 for door, secret for the secret passage");
+				Moves.ui.displayString("Enter which door to exit, 1 south door, 2 for east door");
 				command = Moves.ui.getCommand().toLowerCase().trim();
 				for(Room room : room) {
 					if(command.equals("1") && room.getName().equals("O'Brien")) {

@@ -29,12 +29,12 @@ public class Moves
 				token = tokens.get(i); //gets the tokens that is currently playing
 
 				try { //nullpointer for tokens not in the game
-					
+
 					ui.refreshInfoPanel();
 					ui.displayString("\n" + token.getName());
-					
+
 					do {
-						
+
 						ui.displayString(token.getPlayerName() + " enter start to start your turn");
 						command = ui.getCommand().toLowerCase().trim();
 
@@ -56,12 +56,12 @@ public class Moves
 					}
 
 					do { //ends turn
-						
+
 						ui.displayString(token.getPlayerName() + " enter end to end your turn");
 						command = ui.getCommand().toLowerCase().trim();
-						
+
 						if(command.equals("quit")) quit(token);
-						
+
 					}while(!command.equals("end"));
 				} catch (NullPointerException e) {
 					//nothing to do if it's null!
@@ -97,7 +97,7 @@ public class Moves
 		return roll;
 	}
 
-	
+
 	private int moveToken(Token moveToken, int diceMoves)		//recursive function for move it counts down dice number
 	{
 		ui.display();
@@ -108,13 +108,6 @@ public class Moves
 		{
 			return 0;
 		}
-		//else if, calls method and returns true if they are ready to move
-//		else if(map.exitRoom(moveToken, moveToken.getPosition().getRow(), moveToken.getPosition().getCol()) && !alreadyInARoom)
-//		{
-//			
-//			ui.display();
-//			return moveToken(moveToken, diceMoves-validMove, alreadyInARoom);
-//		}
 		else
 		{
 			do
