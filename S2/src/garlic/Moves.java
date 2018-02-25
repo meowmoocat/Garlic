@@ -24,12 +24,18 @@ public class Moves
 		String command = "";
 		do {
 			int i = 1;
+			int counter = 0;
 			for(Token token : tokens) //loops through turns for tokens
 			{
 				token = tokens.get(i); //gets the tokens that is currently playing
 
+				
 				try { //nullpointer for tokens not in the game
 
+					if(token.getTurn() != 0)
+					{
+						counter++;
+					}
 					ui.refreshInfoPanel();
 					ui.displayString("\n" + token.getName());
 
@@ -68,16 +74,23 @@ public class Moves
 				}
 
 				i++;
-
+				
+				if(counter == 0) command = "end game";
 			}
+
 		} while (!command.equals("end game"));
 
 	}
 
 	private int quit(Token token) //quits player turn
 	{
-		token.setTurn(0);
-		ui.displayString(token.getName() + " has quit!!!");
+		for(Token tokens : tokens)
+		{
+			tokens.setTurn(0);
+		}
+		ui.displayString("game terminated");
+//		token.setTurn(0);
+//		ui.displayString(token.getName() + " has quit!!!");
 		return 0;
 	}
 
