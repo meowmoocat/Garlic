@@ -12,9 +12,12 @@ public class Cluedo {
 	private final UI ui = new UI(tokens,weapons);
 
 	private void inputPlayerNames() {
+		
 		int numPlayersSoFar = 0;
+		
 		do {
 			ui.inputName(players);
+			
 			if (!ui.inputIsDone()) {
 				ui.inputToken(tokens);
 				Token token = tokens.get(ui.getTokenName());
@@ -22,6 +25,7 @@ public class Cluedo {
 				token.setOwned();
 				numPlayersSoFar++;
 			}
+			
 		} while (!ui.inputIsDone() && numPlayersSoFar<MAX_NUM_PLAYERS);
 	}
 

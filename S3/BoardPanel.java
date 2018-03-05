@@ -83,85 +83,85 @@ class BoardPanel extends JPanel {
 		revalidate();
 		repaint();
 	}
-	
+
 	//reads in images for weapons
-		public void weaponsReadIn()
+	public void weaponsReadIn()
+	{
+		for(S3.Weapon weapon : weapons) //TODO: come back to this(in 2 places)
 		{
-			for(S3.Weapon weapon : weapons) //TODO: come back to this(in 2 places)
+			if(weapon.getName().equals("Book"))
 			{
-				if(weapon.getName().equals("Book"))
+				try
 				{
-					try
-					{
-						book = ImageIO.read(this.getClass().
-								getResource("book.jpg"));		
-					}catch(IOException ex)
-					{
-						System.out.println("Could not find the image file "
-								+ ex.toString());
-					}
+					book = ImageIO.read(this.getClass().
+							getResource("book.jpg"));		
+				}catch(IOException ex)
+				{
+					System.out.println("Could not find the image file "
+							+ ex.toString());
 				}
-				else if(weapon.getName().equals("Bored"))
+			}
+			else if(weapon.getName().equals("Bored"))
+			{
+				try
 				{
-					try
-					{
-						bored = ImageIO.read(this.getClass().
-								getResource("bored_1.jpg"));		
-					}catch(IOException ex)
-					{
-						System.out.println("Could not find the image file "
-								+ ex.toString());
-					}
+					bored = ImageIO.read(this.getClass().
+							getResource("bored_1.jpg"));		
+				}catch(IOException ex)
+				{
+					System.out.println("Could not find the image file "
+							+ ex.toString());
 				}
-				else if(weapon.getName().equals("Gradcap"))
+			}
+			else if(weapon.getName().equals("Gradcap"))
+			{
+				try
 				{
-					try
-					{
-						gradcap = ImageIO.read(this.getClass().
-								getResource("gradcap.png"));		
-					}catch(IOException ex)
-					{
-						System.out.println("Could not find the image file "
-								+ ex.toString());
-					}
+					gradcap = ImageIO.read(this.getClass().
+							getResource("gradcap.png"));		
+				}catch(IOException ex)
+				{
+					System.out.println("Could not find the image file "
+							+ ex.toString());
 				}
-				else if(weapon.getName().equals("Librocop"))
+			}
+			else if(weapon.getName().equals("Librocop"))
+			{
+				try
 				{
-					try
-					{
-						librocop = ImageIO.read(this.getClass().
-								getResource("librocop.jpg"));		
-					}catch(IOException ex)
-					{
-						System.out.println("Could not find the image file "
-								+ ex.toString());
-					}
+					librocop = ImageIO.read(this.getClass().
+							getResource("librocop.jpg"));		
+				}catch(IOException ex)
+				{
+					System.out.println("Could not find the image file "
+							+ ex.toString());
 				}
-				else if(weapon.getName().equals("Microscope"))
+			}
+			else if(weapon.getName().equals("Microscope"))
+			{
+				try
 				{
-					try
-					{
-						microscope = ImageIO.read(this.getClass().
-								getResource("MICROSCOPE.png"));		
-					}catch(IOException ex)
-					{
-						System.out.println("Could not find the image file "
-								+ ex.toString());
-					}
+					microscope = ImageIO.read(this.getClass().
+							getResource("MICROSCOPE.png"));		
+				}catch(IOException ex)
+				{
+					System.out.println("Could not find the image file "
+							+ ex.toString());
 				}
-				else if(weapon.getName().equals("Seagull"))
+			}
+			else if(weapon.getName().equals("Seagull"))
+			{
+				try
 				{
-					try
-					{
-						seagull = ImageIO.read(this.getClass().
-								getResource("seagull.jpg"));		
-					}catch(IOException ex)
-					{
-						System.out.println("Could not find the image file "
-								+ ex.toString());
-					}
+					seagull = ImageIO.read(this.getClass().
+							getResource("seagull.jpg"));		
+				}catch(IOException ex)
+				{
+					System.out.println("Could not find the image file "
+							+ ex.toString());
 				}
 			}
 		}
+	}
 
 }

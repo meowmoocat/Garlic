@@ -9,12 +9,12 @@ public class Weapons implements Iterable<Weapon>, Iterator<Weapon> {
 	private Iterator<Weapon> iterator;
 
 	Weapons(Map map) {
-		weapons.add(new Weapon(Names.WEAPON_NAMES[0],map.getRoom(Names.ROOM_NAMES[0])));
-		weapons.add(new Weapon(Names.WEAPON_NAMES[1],map.getRoom(Names.ROOM_NAMES[1])));
-		weapons.add(new Weapon(Names.WEAPON_NAMES[2],map.getRoom(Names.ROOM_NAMES[2])));
-		weapons.add(new Weapon(Names.WEAPON_NAMES[3],map.getRoom(Names.ROOM_NAMES[3])));
-		weapons.add(new Weapon(Names.WEAPON_NAMES[4],map.getRoom(Names.ROOM_NAMES[4])));
-		weapons.add(new Weapon(Names.WEAPON_NAMES[5],map.getRoom(Names.ROOM_NAMES[5])));
+		weapons.add(new Weapon(Names.WEAPON_NAMES[0], map.getRoom(Names.ROOM_NAMES[0]))); //"Book"
+		weapons.add(new Weapon(Names.WEAPON_NAMES[1], map.getRoom(Names.ROOM_NAMES[1]))); //"Bored"
+		weapons.add(new Weapon(Names.WEAPON_NAMES[2], map.getRoom(Names.ROOM_NAMES[2]))); //"Gradcap"
+		weapons.add(new Weapon(Names.WEAPON_NAMES[3], map.getRoom(Names.ROOM_NAMES[3]))); //"Librocop"
+		weapons.add(new Weapon(Names.WEAPON_NAMES[4], map.getRoom(Names.ROOM_NAMES[4]))); //"Microscope"
+		weapons.add(new Weapon(Names.WEAPON_NAMES[5], map.getRoom(Names.ROOM_NAMES[5]))); //"Seagull"
 	}
 
 	public Weapon get(String name) {
