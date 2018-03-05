@@ -8,9 +8,6 @@ package garlic;
 
 public class Coordinates {
 
-
-
-
 	private int row, col;
 
 

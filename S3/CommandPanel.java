@@ -14,6 +14,7 @@ public class CommandPanel extends JPanel  {
 	private final JTextField commandField = new JTextField();
 	private final LinkedList<String> commandBuffer = new LinkedList<>();
 
+	//adds entered text to commandBuffer
 	CommandPanel() {
 		class AddActionListener implements ActionListener {
 			public void actionPerformed(ActionEvent event)	{
@@ -31,6 +32,7 @@ public class CommandPanel extends JPanel  {
 		add(commandField, BorderLayout.CENTER);
 	}
 
+	//gets input from user
 	public String getCommand() {
 		String command;
 		synchronized (commandBuffer) {
