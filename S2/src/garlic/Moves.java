@@ -29,7 +29,7 @@ public class Moves
 			{
 				token = tokens.get(i); //gets the tokens that is currently playing
 
-				
+
 				try { //nullpointer for tokens not in the game
 
 					if(token.getTurn() != 0)
@@ -74,7 +74,7 @@ public class Moves
 				}
 
 				i++;
-				
+
 				if(counter == 0) command = "end game";
 			}
 
@@ -89,8 +89,8 @@ public class Moves
 			tokens.setTurn(0);
 		}
 		ui.displayString("game terminated");
-//		token.setTurn(0);
-//		ui.displayString(token.getName() + " has quit!!!");
+		//		token.setTurn(0);
+		//		ui.displayString(token.getName() + " has quit!!!");
 		return 0;
 	}
 
@@ -229,7 +229,7 @@ public class Moves
 		boolean characterTaken = false;
 		for(Token token : tokens)//checks if the character has already been taken
 		{
-			if((command.equals(token.getName())) && !token.getPlayerName().equals(""))
+			if((command.equals(token.getName().toLowerCase())) && !token.getPlayerName().equals(""))
 			{
 				characterTaken = true;
 			}
