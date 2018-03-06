@@ -7,13 +7,15 @@ public class Room {
 
 	private final String name;
 	private final Coordinates tokenArea;
+	private final Coordinates weaponArea;
 	private final Coordinates[] doors;
 	private boolean hasPassage = false;
 	private Room passageDestination;
 	private final boolean[] squaresOccupied = new boolean[NUMBER_OF_ITEMS];
 
-	Room(String name, Coordinates tokenArea, Coordinates[] doors) {
+	Room(String name,Coordinates weaponArea, Coordinates tokenArea, Coordinates[] doors) {
 		this.name = name;
+		this.weaponArea = weaponArea;
 		this.tokenArea = tokenArea;
 		this.doors = doors;
 		for (boolean squareOccupied : squaresOccupied) {
@@ -60,6 +62,12 @@ public class Room {
 			position.add(new Coordinates(squareNumber - 2*ITEM_AREA_WIDTH, +2));
 		}
 		squaresOccupied[squareNumber] = true;
+		return position;
+	}
+	
+	public Coordinates addWeapon() {
+		Coordinates position = new Coordinates(weaponArea);
+		
 		return position;
 	}
 

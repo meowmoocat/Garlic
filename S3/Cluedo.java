@@ -99,11 +99,13 @@ public class Cluedo {
 					}
 					break;
 				}
-				case "done": {
+				case "done": 
+				{
 					turnOver = true;
 					break;
 				}
-				case "quit": {
+				case "quit": 
+				{
 					turnOver = true;
 					gameOver = true;
 					break;
