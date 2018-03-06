@@ -38,16 +38,16 @@ public class Map {
 	private final static HashMap<String,Coordinates> keyToCoordinates = new HashMap<>();
 
 	Map() {
-		rooms[0] = new Room(Names.ROOM_NAMES[0],new Coordinates(1,2),new Coordinates[]{new Coordinates(4,6)});
-		rooms[1] = new Room(Names.ROOM_NAMES[1],new Coordinates(10,3),new Coordinates[]{new Coordinates(8,5), new Coordinates(9,7), new Coordinates(14,7), new Coordinates(15,5)});
-		rooms[2] = new Room(Names.ROOM_NAMES[2],new Coordinates(19,1),new Coordinates[]{new Coordinates(18,4)});
-		rooms[3] = new Room(Names.ROOM_NAMES[3],new Coordinates(20,9),new Coordinates[]{new Coordinates(18,9),new Coordinates(22,12)});
-		rooms[4] = new Room(Names.ROOM_NAMES[4],new Coordinates(18,15),new Coordinates[]{new Coordinates(17,16), new Coordinates(20,14)});
-		rooms[5] = new Room(Names.ROOM_NAMES[5],new Coordinates(19,22),new Coordinates[]{new Coordinates(17,21)});
-		rooms[6] = new Room(Names.ROOM_NAMES[6],new Coordinates(10,19),new Coordinates[]{new Coordinates(11,18), new Coordinates(12,18), new Coordinates(14,20)});
-		rooms[7] = new Room(Names.ROOM_NAMES[7],new Coordinates(2,22),new Coordinates[]{new Coordinates(6,19)});
-		rooms[8] = new Room(Names.ROOM_NAMES[8],new Coordinates(2,10),new Coordinates[]{new Coordinates(6,15),new Coordinates(7,12)});
-		rooms[9] = new Room(Names.ROOM_NAMES[9],new Coordinates(12,14),new Coordinates[]{new Coordinates(12,17)});
+		rooms[0] = new Room(Names.ROOM_NAMES[0],new Coordinates(1,2),new Coordinates[]{new Coordinates(4,6)});//"Computer Science"
+		rooms[1] = new Room(Names.ROOM_NAMES[1],new Coordinates(10,3),new Coordinates[]{new Coordinates(8,5), new Coordinates(9,7), new Coordinates(14,7), new Coordinates(15,5)});//"O'Reilly Hall"
+		rooms[2] = new Room(Names.ROOM_NAMES[2],new Coordinates(19,1),new Coordinates[]{new Coordinates(18,4)});//"Engineering"
+		rooms[3] = new Room(Names.ROOM_NAMES[3],new Coordinates(20,9),new Coordinates[]{new Coordinates(18,9),new Coordinates(22,12)});//"Sutherland"
+		rooms[4] = new Room(Names.ROOM_NAMES[4],new Coordinates(18,15),new Coordinates[]{new Coordinates(17,16), new Coordinates(20,14)});//"Quinn"
+		rooms[5] = new Room(Names.ROOM_NAMES[5],new Coordinates(19,22),new Coordinates[]{new Coordinates(17,21)});//"Newman"
+		rooms[6] = new Room(Names.ROOM_NAMES[6],new Coordinates(10,19),new Coordinates[]{new Coordinates(11,18), new Coordinates(12,18), new Coordinates(14,20)});//"Library"
+		rooms[7] = new Room(Names.ROOM_NAMES[7],new Coordinates(2,22),new Coordinates[]{new Coordinates(6,19)});//"Ag Science"
+		rooms[8] = new Room(Names.ROOM_NAMES[8],new Coordinates(2,10),new Coordinates[]{new Coordinates(6,15),new Coordinates(7,12)});//"O'Brien"
+		rooms[9] = new Room(Names.ROOM_NAMES[9],new Coordinates(12,14),new Coordinates[]{new Coordinates(12,17)});//"Lake"
 		rooms[0].addPassage(rooms[5]);
 		rooms[5].addPassage(rooms[0]);
 		rooms[2].addPassage(rooms[7]);
