@@ -105,7 +105,8 @@ public class UI {
 	public void inputToken(Tokens tokens) {
 		boolean valid = false;
 		do {
-			//display characters
+			
+			//display characters left to choose from
 			for(S3.Token token : tokens)//checks if the character has already been taken
 			{
 				if(!token.isOwned())
@@ -113,7 +114,6 @@ public class UI {
 					displayString(token.getName());
 				}
 			}
-
 			
 			displayString("Enter your character name:");
 			inputString();
