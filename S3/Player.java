@@ -24,6 +24,6 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return name + " (" + token.getName() + ")";
+		return name + " " + token.getName();
 	}
 }

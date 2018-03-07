@@ -1,6 +1,9 @@
 package S3;
 
 import javax.swing.*;
+
+import garlic.Token;
+
 import java.awt.*;
 
 public class UI {
@@ -98,10 +101,20 @@ public class UI {
 	public String getPlayerName() {
 		return playerName;
 	}
-
+	
 	public void inputToken(Tokens tokens) {
 		boolean valid = false;
 		do {
+			//display characters
+			for(S3.Token token : tokens)//checks if the character has already been taken
+			{
+				if(!token.isOwned())
+				{
+					displayString(token.getName());
+				}
+			}
+
+			
 			displayString("Enter your character name:");
 			inputString();
 			displayString("> " + input);
