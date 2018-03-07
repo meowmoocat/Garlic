@@ -25,6 +25,7 @@ public class Cluedo {
 				numPlayersSoFar++;
 			}
 		} while (!ui.inputIsDone() && numPlayersSoFar<MAX_NUM_PLAYERS);
+		ui.refreshInfoPanel();
 	}
 
 	private void takeTurns() {
@@ -104,6 +105,7 @@ public class Cluedo {
 				case "done": 
 				{
 					turnOver = true;
+					ui.refreshInfoPanel();
 					break;
 				}
 				case "quit": 
