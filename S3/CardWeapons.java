@@ -9,11 +9,7 @@ public class CardWeapons extends Cards{
 		super(name);
 		this.weaponName=name;
 	}
-	
-	public String getWeaponName() {
-		return weaponName;
-	}
-	
+		
 	public String getType() {
 		return type;
 	}
