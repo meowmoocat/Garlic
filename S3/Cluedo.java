@@ -12,13 +12,24 @@ public class Cluedo {
 	private final Map map = new Map();
 	private final Weapons weapons = new Weapons(map);
 	private final UI ui = new UI(tokens,weapons);
-	
-	
 	ArrayList<Cards> cards = new ArrayList<Cards>();
+	
+	
 	
 	private void inCards()
 	{
-		
+		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
+		{
+			
+		}
+		for(int i=0; i<Names.ROOM_NAMES.length; i++)
+		{
+			
+		}
+		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
+		{
+			
+		}
 	}
 	
 	
