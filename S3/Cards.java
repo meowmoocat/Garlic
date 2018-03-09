@@ -11,6 +11,6 @@ public class Cards {
 	
 	public String getCardName() {
 		return cardName;
-	}	
+	}
 	
 }
