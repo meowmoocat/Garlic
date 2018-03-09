@@ -13,4 +13,8 @@ public class CardWeapons extends Cards{
 	public String getWeaponName() {
 		return weaponName;
 	}
+	
+	public String getType() {
+		return type;
+	}
 }
