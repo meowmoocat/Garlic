@@ -1,5 +1,7 @@
 package S3;
 
+import java.util.ArrayList;
+
 public class Cluedo {
 
 	private static final int MAX_NUM_PLAYERS = 6;
@@ -10,8 +12,15 @@ public class Cluedo {
 	private final Map map = new Map();
 	private final Weapons weapons = new Weapons(map);
 	private final UI ui = new UI(tokens,weapons);
-
-
+	
+	
+	ArrayList<Cards> cards = new ArrayList<Cards>();
+	
+	private void inCards()
+	{
+		
+	}
+	
 	
 	private void inputPlayerNames() {
 		int numPlayersSoFar = 0;
