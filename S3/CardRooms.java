@@ -9,11 +9,7 @@ public class CardRooms extends Cards{
 		super(name);
 		this.roomName=name;
 	}
-	
-	public String getRoomName() {
-		return roomName;
-	}
-	
+		
 	public String getType() {
 		return type;
 	}
