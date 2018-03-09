@@ -20,15 +20,18 @@ public class Cluedo {
 	{
 		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
 		{
-			
+			Cards temp = new CardTokens(Names.SUSPECT_NAMES[i]);
+			cards.add(temp);
 		}
 		for(int i=0; i<Names.ROOM_NAMES.length; i++)
 		{
-			
+			Cards temp = new CardRooms(Names.ROOM_NAMES[i]);
+			cards.add(temp);
 		}
 		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
 		{
-			
+			Cards temp = new CardWeapons(Names.WEAPON_NAMES[i]);
+			cards.add(temp);
 		}
 	}
 	
