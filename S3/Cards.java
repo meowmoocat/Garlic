@@ -9,5 +9,8 @@ public class Cards {
 		this.cardName = name;
 	}
 	
+	public String getCardName() {
+		return cardName;
+	}	
 	
 }
