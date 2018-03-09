@@ -12,7 +12,7 @@ public class Cluedo {
 	private final Map map = new Map();
 	private final Weapons weapons = new Weapons(map);
 	private final UI ui = new UI(tokens,weapons);
-	ArrayList<Cards> cards = new ArrayList<Cards>();
+	public ArrayList<Cards> cards = new ArrayList<Cards>();
 	
 	
 	
@@ -32,6 +32,11 @@ public class Cluedo {
 		{
 			Cards temp = new CardWeapons(Names.WEAPON_NAMES[i]);
 			cards.add(temp);
+		}
+		
+		for(Cards c : cards)
+		{
+			System.out.println(c.getCardName());
 		}
 	}
 	
@@ -147,8 +152,8 @@ public class Cluedo {
 
 	public static void main(String[] args) {
 		Cluedo game = new Cluedo();
-		game.inputPlayerNames();
 		game.createCards();
+		game.inputPlayerNames();
 		//TODO player order
 		game.takeTurns();
 		System.exit(0);
