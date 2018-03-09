@@ -16,7 +16,7 @@ public class Cluedo {
 	
 	
 	
-	private void inCards()
+	private void createCards()
 	{
 		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
 		{
@@ -148,6 +148,7 @@ public class Cluedo {
 	public static void main(String[] args) {
 		Cluedo game = new Cluedo();
 		game.inputPlayerNames();
+		game.createCards();
 		//TODO player order
 		game.takeTurns();
 		System.exit(0);
