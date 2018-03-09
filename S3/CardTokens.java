@@ -1,4 +1,4 @@
-package  S3;
+package S3;
 
 public class CardTokens extends Cards{
 	
@@ -8,10 +8,6 @@ public class CardTokens extends Cards{
 	public CardTokens(String name) {
 		super(name);
 		this.tokenName=name;
-	}
-	
-	public String getTokenName() {
-		return tokenName;
 	}
 	
 	public String getType() {
