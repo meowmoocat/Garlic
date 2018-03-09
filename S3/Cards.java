@@ -5,7 +5,7 @@ public class Cards {
 	
 	public static String cardName;
 	
-	public Cards(int cardNum, String name) {
+	public Cards(String name) {
 		this.cardName = name;
 	}
 	
