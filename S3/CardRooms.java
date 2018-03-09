@@ -13,4 +13,8 @@ public class CardRooms extends Cards{
 	public String getRoomName() {
 		return roomName;
 	}
+	
+	public String getType() {
+		return type;
+	}
 }
