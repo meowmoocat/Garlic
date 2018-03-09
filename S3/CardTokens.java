@@ -1,3 +1,5 @@
+package  S3
+
 public class CardTokens extends Cards{
 	
 	private String type = "token";
@@ -10,5 +12,9 @@ public class CardTokens extends Cards{
 	
 	public String getTokenName() {
 		return tokenName;
+	}
+	
+	public String getType() {
+		return type;
 	}
 }
