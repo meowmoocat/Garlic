@@ -1,6 +1,7 @@
 package S3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Cluedo {
 
@@ -115,6 +116,9 @@ public class Cluedo {
 			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
 			i++;
 		}
+		
+		cards.shuffleCards();
+		
 	}
 		
 	private void inputPlayerNames() {
