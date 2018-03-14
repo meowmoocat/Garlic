@@ -22,7 +22,7 @@ public class Cards implements Iterable<Card>, Iterator<Card>{
 		}
 		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
 		{
-			cards.add(new Card(Names.WEAPON_NAMES[i], "tokens"));
+			cards.add(new Card(Names.WEAPON_NAMES[i], "weapons"));
 		}
 	}
 
