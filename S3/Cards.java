@@ -1,6 +1,7 @@
 package S3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class Cards implements Iterable<Card>, Iterator<Card>{
@@ -40,6 +41,10 @@ public class Cards implements Iterable<Card>, Iterator<Card>{
 	public Iterator<Card> iterator() {
 		iterator = cards.iterator();
 		return iterator;
+	}
+	
+	public void shuffleCards() {
+		Collections.shuffle(cards);
 	}
 	
 }
