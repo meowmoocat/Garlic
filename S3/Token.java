@@ -21,7 +21,7 @@ public class Token {
 	}
 
 	public boolean hasName(String name) {
-		return this.name.toLowerCase().equals(name.toLowerCase().trim());
+		return this.name.toLowerCase().contains(name.toLowerCase().trim());
 	}
 
 	public Color getColor() {

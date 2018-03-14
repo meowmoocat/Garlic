@@ -5,42 +5,118 @@ import java.util.ArrayList;
 public class Cluedo {
 
 	private static final int MAX_NUM_PLAYERS = 6;
+	private int TOTAL_PLAYERS;
 
+	private final Cards cards = new Cards();
 	private final Tokens tokens = new Tokens();
 	private final Players players = new Players();
 	private final Dice dice = new Dice();
 	private final Map map = new Map();
 	private final Weapons weapons = new Weapons(map);
 	private final UI ui = new UI(tokens,weapons);
-	public ArrayList<Cards> cards = new ArrayList<Cards>();
 	
 	
-	
-	private void createCards()
+	private void playerOrder()
 	{
-		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
-		{
-			Cards temp = new CardTokens(Names.SUSPECT_NAMES[i]);
-			cards.add(temp);
-		}
-		for(int i=0; i<Names.ROOM_NAMES.length; i++)
-		{
-			Cards temp = new CardRooms(Names.ROOM_NAMES[i]);
-			cards.add(temp);
-		}
-		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
-		{
-			Cards temp = new CardWeapons(Names.WEAPON_NAMES[i]);
-			cards.add(temp);
-		}
+		String[] highestPlayer = new String[TOTAL_PLAYERS];//stores the highest scoring in an array
+		int highestRoll = 0;
+		int i=0;
 		
-		for(Cards c : cards)
+		for(Player player : players)
 		{
-			System.out.println(c.getCardName());
+			dice.roll();
+			ui.displayDice(player, dice);
+			if(dice.getTotal() > highestRoll)
+			{
+				highestPlayer[i] = player.getName();
+				highestRoll = dice.getTotal();
+			}
+			else if(dice.getTotal() == highestRoll)
+			{
+				i++;
+				highestPlayer[i] = player.getName();
+			}
+		}
+		while(highestPlayer[1] != null)
+		{
+			highestRoll = 0;
+			String[] highestPlayerRnd2 = new String[TOTAL_PLAYERS];
+			i = 0;
+			int j = 0;
+			try {
+			
+				while(highestPlayer[i] != null && i<TOTAL_PLAYERS)
+				{
+					dice.roll();
+					ui.displayDice(players.getPlayer(highestPlayer[i]), dice);
+					if(dice.getTotal() > highestRoll)
+					{
+						highestPlayerRnd2[j] = highestPlayer[i];
+						highestRoll = dice.getTotal();
+					}
+					else if(dice.getTotal() == highestRoll)
+					{
+						j++;
+						highestPlayerRnd2[j] = highestPlayer[i];
+					}
+					i++;
+				}
+			
+			} catch (NullPointerException e) {
+				//nothing to do if it's null!
+			}
+			for(int k=0; k<TOTAL_PLAYERS; k++)
+			{
+				highestPlayer[k] = highestPlayerRnd2[k];
+				highestPlayerRnd2[k] = null;
+			}
+		}
+
+		try {
+			int t=1;
+			for(Player player : players)
+			{
+				if(!player.getName().equals(highestPlayer[0]))
+				{
+					highestPlayer[t] = player.getName();
+					t++;
+				}
+			}
+		} catch (NullPointerException e) {
+			
+		}
+		int p=0;
+		for(p=0; p < highestPlayer.length; p++)
+		{
+			players.getPlayer(highestPlayer[p]).setTurn(p+1);
 		}
 	}
 	
-	
+	private void createCards()
+	{
+//		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
+//		{
+//			Cards temp = new CardTokens(Names.SUSPECT_NAMES[i]);
+//			cards.add(temp);
+//		}
+//		for(int i=0; i<Names.ROOM_NAMES.length; i++)
+//		{
+//			Cards temp = new CardRooms(Names.ROOM_NAMES[i]);
+//			cards.add(temp);
+//		}
+//		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
+//		{
+//			Cards temp = new CardWeapons(Names.WEAPON_NAMES[i]);
+//			cards.add(temp);
+//		}
+		int i=0;
+		for(Card c : cards)
+		{
+			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
+			i++;
+		}
+	}
+		
 	private void inputPlayerNames() {
 		int numPlayersSoFar = 0;
 		do {
@@ -54,99 +130,105 @@ public class Cluedo {
 			}
 		} while (!ui.inputIsDone() && numPlayersSoFar<MAX_NUM_PLAYERS);
 		ui.refreshInfoPanel();
+		TOTAL_PLAYERS = numPlayersSoFar;
 	}
 
 	private void takeTurns() {
 		boolean moveOver, turnOver, gameOver = false;
+		int i = 1; //loops players
 		do {
 			turnOver = false;
 			moveOver = false;
+			
 			do {
-				Player currentPlayer = players.getCurrentPlayer();
-				Token currentToken = currentPlayer.getToken();
-				ui.inputCommand(currentPlayer);
-				switch (ui.getCommand()) {
-				case "roll": {
-					if (!moveOver) {
-						dice.roll();
-						ui.displayDice(currentPlayer, dice);
-						int squaresMoved = 0;
-						if (currentToken.isInRoom()) {
-							if (currentToken.getRoom().getNumberOfDoors()>1) {
-								boolean exitDone = false;
-								do {
-									ui.inputDoor(currentPlayer);
-									if (ui.getDoor()>= 1 || ui.getDoor()<=currentToken.getRoom().getNumberOfDoors()) {
-										currentToken.leaveRoom(ui.getDoor()-1);
-										exitDone = true;
+				Player currentPlayer = players.getPlayerTurn(i); 
+				try {
+				Token currentToken = currentPlayer.getToken();						
+						ui.inputCommand(currentPlayer);
+						switch (ui.getCommand()) {
+						case "roll": {
+							if (!moveOver) {
+								dice.roll();
+								ui.displayDice(currentPlayer, dice);
+								int squaresMoved = 0;
+								if (currentToken.isInRoom()) {
+									if (currentToken.getRoom().getNumberOfDoors()>1) {
+										boolean exitDone = false;
+										do {
+											ui.inputDoor(currentPlayer);
+											if (ui.getDoor()>= 1 || ui.getDoor()<=currentToken.getRoom().getNumberOfDoors()) {
+												currentToken.leaveRoom(ui.getDoor()-1);
+												exitDone = true;
+											} else {
+												ui.displayErrorNotADoor();
+											}
+										} while (!exitDone);
 									} else {
-										ui.displayErrorNotADoor();
+										currentToken.leaveRoom();
 									}
-								} while (!exitDone);
-							} else {
-								currentToken.leaveRoom();
-							}
-							ui.display();
-						}
-						do {
-							ui.inputMove(currentPlayer, squaresMoved+1, dice.getTotal());
-							Coordinates currentPosition = currentToken.getPosition();
-							Coordinates newPosition;
-							if (map.isValidMove(currentPosition, ui.getMove())) {
-								newPosition = map.getNewPosition(currentPosition, ui.getMove());
-								if (map.isDoor(currentPosition, newPosition)) {
-									Room room = map.getRoom(newPosition);
-									currentToken.enterRoom(room);
-								} else {
-									currentToken.setPosition(newPosition);
+									ui.display();
 								}
-								squaresMoved++;
-								if (squaresMoved==dice.getTotal() || currentPlayer.getToken().isInRoom()) {
+								do {
+									ui.inputMove(currentPlayer, squaresMoved+1, dice.getTotal());
+									Coordinates currentPosition = currentToken.getPosition();
+									Coordinates newPosition;
+									if (map.isValidMove(currentPosition, ui.getMove())) {
+										newPosition = map.getNewPosition(currentPosition, ui.getMove());
+										if (map.isDoor(currentPosition, newPosition)) {
+											Room room = map.getRoom(newPosition);
+											currentToken.enterRoom(room);
+										} else {
+											currentToken.setPosition(newPosition);
+										}
+										squaresMoved++;
+										if (squaresMoved==dice.getTotal() || currentPlayer.getToken().isInRoom()) {
+											moveOver = true;
+										}
+										ui.display();
+									} else {
+										ui.displayErrorInvalidMove();
+									}
+								} while (!moveOver);
+							} else {
+								ui.displayErrorAlreadyMoved();
+							}
+							break;
+						}
+						case "passage": {
+							if (!moveOver) {
+								if (currentToken.isInRoom() && currentToken.getRoom().hasPassage()) {
+									Room destination = currentToken.getRoom().getPassageDestination();
+									currentToken.leaveRoom();
+									currentToken.enterRoom(destination);
 									moveOver = true;
+									ui.display();
+								} else {
+									ui.displayErrorNoPassage();
 								}
-								ui.display();
 							} else {
-								ui.displayErrorInvalidMove();
+								ui.displayErrorAlreadyMoved();
 							}
-						} while (!moveOver);
-					} else {
-						ui.displayErrorAlreadyMoved();
-					}
-					break;
-				}
-				case "passage": {
-					if (!moveOver) {
-						if (currentToken.isInRoom() && currentToken.getRoom().hasPassage()) {
-							Room destination = currentToken.getRoom().getPassageDestination();
-							currentToken.leaveRoom();
-							currentToken.enterRoom(destination);
-							moveOver = true;
-							ui.display();
-						} else {
-							ui.displayErrorNoPassage();
+							break;
 						}
-					} else {
-						ui.displayErrorAlreadyMoved();
-					}
-					break;
+						case "done": {
+							turnOver = true;
+							ui.refreshInfoPanel();
+							break;
+						}
+						case "quit": {
+							turnOver = true;
+							gameOver = true;
+							break;
+						}
+						}
+					
+				}catch (NullPointerException e) {
+					//Nothing to do!
 				}
-				case "done": 
-				{
-					turnOver = true;
-					ui.refreshInfoPanel();
-					break;
-				}
-				case "quit": 
-				{
-					turnOver = true;
-					gameOver = true;
-					break;
-				}
-				}
+					
 			} while (!turnOver);
-			if (!gameOver) {
-				players.turnOver();
-			}
+			i++;
+			if(i>TOTAL_PLAYERS) i=1;
 		} while (!gameOver);
 	}
 
@@ -154,7 +236,7 @@ public class Cluedo {
 		Cluedo game = new Cluedo();
 		game.createCards();
 		game.inputPlayerNames();
-		//TODO player order
+		game.playerOrder();
 		game.takeTurns();
 		System.exit(0);
 	}

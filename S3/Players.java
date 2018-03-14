@@ -3,12 +3,27 @@ package S3;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
 public class Players implements Iterable<Player>, Iterator<Player> {
 
 	private final ArrayList<Player> players = new ArrayList<>();
-	private int currentPlayerIndex;
+	public boolean hasBeenReordered = false;
 	private Iterator<Player> iterator;
 
+		
+	//loops through all characters and returns characters name
+	public Player getPlayer(String name)
+	{
+		for (Player player : players)
+		{
+			if (player.hasName(name))
+			{
+				return player;
+			}
+		}
+		return null;
+	}
+	
 	public void add(Player player) {
 		players.add(player);
 	}
@@ -29,25 +44,23 @@ public class Players implements Iterable<Player>, Iterator<Player> {
 	public Player get(int index) {
 		return players.get(index);
 	}
-
-	public void setCurrentPlayer(String name) {
-		currentPlayerIndex = 0;
-		while (players.get(currentPlayerIndex).hasName(name)) {
-			currentPlayerIndex++;
+	
+	public Player getPlayerTurn(int i)
+	{
+		for (Player player : players)
+		{
+			if (player.getTurn() == i)
+			{
+				return player;
+			}
 		}
+		return null;
 	}
 
-	public Player getCurrentPlayer() {
-		return players.get(currentPlayerIndex);
-	}
+//	public Player getCurrentPlayer(int i) {
+//		return getTurn(i);
+//	}
 
-	public void turnOver() {
-		if (currentPlayerIndex < players.size()-1) {
-			currentPlayerIndex++;
-		} else {
-			currentPlayerIndex = 0;
-		}
-	}
 
 	@Override
 	public boolean hasNext() {
