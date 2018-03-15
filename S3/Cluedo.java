@@ -10,6 +10,7 @@ public class Cluedo {
 	private static final int MAX_NUM_PLAYERS = 6;
 	private int TOTAL_PLAYERS;
 
+	private final Notes notes = new Notes();
 	private final MurderEnvelope murder = new MurderEnvelope();
 	private final Cards cards = new Cards();
 	private final Tokens tokens = new Tokens();
@@ -172,7 +173,7 @@ System.out.println(murder.murderRoom.getCardName());
 			if (!ui.inputIsDone()) {
 				ui.inputToken(tokens);
 				Token token = tokens.get(ui.getTokenName());
-				players.add(new Player(ui.getPlayerName(),token));
+				players.add(new Player(ui.getPlayerName(),token, notes));
 				token.setOwned();
 				numPlayersSoFar++;
 			}
