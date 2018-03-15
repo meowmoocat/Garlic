@@ -64,7 +64,7 @@ public class Cluedo {
 			i++;
 		}
 		
-		card.remove(number);
+		cards.remove(number);
 	}
 	
 	private void playerOrder()
@@ -273,6 +273,12 @@ public class Cluedo {
 							turnOver = true;
 							gameOver = true;
 							break;
+						}
+						case "help": {
+							
+						}
+						case "cheat": {
+							
 						}
 						}
 					
