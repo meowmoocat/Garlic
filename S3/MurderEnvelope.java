@@ -16,9 +16,9 @@ public class MurderEnvelope {
 	
 	MurderEnvelope()
 	{
-		System.out.println("token: "+murderToken.getCardName());
-		System.out.println("weapon: "+murderWeapon.getCardName());
-		System.out.println("room: "+murderRoom.getCardName());
+//		System.out.println("token: "+murderToken.getCardName());
+//		System.out.println("weapon: "+murderWeapon.getCardName());
+//		System.out.println("room: "+murderRoom.getCardName());
 		
 		int i=0;
 		for(Card card : cards)

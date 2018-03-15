@@ -7,7 +7,7 @@ import java.util.Iterator;
 public class Cards implements Iterable<Card>, Iterator<Card>{
 	//superclass of all cards
 	
-	private final ArrayList<Card> cards = new ArrayList<Card>();
+	public final ArrayList<Card> cards = new ArrayList<Card>();
 //	public static String cardName;
 	private Iterator<Card> iterator;
 	
@@ -25,6 +25,7 @@ public class Cards implements Iterable<Card>, Iterator<Card>{
 		{
 			cards.add(new Card(Names.WEAPON_NAMES[i], "weapons"));
 		}
+		cards.remove(15);
 	}
 
 	@Override
@@ -47,9 +48,4 @@ public class Cards implements Iterable<Card>, Iterator<Card>{
 		Collections.shuffle(cards);
 	}
 
-	public void remove(int number) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

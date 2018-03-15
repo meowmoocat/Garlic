@@ -2,6 +2,7 @@ package S3;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Cluedo {
@@ -18,7 +19,7 @@ public class Cluedo {
 	private final Weapons weapons = new Weapons(map);
 	private final UI ui = new UI(tokens,weapons);
 	
-	public void RandomSuspect()
+	public void randomSuspect()
 	{
 		int number;
 		Random rand = new Random();
@@ -30,11 +31,10 @@ public class Cluedo {
 			
 			i++;
 		}
-		
-		cards.remove(number);
-		
+		System.out.println(murder.murderToken.getCardName());
+				cards.cards.remove(number);
 	}
-	public void RandomWeapon()
+	public void randomWeapon()
 	{
 		int number;
 		Random rand = new Random();
@@ -47,10 +47,10 @@ public class Cluedo {
 			
 			i++;
 		}
-		
-		cards.remove(number);
+		System.out.println(murder.murderWeapon.getCardName());
+		cards.cards.remove(number);
 	}
-	public void RandomRoom()
+	public void randomRoom()
 	{
 		int number;
 		Random rand = new Random();
@@ -63,8 +63,8 @@ public class Cluedo {
 			
 			i++;
 		}
-		
-		cards.remove(number);
+		cards.cards.remove(number);
+System.out.println(murder.murderRoom.getCardName());
 	}
 	
 	private void playerOrder()
@@ -145,30 +145,24 @@ public class Cluedo {
 	
 	private void createCards()
 	{
-//		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
-//		{
-//			Cards temp = new CardTokens(Names.SUSPECT_NAMES[i]);
-//			cards.add(temp);
-//		}
-//		for(int i=0; i<Names.ROOM_NAMES.length; i++)
-//		{
-//			Cards temp = new CardRooms(Names.ROOM_NAMES[i]);
-//			cards.add(temp);
-//		}
-//		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
-//		{
-//			Cards temp = new CardWeapons(Names.WEAPON_NAMES[i]);
-//			cards.add(temp);
-//		}
 		int i=0;
+		i=0;
 		for(Card c : cards)
 		{
 			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
 			i++;
 		}
-		
+		randomSuspect();
+		randomWeapon();
+		randomRoom();
+		i=0;
+		for(Card c : cards)
+		{
+			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
+			i++;
+		}
+		System.out.println();
 		cards.shuffleCards();
-		
 	}
 		
 	private void inputPlayerNames() {
