@@ -2,12 +2,14 @@ package S3;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Cluedo {
 
 	private static final int MAX_NUM_PLAYERS = 6;
 	private int TOTAL_PLAYERS;
 
+	private final MurderEnvelope murder = new MurderEnvelope();
 	private final Cards cards = new Cards();
 	private final Tokens tokens = new Tokens();
 	private final Players players = new Players();
@@ -16,6 +18,54 @@ public class Cluedo {
 	private final Weapons weapons = new Weapons(map);
 	private final UI ui = new UI(tokens,weapons);
 	
+	public void RandomSuspect()
+	{
+		int number;
+		Random rand = new Random();
+		number = rand.nextInt(6);
+		int i=0;
+		for(Card card : cards)
+		{
+			if(i==number) murder.murderToken = card;
+			
+			i++;
+		}
+		
+		cards.remove(number);
+		
+	}
+	public void RandomWeapon()
+	{
+		int number;
+		Random rand = new Random();
+		number = rand.nextInt(6) + 15;
+		
+		int i=0;
+		for(Card card : cards)
+		{
+			if(i==number) murder.murderWeapon = card;
+			
+			i++;
+		}
+		
+		cards.remove(number);
+	}
+	public void RandomRoom()
+	{
+		int number;
+		Random rand = new Random();
+		number = rand.nextInt(9) + 6;
+		
+		int i=0;
+		for(Card card : cards)
+		{
+			if(i==number) murder.murderRoom = card;
+			
+			i++;
+		}
+		
+		card.remove(number);
+	}
 	
 	private void playerOrder()
 	{

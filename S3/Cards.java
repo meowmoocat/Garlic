@@ -46,5 +46,10 @@ public class Cards implements Iterable<Card>, Iterator<Card>{
 	public void shuffleCards() {
 		Collections.shuffle(cards);
 	}
+
+	public void remove(int number) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
