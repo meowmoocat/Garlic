@@ -26,6 +26,7 @@ public class Cluedo {
 		Random rand = new Random();
 		number = rand.nextInt(6);
 		int i=0;
+		System.out.println("number: "+number);
 		for(Card card : cards)
 		{
 			if(i==number) murder.murderToken = card;
@@ -39,8 +40,8 @@ public class Cluedo {
 	{
 		int number;
 		Random rand = new Random();
-		number = rand.nextInt(6) + 15;
-		
+		number = rand.nextInt(6) + 14;
+		System.out.println("number: "+number);
 		int i=0;
 		for(Card card : cards)
 		{
@@ -55,8 +56,8 @@ public class Cluedo {
 	{
 		int number;
 		Random rand = new Random();
-		number = rand.nextInt(9) + 6;
-		
+		number = rand.nextInt(9) + 5;
+		System.out.println("number: "+number);
 		int i=0;
 		for(Card card : cards)
 		{
@@ -153,8 +154,23 @@ System.out.println(murder.murderRoom.getCardName());
 			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
 			i++;
 		}
+		System.out.println();
 		randomSuspect();
+		i=0;
+		for(Card c : cards)
+		{
+			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
+			i++;
+		}
+		System.out.println();
 		randomWeapon();
+		i=0;
+		for(Card c : cards)
+		{
+			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
+			i++;
+		}
+		System.out.println();
 		randomRoom();
 		i=0;
 		for(Card c : cards)
