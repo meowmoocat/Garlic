@@ -286,10 +286,37 @@ System.out.println(murder.murderRoom.getCardName());
 							break;
 						}
 						case "help": {
-							
+							//if in corridor - roll, cheat, done, exit, notes
+							if(!currentToken.isInRoom())
+							{
+								ui.displayString("Possible inputs:\n'roll' - rolls dice to move"
+										+ "\n'cheat' - views cards in murder envelope\n'done' - ends turn"
+										+ "\n'quit' - ends game\n'notes' - view notes");
+							}
+							//if entered room - done, exit, notes, (accuse)
+							else if(currentToken.isInRoom() && moveOver == true)
+							{
+								ui.displayString("Possible inputs:\n'cheat' - views cards in murder envelope"
+										+ "\n'done' - ends turn\n'quit' - ends game\n'notes' - view notes");
+								//TODO add accusations
+							}
+							//if start turn room - notes, roll, done, exit, (passage)
+							else if(currentToken.isInRoom() && moveOver == false)
+							{
+								ui.displayString("Possible inputs:\n'roll' - rolls dice to move"
+										+ "\n'cheat' - views cards in murder envelope\n'done' - ends turn"
+										+ "\n'quit' - ends game\n'notes' - view notes");
+								if(currentToken.getRoom().hasPassage())
+								{
+									ui.displayString("'passage' - move through secret passage");
+								}
+							}
 						}
 						case "cheat": {
 							
+						}
+						case "accusation": {
+							//TODO for next sprint
 						}
 						}
 					

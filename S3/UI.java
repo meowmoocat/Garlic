@@ -37,7 +37,7 @@ public class UI {
 		boardPanel.refresh();
 	}
 
-	private void displayString(String string) {
+	public void displayString(String string) {
 		infoPanel.addText(string);
 	}
 
