@@ -4,7 +4,7 @@ public class Player {
 
 	private final String name;
 	private final Token token;
-	private final Notes note;
+	public final Notes note;
 	private int turn;
 
 	Player(String name, Token token, Notes note) {
@@ -12,6 +12,7 @@ public class Player {
 		this.token = token;
 		this.note = note;
 	}
+
 	
 	//sets the turn for that token based on when that character was chosen
 	public void setTurn(int turn)

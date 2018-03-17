@@ -33,6 +33,33 @@ public class UI {
 
 	/* Display Methods */
 
+	public void notes(Player player)
+	{
+		infoPanel.addText("Bleakley Plum: " + player.note.getNoteBleakleyPlum());
+		infoPanel.addText("Kelly White: " + player.note.getNoteKellyWhite());
+		infoPanel.addText("Caka Scarlett: " + player.note.getNoteCakaScarlett());
+		infoPanel.addText("Sweeney Green: " + player.note.getNoteSweeneyGreen());
+		infoPanel.addText("Kalra Mustard: " + player.note.getNoteKalraMustard());
+		infoPanel.addText("Delorey Peacock: " + player.note.getNoteDeloreyPeacock());
+		
+		infoPanel.addText("\nComputer Science: " + player.note.getNoteComputerScience());
+		infoPanel.addText("O'Reilly Hall: " + player.note.getNoteOReillyHall());
+		infoPanel.addText("Engineering: " + player.note.getNoteEngineering());
+		infoPanel.addText("Sutherland: " + player.note.getNoteSutherland());
+		infoPanel.addText("Quinn: " + player.note.getNoteQuinn());
+		infoPanel.addText("Newman: " + player.note.getNoteNewman());
+		infoPanel.addText("Library: " + player.note.getNoteLibrary());
+		infoPanel.addText("Ag Science: " + player.note.getNoteAgScience());
+		infoPanel.addText("O'Brien: " + player.note.getNoteOBrien());
+		
+		infoPanel.addText("\nBook: " + player.note.getNoteBook());
+		infoPanel.addText("Bored: " + player.note.getNoteBored());
+		infoPanel.addText("Gradcap: " + player.note.getNoteGradcap());
+		infoPanel.addText("Librocop: " + player.note.getNoteLibrocop());
+		infoPanel.addText("Microscope: " + player.note.getNoteMicroscope());
+		infoPanel.addText("Seagull: " + player.note.getNoteSeagull());
+	}
+	
 	public void display() {
 		boardPanel.refresh();
 	}
@@ -147,7 +174,7 @@ public class UI {
 			displayString("> " + input);
 			command = input.trim().toLowerCase().replaceAll("( )+", " ");
 			if (command.equals("quit") || command.equals("done") || command.equals("roll") || command.equals("passage")
-					|| command.equals("help") || command.equals("cheat")) {
+					|| command.equals("help") || command.equals("cheat") || command.equals("notes")) {
 				valid = true;
 			} else {
 				displayError("No such command");

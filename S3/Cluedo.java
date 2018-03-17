@@ -311,9 +311,14 @@ System.out.println(murder.murderRoom.getCardName());
 									ui.displayString("'passage' - move through secret passage");
 								}
 							}
+							break;
 						}
 						case "cheat": {
-							
+							ui.displayString("wtf");
+						}
+						case "notes": {
+							ui.notes(currentPlayer);
+							break;
 						}
 						case "accusation": {
 							//TODO for next sprint
