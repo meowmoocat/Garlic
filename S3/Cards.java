@@ -1,16 +1,20 @@
 package S3;
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
 public class Cards implements Iterable<Card>, Iterator<Card>{
-	//superclass of all cards
-	
+
 	public final ArrayList<Card> cards = new ArrayList<Card>();
-//	public static String cardName;
 	private Iterator<Card> iterator;
-	
+
 	Cards()
 	{
 		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
@@ -43,7 +47,7 @@ public class Cards implements Iterable<Card>, Iterator<Card>{
 		iterator = cards.iterator();
 		return iterator;
 	}
-	
+
 	public void shuffleCards() {
 		Collections.shuffle(cards);
 	}

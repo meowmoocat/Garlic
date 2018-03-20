@@ -1,5 +1,11 @@
 package S3;
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -20,7 +26,7 @@ class BoardPanel extends JPanel {
 	private final Tokens tokens;
 	private final Weapons weapons;
 	private BufferedImage boardImage;
-	
+
 	public BufferedImage book;
 	public BufferedImage bored;
 	public BufferedImage gradcap;
@@ -85,7 +91,7 @@ class BoardPanel extends JPanel {
 	//reads in images for weapons
 	public void weaponsReadIn()
 	{
-		for(S3.Weapon weapon : weapons) //TODO: come back to this(in 2 places)
+		for(Weapon weapon : weapons)
 		{
 			if(weapon.getName().equals("Book"))
 			{
