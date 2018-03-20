@@ -1,12 +1,17 @@
 package S3;
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 public class Player {
 
 	public final Notes notes = new Notes();
 	
 	private final String name;
 	private final Token token;
-//	private final Notes note;
 	private int turn;
 
 	Player(String name, Token token) {
