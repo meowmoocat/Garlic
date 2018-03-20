@@ -87,12 +87,12 @@ public class Cluedo {
 				}
 				i=0;
 			}
-			if(/*dice.getTotal()*/12 > highestRoll)
+			if(dice.getTotal() > highestRoll)
 			{
 				highestPlayer[i] = player.getName();
 				highestRoll =12; //dice.getTotal();
 			}
-			else if(/*dice.getTotal()*/12 == highestRoll)
+			else if(dice.getTotal() == highestRoll)
 			{
 				i++;
 				highestPlayer[i] = player.getName();
