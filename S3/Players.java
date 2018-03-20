@@ -1,5 +1,11 @@
 package S3;
 
+* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -28,6 +34,7 @@ public class Players implements Iterable<Player>, Iterator<Player> {
 		players.add(player);
 	}
 
+	//checks if player name has already been entered or not
 	public boolean contains(String name) {
 		for (Player player : players) {
 			if (player.hasName(name)) {
@@ -56,11 +63,6 @@ public class Players implements Iterable<Player>, Iterator<Player> {
 		}
 		return null;
 	}
-
-//	public Player getCurrentPlayer(int i) {
-//		return getTurn(i);
-//	}
-
 
 	@Override
 	public boolean hasNext() {
