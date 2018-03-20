@@ -3,11 +3,9 @@ package S3;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import garlic.Weapon;  //TODO: check this??
-
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
