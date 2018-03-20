@@ -1,8 +1,5 @@
 package S3;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.Random;
 
 public class Cluedo {
@@ -233,7 +230,7 @@ public class Cluedo {
 			if(i==TOTAL_PLAYERS) i=0;
 		}
 		
-		if(ifStatement == 2 || ifStatement ==3)
+		if(ifStatement == 2 || ifStatement == 3)
 		{
 			cards.cards.add(temp1);
 			cards.cards.add(temp2);
@@ -304,51 +301,51 @@ public class Cluedo {
 						}
 						else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[0]))
 						{// Bleakley Plum
-
+							player.notes.setNoteBleakleyPlum("X");
 						}
 						else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[1]))
 						{// Kelly White
-
+							player.notes.setNoteKellyWhite("X");
 						}
 						else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[2]))
 						{// Caka Scarlett
-
+							player.notes.setNoteCakaScarlett("X");
 						}
 						else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[3]))
 						{// Sweeney Green
-
+							player.notes.setNoteSweeneyGreen("X");
 						}
 						else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[4]))
 						{// Kalra Mustard
-
+							player.notes.setNoteKalraMustard("X");
 						}
 						else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[5]))
 						{// Delorey Peacock
-
+							player.notes.setNoteDeloreyPeacock("X");
 						}
 						else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[0]))
 						{// Book
-
+							player.notes.setNoteBook("X");
 						}
 						else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[1]))
 						{// Bored
-
+							player.notes.setNoteBored("X");
 						}
 						else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[2]))
 						{// Gradcap
-
+							player.notes.setNoteGradcap("X");
 						}
 						else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[3]))
 						{// Librocop
-
+							player.notes.setNoteLibrocop("X");
 						}
 						else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[4]))
 						{// Microscope
-
+							player.notes.setNoteMicroscope("X");
 						}
 						else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[5]))
 						{// Seagull
-
+							player.notes.setNoteSeagull("X");
 						}
 					}
 				}
@@ -404,51 +401,51 @@ public class Cluedo {
 					}
 					else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[0]))
 					{// Bleakley Plum
-
+						player.notes.setNoteBleakleyPlum("A");
 					}
 					else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[1]))
 					{// Kelly White
-
+						player.notes.setNoteKellyWhite("A");
 					}
 					else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[2]))
 					{// Caka Scarlett
-
+						player.notes.setNoteCakaScarlett("A");
 					}
 					else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[3]))
 					{// Sweeney Green
-
+						player.notes.setNoteSweeneyGreen("A");
 					}
 					else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[4]))
 					{// Kalra Mustard
-
+						player.notes.setNoteKalraMustard("A");
 					}
 					else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[5]))
 					{// Delorey Peacock
-
+						player.notes.setNoteDeloreyPeacock("A");
 					}
 					else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[0]))
 					{// Book
-
+						player.notes.setNoteBook("A");
 					}
 					else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[1]))
 					{// Bored
-
+						player.notes.setNoteBored("A");
 					}
 					else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[2]))
 					{// Gradcap
-
+						player.notes.setNoteGradcap("A");
 					}
 					else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[3]))
 					{// Librocop
-
+						player.notes.setNoteLibrocop("A");
 					}
 					else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[4]))
 					{// Microscope
-
+						player.notes.setNoteMicroscope("A");
 					}
 					else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[5]))
 					{// Seagull
-
+						player.notes.setNoteSeagull("A");
 					}
 				}
 			}
