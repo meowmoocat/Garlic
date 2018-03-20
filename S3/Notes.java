@@ -1,197 +1,60 @@
 package S3;
 
-public class Notes {
-	
-	private String noteComputerScience="", noteOReillyHall="", noteEngineering="", noteSutherland="", noteQuinn="", noteNewman="", noteLibrary="", noteAgScience="", noteOBrien="";
-	private String noteBook="", noteBored="", noteGradcap="", noteLibrocop="", noteMicroscope="", noteSeagull="";
-	private String noteBleakleyPlum="", noteKellyWhite="", noteCakaScarlett="", noteSweeneyGreen="", noteKalraMustard="", noteDeloreyPeacock="";
-	
-	Notes()
-	{
-		
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class Tokens implements Iterable<Token>, Iterator<Token> {
+
+	private final ArrayList<Token> tokens = new ArrayList<>();
+	private Iterator<Token> iterator;
+
+	Tokens() {
+		tokens.add(new Token(Names.SUSPECT_NAMES[0], new Color(148, 0, 211), new Coordinates(23,19))); //plum
+		tokens.add(new Token(Names.SUSPECT_NAMES[1], Color.WHITE, new Coordinates(9,0))); //white
+		tokens.add(new Token(Names.SUSPECT_NAMES[2], Color.RED, new Coordinates(7,24))); //scarlett
+		tokens.add(new Token(Names.SUSPECT_NAMES[3], Color.GREEN, new Coordinates(14,0))); //green
+		tokens.add(new Token(Names.SUSPECT_NAMES[4], Color.YELLOW, new Coordinates(0,17))); //mustard
+		tokens.add(new Token(Names.SUSPECT_NAMES[5], new Color(0, 191, 255), new Coordinates(23,6))); //peacock
 	}
-	
-	public void setNoteComputerScience(String noteComputerScience)
-	{
-		this.noteComputerScience=noteComputerScience;
+
+	//returns true if tokens have names
+	public boolean contains(String name) {
+		for (Token token : tokens) {
+			if (token.hasName(name)) {
+				return true;
+			}
+		}
+		return false;
 	}
-	public void setNoteOReillyHall(String noteOReillyHall)
-	{
-		this.noteOReillyHall=noteOReillyHall;
+
+	//returns token
+	public Token get(String name) {
+		for (Token token : tokens) {
+			if (token.hasName(name)) {
+				return token;
+			}
+		}
+		return null;
 	}
-	public void setNoteEngineering(String noteEngineering)
-	{
-		this.noteEngineering=noteEngineering;
+
+	public boolean hasNext() {
+		return iterator.hasNext();
 	}
-	public void setNoteSutherland(String noteSutherland)
-	{
-		this.noteSutherland=noteSutherland;
+
+	public Token next() {
+		return iterator.next();
 	}
-	public void setNoteQuinn(String noteQuinn)
-	{
-		this.noteQuinn=noteQuinn;
+
+	public Iterator<Token> iterator() {
+		iterator = tokens.iterator();
+		return iterator;
 	}
-	public void setNoteNewman(String noteNewman)
-	{
-		this.noteNewman=noteNewman;
-	}
-	public void setNoteLibrary(String noteLibrary)
-	{
-		this.noteLibrary=noteLibrary;
-	}
-	public void setNoteAgScience(String noteAgScience)
-	{
-		this.noteAgScience=noteAgScience;
-	}
-	public void setNoteOBrien(String noteOBrien)
-	{
-		this.noteOBrien=noteOBrien;
-	}
-	
-	
-	
-	public void setNoteBook(String noteBook)
-	{
-		this.noteBook=noteBook;
-	}
-	public void setNoteBored(String noteBored)
-	{
-		this.noteBored=noteBored;
-	}
-	public void setNoteGradcap(String noteGradcap)
-	{
-		this.noteGradcap=noteGradcap;
-	}
-	public void setNoteLibrocop(String noteLibrocop)
-	{
-		this.noteLibrocop=noteLibrocop;
-	}
-	public void setNoteMicroscope(String noteMicroscope)
-	{
-		this.noteMicroscope=noteMicroscope;
-	}
-	public void setNoteSeagull(String noteSeagull)
-	{
-		this.noteSeagull=noteSeagull;
-	}
-	
-	
-	
-	public void setNoteBleakleyPlum(String noteBleakleyPlum)
-	{
-		this.noteBleakleyPlum=noteBleakleyPlum;
-	}
-	public void setNoteKellyWhite(String noteKellyWhite)
-	{
-		this.noteKellyWhite=noteKellyWhite;
-	}
-	public void setNoteCakaScarlett(String noteCakaScarlett)
-	{
-		this.noteCakaScarlett=noteCakaScarlett;
-	}
-	public void setNoteSweeneyGreen(String noteSweeneyGreen)
-	{
-		this.noteSweeneyGreen=noteSweeneyGreen;
-	}
-	public void setNoteKalraMustard(String noteKalraMustard)
-	{
-		this.noteKalraMustard=noteKalraMustard;
-	}
-	public void setNoteDeloreyPeacock(String noteDeloreyPeacock)
-	{
-		this.noteDeloreyPeacock=noteDeloreyPeacock;
-	}
-	
-	
-	
-	public String getNoteComputerScience()
-	{
-		return noteComputerScience;
-	}
-	public String getNoteOReillyHall()
-	{
-		return noteOReillyHall;
-	}
-	public String getNoteEngineering()
-	{
-		return noteEngineering;
-	}
-	public String getNoteSutherland()
-	{
-		return noteSutherland;
-	}
-	public String getNoteQuinn()
-	{
-		return noteQuinn;
-	}
-	public String getNoteNewman()
-	{
-		return noteNewman;
-	}
-	public String getNoteLibrary()
-	{
-		return noteLibrary;
-	}
-	public String getNoteAgScience()
-	{
-		return noteAgScience;
-	}
-	public String getNoteOBrien()
-	{
-		return noteOBrien;
-	}
-	
-	
-	
-	public String getNoteBook()
-	{
-		return noteBook;
-	}
-	public String getNoteBored()
-	{
-		return noteBored;
-	}
-	public String getNoteGradcap()
-	{
-		return noteGradcap;
-	}
-	public String getNoteLibrocop()
-	{
-		return noteLibrocop;
-	}
-	public String getNoteMicroscope()
-	{
-		return noteMicroscope;
-	}
-	public String getNoteSeagull()
-	{
-		return noteSeagull;
-	}
-	
-	
-	
-	public String getNoteBleakleyPlum()
-	{
-		return noteBleakleyPlum;
-	}
-	public String getNoteKellyWhite()
-	{
-		return noteKellyWhite;
-	}
-	public String getNoteCakaScarlett()
-	{
-		return noteCakaScarlett;
-	}
-	public String getNoteSweeneyGreen()
-	{
-		return noteSweeneyGreen;
-	}
-	public String getNoteKalraMustard()
-	{
-		return noteKalraMustard;
-	}
-	public String getNoteDeloreyPeacock()
-	{
-		return noteDeloreyPeacock;
-	}
+
 }
