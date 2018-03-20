@@ -140,7 +140,7 @@ public class UI {
 		do {
 
 			//display characters left to choose from
-			for(S3.Token token : tokens)//checks if the character has already been taken
+			for(Token token : tokens)//checks if the character has already been taken
 			{
 				if(!token.isOwned())
 				{

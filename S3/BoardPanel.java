@@ -58,7 +58,7 @@ class BoardPanel extends JPanel {
 			g2.setColor(token.getColor());
 			g2.fill(ellipseColour);
 		}
-		for (S3.Weapon weapon : weapons) {
+		for (Weapon weapon : weapons) {
 			int x = Math.round(weapon.getPosition().getCol()*COL_SCALE + COL_OFFSET);
 			int y = Math.round(weapon.getPosition().getRow()*ROW_SCALE + ROW_OFFSET);
 			if(weapon.getName().equalsIgnoreCase("book"))
