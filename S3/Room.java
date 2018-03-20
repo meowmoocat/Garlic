@@ -64,10 +64,10 @@ public class Room {
 		squaresOccupied[squareNumber] = true;
 		return position;
 	}
-	
+
 	public Coordinates addWeapon() {
 		Coordinates position = new Coordinates(weaponArea);
-		
+
 		return position;
 	}
 

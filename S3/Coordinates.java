@@ -1,3 +1,8 @@
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
 package S3;
 
 public class Coordinates {
@@ -8,6 +13,7 @@ public class Coordinates {
 		this.col = col;
 		this.row = row;
 	}
+
 
 	Coordinates(Coordinates coordinates) {
 		col = coordinates.getCol ();

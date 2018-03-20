@@ -1,3 +1,8 @@
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
 package S3;
 
 import java.util.ArrayList;
@@ -8,6 +13,7 @@ public class Weapons implements Iterable<Weapon>, Iterator<Weapon> {
 	private final ArrayList<Weapon> weapons = new ArrayList<>();
 	private Iterator<Weapon> iterator;
 
+	//creates weapons
 	Weapons(Map map) {
 		weapons.add(new Weapon(Names.WEAPON_NAMES[0], map.getRoom(Names.ROOM_NAMES[0]))); //"Book"
 		weapons.add(new Weapon(Names.WEAPON_NAMES[1], map.getRoom(Names.ROOM_NAMES[1]))); //"Bored"
