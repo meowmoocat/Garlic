@@ -1,3 +1,8 @@
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
 package S3;
 
 import javax.swing.*;
@@ -32,7 +37,7 @@ public class UI {
 	}
 
 	/* Display Methods */
-
+	//displays the players notes
 	public void notes(Player player)
 	{
 		infoPanel.addText("\n*****Detective Notes*****");
@@ -42,7 +47,7 @@ public class UI {
 		infoPanel.addText("Sweeney Green: " + player.notes.getNoteSweeneyGreen());
 		infoPanel.addText("Kalra Mustard: " + player.notes.getNoteKalraMustard());
 		infoPanel.addText("Delorey Peacock: " + player.notes.getNoteDeloreyPeacock());
-		
+
 		infoPanel.addText("\nComputer Science: " + player.notes.getNoteComputerScience());
 		infoPanel.addText("O'Reilly Hall: " + player.notes.getNoteOReillyHall());
 		infoPanel.addText("Engineering: " + player.notes.getNoteEngineering());
@@ -52,7 +57,7 @@ public class UI {
 		infoPanel.addText("Library: " + player.notes.getNoteLibrary());
 		infoPanel.addText("Ag Science: " + player.notes.getNoteAgScience());
 		infoPanel.addText("O'Brien: " + player.notes.getNoteOBrien());
-		
+
 		infoPanel.addText("\nBook: " + player.notes.getNoteBook());
 		infoPanel.addText("Bored: " + player.notes.getNoteBored());
 		infoPanel.addText("Gradcap: " + player.notes.getNoteGradcap());
@@ -60,15 +65,15 @@ public class UI {
 		infoPanel.addText("Microscope: " + player.notes.getNoteMicroscope());
 		infoPanel.addText("Seagull: " + player.notes.getNoteSeagull());
 	}
-	
+
 	public void display() {
 		boardPanel.refresh();
 	}
-
+	//allows players to add text to the info panel
 	public void displayString(String string) {
 		infoPanel.addText(string);
 	}
-
+	//displays the dice roll
 	public void displayDice(Player player, Dice dice) {
 		displayString(player + " rolls " + dice + ".");
 	}
@@ -100,7 +105,7 @@ public class UI {
 	private void inputString() {
 		input = commandPanel.getCommand();
 	}
-
+	//input names method
 	public void inputName(Players playersSoFar) {
 		boolean valid = false;
 		inputIsDone = false;
@@ -129,11 +134,11 @@ public class UI {
 	public String getPlayerName() {
 		return playerName;
 	}
-	
+
 	public void inputToken(Tokens tokens) {
 		boolean valid = false;
 		do {
-			
+
 			//display characters left to choose from
 			for(S3.Token token : tokens)//checks if the character has already been taken
 			{
@@ -142,7 +147,7 @@ public class UI {
 					displayString(token.getName());
 				}
 			}
-			
+
 			displayString("Enter your character name:");
 			inputString();
 			displayString("> " + input);
@@ -167,6 +172,7 @@ public class UI {
 		return inputIsDone;
 	}
 
+	//lets the player type the commands. For example roll dice etc
 	public void inputCommand(Player player) {
 		boolean valid = false;
 		do {
@@ -187,6 +193,7 @@ public class UI {
 		return command;
 	}
 
+	//allows players to move their token
 	public void inputMove(Player player, int moveNumber, int movesAvailable) {
 		boolean valid = false;
 		do {
@@ -206,6 +213,7 @@ public class UI {
 		return move;
 	}
 
+	//player enters which door to exit
 	public void inputDoor(Player player) {
 		boolean valid = false;
 		do {
@@ -225,10 +233,10 @@ public class UI {
 	public int getDoor() {
 		return door;
 	}
-	
+
 	public void refreshInfoPanel() {
 		infoPanel.refresh();
-		
+
 	}
 
 }

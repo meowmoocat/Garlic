@@ -1,3 +1,9 @@
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 package S3;
 
 import javax.swing.*;
@@ -13,6 +19,7 @@ public class InfoPanel extends JPanel {
 
 	private final JTextArea textArea = new JTextArea(TEXT_AREA_HEIGHT, CHARACTER_WIDTH);
 
+	//creates the information panel
 	InfoPanel() {
 		JScrollPane scrollPane = new JScrollPane(textArea);
 		DefaultCaret caret = (DefaultCaret)textArea.getCaret();
@@ -25,14 +32,14 @@ public class InfoPanel extends JPanel {
 		setLayout(new BorderLayout());
 		add(scrollPane, BorderLayout.CENTER);
 	}
-
+	//adds text to the Information panel
 	public void addText(String text) {
 		textArea.setText(textArea.getText()+"\n"+text);
 	}
-	
+	//deletes all information from the information panel
 	public void refresh() {
 		textArea.setText("");
-		
+
 	}
 
 }
