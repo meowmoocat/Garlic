@@ -1,5 +1,11 @@
 package S3;
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,6 +24,7 @@ public class Tokens implements Iterable<Token>, Iterator<Token> {
 		tokens.add(new Token(Names.SUSPECT_NAMES[5], new Color(0, 191, 255), new Coordinates(23,6))); //peacock
 	}
 
+	//returns true if tokens have names
 	public boolean contains(String name) {
 		for (Token token : tokens) {
 			if (token.hasName(name)) {
@@ -27,6 +34,7 @@ public class Tokens implements Iterable<Token>, Iterator<Token> {
 		return false;
 	}
 
+	//returns token
 	public Token get(String name) {
 		for (Token token : tokens) {
 			if (token.hasName(name)) {
