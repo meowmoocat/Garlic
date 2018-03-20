@@ -1,5 +1,11 @@
 package S3;
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 public class Room {
 
 	private final static int ITEM_AREA_WIDTH = 4;      // an item is a token or a weapon
@@ -27,6 +33,7 @@ public class Room {
 		return this.name.toLowerCase().trim().equals(name.toLowerCase().trim());
 	}
 
+	//returns coordinates of doors
 	public Coordinates getDoorCoordinates(int index) {
 		return doors[index];
 	}
@@ -44,6 +51,7 @@ public class Room {
 		return hasPassage;
 	}
 
+	//location the player is traveling to through passage
 	public Room getPassageDestination() {
 		return passageDestination;
 	}
@@ -64,10 +72,10 @@ public class Room {
 		squaresOccupied[squareNumber] = true;
 		return position;
 	}
-
+	
 	public Coordinates addWeapon() {
 		Coordinates position = new Coordinates(weaponArea);
-
+		
 		return position;
 	}
 

@@ -1,5 +1,11 @@
 package S3;
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 public class Notes {
 	
 	private String noteComputerScience="", noteOReillyHall="", noteEngineering="", noteSutherland="", noteQuinn="", noteNewman="", noteLibrary="", noteAgScience="", noteOBrien="";
@@ -11,6 +17,7 @@ public class Notes {
 		
 	}
 	
+	//mutator that sets the note for players - X if they have the card - A if everyone can see the card
 	public void setNoteComputerScience(String noteComputerScience)
 	{
 		this.noteComputerScience=noteComputerScience;
@@ -103,7 +110,7 @@ public class Notes {
 	}
 	
 	
-	
+	//accessors that return values in note variables
 	public String getNoteComputerScience()
 	{
 		return noteComputerScience;
