@@ -1,5 +1,11 @@
 package S3;
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 import java.awt.*;
 
 public class Token {
@@ -58,14 +64,17 @@ public class Token {
 		return room;
 	}
 
+	//returns true if in room
 	public boolean isInRoom() {
 		return isInRoom;
 	}
 
+	//sets owned to true if a player is chosen
 	public void setOwned() {
 		isOwned = true;
 	}
 
+	//returns true if player was chosen
 	public boolean isOwned() {
 		return isOwned;
 	}
