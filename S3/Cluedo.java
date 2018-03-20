@@ -588,7 +588,10 @@ public class Cluedo {
 							break;
 						}
 						case "cheat": {
-							ui.displayString("wtf");
+							ui.displayString(murder.murderToken.getCardName());
+							ui.displayString(murder.murderRoom.getCardName());
+							ui.displayString(murder.murderWeapon.getCardName());
+							break;
 						}
 						case "notes": {
 							ui.notes(currentPlayer);
