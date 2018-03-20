@@ -2,15 +2,16 @@ package S3;
 
 public class Player {
 
+	public final Notes notes = new Notes();
+	
 	private final String name;
 	private final Token token;
-	public final Notes note;
+//	private final Notes note;
 	private int turn;
 
-	Player(String name, Token token, Notes note) {
+	Player(String name, Token token) {
 		this.name = name;
 		this.token = token;
-		this.note = note;
 	}
 
 	
@@ -42,4 +43,6 @@ public class Player {
 	public String toString() {
 		return name + " " + token.getName();
 	}
+
+
 }

@@ -10,7 +10,7 @@ public class Cluedo {
 	private static final int MAX_NUM_PLAYERS = 6;
 	private int TOTAL_PLAYERS;
 
-	private final Notes notes = new Notes();
+	
 	private final MurderEnvelope murder = new MurderEnvelope();
 	private final Cards cards = new Cards();
 	private final Tokens tokens = new Tokens();
@@ -26,14 +26,14 @@ public class Cluedo {
 		Random rand = new Random();
 		number = rand.nextInt(6);
 		int i=0;
-		System.out.println("number: "+number);
+//		System.out.println("number: "+number);
 		for(Card card : cards)
 		{
 			if(i==number) murder.murderToken = card;
 			
 			i++;
 		}
-		System.out.println(murder.murderToken.getCardName());
+//		System.out.println(murder.murderToken.getCardName());
 				cards.cards.remove(number);
 	}
 	public void randomWeapon()
@@ -41,7 +41,7 @@ public class Cluedo {
 		int number;
 		Random rand = new Random();
 		number = rand.nextInt(6) + 14;
-		System.out.println("number: "+number);
+//		System.out.println("number: "+number);
 		int i=0;
 		for(Card card : cards)
 		{
@@ -49,7 +49,7 @@ public class Cluedo {
 			
 			i++;
 		}
-		System.out.println(murder.murderWeapon.getCardName());
+//		System.out.println(murder.murderWeapon.getCardName());
 		cards.cards.remove(number);
 	}
 	public void randomRoom()
@@ -57,7 +57,7 @@ public class Cluedo {
 		int number;
 		Random rand = new Random();
 		number = rand.nextInt(9) + 5;
-		System.out.println("number: "+number);
+//		System.out.println("number: "+number);
 		int i=0;
 		for(Card card : cards)
 		{
@@ -66,7 +66,7 @@ public class Cluedo {
 			i++;
 		}
 		cards.cards.remove(number);
-System.out.println(murder.murderRoom.getCardName());
+//System.out.println(murder.murderRoom.getCardName());
 	}
 	
 	private void playerOrder()
@@ -79,29 +79,48 @@ System.out.println(murder.murderRoom.getCardName());
 		{
 			dice.roll();
 			ui.displayDice(player, dice);
-			if(dice.getTotal() > highestRoll)
+			if(i>=1 && dice.getTotal() > highestRoll)	//if theres a new highest roll while there's more than one entry in the array
+			{
+				for( ;i>0;i--)
+				{
+					highestPlayer[i]=null;
+				}
+				i=0;
+			}
+			if(/*dice.getTotal()*/12 > highestRoll)
 			{
 				highestPlayer[i] = player.getName();
-				highestRoll = dice.getTotal();
+				highestRoll =12; //dice.getTotal();
 			}
-			else if(dice.getTotal() == highestRoll)
+			else if(/*dice.getTotal()*/12 == highestRoll)
 			{
 				i++;
 				highestPlayer[i] = player.getName();
 			}
 		}
-		while(highestPlayer[1] != null)
+		
+		
+		while(highestPlayer[1] != null)	//second round if two or more are equal
 		{
+			ui.displayString("");
 			highestRoll = 0;
 			String[] highestPlayerRnd2 = new String[TOTAL_PLAYERS];
 			i = 0;
 			int j = 0;
 			try {
 			
-				while(highestPlayer[i] != null && i<TOTAL_PLAYERS)
+				while(i<TOTAL_PLAYERS && highestPlayer[i] != null)
 				{
 					dice.roll();
 					ui.displayDice(players.getPlayer(highestPlayer[i]), dice);
+					if(j>=1 && dice.getTotal() > highestRoll)	//if theres a new highest roll while there's more than one entry in the array
+					{
+						for( ;j>0;j--)
+						{
+							highestPlayerRnd2[j]=null;
+						}
+						j=0;
+					}
 					if(dice.getTotal() > highestRoll)
 					{
 						highestPlayerRnd2[j] = highestPlayer[i];
@@ -147,41 +166,296 @@ System.out.println(murder.murderRoom.getCardName());
 	
 	private void createCards()
 	{
-		int i=0;
-		i=0;
-		for(Card c : cards)
-		{
-			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
-			i++;
-		}
-		System.out.println();
+//		int i=0;
+//		i=0;
+//		for(Card c : cards)
+//		{
+//			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
+//			i++;
+//		}
+//		System.out.println();
 		randomSuspect();
-		i=0;
-		for(Card c : cards)
-		{
-			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
-			i++;
-		}
-		System.out.println();
+//		i=0;
+//		for(Card c : cards)
+//		{
+//			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
+//			i++;
+//		}
+//		System.out.println();
 		randomWeapon();
-		i=0;
-		for(Card c : cards)
-		{
-			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
-			i++;
-		}
-		System.out.println();
+//		i=0;
+//		for(Card c : cards)
+//		{
+//			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
+//			i++;
+//		}
+//		System.out.println();
 		randomRoom();
-		i=0;
-		for(Card c : cards)
-		{
-			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
-			i++;
-		}
-		System.out.println();
+//		i=0;
+//		for(Card c : cards)
+//		{
+//			System.out.println(i+": "+c.getCardName() + ", " + c.getCardType());
+//			i++;
+//		}
+//		System.out.println();
 		cards.shuffleCards();
 	}
+	
+	private void assignCards()
+	{
+		Card temp1 = new Card(null, null);
+		Card temp2 = new Card(null, null);
+		Card temp3 = new Card(null, null);
+		int ifStatement =0;
+		if(18 % TOTAL_PLAYERS == 2)
+		{
+			temp1 = cards.cards.remove(0);
+			temp2 = cards.cards.remove(0);
+			temp1.setPlayer("A");
+			temp2.setPlayer("A");
+			ifStatement = 2;
+		}
+		else if(18 % TOTAL_PLAYERS == 3)
+		{
+			temp1 = cards.cards.remove(0);
+			temp2 = cards.cards.remove(0);
+			temp3 = cards.cards.remove(0);
+			temp1.setPlayer("A");
+			temp2.setPlayer("A");
+			temp3.setPlayer("A");
+			ifStatement = 3;
+		}
+		int i=0;
+		for(Card card : cards)
+		{
+			card.setPlayer(players.get(i).getName());
+			i++;
+			if(i==TOTAL_PLAYERS) i=0;
+		}
 		
+		if(ifStatement == 2 || ifStatement ==3)
+		{
+			cards.cards.add(temp1);
+			cards.cards.add(temp2);
+		}
+		if(ifStatement == 3)
+		{
+			cards.cards.add(temp3);
+		}
+		
+//		i=0;
+//		for(Card card : cards)
+//		{
+//			System.out.println(i+": "+card.getCardName()+" : "+card.getPlayer());
+//			i++;
+//		}
+		
+		//temp Card variables take out all cards, divide rest and add back?
+	}
+	
+	private void makeNotes()
+	{
+		Player player;
+		for(int i=1; i<=TOTAL_PLAYERS; i++)
+		{
+			player = players.getPlayerTurn(i);
+//			try
+//			{
+				for(Card card : cards)
+				{
+					if(card.getPlayer().equals(player.getName()))
+					{
+
+						if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[0]))
+						{// Computer Science
+							player.notes.setNoteComputerScience("X");
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[1]))
+						{// O'Reilly Hall
+							player.notes.setNoteOReillyHall("X");
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[2]))
+						{// Engineering
+							player.notes.setNoteEngineering("X");
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[3]))
+						{// Sutherland
+							player.notes.setNoteSutherland("X");
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[4]))
+						{// Quinn
+							player.notes.setNoteQuinn("X");
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[5]))
+						{// Newman
+							player.notes.setNoteNewman("X");
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[6]))
+						{// Library
+							player.notes.setNoteLibrary("X");
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[7]))
+						{// Ag Science
+							player.notes.setNoteAgScience("X");
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[8]))
+						{// O'Brien
+							player.notes.setNoteOBrien("X");
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[0]))
+						{// Bleakley Plum
+
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[1]))
+						{// Kelly White
+
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[2]))
+						{// Caka Scarlett
+
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[3]))
+						{// Sweeney Green
+
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[4]))
+						{// Kalra Mustard
+
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[5]))
+						{// Delorey Peacock
+
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[0]))
+						{// Book
+
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[1]))
+						{// Bored
+
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[2]))
+						{// Gradcap
+
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[3]))
+						{// Librocop
+
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[4]))
+						{// Microscope
+
+						}
+						else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[5]))
+						{// Seagull
+
+						}
+					}
+				}
+//			}catch(NullPointerException e)
+//			{
+//				//do nothing
+//			}
+		}
+		
+		for(Card card : cards)
+		{
+			for(int i=1; i<=TOTAL_PLAYERS; i++)
+			{
+				player = players.getPlayerTurn(i);
+				
+				if(card.getPlayer().equals("A"))
+				{
+					if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[0]))
+					{// Computer Science
+						player.notes.setNoteComputerScience("A");
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[1]))
+					{// O'Reilly Hall
+						player.notes.setNoteOReillyHall("A");
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[2]))
+					{// Engineering
+						player.notes.setNoteEngineering("A");
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[3]))
+					{// Sutherland
+						player.notes.setNoteSutherland("A");
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[4]))
+					{// Quinn
+						player.notes.setNoteQuinn("A");
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[5]))
+					{// Newman
+						player.notes.setNoteNewman("A");
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[6]))
+					{// Library
+						player.notes.setNoteLibrary("A");
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[7]))
+					{// Ag Science
+						player.notes.setNoteAgScience("A");
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.ROOM_NAMES[8]))
+					{// O'Brien
+						player.notes.setNoteOBrien("A");
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[0]))
+					{// Bleakley Plum
+
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[1]))
+					{// Kelly White
+
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[2]))
+					{// Caka Scarlett
+
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[3]))
+					{// Sweeney Green
+
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[4]))
+					{// Kalra Mustard
+
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.SUSPECT_NAMES[5]))
+					{// Delorey Peacock
+
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[0]))
+					{// Book
+
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[1]))
+					{// Bored
+
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[2]))
+					{// Gradcap
+
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[3]))
+					{// Librocop
+
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[4]))
+					{// Microscope
+
+					}
+					else if(card.getCardName().equalsIgnoreCase(Names.WEAPON_NAMES[5]))
+					{// Seagull
+
+					}
+				}
+			}
+		}
+	}
+		
+	
 	private void inputPlayerNames() {
 		int numPlayersSoFar = 0;
 		do {
@@ -189,7 +463,7 @@ System.out.println(murder.murderRoom.getCardName());
 			if (!ui.inputIsDone()) {
 				ui.inputToken(tokens);
 				Token token = tokens.get(ui.getTokenName());
-				players.add(new Player(ui.getPlayerName(),token, notes));
+				players.add(new Player(ui.getPlayerName(),token));
 				token.setOwned();
 				numPlayersSoFar++;
 			}
@@ -340,6 +614,8 @@ System.out.println(murder.murderRoom.getCardName());
 		game.createCards();
 		game.inputPlayerNames();
 		game.playerOrder();
+		game.assignCards();
+		game.makeNotes();
 		game.takeTurns();
 		System.exit(0);
 	}

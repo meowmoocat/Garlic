@@ -4,6 +4,7 @@ public class Card {
 	
 	private String cardName;
 	private String cardType;
+	private String player;
 
 	Card(String cardName, String cardType)
 	{
@@ -19,5 +20,15 @@ public class Card {
 	public String getCardType()
 	{
 		return cardType;
+	}
+	
+	public void setPlayer(String player)
+	{
+		this.player = player;
+	}
+	
+	public String getPlayer()
+	{
+		return player;
 	}
 }

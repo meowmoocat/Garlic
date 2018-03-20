@@ -35,29 +35,29 @@ public class UI {
 
 	public void notes(Player player)
 	{
-		infoPanel.addText("Bleakley Plum: " + player.note.getNoteBleakleyPlum());
-		infoPanel.addText("Kelly White: " + player.note.getNoteKellyWhite());
-		infoPanel.addText("Caka Scarlett: " + player.note.getNoteCakaScarlett());
-		infoPanel.addText("Sweeney Green: " + player.note.getNoteSweeneyGreen());
-		infoPanel.addText("Kalra Mustard: " + player.note.getNoteKalraMustard());
-		infoPanel.addText("Delorey Peacock: " + player.note.getNoteDeloreyPeacock());
+		infoPanel.addText("Bleakley Plum: " + player.notes.getNoteBleakleyPlum());
+		infoPanel.addText("Kelly White: " + player.notes.getNoteKellyWhite());
+		infoPanel.addText("Caka Scarlett: " + player.notes.getNoteCakaScarlett());
+		infoPanel.addText("Sweeney Green: " + player.notes.getNoteSweeneyGreen());
+		infoPanel.addText("Kalra Mustard: " + player.notes.getNoteKalraMustard());
+		infoPanel.addText("Delorey Peacock: " + player.notes.getNoteDeloreyPeacock());
 		
-		infoPanel.addText("\nComputer Science: " + player.note.getNoteComputerScience());
-		infoPanel.addText("O'Reilly Hall: " + player.note.getNoteOReillyHall());
-		infoPanel.addText("Engineering: " + player.note.getNoteEngineering());
-		infoPanel.addText("Sutherland: " + player.note.getNoteSutherland());
-		infoPanel.addText("Quinn: " + player.note.getNoteQuinn());
-		infoPanel.addText("Newman: " + player.note.getNoteNewman());
-		infoPanel.addText("Library: " + player.note.getNoteLibrary());
-		infoPanel.addText("Ag Science: " + player.note.getNoteAgScience());
-		infoPanel.addText("O'Brien: " + player.note.getNoteOBrien());
+		infoPanel.addText("\nComputer Science: " + player.notes.getNoteComputerScience());
+		infoPanel.addText("O'Reilly Hall: " + player.notes.getNoteOReillyHall());
+		infoPanel.addText("Engineering: " + player.notes.getNoteEngineering());
+		infoPanel.addText("Sutherland: " + player.notes.getNoteSutherland());
+		infoPanel.addText("Quinn: " + player.notes.getNoteQuinn());
+		infoPanel.addText("Newman: " + player.notes.getNoteNewman());
+		infoPanel.addText("Library: " + player.notes.getNoteLibrary());
+		infoPanel.addText("Ag Science: " + player.notes.getNoteAgScience());
+		infoPanel.addText("O'Brien: " + player.notes.getNoteOBrien());
 		
-		infoPanel.addText("\nBook: " + player.note.getNoteBook());
-		infoPanel.addText("Bored: " + player.note.getNoteBored());
-		infoPanel.addText("Gradcap: " + player.note.getNoteGradcap());
-		infoPanel.addText("Librocop: " + player.note.getNoteLibrocop());
-		infoPanel.addText("Microscope: " + player.note.getNoteMicroscope());
-		infoPanel.addText("Seagull: " + player.note.getNoteSeagull());
+		infoPanel.addText("\nBook: " + player.notes.getNoteBook());
+		infoPanel.addText("Bored: " + player.notes.getNoteBored());
+		infoPanel.addText("Gradcap: " + player.notes.getNoteGradcap());
+		infoPanel.addText("Librocop: " + player.notes.getNoteLibrocop());
+		infoPanel.addText("Microscope: " + player.notes.getNoteMicroscope());
+		infoPanel.addText("Seagull: " + player.notes.getNoteSeagull());
 	}
 	
 	public void display() {
