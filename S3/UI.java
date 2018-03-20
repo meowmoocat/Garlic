@@ -35,6 +35,7 @@ public class UI {
 
 	public void notes(Player player)
 	{
+		infoPanel.addText("\n*****Detective Notes*****");
 		infoPanel.addText("Bleakley Plum: " + player.notes.getNoteBleakleyPlum());
 		infoPanel.addText("Kelly White: " + player.notes.getNoteKellyWhite());
 		infoPanel.addText("Caka Scarlett: " + player.notes.getNoteCakaScarlett());
