@@ -272,5 +272,10 @@ public class UI {
     public int getDoor() {
         return door;
     }
+	
+	public void refreshInfoPanel() {
+		infoPanel.refresh();
+
+	}
 
 }
