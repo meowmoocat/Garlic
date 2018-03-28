@@ -7,20 +7,21 @@ public class Room {
 
     private final String name;
     private final Coordinates tokenArea;
+    private final Coordinates weaponArea;
     private final Coordinates[] doors;
     private boolean hasPassage = false;
     private Room passageDestination;
     private final boolean[] squaresOccupied;
 
-    Room(String name, Coordinates tokenArea, Coordinates[] doors) {
-        squaresOccupied = new boolean[NUMBER_OF_ITEMS];
-        this.name = name;
-        this.tokenArea = tokenArea;
-        this.doors = doors;
-        for (boolean squareOccupied : squaresOccupied) {
-            squareOccupied = false;
-        }
-    }
+    Room(String name,Coordinates weaponArea, Coordinates tokenArea, Coordinates[] doors) {		squaresOccupied = new boolean[NUMBER_OF_ITEMS];
+	this.name = name;
+	this.tokenArea = tokenArea;
+	this.weaponArea = weaponArea;
+	this.doors = doors;
+	for (boolean squareOccupied : squaresOccupied) {
+		squareOccupied = false;
+	}
+}
 
     public boolean hasName(String name) {
         return this.name.toLowerCase().trim().equals(name.toLowerCase().trim());
@@ -47,7 +48,7 @@ public class Room {
         return passageDestination;
     }
 
-    public Coordinates addItem() {
+    public Coordinates addToken() {
         int squareNumber = 0;
         while (squaresOccupied[squareNumber]) {
                 squareNumber++;
@@ -68,6 +69,12 @@ public class Room {
         int squareNumber =(position.getRow()-tokenArea.getRow())*ITEM_AREA_WIDTH+position.getCol()-tokenArea.getCol();
         squaresOccupied[squareNumber] = false;
     }
+    
+	public Coordinates addWeapon() {
+		Coordinates position = new Coordinates(weaponArea);
+		
+		return position;
+	}
 
     @Override
     public String toString() {

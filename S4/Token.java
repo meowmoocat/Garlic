@@ -21,7 +21,7 @@ public class Token {
     }
 
     public boolean hasName(String name) {
-        return this.name.toLowerCase().equals(name.trim());
+    	return this.name.toLowerCase().contains(name.toLowerCase().trim());
     }
 
     public Color getColor() {
@@ -38,7 +38,7 @@ public class Token {
 
     public void enterRoom(Room room) {
         this.room = room;
-        position = this.room.addItem();
+        position = this.room.addToken();
         isInRoom = true;
     }
 

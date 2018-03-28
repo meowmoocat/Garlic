@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class UI {
 
-    private static final int FRAME_WIDTH = 1200;
-    private static final int FRAME_HEIGHT = 800;
+    private static final int FRAME_WIDTH = 1095;
+    private static final int FRAME_HEIGHT = 700;
 
     private final BoardPanel boardPanel;
     private final InfoPanel infoPanel;
@@ -21,7 +21,7 @@ public class UI {
         commandPanel = new CommandPanel();
         boardPanel = new BoardPanel(characters, weapons);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        frame.setTitle("Cluedo");
+        frame.setTitle("UCD Cluedo");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.add(boardPanel, BorderLayout.LINE_START);
         frame.add(infoPanel, BorderLayout.LINE_END);
@@ -74,15 +74,16 @@ public class UI {
     }
 
     public void displayNotes(Player player, Deck deck) {
-        displayString("SUSPECTS");
+    	displayString("\n\t*****Detective Notes*****");
+    	displayString("\nSUSPECTS");
         for (String cardName : Names.SUSPECT_NAMES) {
             displayNote(player, deck, cardName);
         }
-        displayString("WEAPONS");
+        displayString("\nWEAPONS");
         for (String cardName : Names.WEAPON_NAMES) {
             displayNote(player, deck, cardName);
         }
-        displayString("ROOMS");
+        displayString("\nROOMS");
         for (String cardName : Names.ROOM_CARD_NAMES) {
             displayNote(player, deck, cardName);
         }
@@ -92,17 +93,42 @@ public class UI {
         displayString("The solutions is: " + cards);
     }
 
-    public void displayHelp() {
-        displayString("Commands:");
-        displayString("roll = roll the dice and move your token.");
-        displayString("   u = up");
-        displayString("   d = down");
-        displayString("   l = left");
-        displayString("   r = right");
-        displayString("passage = move to another room via the passage.");
-        displayString("notes = see a record of your cards.");
-        displayString("done = end your turn.");
-        displayString("quit = end the game.");
+    public void displayHelp(Token currentToken, boolean moveOver) {
+		displayString("Available Commands:");
+		//if in corridor - roll, cheat, done, exit, notes
+		if(!currentToken.isInRoom())
+		{
+			displayString("Possible inputs:\n'roll' - rolls dice to move"
+					+ "\n'cheat' - views cards in murder envelope\n'done' - ends turn"
+					+ "\n'quit' - ends game\n'notes' - view notes");
+		}
+		//if entered room - done, exit, notes, (accuse)
+		else if(currentToken.isInRoom() && moveOver == true)
+		{
+			displayString("Possible inputs:\n'cheat' - views cards in murder envelope"
+					+ "\n'done' - ends turn\n'quit' - ends game\n'notes' - view notes");
+			//TODO add accusations
+		}
+		//if start turn room - notes, roll, done, exit, (passage)
+		else if(currentToken.isInRoom() && moveOver == false)
+		{
+			displayString("Possible inputs:\n'roll' - rolls dice to move"
+					+ "\n'cheat' - views cards in murder envelope\n'done' - ends turn"
+					+ "\n'quit' - ends game\n'notes' - view notes");
+			if(currentToken.getRoom().hasPassage())
+			{
+				displayString("'passage' - move through secret passage");
+			}
+		}
+//        displayString("roll = roll the dice and move your token.");
+//        displayString("   u = up");
+//        displayString("   d = down");
+//        displayString("   l = left");
+//        displayString("   r = right");
+//        displayString("passage = move to another room via the passage.");
+//        displayString("notes = see a record of your cards.");
+//        displayString("done = end your turn.");
+//        displayString("quit = end the game.");
     }
 
     /* Display Error Messages */

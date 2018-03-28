@@ -136,6 +136,23 @@ public class Cluedo {
         }
     }
 
+    private void question() {
+		//make sure it's valid - only when entering a room
+		
+		//input suspect, weapon, and what room they're in
+		
+		//move suspect and weapon into room(swap weapon)
+		
+		//loops between other players
+	}
+	
+	private void accuse() {
+		//check murder cards if true that player wins
+		// if wrong that player has no more turns
+		
+		//maybe return boolean turn over is false and player.turnOver()
+	}
+	
     private void takeTurns() {
         boolean turnOver, gameOver = false;
         do {
@@ -163,7 +180,7 @@ public class Cluedo {
                         break;
                     }
                     case "help" : {
-                        ui.displayHelp();
+                    	ui.displayHelp(currentToken, moveOver);
                         break;
                     }
                     case "done": {
@@ -175,6 +192,14 @@ public class Cluedo {
                         gameOver = true;
                         break;
                     }
+                    case "question": {
+    					question();
+    					break;
+    				}
+    				case "accuse": {
+    					accuse();
+    					break;
+    				}
                 }
             } while (!turnOver);
             if (!gameOver) {

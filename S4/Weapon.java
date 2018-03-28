@@ -7,7 +7,7 @@ public class Weapon {
 
     Weapon(String name, Room room) {
         this.name = name;
-        position = room.addItem ();
+        position = room.addWeapon();
     }
 
     public String getName() {
