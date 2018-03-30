@@ -141,19 +141,25 @@ public class Cluedo {
 
 	private void question() {
 		boolean questions = moveOver;
-//		if(enteredRoom)
-		while(questions && currentToken.isInRoom())
+		if(enteredRoom)
 		{
-			currentToken.getRoom().getName();
-			
+			while(questions && currentToken.isInRoom())
+			{
+				currentToken.getRoom().getName();
+
+			}
+			//make sure it's valid - only when entering a room
+
+			//input suspect, weapon, and what room they're in
+
+			//move suspect and weapon into room(swap weapon)
+
+			//loops between other players
 		}
-		//make sure it's valid - only when entering a room
-
-		//input suspect, weapon, and what room they're in
-
-		//move suspect and weapon into room(swap weapon)
-
-		//loops between other players
+		else
+		{
+			//print can't ask a question atm
+		}
 	}
 
 	private void accuse() {
