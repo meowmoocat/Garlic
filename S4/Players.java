@@ -1,5 +1,11 @@
 package S4; 
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -7,6 +13,7 @@ public class Players implements Iterable<Player>, Iterator<Player> {
 
 	private ArrayList<Player> players = new ArrayList<>();
 	private int currentPlayerIndex;
+	private int questionIndex;
 	private Iterator<Player> iterator;
 
 	Players() {
@@ -69,6 +76,14 @@ public class Players implements Iterable<Player>, Iterator<Player> {
 			currentPlayerIndex++;
 		} else {
 			currentPlayerIndex = 0;
+		}
+	}
+	
+	public void questionTurns() {
+		if (questionIndex < players.size()-1) {
+			questionIndex++;
+		} else {
+			questionIndex = 0;
 		}
 	}
 
