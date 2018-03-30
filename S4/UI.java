@@ -287,6 +287,7 @@ public class UI {
 			if(token.contains(input))
 			{
 				valid = true;
+				input = token.get(input).getName();
 			}
 			else
 			{
@@ -306,6 +307,7 @@ public class UI {
 			if(weapons.contains(input))
 			{
 				valid = true;
+				input = weapons.get(input).getName();
 			}
 			else
 			{
