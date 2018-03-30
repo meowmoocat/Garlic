@@ -277,7 +277,7 @@ public class UI {
 		} while (!valid);
 	}
 
-	public void inputTokenGuess(Player player, Tokens token) {
+	public String inputTokenGuess(Player player, Tokens token) {
 		boolean valid = false;
 		do {
 			displayString("Enter the suspect token: ");
@@ -293,9 +293,10 @@ public class UI {
 				displayError("Not a valid character name");
 			}
 		} while(!valid);
+		return input;
 	}
 	
-	public void inputWeaponGuess(Player player, Weapons weapons) {
+	public String inputWeaponGuess(Player player, Weapons weapons) {
 		boolean valid = false;
 		do {
 			displayString("Enter the murder weapon: ");
@@ -311,6 +312,7 @@ public class UI {
 				displayError("Not a valid weapon name");
 			}
 		} while(!valid);
+		return input;
 	}
 
 	public int getDoor() {
