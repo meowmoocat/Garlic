@@ -296,7 +296,7 @@ public class UI {
 		} while(!valid);
 		return input;
 	}
-	
+
 	public String inputWeaponGuess(Player player, Weapons weapons) {
 		boolean valid = false;
 		do {
@@ -315,6 +315,16 @@ public class UI {
 			}
 		} while(!valid);
 		return input;
+	}
+	
+	public void inputConfirm(Player player) {
+		do
+		{
+		displayString(player+ ": Enter confirm to confirm changeover: ");
+		inputString();
+		displayString("> " + input);
+		input = input.trim();
+		} while(!input.equals("confirm"));
 	}
 
 	public int getDoor() {
