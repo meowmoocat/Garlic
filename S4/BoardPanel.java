@@ -1,23 +1,27 @@
 package S4;
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import S3.Weapon;
-
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 class BoardPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private static final int FRAME_WIDTH = 750, FRAME_HEIGHT = 750;  // must be even
-	private static final float COL_OFFSET = 52f, ROW_OFFSET = 29f;
-	private static final float COL_SCALE = 26.9f, ROW_SCALE = 27.1f;
-	private static final int TOKEN_RADIUS = 12;   // must be even
+	private static final int FRAME_WIDTH = 650, FRAME_HEIGHT = 650;  // must be even
+	private static final float COL_OFFSET = 43f, ROW_OFFSET = 24f;
+	private static final float COL_SCALE = 23.4f, ROW_SCALE = 23.5f;
+	private static final int TOKEN_RADIUS = 10;   // must be even
 
 	private final Tokens tokens;
 	private final Weapons weapons;
@@ -30,6 +34,7 @@ class BoardPanel extends JPanel {
 	public BufferedImage microscope;
 	public BufferedImage seagull;
 
+	//creates instance of board panel
 	BoardPanel(Tokens tokens, Weapons weapons) {
 		this.tokens = tokens;
 		this.weapons = weapons;
@@ -43,23 +48,23 @@ class BoardPanel extends JPanel {
 		weaponsReadIn();
 	}
 
-
+	//draws board, tokens and weapons
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 =(Graphics2D) g;
 		g2.drawImage(boardImage, 0, 0, FRAME_WIDTH, FRAME_HEIGHT, this);
-		for (Token suspect : tokens) {
-			int x = Math.round(suspect.getPosition().getCol()*COL_SCALE + COL_OFFSET);
-			int y = Math.round(suspect.getPosition().getRow()*ROW_SCALE + ROW_OFFSET);
+		for (Token token : tokens) {
+			int x = Math.round(token.getPosition().getCol()*COL_SCALE + COL_OFFSET);
+			int y = Math.round(token.getPosition().getRow()*ROW_SCALE + ROW_OFFSET);
 			g2.setColor(Color.BLACK);
 			Ellipse2D.Double ellipseBlack = new Ellipse2D.Double(x,y,2*TOKEN_RADIUS,2*TOKEN_RADIUS);
 			g2.fill(ellipseBlack);
 			Ellipse2D.Double ellipseColour = new Ellipse2D.Double(x+2,y+2,2*TOKEN_RADIUS-4,2*TOKEN_RADIUS-4);
-			g2.setColor(suspect.getColor());
+			g2.setColor(token.getColor());
 			g2.fill(ellipseColour);
 		}
-		for (S4.Weapon weapon : weapons) {
+		for (Weapon weapon : weapons) {
 			int x = Math.round(weapon.getPosition().getCol()*COL_SCALE + COL_OFFSET);
 			int y = Math.round(weapon.getPosition().getRow()*ROW_SCALE + ROW_OFFSET);
 			if(weapon.getName().equalsIgnoreCase("book"))
@@ -77,6 +82,7 @@ class BoardPanel extends JPanel {
 		}
 	}
 
+	//redraws images 
 	public void refresh() {
 		revalidate();
 		repaint();
@@ -85,7 +91,7 @@ class BoardPanel extends JPanel {
 	//reads in images for weapons
 	public void weaponsReadIn()
 	{
-		for(S4.Weapon weapon : weapons)
+		for(Weapon weapon : weapons)
 		{
 			if(weapon.getName().equals("Book"))
 			{
@@ -161,4 +167,5 @@ class BoardPanel extends JPanel {
 			}
 		}
 	}
+
 }
