@@ -74,7 +74,9 @@ public class UI {
 			displayString(displayName + "X");
 		} else if (deck.isSharedCard(cardName)) {
 			displayString(displayName + "A");
-		} else {
+		} else if (player.isViewedCard(cardName)) {
+			displayString(displayName + "V");
+		}else {
 			displayString(displayName + ".");
 		}
 	}
