@@ -1,5 +1,11 @@
 package S4; 
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -154,9 +160,9 @@ public class UI {
 	}
 
 	public void displayErrorQuestion() {
-	    displayError("Can't ask Question at this time");
+		displayError("Can't ask Question at this time");
 	}
-	
+
 	private void inputString() {
 		input = commandPanel.getCommand();
 	}
@@ -271,7 +277,7 @@ public class UI {
 		} while (!valid);
 	}
 
-	public void inputQuestions(Player player, Tokens token) {
+	public void inputTokenGuess(Player player, Tokens token) {
 		boolean valid = false;
 		do {
 			displayString("Enter the suspect token: ");
@@ -285,6 +291,24 @@ public class UI {
 			else
 			{
 				displayError("Not a valid character name");
+			}
+		} while(!valid);
+	}
+	
+	public void inputWeaponGuess(Player player, Weapons weapons) {
+		boolean valid = false;
+		do {
+			displayString("Enter the murder weapon: ");
+			inputString();
+			displayString("> " + input);
+			input = input.trim();
+			if(weapons.contains(input))
+			{
+				valid = true;
+			}
+			else
+			{
+				displayError("Not a valid weapon name");
 			}
 		} while(!valid);
 	}
