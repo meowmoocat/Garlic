@@ -212,6 +212,7 @@ public class Cluedo {
 				}
 				case "question": {
 					question();
+					enteredRoom = false;
 					break;
 				}
 				case "accuse": {
