@@ -156,6 +156,7 @@ public class Cluedo {
 			possSuspect=ui.inputTokenGuess(currentPlayer,tokens);
 			possWeapon=ui.inputWeaponGuess(currentPlayer,weapons);
 			possRoom=currentToken.getRoom().getName();
+			// TODO move token and player
 			Player questionedPlayer = currentPlayer;
 			Player tempPlayer = currentPlayer;
 			players.turnOver();
@@ -192,7 +193,9 @@ public class Cluedo {
 
 	private void checkDeck(Player questionedPlayer, String possSuspect, String possWeapon, String possRoom) {
 		// TODO Auto-generated method stub
-		
+		questionedPlayer.hasCard(possSuspect);
+		questionedPlayer.hasCard(possWeapon);
+		questionedPlayer.hasCard(possRoom);
 	}
 
 	private void accuse() {
