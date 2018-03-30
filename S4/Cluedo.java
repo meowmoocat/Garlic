@@ -158,7 +158,7 @@ public class Cluedo {
 			possRoom=currentToken.getRoom().getName();
 			// TODO move token and player
 			Player questionedPlayer = currentPlayer;
-			Player tempPlayer = currentPlayer;
+			Player questionerPlayer = currentPlayer;
 			players.turnOver();
 			
 			do
@@ -169,12 +169,12 @@ public class Cluedo {
 				ui.refreshInfoPanel();
 				ui.inputConfirm(questionedPlayer);
 				//input confirm
-				checkDeck(questionedPlayer,possSuspect,possWeapon,possRoom);
+				questions = checkDeck(questionerPlayer, questionedPlayer,possSuspect,possWeapon,possRoom);
 				//input done
 				
-				//questions = false;
+				
 				players.turnOver();
-			}while(questions && questionedPlayer != tempPlayer);
+			}while(questions && questionedPlayer != questionerPlayer);
 			
 			//make sure it's valid - only when entering a room
 
@@ -183,7 +183,7 @@ public class Cluedo {
 			//move suspect and weapon into room(swap weapon)
 
 			//loops between other players
-			currentPlayer=tempPlayer;
+			currentPlayer=questionerPlayer;
 		}
 		else
 		{
@@ -191,12 +191,13 @@ public class Cluedo {
 		}
 	}
 
-	private void checkDeck(Player questionedPlayer, String possSuspect, String possWeapon, String possRoom) {
+	private boolean checkDeck(Player questionerPlayer, Player questionedPlayer, String possSuspect, String possWeapon, String possRoom) {
 		// TODO Auto-generated method stub
 		if(questionedPlayer.hasCard(possSuspect) || questionedPlayer.hasCard(possWeapon) ||questionedPlayer.hasCard(possRoom))
 		{
-			
+			return false;
 		}
+		return true;
 	}
 
 	private void accuse() {
