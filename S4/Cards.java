@@ -24,6 +24,15 @@ public class Cards {
         }
         return false;
     }
+    
+    public Card isCard(String name) {
+        for (Card card : cards) {
+            if (card.hasName(name)) {
+                return card;
+            }
+        }
+        return null;
+    }
 
     private ArrayList<Card> asList() {
         return cards;

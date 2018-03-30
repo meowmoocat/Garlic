@@ -34,6 +34,11 @@ public class Deck {
 	public Cards getMurderCards () {
 		return murderCards;
 	}
+	
+	public Cards getAllCards()
+	{
+		return allCards;
+	}
 
 	public void prepareToDeal(int numberOfPlayers) {
 		allCards.addAll(suspectCards);

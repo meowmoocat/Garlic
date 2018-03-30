@@ -193,6 +193,7 @@ public class Cluedo {
 
 	private boolean checkDeck(Player questionerPlayer, Player questionedPlayer, String possSuspect, String possWeapon, String possRoom) {
 		// TODO Auto-generated method stub
+		
 		if(questionedPlayer.hasCard(possSuspect) || questionedPlayer.hasCard(possWeapon) ||questionedPlayer.hasCard(possRoom))
 		{
 			if(questionedPlayer.hasCard(possSuspect) && questionedPlayer.hasCard(possWeapon) && questionedPlayer.hasCard(possRoom))
@@ -221,7 +222,7 @@ public class Cluedo {
 			}
 			else if(questionedPlayer.hasCard(possRoom));
 			{
-				
+				questionerPlayer.addViewedCards(deck.getAllCards().isCard(possRoom));
 			}
 			
 			return false;

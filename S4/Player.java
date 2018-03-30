@@ -1,4 +1,6 @@
-package S4; 
+package S4;
+
+import java.util.ArrayList;
 
 /* created by Garlic
  * Anna Davison	16382333
@@ -12,11 +14,13 @@ public class Player {
 	private final Token token;
 	private Cards cards;
 	private Cards viewedCards;
+//	private Cards viewedCards;
 
 	Player(String name, Token token) {
 		this.name = name;
 		this.token = token;
 		cards = new Cards();
+		viewedCards = new Cards();
 	}
 
 	public boolean hasName(String name) {
@@ -35,8 +39,8 @@ public class Player {
 		this.cards = cards;
 	}
 	
-	public void addViewedCards(Cards viewedCards) {
-		this.viewedCards = viewedCards;
+	public void addViewedCards(Card card) {
+		this.viewedCards.add(card);;
 	}
 
 	public boolean hasCard(String name) {
