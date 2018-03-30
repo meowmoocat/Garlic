@@ -79,6 +79,17 @@ public class Players implements Iterable<Player>, Iterator<Player> {
 		}
 	}
 	
+	public void setQuestionPlayer(String name) {
+		questionIndex = 0;
+		while (!players.get(questionIndex).hasName(name)) {
+			questionIndex++;
+		}
+	}
+
+	public Player getQuestionPlayer() {
+		return players.get(questionIndex);
+	}
+	
 	public void questionTurns() {
 		if (questionIndex < players.size()-1) {
 			questionIndex++;
