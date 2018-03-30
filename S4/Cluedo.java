@@ -156,18 +156,25 @@ public class Cluedo {
 			possSuspect=ui.inputTokenGuess(currentPlayer,tokens);
 			possWeapon=ui.inputWeaponGuess(currentPlayer,weapons);
 			possRoom=currentToken.getRoom().getName();
-			//TO DO move token and weapon
-			Player questionPlayer = currentPlayer;
+			Player questionedPlayer = currentPlayer;
 			Player tempPlayer = currentPlayer;
 			players.turnOver();
+			
 			do
 			{
-				questionPlayer = players.getCurrentPlayer();
+				questionedPlayer=players.getCurrentPlayer();
 				System.out.print("Sus: "+ possSuspect+" Wap: "+possWeapon+" Room: "+possRoom);
 				
-//				questions = false;
+				ui.refreshInfoPanel();
+				ui.inputConfirm(questionedPlayer);
+				//input confirm
+				checkDeck(questionedPlayer,possSuspect,possWeapon,possRoom);
+				//input done
+				
+				//questions = false;
 				players.turnOver();
-			}while(questions && questionPlayer != tempPlayer);
+			}while(questions && questionedPlayer != tempPlayer);
+			
 			//make sure it's valid - only when entering a room
 
 			//input suspect, weapon, and what room they're in
@@ -175,12 +182,16 @@ public class Cluedo {
 			//move suspect and weapon into room(swap weapon)
 
 			//loops between other players
-			currentPlayer = tempPlayer;
+			currentPlayer=tempPlayer;
 		}
 		else
 		{
 			ui.displayErrorQuestion();
 		}
+	}
+
+	private void checkDeck(Player questionedPlayer, String possSuspect, String possWeapon, String possRoom) {
+		// TODO Auto-generated method stub
 		
 	}
 
