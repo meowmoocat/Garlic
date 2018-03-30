@@ -193,9 +193,10 @@ public class Cluedo {
 
 	private void checkDeck(Player questionedPlayer, String possSuspect, String possWeapon, String possRoom) {
 		// TODO Auto-generated method stub
-		questionedPlayer.hasCard(possSuspect);
-		questionedPlayer.hasCard(possWeapon);
-		questionedPlayer.hasCard(possRoom);
+		if(questionedPlayer.hasCard(possSuspect) || questionedPlayer.hasCard(possWeapon) ||questionedPlayer.hasCard(possRoom))
+		{
+			
+		}
 	}
 
 	private void accuse() {
