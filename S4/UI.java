@@ -222,7 +222,7 @@ public class UI {
             inputString();
             displayString("> " + input);
             command = input.trim().toLowerCase().replaceAll("( )+", " ");
-            if (command.matches("quit|done|roll|passage|notes|cheat|help")) {
+            if (command.matches("quit|done|roll|passage|notes|cheat|help|question|accuse")) {
                 valid = true;
             } else {
                 displayError("No such command");
@@ -267,6 +267,24 @@ public class UI {
                 displayError("Input must be a number");
             }
         } while (!valid);
+    }
+    
+    public void inputQuestions(Player player, Tokens token) {
+    	boolean valid = false;
+    	do {
+    		displayString("Enter the suspect token: ");
+    		inputString();
+            displayString("> " + input);
+            input = input.trim();
+            if(token.contains(input))
+            {
+            	valid = true;
+            }
+            else
+            {
+            	displayError("Not a valid character name");
+            }
+    	} while(!valid);
     }
 
     public int getDoor() {

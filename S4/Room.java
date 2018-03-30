@@ -23,6 +23,11 @@ public class Room {
 	}
 }
 
+    public String getName()
+    {
+    	return this.name.toLowerCase().trim();
+    }
+    
     public boolean hasName(String name) {
         return this.name.toLowerCase().trim().equals(name.toLowerCase().trim());
     }
