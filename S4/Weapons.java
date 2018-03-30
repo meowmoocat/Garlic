@@ -28,6 +28,15 @@ public class Weapons implements Iterable<Weapon>, Iterator<Weapon> {
 		}
 		return false;
 	}
+	
+	public Weapon get(String name) {
+		for (Weapon weapon : weapons) {
+			if (weapon.hasName(name)) {
+				return weapon;
+			}
+		}
+		return null;
+	}
 
 	public boolean hasNext() {
 		return iterator.hasNext ();
