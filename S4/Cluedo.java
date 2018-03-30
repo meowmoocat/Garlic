@@ -11,6 +11,7 @@ public class Cluedo {
 	private final Weapons weapons = new Weapons(map);
 	private final UI ui = new UI(tokens,weapons);
 	private boolean moveOver;
+	private boolean enteredRoom;
 	private Player currentPlayer;
 	private Token currentToken;
 	private final Deck deck = new Deck();
@@ -104,6 +105,7 @@ public class Cluedo {
 					if (map.isDoor(currentPosition, newPosition)) {
 						Room room = map.getRoom(newPosition);
 						currentToken.enterRoom(room);
+						enteredRoom = true;
 					} else {
 						currentToken.setPosition(newPosition);
 					}
@@ -138,13 +140,26 @@ public class Cluedo {
 	}
 
 	private void question() {
-		//make sure it's valid - only when entering a room
+		boolean questions = moveOver;
+		if(enteredRoom)
+		{
+			while(questions && currentToken.isInRoom())
+			{
+				currentToken.getRoom().getName();
 
-		//input suspect, weapon, and what room they're in
+			}
+			//make sure it's valid - only when entering a room
 
-		//move suspect and weapon into room(swap weapon)
+			//input suspect, weapon, and what room they're in
 
-		//loops between other players
+			//move suspect and weapon into room(swap weapon)
+
+			//loops between other players
+		}
+		else
+		{
+			//print can't ask a question atm
+		}
 	}
 
 	private void accuse() {
@@ -159,6 +174,7 @@ public class Cluedo {
 		do {
 			turnOver = false;
 			moveOver = false;
+			enteredRoom = false;
 			do {
 				currentPlayer = players.getCurrentPlayer();
 				currentToken = currentPlayer.getToken();
