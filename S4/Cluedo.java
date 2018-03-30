@@ -146,6 +146,7 @@ public class Cluedo {
 			while(questions && currentToken.isInRoom())
 			{
 				currentToken.getRoom().getName();
+				questions = false;
 
 			}
 			//make sure it's valid - only when entering a room
@@ -158,7 +159,7 @@ public class Cluedo {
 		}
 		else
 		{
-			//print can't ask a question atm
+			ui.displayErrorQuestion();
 		}
 	}
 

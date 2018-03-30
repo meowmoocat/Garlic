@@ -153,8 +153,10 @@ public class UI {
 		displayError("Not in a room with a passage");
 	}
 
-	/* User Input Methods */
-
+	public void displayErrorQuestion() {
+	    displayError("Can't ask Question at this time");
+	}
+	
 	private void inputString() {
 		input = commandPanel.getCommand();
 	}
