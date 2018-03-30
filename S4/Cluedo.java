@@ -195,6 +195,35 @@ public class Cluedo {
 		// TODO Auto-generated method stub
 		if(questionedPlayer.hasCard(possSuspect) || questionedPlayer.hasCard(possWeapon) ||questionedPlayer.hasCard(possRoom))
 		{
+			if(questionedPlayer.hasCard(possSuspect) && questionedPlayer.hasCard(possWeapon) && questionedPlayer.hasCard(possRoom))
+			{
+				//choose which to add to questioners notes
+			}
+			else if(questionedPlayer.hasCard(possSuspect) && questionedPlayer.hasCard(possWeapon))
+			{
+				
+			}
+			else if(questionedPlayer.hasCard(possSuspect) && questionedPlayer.hasCard(possRoom))
+			{
+				
+			}
+			else if(questionedPlayer.hasCard(possWeapon) ||questionedPlayer.hasCard(possRoom))
+			{
+				
+			}
+			else if(questionedPlayer.hasCard(possSuspect))
+			{
+				
+			}
+			else if(questionedPlayer.hasCard(possWeapon))
+			{
+				
+			}
+			else if(questionedPlayer.hasCard(possRoom));
+			{
+				
+			}
+			
 			return false;
 		}
 		return true;
