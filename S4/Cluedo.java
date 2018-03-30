@@ -1,5 +1,11 @@
 package S4;
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 public class Cluedo {
 
 	private static final int MAX_NUM_PLAYERS = 6;
@@ -141,10 +147,19 @@ public class Cluedo {
 
 	private void question() {
 		boolean questions = moveOver;
+		String possSuspect;
+		String possWeapon;
+		String possRoom;
+		
 		if(enteredRoom)
 		{
-			while(questions && currentToken.isInRoom())
+			possSuspect=ui.inputTokenGuess(currentPlayer,tokens);
+			possWeapon=ui.inputWeaponGuess(currentPlayer,weapons);
+			possRoom=currentToken.getRoom().getName();
+			
+			while(questions)
 			{
+				System.out.print("Sus: "+ possSuspect+" Wap: "+possWeapon+" Room: "+possRoom);
 				currentToken.getRoom().getName();
 				questions = false;
 
