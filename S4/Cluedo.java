@@ -151,29 +151,33 @@ public class Cluedo {
 		String possWeapon;
 		String possRoom;
 		
+		Player questionedPlayer;
+		Player questionerPlayer = currentPlayer;
+		
+		Players playersQuestions =  new Players(players);
+		
 		if(enteredRoom)
 		{
 			possSuspect=ui.inputTokenGuess(currentPlayer,tokens);
 			possWeapon=ui.inputWeaponGuess(currentPlayer,weapons);
 			possRoom=currentToken.getRoom().getName();
 			// TODO move token and player
-			Player questionedPlayer = currentPlayer;
-			Player questionerPlayer = currentPlayer;
-			players.turnOver();
+			
+			playersQuestions.setCurrentPlayer(currentPlayer.getName());
+			playersQuestions.turnOver();
 			
 			do
 			{
-				questionedPlayer=players.getCurrentPlayer();
-				System.out.print("Sus: "+ possSuspect+" Wap: "+possWeapon+" Room: "+possRoom);
-				
-				ui.refreshInfoPanel();
-				ui.inputConfirm(questionedPlayer);
-				//input confirm
-				questions = checkDeck(questionerPlayer, questionedPlayer,possSuspect,possWeapon,possRoom);
-				//input done
-				
-				
-				players.turnOver();
+				questionedPlayer = playersQuestions.getCurrentPlayer();
+				if (questionedPlayer != questionerPlayer) {
+					System.out.println("\nSus: " + possSuspect + " Wap: " + possWeapon + " Room: " + possRoom);
+					ui.refreshInfoPanel();
+					ui.inputConfirm(questionedPlayer);
+					//input confirm
+					questions = checkDeck(questionerPlayer, questionedPlayer,possSuspect,possWeapon,possRoom);
+					//input done
+					playersQuestions.turnOver();
+				}
 			}while(questions && questionedPlayer != questionerPlayer);
 			
 			//make sure it's valid - only when entering a room
@@ -183,7 +187,9 @@ public class Cluedo {
 			//move suspect and weapon into room(swap weapon)
 
 			//loops between other players
-			currentPlayer=questionerPlayer;
+//			currentPlayer=questionerPlayer;
+			System.out.println("questioner: "+questionerPlayer.getName());
+			System.out.println("questioned: "+questionedPlayer.getName());
 		}
 		else
 		{
@@ -198,30 +204,37 @@ public class Cluedo {
 		{
 			if(questionedPlayer.hasCard(possSuspect) && questionedPlayer.hasCard(possWeapon) && questionedPlayer.hasCard(possRoom))
 			{
+				System.out.println("fuck1");
+
 				//choose which to add to questioners notes
 			}
 			else if(questionedPlayer.hasCard(possSuspect) && questionedPlayer.hasCard(possWeapon))
 			{
-				
+				System.out.println("fuck2");
+
 			}
 			else if(questionedPlayer.hasCard(possSuspect) && questionedPlayer.hasCard(possRoom))
 			{
-				
+				System.out.println("fuck3");
+
 			}
-			else if(questionedPlayer.hasCard(possWeapon) ||questionedPlayer.hasCard(possRoom))
+			else if(questionedPlayer.hasCard(possWeapon) && questionedPlayer.hasCard(possRoom))
 			{
-				
+				System.out.println("fuck4");
 			}
 			else if(questionedPlayer.hasCard(possSuspect))
 			{
-				
+				System.out.println("fuck5");
+				questionerPlayer.addViewedCards(deck.getAllCards().isCard(possSuspect));
 			}
 			else if(questionedPlayer.hasCard(possWeapon))
 			{
-				
+				System.out.println("fuck6");
+				questionerPlayer.addViewedCards(deck.getAllCards().isCard(possWeapon));
 			}
 			else if(questionedPlayer.hasCard(possRoom));
 			{
+				System.out.println("fuck7");
 				questionerPlayer.addViewedCards(deck.getAllCards().isCard(possRoom));
 			}
 			

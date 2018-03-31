@@ -1,7 +1,5 @@
 package S4;
 
-import java.util.ArrayList;
-
 /* created by Garlic
  * Anna Davison	16382333
  * James Kearns	15467622
@@ -40,7 +38,7 @@ public class Player {
 	}
 	
 	public void addViewedCards(Card card) {
-		this.viewedCards.add(card);;
+		this.viewedCards.add(card);
 	}
 
 	public boolean hasCard(String name) {
@@ -55,4 +53,5 @@ public class Player {
 	public boolean isViewedCard(String cardName) {
 		return viewedCards.contains(name);
 	}
+	
 }

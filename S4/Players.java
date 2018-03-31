@@ -13,7 +13,6 @@ public class Players implements Iterable<Player>, Iterator<Player> {
 
 	private ArrayList<Player> players = new ArrayList<>();
 	private int currentPlayerIndex;
-	private int questionIndex;
 	private Iterator<Player> iterator;
 
 	Players() {
@@ -76,25 +75,6 @@ public class Players implements Iterable<Player>, Iterator<Player> {
 			currentPlayerIndex++;
 		} else {
 			currentPlayerIndex = 0;
-		}
-	}
-	
-	public void setQuestionPlayer(String name) {
-		questionIndex = 0;
-		while (!players.get(questionIndex).hasName(name)) {
-			questionIndex++;
-		}
-	}
-
-	public Player getQuestionPlayer() {
-		return players.get(questionIndex);
-	}
-	
-	public void questionTurns() {
-		if (questionIndex < players.size()-1) {
-			questionIndex++;
-		} else {
-			questionIndex = 0;
 		}
 	}
 
