@@ -64,5 +64,19 @@ public class Deck {
 		}
 		return hand;
 	}
+	
+	public Cards viewedCards(Player player, Card card)
+	{
+		System.out.println(player.getName());
+		Cards viewedCards = new Cards();
+		try {
+			viewedCards.addAll(player.getViewedCard());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		viewedCards.add(card);
+		System.out.println(viewedCards.toString());
+		return viewedCards;
+	}
 
 }

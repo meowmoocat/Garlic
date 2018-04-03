@@ -12,13 +12,17 @@ public class Player {
 	private final Token token;
 	private Cards cards;
 	private Cards viewedCards;
-//	private Cards viewedCards;
 
 	Player(String name, Token token) {
 		this.name = name;
 		this.token = token;
 		cards = new Cards();
 		viewedCards = new Cards();
+	}
+	
+	public Card getCard(String name)
+	{
+		return cards.isCard(name);
 	}
 
 	public boolean hasName(String name) {
@@ -37,8 +41,8 @@ public class Player {
 		this.cards = cards;
 	}
 	
-	public void addViewedCards(Card card) {
-		this.viewedCards.add(card);
+	public void addViewedCards(Cards cards) {
+		this.viewedCards = cards;
 	}
 
 	public boolean hasCard(String name) {
@@ -50,8 +54,17 @@ public class Player {
 		return name + " (" + token.getName() + ")";
 	}
 
-	public boolean isViewedCard(String cardName) {
+	public boolean isViewedCard(String name) {
 		return viewedCards.contains(name);
 	}
+	
+	public Cards getViewedCard()
+	{
+		return viewedCards;
+	}
+	
+//    public Card isCard(String name) {
+//        
+//    }
 	
 }

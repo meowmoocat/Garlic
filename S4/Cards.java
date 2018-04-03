@@ -17,12 +17,18 @@ public class Cards {
     }
 
     public boolean contains(String name) {
-        for (Card card : cards) {
-            if (card.hasName(name)) {
-                return true;
-            }
-        }
-        return false;
+			for (Card card : cards) {
+				try {
+					if (card.hasName(name)) {
+//						System.out.println(num+": "+card.toString());
+						return true;
+					} 
+				} catch (Exception e) {
+//					System.out.println(num+": exception "+name);
+					// TODO: handle exception
+				}
+			} 
+		return false;
     }
     
     public Card isCard(String name) {
