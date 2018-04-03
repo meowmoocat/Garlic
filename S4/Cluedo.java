@@ -161,6 +161,7 @@ public class Cluedo {
 			possSuspect=ui.inputTokenGuess(currentPlayer,tokens);
 			possWeapon=ui.inputWeaponGuess(currentPlayer,weapons);
 			possRoom=currentToken.getRoom().getName();
+			System.out.println("poss Room"+possRoom);
 			// TODO move token and player
 			
 			playersQuestions.setCurrentPlayer(currentPlayer.getName());
@@ -196,7 +197,9 @@ public class Cluedo {
 	}
 
 	private boolean checkDeck(Player questionedPlayer, String possSuspect, String possWeapon, String possRoom) {
-		if(questionedPlayer.hasCard(possSuspect) || questionedPlayer.hasCard(possWeapon) ||questionedPlayer.hasCard(possRoom))
+		System.out.println("poss Room"+possRoom);
+
+		if(questionedPlayer.hasCard(possSuspect) || questionedPlayer.hasCard(possWeapon) || questionedPlayer.hasCard(possRoom))
 		{
 			if(questionedPlayer.hasCard(possSuspect) && questionedPlayer.hasCard(possWeapon) && questionedPlayer.hasCard(possRoom))
 			{
@@ -229,7 +232,7 @@ public class Cluedo {
 				currentPlayer.addViewedCards(deck.viewedCards(currentPlayer, questionedPlayer.getCard(possWeapon)));
 //				questionerPlayer.addViewedCards(deck.getAllCards().isCard(possWeapon));
 			} 
-			else if(questionedPlayer.hasCard(possRoom));
+			else if(questionedPlayer.hasCard(possRoom))
 			{
 				System.out.println("fuck7");
 				currentPlayer.addViewedCards(deck.viewedCards(currentPlayer, questionedPlayer.getCard(possRoom)));
