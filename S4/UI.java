@@ -45,6 +45,30 @@ public class UI {
 	private void displayString(String string) {
 		infoPanel.addText(string);
 	}
+	
+	public void displayViewChoice3(Player player, String name1, String name2, String name3)
+	{
+		displayString("Choose to show "+player.getName()+" the "+name1+", "+name2+" or "+name3+" card.");
+		displayString("Enter the card name.");
+	}
+	
+	public void displayViewChoice2(Player player, String name1, String name2)
+	{
+		displayString("Choose to show "+player.getName()+" the "+name1+" or "+name2+" card.");
+		displayString("Enter the card name.");
+	}
+	
+	public void displayViewed(Player player, String cardName)
+	{
+		displayString(player.getName()+ " has viewed your card for " + cardName);
+	}
+	
+	public void displayAccused(String token, String weapon, String room)
+	{
+		displayString("Suspect token: " + token);
+		displayString("Suspect weapon: " + weapon);
+		displayString("Suspect room: " + room);
+	}
 
 	public void displayMurderAnnouncement() {
 		displayString("WELCOME TO CLUEDO");
@@ -145,6 +169,10 @@ public class UI {
 		displayString("Error: " + message + ".");
 	}
 
+	public void displayErrorNoCardsToView()
+	{
+		displayError("No cards to show");
+	}
 	public void displayErrorNotADoor() {
 		displayError("Not a door");
 	}
