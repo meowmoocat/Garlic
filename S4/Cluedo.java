@@ -1,5 +1,7 @@
 package S4;
 
+import java.util.ArrayList;
+
 /* created by Garlic
  * Anna Davison	16382333
  * James Kearns	15467622
@@ -22,6 +24,22 @@ public class Cluedo {
 	private Player currentPlayer;
 	private Token currentToken;
 	private final Deck deck = new Deck();
+	private final ArrayList<String> log = new ArrayList<>();
+	
+	public void setLog(String string)
+	{
+		log.add(string);
+	}
+	
+	public void getLog()
+	{
+//		for(int i=0; i<log.size(); i++)
+//		{
+			System.out.println(log);
+//		}
+		
+	}
+
 
 	private void announceTheGame() {
 		ui.displayMurderAnnouncement();
@@ -165,6 +183,10 @@ public class Cluedo {
 			possRoom=currentToken.getRoom().getName();
 			// TODO move token and player
 			
+			setLog(currentPlayer.getName());
+			setLog(possSuspect);
+			setLog(possWeapon);
+			setLog(possRoom);
 			playersQuestions.setCurrentPlayer(currentPlayer.getName());
 			playersQuestions.turnOver();
 			
@@ -233,6 +255,7 @@ public class Cluedo {
 				currentPlayer.addViewedCards(deck.viewedCards(currentPlayer, questionedPlayer.getCard(possRoom)));
 			}
 			
+			setLog(questionedPlayer.getName());
 			return false;
 		}
 		ui.displayErrorNoCardsToView();
@@ -297,6 +320,10 @@ public class Cluedo {
 				}
 				case "accuse": {
 					accuse();
+					break;
+				}
+				case "log": {
+					getLog();
 					break;
 				}
 				}

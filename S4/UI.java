@@ -260,7 +260,7 @@ public class UI {
 			inputString();
 			displayString("> " + input);
 			command = input.trim().toLowerCase().replaceAll("( )+", " ");
-			if (command.matches("quit|done|roll|passage|notes|cheat|help|question|accuse")) {
+			if (command.matches("quit|done|roll|passage|notes|cheat|help|question|accuse|log")) {
 				valid = true;
 			} else {
 				displayError("No such command");
