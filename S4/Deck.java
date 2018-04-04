@@ -67,7 +67,6 @@ public class Deck {
 	
 	public Cards viewedCards(Player player, Card card)
 	{
-		System.out.println(player.getName());
 		Cards viewedCards = new Cards();
 		try {
 			viewedCards.addAll(player.getViewedCard());
@@ -75,7 +74,6 @@ public class Deck {
 			// TODO: handle exception
 		}
 		viewedCards.add(card);
-		System.out.println(viewedCards.toString());
 		return viewedCards;
 	}
 

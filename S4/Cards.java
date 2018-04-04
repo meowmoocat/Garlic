@@ -20,11 +20,9 @@ public class Cards {
 			for (Card card : cards) {
 				try {
 					if (card.hasName(name)) {
-//						System.out.println(num+": "+card.toString());
 						return true;
 					} 
 				} catch (Exception e) {
-//					System.out.println(num+": exception "+name);
 					// TODO: handle exception
 				}
 			} 

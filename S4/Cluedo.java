@@ -18,6 +18,7 @@ public class Cluedo {
 	private final UI ui = new UI(tokens,weapons);
 	private boolean moveOver;
 	private boolean enteredRoom;
+	private boolean enteredLake;
 	private Player currentPlayer;
 	private Token currentToken;
 	private final Deck deck = new Deck();
@@ -158,6 +159,7 @@ public class Cluedo {
 		
 		if(enteredRoom)
 		{
+			ui.displayNotes(currentPlayer, deck);
 			possSuspect=ui.inputTokenGuess(currentPlayer,tokens);
 			possWeapon=ui.inputWeaponGuess(currentPlayer,weapons);
 			possRoom=currentToken.getRoom().getName();
@@ -239,6 +241,7 @@ public class Cluedo {
 	}
 
 	private void accuse() {
+		if(currentToken.getRoom().equals(Names.ROOM_NAMES[9])) enteredLake=true;
 		//check murder cards if true that player wins
 		// if wrong that player has no more turns
 
@@ -251,6 +254,7 @@ public class Cluedo {
 			turnOver = false;
 			moveOver = false;
 			enteredRoom = false;
+			enteredLake = false;
 			do {
 				currentPlayer = players.getCurrentPlayer();
 				currentToken = currentPlayer.getToken();
