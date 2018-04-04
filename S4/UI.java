@@ -45,24 +45,24 @@ public class UI {
 	private void displayString(String string) {
 		infoPanel.addText(string);
 	}
-	
+
 	public void displayViewChoice3(Player player, String name1, String name2, String name3)
 	{
 		displayString("Choose to show "+player.getName()+" the "+name1+", "+name2+" or "+name3+" card.");
 		displayString("Enter the card name.");
 	}
-	
+
 	public void displayViewChoice2(Player player, String name1, String name2)
 	{
 		displayString("Choose to show "+player.getName()+" the "+name1+" or "+name2+" card.");
 		displayString("Enter the card name.");
 	}
-	
+
 	public void displayViewed(Player player, String cardName)
 	{
 		displayString(player.getName()+ " has viewed your card for " + cardName);
 	}
-	
+
 	public void displayAccused(String token, String weapon, String room)
 	{
 		displayString("Suspect token: " + token);
@@ -125,7 +125,7 @@ public class UI {
 		displayString("The solutions is: " + cards);
 	}
 
-	public void displayHelp(Token currentToken, boolean moveOver) {
+	public void displayHelp(Token currentToken, boolean moveOver, boolean enteredRoom) {
 		displayString("Available Commands:");
 		//if in corridor - roll, cheat, done, exit, notes
 		if(!currentToken.isInRoom())
@@ -139,7 +139,11 @@ public class UI {
 		{
 			displayString("Possible inputs:\n'cheat' - views cards in murder envelope"
 					+ "\n'done' - ends turn\n'quit' - ends game\n'notes' - view notes");
-			//TODO add accusations
+
+			if(enteredRoom == true)
+			{
+				displayString("'question' - posing a question to the players");
+			}
 		}
 		//if start turn room - notes, roll, done, exit, (passage)
 		else if(currentToken.isInRoom() && moveOver == false)
@@ -346,14 +350,14 @@ public class UI {
 		} while(!valid);
 		return input;
 	}
-	
+
 	public void inputConfirm(Player player) {
 		do
 		{
-		displayString(player+ ": Enter confirm to confirm changeover: ");
-		inputString();
-		displayString("> " + input);
-		input = input.trim();
+			displayString(player+ ": Enter confirm to confirm changeover: ");
+			inputString();
+			displayString("> " + input);
+			input = input.trim();
 		} while(!input.equals("confirm"));
 	}
 
