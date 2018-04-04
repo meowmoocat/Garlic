@@ -25,19 +25,19 @@ public class Cluedo {
 	private Token currentToken;
 	private final Deck deck = new Deck();
 	private final ArrayList<String> log = new ArrayList<>();
-	
+
 	public void setLog(String string)
 	{
 		log.add(string);
 	}
-	
+
 	public void getLog()
 	{
-//		for(int i=0; i<log.size(); i++)
-//		{
-			System.out.println(log);
-//		}
-		
+		//		for(int i=0; i<log.size(); i++)
+		//		{
+		System.out.println(log);
+		//		}
+
 	}
 
 
@@ -169,12 +169,12 @@ public class Cluedo {
 		String possSuspect;
 		String possWeapon;
 		String possRoom;
-		
+
 		Player questionedPlayer;
 		Player questionerPlayer = currentPlayer;
-		
+
 		Players playersQuestions =  new Players(players);
-		
+
 		if(enteredRoom)
 		{
 			ui.displayNotes(currentPlayer, deck);
@@ -182,14 +182,14 @@ public class Cluedo {
 			possWeapon=ui.inputWeaponGuess(currentPlayer,weapons);
 			possRoom=currentToken.getRoom().getName();
 			// TODO move token and player
-			
+
 			setLog(currentPlayer.getName());
 			setLog(possSuspect);
 			setLog(possWeapon);
 			setLog(possRoom);
 			playersQuestions.setCurrentPlayer(currentPlayer.getName());
 			playersQuestions.turnOver();
-			
+
 			do
 			{
 				questionedPlayer = playersQuestions.getCurrentPlayer();
@@ -203,7 +203,7 @@ public class Cluedo {
 					playersQuestions.turnOver();
 				}
 			}while(questions && questionedPlayer != questionerPlayer);
-			
+
 			//make sure it's valid - only when entering a room
 
 			//input suspect, weapon, and what room they're in
@@ -254,7 +254,7 @@ public class Cluedo {
 				ui.displayViewed(currentPlayer, possRoom);
 				currentPlayer.addViewedCards(deck.viewedCards(currentPlayer, questionedPlayer.getCard(possRoom)));
 			}
-			
+
 			setLog(questionedPlayer.getName());
 			return false;
 		}
@@ -300,7 +300,7 @@ public class Cluedo {
 					break;
 				}
 				case "help" : {
-					ui.displayHelp(currentToken, moveOver);
+					ui.displayHelp(currentToken, moveOver, enteredRoom);
 					break;
 				}
 				case "done": {
