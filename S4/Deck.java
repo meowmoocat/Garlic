@@ -34,7 +34,7 @@ public class Deck {
 	public Cards getMurderCards () {
 		return murderCards;
 	}
-	
+
 	public Cards getAllCards()
 	{
 		return allCards;
@@ -64,7 +64,7 @@ public class Deck {
 		}
 		return hand;
 	}
-	
+
 	public Cards viewedCards(Player player, Card card)
 	{
 		Cards viewedCards = new Cards();

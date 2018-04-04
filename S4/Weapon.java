@@ -17,7 +17,7 @@ public class Weapon {
 	public Coordinates getPosition() {
 		return position;
 	}
-	
+
 	public boolean hasName(String name) {
 		return this.name.toLowerCase().contains(name.toLowerCase().trim());
 	}

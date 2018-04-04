@@ -20,7 +20,7 @@ public class Cluedo {
 	private final UI ui = new UI(tokens,weapons);
 	private boolean moveOver;
 	private boolean enteredRoom;
-	private boolean enteredLake;
+	private boolean gameWon;
 	private Player currentPlayer;
 	private Token currentToken;
 	private final Deck deck = new Deck();
@@ -33,11 +33,7 @@ public class Cluedo {
 
 	public void getLog()
 	{
-		//		for(int i=0; i<log.size(); i++)
-		//		{
 		System.out.println(log);
-		//		}
-
 	}
 
 
@@ -130,7 +126,7 @@ public class Cluedo {
 					if (map.isDoor(currentPosition, newPosition)) {
 						Room room = map.getRoom(newPosition);
 						currentToken.enterRoom(room);
-						enteredRoom = true;
+						if(!room.getName().equalsIgnoreCase("Lake")) enteredRoom = true;
 					} else {
 						currentToken.setPosition(newPosition);
 					}
@@ -155,6 +151,7 @@ public class Cluedo {
 				currentToken.leaveRoom();
 				currentToken.enterRoom(destination);
 				moveOver = true;
+				enteredRoom = true;
 				ui.display();
 			} else {
 				ui.displayErrorNoPassage();
@@ -195,9 +192,9 @@ public class Cluedo {
 				questionedPlayer = playersQuestions.getCurrentPlayer();
 				if (questionedPlayer != questionerPlayer) {
 					ui.refreshInfoPanel();
+					ui.displayAccused(possSuspect, possWeapon, possRoom);
 					ui.inputConfirm(questionedPlayer);
 					//input confirm
-					ui.displayAccused(possSuspect, possWeapon, possRoom);
 					questions = checkDeck(questionedPlayer,possSuspect,possWeapon,possRoom);
 					//input done
 					playersQuestions.turnOver();
@@ -219,25 +216,33 @@ public class Cluedo {
 	}
 
 	private boolean checkDeck(Player questionedPlayer, String possSuspect, String possWeapon, String possRoom) {
-
+		String choice;
 		if(questionedPlayer.hasCard(possSuspect) || questionedPlayer.hasCard(possWeapon) || questionedPlayer.hasCard(possRoom))
 		{
 			if(questionedPlayer.hasCard(possSuspect) && questionedPlayer.hasCard(possWeapon) && questionedPlayer.hasCard(possRoom))
 			{
 				ui.displayViewChoice3(currentPlayer, possSuspect, possWeapon, possRoom);
+				choice = ui.inputCardChoice(possSuspect, possWeapon, possRoom);
+				currentPlayer.addViewedCards(deck.viewedCards(currentPlayer, questionedPlayer.getCard(choice)));
 				//choose which to add to questioners notes
 			}
 			else if(questionedPlayer.hasCard(possSuspect) && questionedPlayer.hasCard(possWeapon))
 			{
 				ui.displayViewChoice2(currentPlayer, possSuspect, possWeapon);
+				choice = ui.inputCardChoice(possSuspect, possWeapon, possRoom);
+				currentPlayer.addViewedCards(deck.viewedCards(currentPlayer, questionedPlayer.getCard(choice)));
 			}
 			else if(questionedPlayer.hasCard(possSuspect) && questionedPlayer.hasCard(possRoom))
 			{
 				ui.displayViewChoice2(currentPlayer, possSuspect, possRoom);
+				choice = ui.inputCardChoice(possSuspect, possWeapon, possRoom);
+				currentPlayer.addViewedCards(deck.viewedCards(currentPlayer, questionedPlayer.getCard(choice)));
 			}
 			else if(questionedPlayer.hasCard(possWeapon) && questionedPlayer.hasCard(possRoom))
 			{
 				ui.displayViewChoice2(currentPlayer, possWeapon, possRoom);
+				choice = ui.inputCardChoice(possSuspect, possWeapon, possRoom);
+				currentPlayer.addViewedCards(deck.viewedCards(currentPlayer, questionedPlayer.getCard(choice)));
 			}
 			else if(questionedPlayer.hasCard(possSuspect))
 			{
@@ -263,8 +268,32 @@ public class Cluedo {
 		return true;
 	}
 
-	private void accuse() {
-		if(currentToken.getRoom().equals(Names.ROOM_NAMES[9])) enteredLake=true;
+	private boolean accuse() {
+		String guessSuspect;
+		String guessWeapon;
+		String guessRoom;
+		if(currentToken.getRoom().getName().equals(Names.ROOM_NAMES[9]))
+		{
+			ui.displayNotes(currentPlayer, deck);
+			guessSuspect=ui.inputTokenGuess(currentPlayer,tokens);
+			guessWeapon=ui.inputWeaponGuess(currentPlayer,weapons);
+			guessRoom = ui.inputRoomGuess(currentPlayer);
+
+			if(deck.getMurderCards().contains(guessSuspect)
+					&& deck.getMurderCards().contains(guessWeapon)
+					&& deck.getMurderCards().contains(guessRoom))
+			{
+				//current player wins
+			}
+			//else player is out of the game
+			currentPlayer.setAccuseGuessed(true);
+			return true;
+		}
+		else
+		{
+			//ui.display(need to be in the lake to accuse)
+			return false;
+		}
 		//check murder cards if true that player wins
 		// if wrong that player has no more turns
 
@@ -277,55 +306,57 @@ public class Cluedo {
 			turnOver = false;
 			moveOver = false;
 			enteredRoom = false;
-			enteredLake = false;
 			do {
 				currentPlayer = players.getCurrentPlayer();
 				currentToken = currentPlayer.getToken();
-				ui.inputCommand(currentPlayer);
-				switch (ui.getCommand()) {
-				case "roll": {
-					roll();
-					break;
-				}
-				case "passage": {
-					passage();
-					break;
-				}
-				case "notes": {
-					ui.displayNotes(currentPlayer, deck);
-					break;
-				}
-				case "cheat" : {
-					ui.displaySolution(deck.getMurderCards());
-					break;
-				}
-				case "help" : {
-					ui.displayHelp(currentToken, moveOver, enteredRoom);
-					break;
-				}
-				case "done": {
-					turnOver = true;
-					ui.refreshInfoPanel();
-					break;
-				}
-				case "quit": {
-					turnOver = true;
-					gameOver = true;
-					break;
-				}
-				case "question": {
-					question();
-					enteredRoom = false;
-					break;
-				}
-				case "accuse": {
-					accuse();
-					break;
-				}
-				case "log": {
-					getLog();
-					break;
-				}
+				if(!currentPlayer.getAccuseGuessed())
+				{
+					ui.inputCommand(currentPlayer);
+					switch (ui.getCommand()) {
+					case "roll": {
+						roll();
+						break;
+					}
+					case "passage": {
+						passage();
+						break;
+					}
+					case "notes": {
+						ui.displayNotes(currentPlayer, deck);
+						break;
+					}
+					case "cheat" : {
+						ui.displaySolution(deck.getMurderCards());
+						break;
+					}
+					case "help" : {
+						ui.displayHelp(currentToken, moveOver, enteredRoom);
+						break;
+					}
+					case "done": {
+						turnOver = true;
+						ui.refreshInfoPanel();
+						break;
+					}
+					case "quit": {
+						turnOver = true;
+						gameOver = true;
+						break;
+					}
+					case "question": {
+						question();
+						enteredRoom = false;
+						break;
+					}
+					case "accuse": {
+						turnOver = accuse();
+						break;
+					}
+					case "log": {
+						getLog();
+						break;
+					}
+					}
 				}
 			} while (!turnOver);
 			if (!gameOver) {

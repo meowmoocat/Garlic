@@ -49,13 +49,11 @@ public class UI {
 	public void displayViewChoice3(Player player, String name1, String name2, String name3)
 	{
 		displayString("Choose to show "+player.getName()+" the "+name1+", "+name2+" or "+name3+" card.");
-		displayString("Enter the card name.");
 	}
 
 	public void displayViewChoice2(Player player, String name1, String name2)
 	{
 		displayString("Choose to show "+player.getName()+" the "+name1+" or "+name2+" card.");
-		displayString("Enter the card name.");
 	}
 
 	public void displayViewed(Player player, String cardName)
@@ -177,6 +175,7 @@ public class UI {
 	{
 		displayError("No cards to show");
 	}
+
 	public void displayErrorNotADoor() {
 		displayError("Not a door");
 	}
@@ -346,6 +345,58 @@ public class UI {
 			else
 			{
 				displayError("Not a valid weapon name");
+			}
+		} while(!valid);
+		return input;
+	}
+
+	public String inputRoomGuess(Player player) {
+		boolean valid = false;
+		do {
+			displayString("Enter the murder weapon: ");
+			inputString();
+			displayString("> " + input);
+			input = input.trim();
+			for(int i=0; i<Names.ROOM_CARD_NAMES.length; i++)
+			{
+				if(input.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i]))
+				{
+					valid = true;
+					input = Names.ROOM_CARD_NAMES[i];
+				}
+				else
+				{
+					displayError("Not a valid room name");
+				}
+			}
+		} while(!valid);
+		return input;
+	}
+
+	public String inputCardChoice(String suspect, String weapon, String room)
+	{
+		boolean valid = false;
+		do {
+			displayString("Enter the card name: ");
+			inputString();
+			displayString("> " + input);
+			input = input.trim();
+			for(int i=0; i<Names.ALL_NAMES.length; i++)
+			{
+				if(input.equalsIgnoreCase(Names.ALL_NAMES[i]))
+				{
+					if(!input.equalsIgnoreCase(room) || 
+							!input.equalsIgnoreCase(suspect) || 
+							!input.equalsIgnoreCase(weapon))
+					{
+						valid = true;
+						input = Names.ALL_NAMES[i];
+					}
+				}
+				else
+				{
+					displayError("Not a valid card name");
+				}
 			}
 		} while(!valid);
 		return input;

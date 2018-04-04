@@ -16,7 +16,7 @@ public class Weapons implements Iterable<Weapon>, Iterator<Weapon> {
 		weapons.add(new Weapon(Names.WEAPON_NAMES[4],map.getRoom(Names.ROOM_NAMES[4])));
 		weapons.add(new Weapon(Names.WEAPON_NAMES[5],map.getRoom(Names.ROOM_NAMES[5])));
 	}
-	
+
 	public boolean contains(String name)
 	{
 		for(Weapon weapon : weapons)
@@ -28,7 +28,7 @@ public class Weapons implements Iterable<Weapon>, Iterator<Weapon> {
 		}
 		return false;
 	}
-	
+
 	public Weapon get(String name) {
 		for (Weapon weapon : weapons) {
 			if (weapon.hasName(name)) {
