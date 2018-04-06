@@ -33,7 +33,14 @@ public class Cluedo {
 
 	public void getLog()
 	{
-		System.out.println(log);
+		
+		StringBuilder sb = new StringBuilder();
+		for(String s : log)
+		{
+			sb.append(s);
+			sb.append("\n");
+		}
+		System.out.println(sb.toString());
 	}
 
 
@@ -183,13 +190,13 @@ public class Cluedo {
 			setLog(currentPlayer.getName());
 			setLog("Suspects ");
 			setLog(possSuspect);
-			setLog("Did it\n");
+			setLog("Did it");
 			setLog("And thinks the murder weapon is the ");
 			setLog(possWeapon);
-			setLog("\n");
 			setLog("And he/she did it in the ");
 			setLog(possRoom);
 			
+			playersQuestions.setCurrentPlayer(currentPlayer.getName());
 			playersQuestions.turnOver();
 
 			do
