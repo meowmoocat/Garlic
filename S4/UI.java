@@ -197,6 +197,10 @@ public class UI {
 	public void displayErrorQuestion() {
 		displayError("Can't ask Question at this time");
 	}
+	
+	public void displayErrorNotLake() {
+		displayError("Go to the lake if you want to accuse");
+	}
 
 	private void inputString() {
 		input = commandPanel.getCommand();
@@ -399,7 +403,7 @@ public class UI {
 						displayError("Not a valid card name");
 					}
 				}
-				
+
 			}
 		} while(!valid);
 		return input;
@@ -423,7 +427,7 @@ public class UI {
 		infoPanel.refresh();
 
 	}
-	
+
 	public void setLog(String string)
 	{
 		log.add(string);
@@ -431,14 +435,14 @@ public class UI {
 
 	public void getLog()
 	{
-		
+
 		StringBuilder sb = new StringBuilder();
 		for(String s : log)
 		{
 			sb.append(s);
 			sb.append("\n");
 		}
-//		System.out.println(sb.toString());
+		//		System.out.println(sb.toString());
 		displayString(sb.toString());
 	}
 
