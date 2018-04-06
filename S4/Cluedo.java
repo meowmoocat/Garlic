@@ -188,10 +188,11 @@ public class Cluedo {
 					//input confirm
 					questions = checkDeck(questionedPlayer,possSuspect,possWeapon,possRoom);
 					//input done
+					ui.inputDone(questionedPlayer);
 					playersQuestions.turnOver();
 				}
 			}while(questions && questionedPlayer != questionerPlayer);
-
+			ui.refreshInfoPanel();//done
 			//make sure it's valid - only when entering a room
 
 			//input suspect, weapon, and what room they're in
@@ -263,7 +264,7 @@ public class Cluedo {
 		String guessSuspect;
 		String guessWeapon;
 		String guessRoom;
-		
+
 		if(currentToken.getRoom().getName().equalsIgnoreCase(Names.ROOM_NAMES[9]))
 		{
 			ui.displayNotes(currentPlayer, deck);
@@ -276,10 +277,11 @@ public class Cluedo {
 					&& deck.getMurderCards().contains(guessRoom))
 			{
 				gameWon=true;
+				ui.youWon(currentPlayer);
 			}
-			//else player is out of the game
-			currentPlayer.setAccuseGuessed(true);
-			return true;
+				//else player is out of the game
+				currentPlayer.setAccuseGuessed(true);
+				return true;
 		}
 		else
 		{
@@ -352,7 +354,7 @@ public class Cluedo {
 					}
 				}
 			} while (!turnOver);
-			if (!gameOver) {
+			if (!gameOver && !gameWon) {
 				players.turnOver();
 			}
 		} while (!gameOver && !gameWon);
