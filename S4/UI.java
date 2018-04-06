@@ -359,10 +359,11 @@ public class UI {
 	public String inputRoomGuess(Player player) {
 		boolean valid = false;
 		do {
-			displayString("Enter the murder weapon: ");
+			displayString("Enter the murder room: ");
 			inputString();
 			displayString("> " + input);
 			input = input.trim();
+			int counter = 0;
 			for(int i=0; i<Names.ROOM_CARD_NAMES.length; i++)
 			{
 				if(input.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i]))
@@ -370,9 +371,13 @@ public class UI {
 					valid = true;
 					input = Names.ROOM_CARD_NAMES[i];
 				}
-				else
+				else if(counter==Names.ROOM_CARD_NAMES.length-1)
 				{
 					displayError("Not a valid room name");
+				}
+				else
+				{
+					counter++;
 				}
 			}
 		} while(!valid);
@@ -444,6 +449,22 @@ public class UI {
 		}
 		//		System.out.println(sb.toString());
 		displayString(sb.toString());
+	}
+
+	public void youWon(Player currentPlayer) {
+		displayString(currentPlayer.getName()+" won the game!!!!!\nFinally!!!1!!!");
+		
+	}
+
+	public void inputDone(Player player) {
+		do
+		{
+			displayString(player+ ": Enter done to confirm changeover: ");
+			inputString();
+			displayString("> " + input);
+			input = input.trim();
+		} while(!input.equals("done"));
+		
 	}
 
 }
