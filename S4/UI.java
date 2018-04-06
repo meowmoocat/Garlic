@@ -392,11 +392,12 @@ public class UI {
 						valid = true;
 						input = Names.ALL_NAMES[i];
 					}
+					else
+					{
+						displayError("Not a valid card name");
+					}
 				}
-				else
-				{
-					displayError("Not a valid card name");
-				}
+				
 			}
 		} while(!valid);
 		return input;

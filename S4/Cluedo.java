@@ -181,10 +181,15 @@ public class Cluedo {
 			// TODO move token and player
 
 			setLog(currentPlayer.getName());
+			setLog("Suspects ");
 			setLog(possSuspect);
+			setLog("Did it\n");
+			setLog("And thinks the murder weapon is the ");
 			setLog(possWeapon);
+			setLog("\n");
+			setLog("And he/she did it in the ");
 			setLog(possRoom);
-			playersQuestions.setCurrentPlayer(currentPlayer.getName());
+			
 			playersQuestions.turnOver();
 
 			do
