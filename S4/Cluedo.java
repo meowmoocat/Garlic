@@ -263,6 +263,8 @@ public class Cluedo {
 		String guessSuspect;
 		String guessWeapon;
 		String guessRoom;
+		//room names assigned length minus one messing this up
+		//TODO
 		if(currentToken.getRoom().getName().equals(Names.ROOM_NAMES[9]))
 		{
 			ui.displayNotes(currentPlayer, deck);
