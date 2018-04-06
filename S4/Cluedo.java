@@ -195,10 +195,11 @@ System.out.println("row: "+destination.getRow()+"\nColumn: "+destination.getCol(
 					//input confirm
 					questions = checkDeck(questionedPlayer,possSuspect,possWeapon,possRoom);
 					//input done
+					ui.inputDone(questionedPlayer);
 					playersQuestions.turnOver();
 				}
 			}while(questions && questionedPlayer != questionerPlayer);
-
+			ui.refreshInfoPanel();
 			//make sure it's valid - only when entering a room
 
 			//input suspect, weapon, and what room they're in
@@ -283,6 +284,7 @@ System.out.println("row: "+destination.getRow()+"\nColumn: "+destination.getCol(
 					&& deck.getMurderCards().contains(guessRoom))
 			{
 				gameWon=true;
+				ui.youWon(currentPlayer);
 			}
 			//else player is out of the game
 			currentPlayer.setAccuseGuessed(true);
@@ -358,8 +360,12 @@ System.out.println("row: "+destination.getRow()+"\nColumn: "+destination.getCol(
 					}
 					}
 				}
+				else
+				{
+					turnOver = true;
+				}
 			} while (!turnOver);
-			if (!gameOver) {
+			if (!gameOver && !gameWon) {
 				players.turnOver();
 			}
 		} while (!gameOver && !gameWon);
