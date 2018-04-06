@@ -93,6 +93,8 @@ public class Map {
 	}
 
 	public Room getRoom (Coordinates position) {
+		System.out.println("Row: "+position.getRow()+"\nColumn: "+position.getCol());
+		
 		return rooms[MAP[position.getRow()][position.getCol()]];
 	}
 

@@ -13,12 +13,23 @@ public class Player {
 	private Cards cards;
 	private Cards viewedCards;
 	private Boolean accuseGuessed = false;
+	private Coordinates inRoom;
 
 	Player(String name, Token token) {
 		this.name = name;
 		this.token = token;
 		cards = new Cards();
 		viewedCards = new Cards();
+	}
+	
+	public void setInRoom(Coordinates room)
+	{
+		this.inRoom = room;
+	}
+	
+	public Coordinates getInRoom()
+	{
+		return inRoom;
 	}
 
 	public Boolean getAccuseGuessed()
