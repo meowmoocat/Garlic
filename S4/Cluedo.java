@@ -24,24 +24,7 @@ public class Cluedo {
 	private Player currentPlayer;
 	private Token currentToken;
 	private final Deck deck = new Deck();
-	private final ArrayList<String> log = new ArrayList<>();
-
-	public void setLog(String string)
-	{
-		log.add(string);
-	}
-
-	public void getLog()
-	{
-		
-		StringBuilder sb = new StringBuilder();
-		for(String s : log)
-		{
-			sb.append(s);
-			sb.append("\n");
-		}
-		System.out.println(sb.toString());
-	}
+	
 
 
 	private void announceTheGame() {
@@ -187,14 +170,10 @@ public class Cluedo {
 			possRoom=currentToken.getRoom().getName();
 			// TODO move token and player
 
-			setLog(currentPlayer.getName());
-			setLog("Suspects ");
-			setLog(possSuspect);
-			setLog("Did it");
-			setLog("And thinks the murder weapon is the ");
-			setLog(possWeapon);
-			setLog("And he/she did it in the ");
-			setLog(possRoom);
+			ui.setLog("\n"+currentPlayer.getName() + " asked:");
+			ui.setLog("Was it " + possSuspect);
+			ui.setLog("With the "+possWeapon);
+			ui.setLog("In "+possRoom);
 			
 			playersQuestions.setCurrentPlayer(currentPlayer.getName());
 			playersQuestions.turnOver();
@@ -272,7 +251,7 @@ public class Cluedo {
 				currentPlayer.addViewedCards(deck.viewedCards(currentPlayer, questionedPlayer.getCard(possRoom)));
 			}
 
-			setLog(questionedPlayer.getName());
+			ui.setLog(questionedPlayer.getName() + " answered.");
 			return false;
 		}
 		ui.displayErrorNoCardsToView();
@@ -365,7 +344,7 @@ public class Cluedo {
 						break;
 					}
 					case "log": {
-						getLog();
+						ui.getLog();
 						break;
 					}
 					}

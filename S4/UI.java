@@ -8,6 +8,7 @@ package S4;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class UI {
 
@@ -20,6 +21,7 @@ public class UI {
 	private String input, playerName, tokenName, command, move;
 	private int door;
 	private boolean inputIsDone;
+	private final ArrayList<String> log = new ArrayList<>();
 
 	UI(Tokens characters, Weapons weapons) {
 		JFrame frame = new JFrame();
@@ -420,6 +422,24 @@ public class UI {
 	public void refreshInfoPanel() {
 		infoPanel.refresh();
 
+	}
+	
+	public void setLog(String string)
+	{
+		log.add(string);
+	}
+
+	public void getLog()
+	{
+		
+		StringBuilder sb = new StringBuilder();
+		for(String s : log)
+		{
+			sb.append(s);
+			sb.append("\n");
+		}
+//		System.out.println(sb.toString());
+		displayString(sb.toString());
 	}
 
 }
