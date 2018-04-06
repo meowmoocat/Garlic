@@ -24,7 +24,7 @@ public class Cluedo {
 	private Player currentPlayer;
 	private Token currentToken;
 	private final Deck deck = new Deck();
-	
+
 
 
 	private void announceTheGame() {
@@ -174,7 +174,7 @@ public class Cluedo {
 			ui.setLog("Was it " + possSuspect);
 			ui.setLog("With the "+possWeapon);
 			ui.setLog("In "+possRoom);
-			
+
 			playersQuestions.setCurrentPlayer(currentPlayer.getName());
 			playersQuestions.turnOver();
 
@@ -274,7 +274,7 @@ public class Cluedo {
 					&& deck.getMurderCards().contains(guessWeapon)
 					&& deck.getMurderCards().contains(guessRoom))
 			{
-				//current player wins
+				gameWon=true;
 			}
 			//else player is out of the game
 			currentPlayer.setAccuseGuessed(true);
@@ -283,6 +283,7 @@ public class Cluedo {
 		else
 		{
 			//ui.display(need to be in the lake to accuse)
+			ui.displayErrorNotLake();
 			return false;
 		}
 		//check murder cards if true that player wins
@@ -353,7 +354,7 @@ public class Cluedo {
 			if (!gameOver) {
 				players.turnOver();
 			}
-		} while (!gameOver);
+		} while (!gameOver && !gameWon);
 	}
 
 	public static void main(String[] args) {
