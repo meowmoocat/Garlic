@@ -132,25 +132,29 @@ public class UI {
 		{
 			displayString("Possible inputs:\n'roll' - rolls dice to move"
 					+ "\n'cheat' - views cards in murder envelope\n'done' - ends turn"
-					+ "\n'quit' - ends game\n'notes' - view notes");
+					+ "\n'quit' - ends game\n'notes' - view notes\n'log' - view log");
 		}
 		//if entered room - done, exit, notes, (accuse)
 		else if(currentToken.isInRoom() && moveOver == true)
 		{
 			displayString("Possible inputs:\n'cheat' - views cards in murder envelope"
-					+ "\n'done' - ends turn\n'quit' - ends game\n'notes' - view notes");
+					+ "\n'done' - ends turn\n'quit' - ends game\n'notes' - view notes\n'log' - view log");
 
-			if(enteredRoom == true)
+			if(enteredRoom == true && !currentToken.getRoom().getName().equalsIgnoreCase(Names.ROOM_NAMES[9]))
 			{
 				displayString("'question' - posing a question to the players");
 			}
+			/*if(enteredRoom == true && currentToken.getRoom().getName().equalsIgnoreCase(Names.ROOM_NAMES[9]))
+			{
+				displayString("'accuse' - checking the murder envelope");
+			}*/
 		}
 		//if start turn room - notes, roll, done, exit, (passage)
 		else if(currentToken.isInRoom() && moveOver == false)
 		{
 			displayString("Possible inputs:\n'roll' - rolls dice to move"
 					+ "\n'cheat' - views cards in murder envelope\n'done' - ends turn"
-					+ "\n'quit' - ends game\n'notes' - view notes");
+					+ "\n'quit' - ends game\n'notes' - view notes\n'log' - view log");
 			if(currentToken.getRoom().hasPassage())
 			{
 				displayString("'passage' - move through secret passage");
@@ -197,7 +201,7 @@ public class UI {
 	public void displayErrorQuestion() {
 		displayError("Can't ask Question at this time");
 	}
-	
+
 	public void displayErrorNotLake() {
 		displayError("Go to the lake if you want to accuse");
 	}
@@ -453,7 +457,7 @@ public class UI {
 
 	public void youWon(Player currentPlayer) {
 		displayString(currentPlayer.getName()+" won the game!!!!!\nFinally!!!1!!!");
-		
+
 	}
 
 	public void inputDone(Player player) {
@@ -464,7 +468,7 @@ public class UI {
 			displayString("> " + input);
 			input = input.trim();
 		} while(!input.equals("done"));
-		
+
 	}
 
 }
