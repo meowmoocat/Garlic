@@ -1,5 +1,11 @@
 package S4; 
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 import java.awt.*;
 
 public class Token {
@@ -7,7 +13,7 @@ public class Token {
 	private final String name;
 	private final Color color;
 	private Coordinates position;
-	private boolean isInRoom = false, isOwned = false;
+	private boolean isInRoom = false, isOwned = false;//is owned is set to true if a person chooses to play as that character
 	private Room room;
 
 	Token(String name, Color color, Coordinates position) {
@@ -36,18 +42,21 @@ public class Token {
 		return position;
 	}
 
+	//adds token to room
 	public void enterRoom(Room room) {
 		this.room = room;
 		position = this.room.addToken();
 		isInRoom = true;
 	}
 
+	//moves token to door to leave if the player has to choose a door
 	public void leaveRoom(int doorIndex) {
 		room.removeItem(position);
 		position = room.getDoorCoordinates(doorIndex);
 		isInRoom = false;
 	}
 
+	//moves token to door to leave
 	public void leaveRoom() {
 		room.removeItem(position);
 		position = room.getDoorCoordinates(0);
