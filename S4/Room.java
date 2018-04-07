@@ -1,5 +1,11 @@
 package S4; 
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 public class Room {
 
 	private final static int ITEM_AREA_WIDTH = 4;      // an item is a token or a weapon
@@ -54,9 +60,10 @@ public class Room {
 		return passageDestination;
 	}
 
+	//adds token to a room
 	public Coordinates addToken() {
 		int squareNumber = 0;
-		while (squaresOccupied[squareNumber]) {//TODO error here when player suspects itself
+		while (squaresOccupied[squareNumber]) {
 			squareNumber++;
 		}
 		Coordinates position = new Coordinates(tokenArea);
