@@ -454,6 +454,11 @@ public class UI {
 		//		System.out.println(sb.toString());
 		displayString(sb.toString());
 	}
+	
+	public void youLost(Player currentPlayer)
+	{
+		displayString("\n"+currentPlayer.getName()+" you guessed wrong!!!\nYour out of the game, go home!!");
+	}
 
 	public void youWon(Player currentPlayer) {
 		displayString("\n"+currentPlayer.getName()+" won the game!!!!!\nFinally!!!1!!!");

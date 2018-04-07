@@ -323,6 +323,8 @@ public class Cluedo {
 			//else player is out of the game
 			else
 			{
+				ui.youLost(currentPlayer);
+				//TODO add an input
 				counterForWin++;
 				currentPlayer.setAccuseGuessed(true);
 				ui.refreshInfoPanel();
@@ -352,7 +354,7 @@ public class Cluedo {
 			do {
 				currentPlayer = players.getCurrentPlayer();
 				currentToken = currentPlayer.getToken();
-				if(counterForWin==numPlayers-1)
+				if(counterForWin==numPlayers-1 && !currentPlayer.getAccuseGuessed())
 				{
 					gameWon = true;
 					turnOver = true;
