@@ -18,12 +18,15 @@ public class Cluedo {
 	private final Map map = new Map();
 	private final Weapons weapons = new Weapons(map);
 	private final UI ui = new UI(tokens,weapons);
+	private final Deck deck = new Deck();
 	private boolean moveOver;
 	private boolean enteredRoom;
 	private boolean gameWon;
+	private boolean enteredPassage;
 	private Player currentPlayer;
 	private Token currentToken;
-	private final Deck deck = new Deck();
+	private Room passageDestination;
+	
 
 
 	private void announceTheGame() {
@@ -137,11 +140,12 @@ public class Cluedo {
 	private void passage() {
 		if (!moveOver) {
 			if (currentToken.isInRoom() && currentToken.getRoom().hasPassage()) {
-				Room destination = currentToken.getRoom().getPassageDestination();
+				passageDestination = currentToken.getRoom().getPassageDestination();
 				currentToken.leaveRoom();
-				currentToken.enterRoom(destination);
+				currentToken.enterRoom(passageDestination);
 				moveOver = true;
 				enteredRoom = true;
+				enteredPassage = true;
 				ui.display();
 			} else {
 				ui.displayErrorNoPassage();
@@ -158,7 +162,6 @@ public class Cluedo {
 		String possRoom;
 
 		Player questionedPlayer;
-		Player questionerPlayer = currentPlayer;
 
 		Players playersQuestions =  new Players(players);
 
@@ -175,20 +178,45 @@ public class Cluedo {
 			ui.setLog("With the "+possWeapon);
 			ui.setLog("In "+possRoom);
 
-			Coordinates destination = currentPlayer.getInRoom();
+			//moves suspect token to room
 			Token moveToken = tokens.get(possSuspect);
-System.out.println(moveToken.getName());
-System.out.println("row: "+destination.getRow()+"\nColumn: "+destination.getCol());
-			Room room = map.getRoom(destination);
-			moveToken.enterRoom(room);
+			Weapon moveWeapon = weapons.get(possWeapon);
 			
+			if(enteredPassage)
+			{
+				if(moveToken.isInRoom())
+				{
+					moveToken.leaveRoom();
+				}
+				moveToken.enterRoom(passageDestination);
+			}
+			else
+			{
+				if(moveToken.isInRoom())
+				{
+					moveToken.leaveRoom();
+				}
+				Coordinates destination = currentPlayer.getInRoom();
+				Room room = map.getRoom(destination);
+				moveToken.enterRoom(room);
+			}
+			
+			for(Weapon weapon : weapons)
+			{
+				if(weapon.getPosition().equals(currentToken.getRoom().addWeapon()))
+				{
+					
+					
+				}
+			}
+			ui.display();
 			playersQuestions.setCurrentPlayer(currentPlayer.getName());
 			playersQuestions.turnOver();
 
 			do
 			{
 				questionedPlayer = playersQuestions.getCurrentPlayer();
-				if (questionedPlayer != questionerPlayer) {
+				if (questionedPlayer != currentPlayer) {
 					ui.refreshInfoPanel();
 					ui.displayAccused(possSuspect, possWeapon, possRoom);
 					ui.inputConfirm(questionedPlayer);
@@ -198,7 +226,7 @@ System.out.println("row: "+destination.getRow()+"\nColumn: "+destination.getCol(
 					ui.inputDone(questionedPlayer);
 					playersQuestions.turnOver();
 				}
-			}while(questions && questionedPlayer != questionerPlayer);
+			}while(questions && questionedPlayer != currentPlayer);
 			ui.refreshInfoPanel();
 			//make sure it's valid - only when entering a room
 
@@ -288,6 +316,7 @@ System.out.println("row: "+destination.getRow()+"\nColumn: "+destination.getCol(
 			}
 			//else player is out of the game
 			currentPlayer.setAccuseGuessed(true);
+			ui.refreshInfoPanel();
 			return true;
 		}
 		else
@@ -308,6 +337,7 @@ System.out.println("row: "+destination.getRow()+"\nColumn: "+destination.getCol(
 			turnOver = false;
 			moveOver = false;
 			enteredRoom = false;
+			enteredPassage = false;
 			do {
 				currentPlayer = players.getCurrentPlayer();
 				currentToken = currentPlayer.getToken();

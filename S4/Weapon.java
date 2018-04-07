@@ -3,7 +3,7 @@ package S4;
 public class Weapon {
 
 	private final String name;
-	private final Coordinates position;
+	private Coordinates position;
 
 	Weapon(String name, Room room) {
 		this.name = name;
@@ -16,6 +16,11 @@ public class Weapon {
 
 	public Coordinates getPosition() {
 		return position;
+	}
+	
+	public void setPosition(Room room)
+	{
+		position = room.addWeapon();
 	}
 
 	public boolean hasName(String name) {

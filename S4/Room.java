@@ -13,14 +13,15 @@ public class Room {
 	private Room passageDestination;
 	private final boolean[] squaresOccupied;
 
-	Room(String name,Coordinates weaponArea, Coordinates tokenArea, Coordinates[] doors) {		squaresOccupied = new boolean[NUMBER_OF_ITEMS];
-	this.name = name;
-	this.tokenArea = tokenArea;
-	this.weaponArea = weaponArea;
-	this.doors = doors;
-	for (boolean squareOccupied : squaresOccupied) {
-		squareOccupied = false;
-	}
+	Room(String name,Coordinates weaponArea, Coordinates tokenArea, Coordinates[] doors) {
+		squaresOccupied = new boolean[NUMBER_OF_ITEMS];
+		this.name = name;
+		this.tokenArea = tokenArea;
+		this.weaponArea = weaponArea;
+		this.doors = doors;
+		for (boolean squareOccupied : squaresOccupied) {
+			squareOccupied = false;
+		}
 	}
 
 	public String getName()
@@ -55,7 +56,7 @@ public class Room {
 
 	public Coordinates addToken() {
 		int squareNumber = 0;
-		while (squaresOccupied[squareNumber]) {
+		while (squaresOccupied[squareNumber]) {//TODO error here when player suspects itself
 			squareNumber++;
 		}
 		Coordinates position = new Coordinates(tokenArea);
@@ -77,7 +78,6 @@ public class Room {
 
 	public Coordinates addWeapon() {
 		Coordinates position = new Coordinates(weaponArea);
-
 		return position;
 	}
 
