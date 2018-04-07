@@ -35,7 +35,7 @@ public class Cluedo {
 	}
 
 	private void inputPlayerNames() {
-//		int numPlayersSoFar = 0;
+		//		int numPlayersSoFar = 0;
 		numPlayers = 0;
 		counterForWin = 0;
 		do {
@@ -184,7 +184,7 @@ public class Cluedo {
 			//moves suspect token to room
 			Token moveToken = tokens.get(possSuspect);
 			Weapon moveWeapon = weapons.get(possWeapon);
-			
+
 			if(!currentPlayer.getName().equalsIgnoreCase(possSuspect))
 			{
 				if(enteredPassage)
@@ -210,8 +210,8 @@ public class Cluedo {
 			{
 				if(weapon.getPosition().equals(currentToken.getRoom().addWeapon()))
 				{
-					
-					
+
+
 				}
 			}
 			ui.display();
@@ -305,7 +305,7 @@ public class Cluedo {
 		String guessSuspect;
 		String guessWeapon;
 		String guessRoom;
-		
+
 		if(currentToken.getRoom().getName().equalsIgnoreCase(Names.ROOM_NAMES[9]))
 		{
 			ui.displayNotes(currentPlayer, deck);
@@ -324,6 +324,7 @@ public class Cluedo {
 			else
 			{
 				ui.youLost(currentPlayer);
+				ui.inputDone(currentPlayer);
 				//TODO add an input
 				counterForWin++;
 				currentPlayer.setAccuseGuessed(true);
@@ -427,6 +428,6 @@ public class Cluedo {
 		game.dealCards();
 		game.rollToStart();
 		game.takeTurns();
-//		System.exit(0);
+		//		System.exit(0);
 	}
 }
