@@ -45,13 +45,13 @@ public class Map {
 
 	Map () {
 		//"Computer Science", first coordinates room position for weapons, then tokens, then doors
-		rooms[0] = new Room(Names.ROOM_NAMES[0],new Coordinates(2,5),new Coordinates(1,1),new Coordinates[]{new Coordinates(4,6)});
+		rooms[0] = new Room(Names.ROOM_NAMES[0],new Coordinates(2,5),new Coordinates(0,1),new Coordinates[]{new Coordinates(4,6)});
 
 		//"O'Reilly Hall"
 		rooms[1] = new Room(Names.ROOM_NAMES[1],new Coordinates(11,3),new Coordinates(10,6),new Coordinates[]{new Coordinates(8,5), new Coordinates(9,7), new Coordinates(14,7), new Coordinates(15,5)});
 
 		//"Engineering"
-		rooms[2] = new Room(Names.ROOM_NAMES[2],new Coordinates(20,4),new Coordinates(20,2),new Coordinates[]{new Coordinates(18,4)});
+		rooms[2] = new Room(Names.ROOM_NAMES[2],new Coordinates(20,4),new Coordinates(19,2),new Coordinates[]{new Coordinates(18,4)});
 
 		//"Sutherland"
 		rooms[3] = new Room(Names.ROOM_NAMES[3],new Coordinates(18,10),new Coordinates(20,10),new Coordinates[]{new Coordinates(18,9),new Coordinates(22,12)});
@@ -63,10 +63,10 @@ public class Map {
 		rooms[5] = new Room(Names.ROOM_NAMES[5],new Coordinates(17,22),new Coordinates(19,21),new Coordinates[]{new Coordinates(17,21)});
 
 		//"Library"
-		rooms[6] = new Room(Names.ROOM_NAMES[6],new Coordinates(11,20),new Coordinates(10,19),new Coordinates[]{new Coordinates(11,18), new Coordinates(12,18), new Coordinates(14,20)});
+		rooms[6] = new Room(Names.ROOM_NAMES[6],new Coordinates(11,20),new Coordinates(9,19),new Coordinates[]{new Coordinates(11,18), new Coordinates(12,18), new Coordinates(14,20)});
 
 		//"Ag Science"
-		rooms[7] = new Room(Names.ROOM_NAMES[7],new Coordinates(0,21),new Coordinates(2,19),new Coordinates[]{new Coordinates(6,19)});
+		rooms[7] = new Room(Names.ROOM_NAMES[7],new Coordinates(0,21),new Coordinates(1,19),new Coordinates[]{new Coordinates(6,19)});
 
 		//"O'Brien"
 		rooms[8] = new Room(Names.ROOM_NAMES[8],new Coordinates(2,9),new Coordinates(2,11),new Coordinates[]{new Coordinates(6,15),new Coordinates(7,12)});

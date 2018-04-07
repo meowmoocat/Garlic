@@ -183,9 +183,16 @@ public class Cluedo {
 			//moves suspect token to room
 			Token moveToken = tokens.get(possSuspect);
 			Weapon moveWeapon = weapons.get(possWeapon);
-
-			Coordinates destination = currentPlayer.getInRoom();
-			Room room = map.getRoom(destination);
+			Player movePlayer = null;
+			
+			for(Player player : players)
+			{
+				if(player.getToken().hasName(possSuspect))
+				{
+					movePlayer = player;
+					player.setCalledInToRoom(true);
+				}
+			}
 
 			if(!currentPlayer.getName().equalsIgnoreCase(possSuspect))
 			{
@@ -196,6 +203,19 @@ public class Cluedo {
 						moveToken.leaveRoom();
 					}
 					moveToken.enterRoom(passageDestination);
+					if(moveToken.isOwned()) movePlayer.setInRoom(passageDestination.addToken());
+				}
+				else if(currentPlayer.getCalledInToRoom())
+				{
+					if(moveToken.isInRoom())
+					{
+						moveToken.leaveRoom();
+					}
+					Coordinates destination = map.getRoom(possRoom).getDoorCoordinates(0);
+					Room room = map.getRoom(destination);
+					moveToken.enterRoom(room);
+					if(moveToken.isOwned()) movePlayer.setInRoom(destination);
+					currentPlayer.setCalledInToRoom(false);
 				}
 				else
 				{
@@ -203,32 +223,36 @@ public class Cluedo {
 					{
 						moveToken.leaveRoom();
 					}
-
+					Coordinates destination = currentPlayer.getInRoom();
+					Room room = map.getRoom(destination);
 					moveToken.enterRoom(room);
+					if(moveToken.isOwned()) movePlayer.setInRoom(destination);
 				}
-
 			}
 			
 			Room roomLast = moveWeapon.getRoom();
+			Room destinationRoom;
+			Boolean weaponMoved = false;
 			for(Weapon weapon : weapons)
 			{
-				if(weapon.getRoom().equals(room))
+				if(weapon.getRoom().getName().equalsIgnoreCase(possRoom))
 				{
+					destinationRoom = weapon.getRoom();
 					weapon.setRoom(roomLast);
 					weapon.enterRoom(roomLast);
-					moveWeapon.setRoom(room);
-					moveWeapon.enterRoom(room);
+					
+					moveWeapon.setRoom(destinationRoom);
+					moveWeapon.enterRoom(destinationRoom);
+					weaponMoved = true;
 				}
+			}
+			if(!weaponMoved)
+			{
+				destinationRoom = map.getRoom(possRoom);
+				moveWeapon.setRoom(destinationRoom);
+				moveWeapon.enterRoom(destinationRoom);
 			}
 			ui.display();
-
-			for(Player player : players)
-			{
-				if(player.getToken().getName().equals(possSuspect))
-				{
-					player.setCalledInToRoom(true);
-				}
-			}
 
 			playersQuestions.setCurrentPlayer(currentPlayer.getName());
 			playersQuestions.turnOver();
