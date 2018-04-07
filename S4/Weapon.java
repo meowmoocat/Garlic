@@ -4,6 +4,8 @@ public class Weapon {
 
 	private final String name;
 	private Coordinates position;
+	private boolean isInRoom = false, isOwned = false;
+	private Room room;
 
 	Weapon(String name, Room room) {
 		this.name = name;
@@ -25,5 +27,11 @@ public class Weapon {
 
 	public boolean hasName(String name) {
 		return this.name.toLowerCase().contains(name.toLowerCase().trim());
+	}
+	
+	public void enterRoom(Room room) {
+		this.room = room;
+		position = this.room.addWeapon();
+		isInRoom = true;
 	}
 }
