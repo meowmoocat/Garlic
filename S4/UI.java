@@ -125,7 +125,7 @@ public class UI {
 		displayString("The solutions is: " + cards);
 	}
 
-	public void displayHelp(Token currentToken, boolean moveOver, boolean enteredRoom) {
+	public void displayHelp(Player currentPlayer, Token currentToken, boolean moveOver, boolean enteredRoom) {
 		displayString("Available Commands:");
 		//if in corridor - roll, cheat, done, exit, notes
 		if(!currentToken.isInRoom())
@@ -160,15 +160,11 @@ public class UI {
 				displayString("'passage' - move through secret passage");
 			}
 		}
-		//        displayString("roll = roll the dice and move your token.");
-		//        displayString("   u = up");
-		//        displayString("   d = down");
-		//        displayString("   l = left");
-		//        displayString("   r = right");
-		//        displayString("passage = move to another room via the passage.");
-		//        displayString("notes = see a record of your cards.");
-		//        displayString("done = end your turn.");
-		//        displayString("quit = end the game.");
+		if(currentPlayer.getCalledInToRoom())
+		{
+			displayString("'question' - posing a question to the players");
+		}
+		
 	}
 
 	/* Display Error Messages */

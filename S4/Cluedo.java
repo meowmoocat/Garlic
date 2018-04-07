@@ -91,6 +91,7 @@ public class Cluedo {
 
 	private void roll() {
 		if (!moveOver) {
+			currentPlayer.setCalledInToRoom(false);
 			dice.roll();
 			ui.displayDice(currentPlayer, dice);
 			int squaresMoved = 0;
@@ -149,6 +150,7 @@ public class Cluedo {
 				moveOver = true;
 				enteredRoom = true;
 				enteredPassage = true;
+				currentPlayer.setCalledInToRoom(false);
 				ui.display();
 			} else {
 				ui.displayErrorNoPassage();
@@ -165,10 +167,9 @@ public class Cluedo {
 		String possRoom;
 
 		Player questionedPlayer;
-
 		Players playersQuestions =  new Players(players);
-
-		if(enteredRoom)
+		
+		if(enteredRoom || currentPlayer.getCalledInToRoom())
 		{
 			ui.displayNotes(currentPlayer, deck);
 			possSuspect=ui.inputTokenGuess(currentPlayer,tokens);
@@ -184,6 +185,7 @@ public class Cluedo {
 			//moves suspect token to room
 			Token moveToken = tokens.get(possSuspect);
 			Weapon moveWeapon = weapons.get(possWeapon);
+			
 			Coordinates destination = currentPlayer.getInRoom();
 			Room room = map.getRoom(destination);
 
@@ -219,6 +221,15 @@ public class Cluedo {
 				}
 			}
 			ui.display();
+			
+			for(Player player : players)
+			{
+				if(player.getToken().getName().equals(possSuspect))
+				{
+					player.setCalledInToRoom(true);
+				}
+			}
+			
 			playersQuestions.setCurrentPlayer(currentPlayer.getName());
 			playersQuestions.turnOver();
 
@@ -386,7 +397,7 @@ public class Cluedo {
 						break;
 					}
 					case "help" : {
-						ui.displayHelp(currentToken, moveOver, enteredRoom);
+						ui.displayHelp(currentPlayer, currentToken, moveOver, enteredRoom);
 						break;
 					}
 					case "done": {
