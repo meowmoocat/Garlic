@@ -354,9 +354,11 @@ public class Cluedo {
 				currentToken = currentPlayer.getToken();
 				if(counterForWin==numPlayers-1)
 				{
+					gameWon = true;
+					turnOver = true;
 					ui.youWon(currentPlayer);
 				}
-				if(!currentPlayer.getAccuseGuessed())
+				else if(!currentPlayer.getAccuseGuessed())
 				{
 					ui.inputCommand(currentPlayer);
 					switch (ui.getCommand()) {
