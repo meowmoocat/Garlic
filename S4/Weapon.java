@@ -29,9 +29,4 @@ public class Weapon {
 		return this.name.toLowerCase().contains(name.toLowerCase().trim());
 	}
 	
-	public void enterRoom(Room room) {
-		this.room = room;
-		position = this.room.addWeapon();
-		isInRoom = true;
-	}
 }
