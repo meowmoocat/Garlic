@@ -184,8 +184,6 @@ public class Cluedo {
 			//moves suspect token to room
 			Token moveToken = tokens.get(possSuspect);
 			Weapon moveWeapon = weapons.get(possWeapon);
-			Coordinates destination = currentPlayer.getInRoom();
-			Room room = map.getRoom(destination);
 
 			if(!currentPlayer.getName().equalsIgnoreCase(possSuspect))
 			{
@@ -203,11 +201,10 @@ public class Cluedo {
 					{
 						moveToken.leaveRoom();
 					}
-					
+					Coordinates destination = currentPlayer.getInRoom();
+					Room room = map.getRoom(destination);
 					moveToken.enterRoom(room);
 				}
-				
-				moveWeapon.enterRoom(room);
 			}
 			for(Weapon weapon : weapons)
 			{

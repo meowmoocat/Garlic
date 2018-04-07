@@ -34,4 +34,5 @@ public class Weapon {
 		position = this.room.addWeapon();
 		isInRoom = true;
 	}
+	
 }
