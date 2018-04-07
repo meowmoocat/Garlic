@@ -26,7 +26,8 @@ public class Cluedo {
 	private Player currentPlayer;
 	private Token currentToken;
 	private Room passageDestination;
-	
+	private int counterForWin;
+	private int numPlayers;
 
 
 	private void announceTheGame() {
@@ -34,7 +35,9 @@ public class Cluedo {
 	}
 
 	private void inputPlayerNames() {
-		int numPlayersSoFar = 0;
+//		int numPlayersSoFar = 0;
+		numPlayers = 0;
+		counterForWin = 0;
 		do {
 			ui.inputName(players);
 			if (!ui.inputIsDone()) {
@@ -42,9 +45,9 @@ public class Cluedo {
 				Token token = tokens.get(ui.getTokenName());
 				players.add(new Player(ui.getPlayerName(),token));
 				token.setOwned();
-				numPlayersSoFar++;
+				numPlayers++;
 			}
-		} while (!ui.inputIsDone() && numPlayersSoFar<MAX_NUM_PLAYERS);
+		} while (!ui.inputIsDone() && numPlayers<MAX_NUM_PLAYERS);
 		ui.refreshInfoPanel();
 	}
 
@@ -297,6 +300,7 @@ public class Cluedo {
 		return true;
 	}
 
+
 	private boolean accuse() {
 		String guessSuspect;
 		String guessWeapon;
@@ -317,9 +321,14 @@ public class Cluedo {
 				ui.youWon(currentPlayer);
 			}
 			//else player is out of the game
-			currentPlayer.setAccuseGuessed(true);
-			ui.refreshInfoPanel();
+			else
+			{
+				counterForWin++;
+				currentPlayer.setAccuseGuessed(true);
+				ui.refreshInfoPanel();
+			}
 			return true;
+
 		}
 		else
 		{
@@ -343,6 +352,10 @@ public class Cluedo {
 			do {
 				currentPlayer = players.getCurrentPlayer();
 				currentToken = currentPlayer.getToken();
+				if(counterForWin==numPlayers-1)
+				{
+					ui.youWon(currentPlayer);
+				}
 				if(!currentPlayer.getAccuseGuessed())
 				{
 					ui.inputCommand(currentPlayer);
@@ -410,6 +423,6 @@ public class Cluedo {
 		game.dealCards();
 		game.rollToStart();
 		game.takeTurns();
-		System.exit(0);
+//		System.exit(0);
 	}
 }
