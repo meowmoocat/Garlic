@@ -48,21 +48,25 @@ public class UI {
 		infoPanel.addText(string);
 	}
 
+	//string displayed when questioned player has all three cards asked
 	public void displayViewChoice3(Player player, String name1, String name2, String name3)
 	{
 		displayString("Choose to show "+player.getName()+" the "+name1+", "+name2+" or "+name3+" card.");
 	}
 
+	//string displayed when questioned player has two of the cards asked
 	public void displayViewChoice2(Player player, String name1, String name2)
 	{
 		displayString("Choose to show "+player.getName()+" the "+name1+" or "+name2+" card.");
 	}
 
+	//string displayed when questioned player has one of the cards asked
 	public void displayViewed(Player player, String cardName)
 	{
 		displayString(player.getName()+ " has viewed your card for " + cardName);
 	}
 
+	//displays guess
 	public void displayAccused(String token, String weapon, String room)
 	{
 		displayString("Suspect token: " + token);
@@ -121,6 +125,7 @@ public class UI {
 		}
 	}
 
+	//displays cheat string
 	public void displaySolution(Cards cards) {
 		displayString("The solutions is: " + cards);
 	}
@@ -160,11 +165,11 @@ public class UI {
 				displayString("'passage' - move through secret passage");
 			}
 		}
-		if(currentPlayer.getCalledInToRoom())
+		if(currentPlayer.getCalledInToRoom())//player pulled to a room by question is allowed to stay in that room and ask a question
 		{
 			displayString("'question' - posing a question to the players");
 		}
-		
+
 	}
 
 	/* Display Error Messages */
@@ -447,7 +452,6 @@ public class UI {
 			sb.append(s);
 			sb.append("\n");
 		}
-		//		System.out.println(sb.toString());
 		displayString(sb.toString());
 	}
 
@@ -458,7 +462,6 @@ public class UI {
 
 	public void youWon(Player currentPlayer) {
 		displayString(currentPlayer.getName()+" won the game!!!!!\nFinally!!!!!!");
-
 	}
 
 	public void inputDone(Player player) {
