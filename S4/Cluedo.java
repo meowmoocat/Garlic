@@ -182,25 +182,27 @@ public class Cluedo {
 			Token moveToken = tokens.get(possSuspect);
 			Weapon moveWeapon = weapons.get(possWeapon);
 			
-			if(enteredPassage)
+			if(!currentPlayer.getName().equalsIgnoreCase(possSuspect))
 			{
-				if(moveToken.isInRoom())
+				if(enteredPassage)
 				{
-					moveToken.leaveRoom();
+					if(moveToken.isInRoom())
+					{
+						moveToken.leaveRoom();
+					}
+					moveToken.enterRoom(passageDestination);
 				}
-				moveToken.enterRoom(passageDestination);
-			}
-			else
-			{
-				if(moveToken.isInRoom())
+				else
 				{
-					moveToken.leaveRoom();
+					if(moveToken.isInRoom())
+					{
+						moveToken.leaveRoom();
+					}
+					Coordinates destination = currentPlayer.getInRoom();
+					Room room = map.getRoom(destination);
+					moveToken.enterRoom(room);
 				}
-				Coordinates destination = currentPlayer.getInRoom();
-				Room room = map.getRoom(destination);
-				moveToken.enterRoom(room);
 			}
-			
 			for(Weapon weapon : weapons)
 			{
 				if(weapon.getPosition().equals(currentToken.getRoom().addWeapon()))

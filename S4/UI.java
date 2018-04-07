@@ -144,10 +144,10 @@ public class UI {
 			{
 				displayString("'question' - posing a question to the players");
 			}
-			/*if(enteredRoom == true && currentToken.getRoom().getName().equalsIgnoreCase(Names.ROOM_NAMES[9]))
+			if(currentToken.getRoom().getName().equalsIgnoreCase(Names.ROOM_NAMES[9]))
 			{
 				displayString("'accuse' - checking the murder envelope");
-			}*/
+			}
 		}
 		//if start turn room - notes, roll, done, exit, (passage)
 		else if(currentToken.isInRoom() && moveOver == false)
