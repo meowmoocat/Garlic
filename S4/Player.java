@@ -12,9 +12,9 @@ public class Player {
 	private final Token token;
 	private Cards cards;
 	private Cards viewedCards;
-	private Boolean accuseGuessed = false;
+	private Boolean accuseGuessed = false;//set to true if player makes final accusation
 	private Coordinates inRoom;
-	private Boolean calledInToRoom = false;
+	private Boolean calledInToRoom = false;//set to true when a player asks a question about their character
 
 	Player(String name, Token token) {
 		this.name = name;
@@ -22,22 +22,22 @@ public class Player {
 		cards = new Cards();
 		viewedCards = new Cards();
 	}
-	
+
 	public Boolean getCalledInToRoom()
 	{
 		return calledInToRoom;
 	}
-	
+
 	public void setCalledInToRoom(Boolean called)
 	{
 		this.calledInToRoom = called;
 	}
-	
+
 	public void setInRoom(Coordinates room)
 	{
 		this.inRoom = room;
 	}
-	
+
 	public Coordinates getInRoom()
 	{
 		return inRoom;
