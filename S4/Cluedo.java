@@ -166,7 +166,7 @@ public class Cluedo {
 
 		Player questionedPlayer;
 		Players playersQuestions =  new Players(players);
-		
+
 		if(enteredRoom || currentPlayer.getCalledInToRoom())
 		{
 			ui.displayNotes(currentPlayer, deck);
@@ -183,7 +183,7 @@ public class Cluedo {
 			//moves suspect token to room
 			Token moveToken = tokens.get(possSuspect);
 			Weapon moveWeapon = weapons.get(possWeapon);
-			
+
 			Coordinates destination = currentPlayer.getInRoom();
 			Room room = map.getRoom(destination);
 
@@ -203,23 +203,25 @@ public class Cluedo {
 					{
 						moveToken.leaveRoom();
 					}
-					
+
 					moveToken.enterRoom(room);
 				}
-				
-				moveWeapon.enterRoom(room);
 
 			}
+			
+			Room roomLast = moveWeapon.getRoom();
 			for(Weapon weapon : weapons)
 			{
-				if(weapon.getPosition().equals(currentToken.getRoom().addWeapon()))
+				if(weapon.getRoom().equals(room))
 				{
-
-
+					weapon.setRoom(roomLast);
+					weapon.enterRoom(roomLast);
+					moveWeapon.setRoom(room);
+					moveWeapon.enterRoom(room);
 				}
 			}
 			ui.display();
-			
+
 			for(Player player : players)
 			{
 				if(player.getToken().getName().equals(possSuspect))
@@ -227,7 +229,7 @@ public class Cluedo {
 					player.setCalledInToRoom(true);
 				}
 			}
-			
+
 			playersQuestions.setCurrentPlayer(currentPlayer.getName());
 			playersQuestions.turnOver();
 
