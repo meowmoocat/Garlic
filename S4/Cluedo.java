@@ -1,7 +1,5 @@
 package S4;
 
-import java.util.ArrayList;
-
 /* created by Garlic
  * Anna Davison	16382333
  * James Kearns	15467622
