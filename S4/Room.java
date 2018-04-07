@@ -8,8 +8,8 @@ package S4;
 
 public class Room {
 
-	private final static int ITEM_AREA_WIDTH = 4;      // an item is a token or a weapon
-	private final static int NUMBER_OF_ITEMS = 6;
+	private final static int ITEM_AREA_WIDTH = 4;
+	private final static int NUMBER_OF_ITEMS = 12;
 
 	private final String name;
 	private final Coordinates tokenArea;
