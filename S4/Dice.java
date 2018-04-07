@@ -1,5 +1,11 @@
 package S4;
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 public class Dice {
 
 	private static final int NUM_DICE = 2;
