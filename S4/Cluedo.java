@@ -296,7 +296,7 @@ public class Cluedo {
 			return false;
 		}
 		ui.displayErrorNoCardsToView();
-		//TODO: input line to sign off
+		ui.setLog(questionedPlayer.getName() + " didn't answer.");
 		return true;
 	}
 
