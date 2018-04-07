@@ -25,6 +25,7 @@ public class Players implements Iterable<Player>, Iterator<Player> {
 		}
 	}
 
+	//emptys players array
 	public void clear() {
 		players.clear();
 	}
