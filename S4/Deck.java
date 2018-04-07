@@ -1,5 +1,11 @@
 package S4;
 
+/* created by Garlic
+ * Anna Davison	16382333
+ * James Kearns	15467622
+ * Orla Keating	15205679
+ */
+
 public class Deck {
 
 	private final Cards suspectCards = new Cards();
@@ -71,7 +77,7 @@ public class Deck {
 		try {
 			viewedCards.addAll(player.getViewedCard());
 		} catch (Exception e) {
-			// TODO: handle exception
+			//handle exception
 		}
 		viewedCards.add(card);
 		return viewedCards;
