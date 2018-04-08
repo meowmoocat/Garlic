@@ -462,7 +462,7 @@ public class UI {
 	}
 
 	public void youWon(Player currentPlayer) {
-		displayString(currentPlayer.getName()+" won the game!!!!!\nFinally!!!!!!");
+		displayString("\n\n\n\n\n\n\n\t\t"+currentPlayer.getName()+" won the game!!!!!\n\t\tFinally!!!!!!");
 	}
 
 	public void inputDone(Player player) {

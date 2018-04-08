@@ -25,7 +25,7 @@ public class Map {
 			{X,X,X,X,X,C,C,C,C,C,C,C,C,C,C,C,C,D,3,X,X,X,X,X},
 			{X,X,X,X,X,X,X,X,C,C,X,X,X,X,X,C,C,C,X,X,X,X,X,X},
 			{X,X,X,X,X,X,X,X,C,C,X,X,X,X,X,C,C,C,X,X,X,X,X,X},
-			{X,X,X,X,X,X,X,8,D,C,X,X,X,X,X,C,C,C,X,X,X,X,X,X},
+			{X,X,X,X,X,X,X,8,D,C,X,X,X,X,X,C,C,C,X,X,X,X,3,X},
 			{X,X,X,X,X,X,X,X,C,C,X,X,X,X,X,C,C,C,C,C,D,C,C,X},
 			{X,X,X,X,X,X,X,X,C,C,X,X,X,X,X,C,C,C,X,X,4,X,X,X},
 			{X,X,X,X,X,X,8,X,C,C,X,X,X,X,X,C,C,X,X,X,X,X,X,X},
