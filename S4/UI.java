@@ -78,6 +78,7 @@ public class UI {
 		displayString("WELCOME TO CLUEDO");
 		displayString("A murder has been committed.");
 		displayString("You must solve the case.");
+		displayString("Mouse click image to remove intro screen.");
 	}
 
 	public void displayCardsDealt() {
@@ -396,7 +397,7 @@ public class UI {
 			displayString("Enter the card name: ");
 			inputString();
 			displayString("> " + input);
-			input = input.trim();
+			input = input.trim().toLowerCase();
 			for(int i=0; i<Names.ALL_NAMES.length; i++)
 			{
 				if(input.equalsIgnoreCase(Names.ALL_NAMES[i]))

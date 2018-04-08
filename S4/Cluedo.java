@@ -17,7 +17,7 @@ public class Cluedo {
 	private final Weapons weapons = new Weapons(map);
 	private final UI ui = new UI(tokens,weapons);
 	private final Deck deck = new Deck();
-	private boolean moveOver;
+	private boolean moveOver; //for moving around the board(not turns)
 	private boolean enteredRoom;
 	private boolean gameWon;
 	private boolean enteredPassage;
@@ -33,7 +33,6 @@ public class Cluedo {
 	}
 
 	private void inputPlayerNames() {
-		//		int numPlayersSoFar = 0;
 		numPlayers = 0;
 		counterForWin = 0;
 		do {
@@ -167,20 +166,20 @@ public class Cluedo {
 		Player questionedPlayer;
 		Players playersQuestions =  new Players(players);
 
+		//conditions for asking a question
 		if(enteredRoom || currentPlayer.getCalledInToRoom())
 		{
 			ui.displayNotes(currentPlayer, deck);
 			possSuspect=ui.inputTokenGuess(currentPlayer,tokens);
 			possWeapon=ui.inputWeaponGuess(currentPlayer,weapons);
 			possRoom=currentToken.getRoom().getName();
-			// TODO move token and player
 
 			ui.setLog("\n"+currentPlayer.getName() + " asked:");
 			ui.setLog("Was it " + possSuspect);
 			ui.setLog("With the "+possWeapon);
 			ui.setLog("In "+possRoom);
 
-			//moves suspect token to room
+			
 			Token moveToken = tokens.get(possSuspect);
 			Weapon moveWeapon = weapons.get(possWeapon);
 			Player movePlayer = null;
@@ -193,7 +192,8 @@ public class Cluedo {
 					player.setCalledInToRoom(true);
 				}
 			}
-
+			
+			//moves suspect token to room
 			if(!currentPlayer.getName().equalsIgnoreCase(possSuspect))
 			{
 				if(enteredPassage)
@@ -230,10 +230,11 @@ public class Cluedo {
 				}
 			}
 			
+			//moves suspect weapon to room
 			Room roomLast = moveWeapon.getRoom();
 			Room destinationRoom;
 			Boolean weaponMoved = false;
-			for(Weapon weapon : weapons)
+			for(Weapon weapon : weapons) //if the weapons need to be swapped
 			{
 				if(weapon.getRoom().getName().equalsIgnoreCase(possRoom))
 				{
@@ -246,7 +247,7 @@ public class Cluedo {
 					weaponMoved = true;
 				}
 			}
-			if(!weaponMoved)
+			if(!weaponMoved)//if there's no other weapon in the room
 			{
 				destinationRoom = map.getRoom(possRoom);
 				moveWeapon.setRoom(destinationRoom);
@@ -258,7 +259,7 @@ public class Cluedo {
 			playersQuestions.turnOver();
 
 			do
-			{
+			{	//loops through players for questioning
 				questionedPlayer = playersQuestions.getCurrentPlayer();
 				if (questionedPlayer != currentPlayer) {
 					ui.refreshInfoPanel();
@@ -286,6 +287,7 @@ public class Cluedo {
 		}
 	}
 
+	//checks the questioned players deck to see if they have a suspect card
 	private boolean checkDeck(Player questionedPlayer, String possSuspect, String possWeapon, String possRoom) {
 		String choice;
 		if(questionedPlayer.hasCard(possSuspect) || questionedPlayer.hasCard(possWeapon) || questionedPlayer.hasCard(possRoom))
@@ -339,7 +341,7 @@ public class Cluedo {
 		return true;
 	}
 
-
+//for when the player is in lake and has accused someone
 	private boolean accuse() {
 		String guessSuspect;
 		String guessWeapon;
@@ -364,7 +366,6 @@ public class Cluedo {
 			{
 				ui.youLost(currentPlayer);
 				ui.inputDone(currentPlayer);
-				//TODO add an input
 				counterForWin++;
 				currentPlayer.setAccuseGuessed(true);
 				ui.refreshInfoPanel();
@@ -467,6 +468,5 @@ public class Cluedo {
 		game.dealCards();
 		game.rollToStart();
 		game.takeTurns();
-		//		System.exit(0);
 	}
 }

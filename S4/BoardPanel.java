@@ -10,6 +10,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
 
 import java.awt.image.BufferedImage;
@@ -22,11 +24,14 @@ class BoardPanel extends JPanel {
 	private static final float COL_OFFSET = 43f, ROW_OFFSET = 24f;
 	private static final float COL_SCALE = 23.4f, ROW_SCALE = 23.5f;
 	private static final int TOKEN_RADIUS = 10;   // must be even
-
+	private boolean intro;
+	
 	private final Tokens tokens;
 	private final Weapons weapons;
 	private BufferedImage boardImage;
 
+	private BufferedImage introScreen;
+	
 	public BufferedImage book;
 	public BufferedImage bored;
 	public BufferedImage gradcap;
@@ -38,6 +43,7 @@ class BoardPanel extends JPanel {
 	BoardPanel(Tokens tokens, Weapons weapons) {
 		this.tokens = tokens;
 		this.weapons = weapons;
+		this.intro = true;
 		setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		setBackground(Color.WHITE);
 		try {
@@ -45,7 +51,13 @@ class BoardPanel extends JPanel {
 		} catch (IOException ex) {
 			System.out.println("Could not find the image file " + ex.toString());
 		}
+		try {
+			introScreen = ImageIO.read(this.getClass().getResource("IntroScreen.png"));
+		} catch (IOException ex) {
+			System.out.println("Could not find the image file " + ex.toString());
+		}
 		weaponsReadIn();
+		removeIntro();
 	}
 
 	//draws board, tokens and weapons
@@ -80,12 +92,51 @@ class BoardPanel extends JPanel {
 			if(weapon.getName().equalsIgnoreCase("seagull"))
 				g2.drawImage(seagull, x, y, 4*TOKEN_RADIUS, 4*TOKEN_RADIUS, this);
 		}
+		if(intro)
+		{
+			g2.drawImage(introScreen, 0, 0, FRAME_WIDTH, FRAME_HEIGHT, this);
+		}
 	}
 
 	//redraws images 
 	public void refresh() {
 		revalidate();
 		repaint();
+	}
+	
+	public void removeIntro()
+	{
+		this.addMouseListener(new MouseListener() {
+			
+			public void mouseClicked(MouseEvent arg0) {
+				intro = false;
+				repaint();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 
 	//reads in images for weapons
