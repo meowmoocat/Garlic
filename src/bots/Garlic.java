@@ -16,6 +16,7 @@ public class Garlic implements BotAPI {
 	private Dice dice;
 	private Log log;
 	private Deck deck;
+	private Boolean moveOver;
 
 	public Garlic (Player player, PlayersInfo playersInfo, Map map, Dice dice, Log log, Deck deck) {
 		this.player = player;
@@ -24,6 +25,7 @@ public class Garlic implements BotAPI {
 		this.dice = dice;
 		this.log = log;
 		this.deck = deck;
+		moveOver = false;
 	}
 
 	public String getName() {
@@ -32,24 +34,36 @@ public class Garlic implements BotAPI {
 
 	public String getCommand() {
 		//if token is in corridor roll
-		System.out.println("fuck");
-		if(map.isCorridor(player.getToken().getPosition()))
+		if(map.isCorridor(player.getToken().getPosition()) && !moveOver)
 		{
 			return "roll";
 		}
 		if(player.getToken().isInRoom())
 		{
+			if(!moveOver)
+			{
+				
+			}
 			//if entered room question
 			//if in middle accuse
 			//if start turn & in room -> roll || passage
 		}
 		//if turn over done
-		return "done";
+		else
+		{
+			moveOver = false;
+			return "done";
+		}
+		return "notes";
 	}
 
 	public String getMove() {
 		// Add your code here
-		return "r";
+		moveOver = true;
+		if(player.getToken().getName().equalsIgnoreCase("scarlett")) return "u";
+		if(player.getToken().getName().equalsIgnoreCase("white") || player.getToken().getName().equalsIgnoreCase("green")) return "d";
+		if(player.getToken().getName().equalsIgnoreCase("mustard")) return "r";
+		return "l";
 	}
 
 	public String getSuspect() {
