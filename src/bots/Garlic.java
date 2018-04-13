@@ -2,7 +2,7 @@ package bots;
 
 import gameengine.*;
 
-public class Bot2 implements BotAPI {
+public class Garlic implements BotAPI {
 
 	// The public API of Bot must not change
 	// This is ONLY class that you can edit in the program
@@ -17,7 +17,7 @@ public class Bot2 implements BotAPI {
 	private Log log;
 	private Deck deck;
 
-	public Bot2 (Player player, PlayersInfo playersInfo, Map map, Dice dice, Log log, Deck deck) {
+	public Garlic (Player player, PlayersInfo playersInfo, Map map, Dice dice, Log log, Deck deck) {
 		this.player = player;
 		this.playersInfo = playersInfo;
 		this.map = map;
@@ -27,11 +27,23 @@ public class Bot2 implements BotAPI {
 	}
 
 	public String getName() {
-		return "Bot2"; // must match the class name
+		return "Garlic"; // must match the class name
 	}
 
 	public String getCommand() {
-		// Add your code here
+		//if token is in corridor roll
+		System.out.println("fuck");
+		if(map.isCorridor(player.getToken().getPosition()))
+		{
+			return "roll";
+		}
+		if(player.getToken().isInRoom())
+		{
+			//if entered room question
+			//if in middle accuse
+			//if start turn & in room -> roll || passage
+		}
+		//if turn over done
 		return "done";
 	}
 
@@ -68,4 +80,5 @@ public class Bot2 implements BotAPI {
 	public void notifyResponse(Log response) {
 		// Add your code here
 	}
+
 }
