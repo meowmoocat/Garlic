@@ -88,6 +88,75 @@ public class Garlic implements BotAPI {
 
 	public String getCard(Cards matchingCards) {
 		// Add your code here
+		
+		if(player.hasCard("plum") && matchingCards.contains("plum")) {
+			return "plum";
+		}
+		if(player.hasCard("white") && matchingCards.contains("white")) {
+			return "white";
+		}
+		if(player.hasCard("scarlett") && matchingCards.contains("scarlett")) {
+			return "scarlett";
+		}
+		if(player.hasCard("green") && matchingCards.contains("green")) {
+			return "green";
+		}
+		if(player.hasCard("mustard") && matchingCards.contains("mustard")) {
+			return "plum";
+		}
+		if(player.hasCard("peacock") && matchingCards.contains("peacock")) {
+			return "peacock";
+		}
+		
+		if(player.hasCard("rope") && matchingCards.contains("rope")) {
+			return "rope";
+		}
+		if(player.hasCard("dagger") && matchingCards.contains("dagger")) {
+			return "dagger";
+		}
+		if(player.hasCard("wrench") && matchingCards.contains("wrench")) {
+			return "wrench";
+		}
+		if(player.hasCard("pistol") && matchingCards.contains("pistol")) {
+			return "pistol";
+		}
+		if(player.hasCard("candelstick") && matchingCards.contains("candelstick")) {
+			return "candelstick";
+		}
+		if(player.hasCard("lead pipe") && matchingCards.contains("lead pipe")) {
+			return "lead pipe";
+		}
+		
+		if(player.hasCard("kitchen") && matchingCards.contains("kitchen")) {
+			return "kitchen";
+		}
+		if(player.hasCard("ballroom") && matchingCards.contains("ballroom")) {
+			return "ballroom";
+		}
+		if(player.hasCard("conservatory") && matchingCards.contains("conservatory")) {
+			return "conservatory";
+		}
+		if(player.hasCard("billiard room") && matchingCards.contains("billiard room")) {
+			return "billiard room";
+		}
+		if(player.hasCard("library") && matchingCards.contains("library")) {
+			return "library";
+		}
+		if(player.hasCard("study") && matchingCards.contains("study")) {
+			return "study";
+		}
+		if(player.hasCard("hall") && matchingCards.contains("hall")) {
+			return "hall";
+		}
+		if(player.hasCard("lounge") && matchingCards.contains("lounge")) {
+			return "lounge";
+		}
+		if(player.hasCard("dining room") && matchingCards.contains("dining room")) {
+			return "dining room";
+		}
+		if(player.hasCard("cellar") && matchingCards.contains("cellar")) {
+			return "cellar";
+		}
 		return matchingCards.get().toString();
 	}
 
