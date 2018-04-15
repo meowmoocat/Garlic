@@ -1,8 +1,19 @@
 package bots;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+import com.sun.javafx.scene.paint.GradientUtils.Point;
+
+
 import gameengine.*;
 
 public class Garlic implements BotAPI {
+
+
+	private HashMap<String, Integer> RoomValues = new HashMap<>();
+
 
 	// The public API of Bot must not change
 	// This is ONLY class that you can edit in the program
@@ -17,6 +28,9 @@ public class Garlic implements BotAPI {
 	private Log log;
 	private Deck deck;
 	private Boolean moveOver;
+	private Token token;
+	//	private Graph graph = new GraphImpl();
+	private Boolean note = false;
 
 	public Garlic (Player player, PlayersInfo playersInfo, Map map, Dice dice, Log log, Deck deck) {
 		this.player = player;
@@ -26,7 +40,64 @@ public class Garlic implements BotAPI {
 		this.log = log;
 		this.deck = deck;
 		moveOver = false;
+		this.token = player.getToken();
+
+		RoomValues.put("Kitchen", 0);
+		RoomValues.put("Ballroom", 0);
+		RoomValues.put("Conservatory", 0);
+		RoomValues.put("Billiard Room", 0);
+		RoomValues.put("Library", 0);
+		RoomValues.put("Study", 0);
+		RoomValues.put("Hall", 0);
+		RoomValues.put("Lounge", 0);
+		RoomValues.put("Dining Room", 0);
+		RoomValues.put("Cellar", 0);
+
 	}
+
+	private void changeNum()
+	{
+		for(int i=0; i<Names.ROOM_CARD_NAMES.length; i++)
+		{
+			if(!player.hasCard(Names.ROOM_CARD_NAMES[i]))
+			{
+				if(RoomValues.containsKey(Names.ROOM_NAMES[i]))
+				{
+					RoomValues.get(Names.ROOM_CARD_NAMES[i]);
+					RoomValues.put(Names.ROOM_CARD_NAMES[i], 1);
+				}
+			}
+		}
+	}
+
+	//	private void visit(String []map, Point start)
+	//	{
+	//		int []x = {0,0,1,-1};
+	//		int []y = {1,-1,0,0};
+	//		
+	//		LinkedList<Point> q = new LinkedList();
+	//		q.add(start);
+	//		int n = map.length;
+	//		int m = map[0].length();
+	//		int[][]dist = new int[n][m];
+	//		
+	//		for(int []a : dist)
+	//		{
+	//			Arrays.fill(a, -1);
+	//		}
+	//		
+	//		dist[start.x][start.y] = 0;
+	//		while(!q.isEmpty())
+	//		{
+	//			Point p = q.removefirst();
+	//			for(int i=0;i<4; i++)
+	//			{
+	//				int a = p.x + x[i];
+	//				int b = p.y + y[i];
+	//				if(a>)
+	//			}
+	//		}
+	//	}
 
 	public String getName() {
 		return "Garlic"; // must match the class name
@@ -34,6 +105,11 @@ public class Garlic implements BotAPI {
 
 	public String getCommand() {
 		//if token is in corridor roll
+		if(!note)
+		{
+			note = true;
+			return "notes";
+		}
 		if(map.isCorridor(player.getToken().getPosition()) && !moveOver)
 		{
 			return "roll";
@@ -63,7 +139,12 @@ public class Garlic implements BotAPI {
 	}
 
 	public String getMove() {
-		// Add your code here
+		changeNum();
+		for(int i=0; i<Names.ROOM_NAMES.length;i++)
+		{
+			System.out.println(Names.ROOM_NAMES[i]+" "+RoomValues.get(Names.ROOM_NAMES[i]));
+		}
+		System.out.println("\n");
 		moveOver = true;
 		if(player.getToken().getName().equalsIgnoreCase("scarlett")) return "u";
 		if(player.getToken().getName().equalsIgnoreCase("white") || player.getToken().getName().equalsIgnoreCase("green")) return "d";
@@ -73,6 +154,7 @@ public class Garlic implements BotAPI {
 
 	public String getSuspect() {
 		// Add your code here
+		//TODO: check case
 		if(!player.hasCard("plum") && !player.hasSeen("plum")) {
 			return "plum";
 		}
@@ -149,6 +231,9 @@ public class Garlic implements BotAPI {
 		if(!player.hasCard("dining room") && !player.hasSeen("dining room")) {
 			return "dining room";
 		}
+		if(!player.hasCard("cellar") && !player.hasSeen("cellar")) {
+			return "cellar";
+		}
 
 		return Names.ROOM_NAMES[0];
 	}
@@ -159,8 +244,6 @@ public class Garlic implements BotAPI {
 	}
 
 	public String getCard(Cards matchingCards) {
-		// Add your code here
-
 		if(player.hasCard("plum") && matchingCards.contains("plum")) {
 			return "plum";
 		}
@@ -229,7 +312,6 @@ public class Garlic implements BotAPI {
 		if(player.hasCard("cellar") && matchingCards.contains("cellar")) {
 			return "cellar";
 		}
-
 		return matchingCards.get().toString();
 	}
 
