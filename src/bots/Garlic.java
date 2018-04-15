@@ -144,9 +144,6 @@ public class Garlic implements BotAPI {
 		if(!player.hasCard("dining room") && !player.hasSeen("dining room")) {
 			return "dining room";
 		}
-		if(!player.hasCard("cellar") && !player.hasSeen("cellar")) {
-			return "cellar";
-		}
 		
 		return Names.ROOM_NAMES[0];
 	}
