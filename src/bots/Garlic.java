@@ -42,7 +42,7 @@ public class Garlic implements BotAPI {
 		{
 			if(!moveOver)
 			{
-				
+
 			}
 			//if entered room question
 			//if in middle accuse
@@ -68,16 +68,86 @@ public class Garlic implements BotAPI {
 
 	public String getSuspect() {
 		// Add your code here
+		if(!player.hasCard("plum") && !player.hasSeen("plum")) {
+			return "plum";
+		}
+		if(!player.hasCard("white") && !player.hasSeen("white")) {
+			return "white";
+		}
+		if(!player.hasCard("scarlett") && !player.hasSeen("scarlett")) {
+			return "scarlett";
+		}
+		if(!player.hasCard("green") && !player.hasSeen("green")) {
+			return "green";
+		}
+		if(!player.hasCard("mustard") && !player.hasSeen("mustard")) {
+			return "plum";
+		}
+		if(!player.hasCard("peacock") && !player.hasSeen("peacock")) {
+			return "peacock";
+		}
 		return Names.SUSPECT_NAMES[0];
 	}
 
 	public String getWeapon() {
 		// Add your code here
+		
+		if(!player.hasCard("rope") && !player.hasSeen("rope")) {
+			return "rope";
+		}
+		if(!player.hasCard("dagger") && !player.hasSeen("dagger")) {
+			return "dagger";
+		}
+		if(!player.hasCard("wrench") && !player.hasSeen("wrench")) {
+			return "wrench";
+		}
+		if(!player.hasCard("pistol") && !player.hasSeen("pistol")) {
+			return "pistol";
+		}
+		if(!player.hasCard("candelstick") && !player.hasSeen("candelstick")) {
+			return "candelstick";
+		}
+		if(!player.hasCard("lead pipe") && !player.hasSeen("lead pipe")) {
+			return "lead pipe";
+		}
+		
 		return Names.WEAPON_NAMES[0];
 	}
 
 	public String getRoom() {
 		// Add your code here
+		
+		if(!player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
+			return "kitchen";
+		}
+		if(!player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+			return "ballroom";
+		}
+		if(!player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+			return "conservatory";
+		}
+		if(!player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+			return "billiard room";
+		}
+		if(!player.hasCard("library") && !player.hasSeen("library")) {
+			return "library";
+		}
+		if(!player.hasCard("study") && !player.hasSeen("study")) {
+			return "study";
+		}
+		if(!player.hasCard("hall") && !player.hasSeen("hall")) {
+			return "hall";
+		}
+		if(!player.hasCard("lounge") && !player.hasSeen("lounge")) {
+			return "lounge";
+		}
+		if(!player.hasCard("dining room") && !player.hasSeen("dining room")) {
+			return "dining room";
+		}
+		if(!player.hasCard("cellar") && !player.hasSeen("cellar")) {
+			return "cellar";
+		}
+		
 		return Names.ROOM_NAMES[0];
 	}
 
@@ -157,6 +227,7 @@ public class Garlic implements BotAPI {
 		if(player.hasCard("cellar") && matchingCards.contains("cellar")) {
 			return "cellar";
 		}
+		
 		return matchingCards.get().toString();
 	}
 
