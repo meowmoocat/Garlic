@@ -42,7 +42,12 @@ public class Garlic implements BotAPI {
 		{
 			if(!moveOver)
 			{
-
+				if((map.getRoom(player.getToken().getPosition()).toString())!=Names.ROOM_NAMES[9]) {//needs to not work if already asked question
+					return "question";
+				}
+				if((map.getRoom(player.getToken().getPosition()).toString())==Names.ROOM_NAMES[9]) {//needs to not work if already accused
+					return "accuse";
+				}
 			}
 			//if entered room question
 			//if in middle accuse
@@ -91,7 +96,7 @@ public class Garlic implements BotAPI {
 
 	public String getWeapon() {
 		// Add your code here
-		
+
 		if(!player.hasCard("rope") && !player.hasSeen("rope")) {
 			return "rope";
 		}
@@ -110,13 +115,13 @@ public class Garlic implements BotAPI {
 		if(!player.hasCard("lead pipe") && !player.hasSeen("lead pipe")) {
 			return "lead pipe";
 		}
-		
+
 		return Names.WEAPON_NAMES[0];
 	}
 
 	public String getRoom() {
 		// Add your code here
-		
+
 		if(!player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
 			return "kitchen";
 		}
@@ -144,7 +149,7 @@ public class Garlic implements BotAPI {
 		if(!player.hasCard("dining room") && !player.hasSeen("dining room")) {
 			return "dining room";
 		}
-		
+
 		return Names.ROOM_NAMES[0];
 	}
 
@@ -155,7 +160,7 @@ public class Garlic implements BotAPI {
 
 	public String getCard(Cards matchingCards) {
 		// Add your code here
-		
+
 		if(player.hasCard("plum") && matchingCards.contains("plum")) {
 			return "plum";
 		}
@@ -174,7 +179,7 @@ public class Garlic implements BotAPI {
 		if(player.hasCard("peacock") && matchingCards.contains("peacock")) {
 			return "peacock";
 		}
-		
+
 		if(player.hasCard("rope") && matchingCards.contains("rope")) {
 			return "rope";
 		}
@@ -193,7 +198,7 @@ public class Garlic implements BotAPI {
 		if(player.hasCard("lead pipe") && matchingCards.contains("lead pipe")) {
 			return "lead pipe";
 		}
-		
+
 		if(player.hasCard("kitchen") && matchingCards.contains("kitchen")) {
 			return "kitchen";
 		}
@@ -224,7 +229,7 @@ public class Garlic implements BotAPI {
 		if(player.hasCard("cellar") && matchingCards.contains("cellar")) {
 			return "cellar";
 		}
-		
+
 		return matchingCards.get().toString();
 	}
 
