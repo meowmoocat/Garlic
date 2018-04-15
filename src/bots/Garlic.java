@@ -231,9 +231,6 @@ public class Garlic implements BotAPI {
 		if(!player.hasCard("dining room") && !player.hasSeen("dining room")) {
 			return "dining room";
 		}
-		if(!player.hasCard("cellar") && !player.hasSeen("cellar")) {
-			return "cellar";
-		}
 
 		return Names.ROOM_NAMES[0];
 	}
@@ -309,9 +306,7 @@ public class Garlic implements BotAPI {
 		if(player.hasCard("dining room") && matchingCards.contains("dining room")) {
 			return "dining room";
 		}
-		if(player.hasCard("cellar") && matchingCards.contains("cellar")) {
-			return "cellar";
-		}
+
 		return matchingCards.get().toString();
 	}
 
