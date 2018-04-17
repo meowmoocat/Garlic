@@ -1,10 +1,9 @@
 package bots;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
-
-import com.sun.javafx.scene.paint.GradientUtils.Point;
 
 
 import gameengine.*;
@@ -29,7 +28,6 @@ public class Garlic implements BotAPI {
 	private Deck deck;
 	private Boolean moveOver;
 	private Token token;
-	//	private Graph graph = new GraphImpl();
 	private Boolean note = false;
 
 	public Garlic (Player player, PlayersInfo playersInfo, Map map, Dice dice, Log log, Deck deck) {
@@ -52,7 +50,6 @@ public class Garlic implements BotAPI {
 		RoomValues.put("Lounge", 0);
 		RoomValues.put("Dining Room", 0);
 		RoomValues.put("Cellar", 0);
-
 	}
 
 	private void changeNum()
@@ -306,8 +303,31 @@ public class Garlic implements BotAPI {
 		if(player.hasCard("dining room") && matchingCards.contains("dining room")) {
 			return "dining room";
 		}
-
 		return matchingCards.get().toString();
+	}
+	
+	private static ArrayList<Coordinates> possibleMoves(Coordinates current_tile) {
+		ArrayList<Coordinates> moves = new ArrayList<Coordinates>();
+		int x = current_tile.getRow(), y = current_tile.getCol();
+		int current_type = Map.MAP[x][y];
+		if (! ((x - 1) < 0) && !(current_type == Map.C && Map.MAP[x-1][y] == Map.X)) {
+			// can't move up
+			moves.add(new Coordinates(y, x-1));
+		}
+		if (! ((x + 1) > Map.NUM_ROWS) && !(current_type == Map.C && Map.MAP[x+1][y] == Map.X)) {
+			// can't move up
+			moves.add(new Coordinates(y, x+1));
+		}
+		if (! ((y - 1) < 0) && !(current_type == Map.C && Map.MAP[x][y-1] == Map.X)) {
+			// can't move up
+			moves.add(new Coordinates(y-1, x));
+		}
+		if (! ((y + 1) < Map.NUM_COLS) && !(current_type == Map.C && Map.MAP[x][y+1] == Map.X)) {
+			// can't move up
+			moves.add(new Coordinates(y+1, x));
+		}
+		
+		return moves;
 	}
 
 	public void notifyResponse(Log response) {
