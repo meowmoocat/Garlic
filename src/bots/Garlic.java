@@ -158,7 +158,7 @@ public class Garlic implements BotAPI {
 		if(player.getToken().getName().equalsIgnoreCase("white") || player.getToken().getName().equalsIgnoreCase("green")) return "d";
 		if(player.getToken().getName().equalsIgnoreCase("mustard")) return "r";*/
 
-		//white start to kitchen
+		//white start
 		if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 			String j=null;
 			for(int i=0; i < 8 ; i++) {
@@ -188,6 +188,83 @@ public class Garlic implements BotAPI {
 				if(i==10) j="l";
 				if(i==11) j="l";
 				if(i==12) j="u";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+			String j=null;
+			for(int i=0; i < 16 ; i++) {
+				if(i==0) j="d";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="d";
+				if(i==4) j="d";
+				if(i==5) j="d";
+				if(i==6) j="d";
+				if(i==7) j="d";
+				if(i==8) j="d";
+				if(i==9) j="d";
+				if(i==10) j="d";
+				if(i==11) j="r";
+				if(i==12) j="d";
+				if(i==13) j="d";
+				if(i==14) j="d";
+				if(i==15) j="l";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+			String j=null;
+			for(int i=0; i < 22 ; i++) {
+				if(i==0) j="d";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="d";
+				if(i==4) j="d";
+				if(i==5) j="d";
+				if(i==6) j="d";
+				if(i==7) j="d";
+				if(i==8) j="d";
+				if(i==9) j="d";
+				if(i==10) j="d";
+				if(i==11) j="r";
+				if(i==12) j="r";
+				if(i==13) j="r";
+				if(i==14) j="r";
+				if(i==15) j="r";
+				if(i==16) j="r";
+				if(i==17) j="r";
+				if(i==18) j="r";
+				if(i==19) j="r";
+				if(i==20) j="r";
+				if(i==21) j="r";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+			String j=null;
+			for(int i=0; i < 24 ; i++) {
+				if(i==0) j="d";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="d";
+				if(i==4) j="d";
+				if(i==5) j="d";
+				if(i==6) j="d";
+				if(i==7) j="d";
+				if(i==8) j="d";
+				if(i==9) j="d";
+				if(i==10) j="d";
+				if(i==11) j="r";
+				if(i==12) j="d";
+				if(i==13) j="d";
+				if(i==14) j="d";
+				if(i==15) j="d";
+				if(i==16) j="d";
+				if(i==17) j="d";
+				if(i==18) j="d";
+				if(i==19) j="d";
+				if(i==20) j="d";
+				if(i==21) j="l";
+				if(i==22) j="l";
+				if(i==23) j="d";
 				q.add(j);
 			}
 		}
