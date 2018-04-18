@@ -1,7 +1,6 @@
 package bots;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -27,9 +26,8 @@ public class Garlic implements BotAPI {
 	private Log log;
 	private Deck deck;
 	private Boolean moveOver;
+	private Boolean questionAsked;
 	private Token token;
-	private Boolean note = false;
-	private Boolean roll = false;
 	private Queue<String> q = new LinkedList<String>();
 
 	public Garlic (Player player, PlayersInfo playersInfo, Map map, Dice dice, Log log, Deck deck) {
@@ -40,6 +38,7 @@ public class Garlic implements BotAPI {
 		this.log = log;
 		this.deck = deck;
 		moveOver = false;
+		questionAsked = false;
 		this.token = player.getToken();
 
 		RoomValues.put("Kitchen", 0);
@@ -69,67 +68,35 @@ public class Garlic implements BotAPI {
 		}
 	}
 
-	//	private void visit(String []map, Point start)
-	//	{
-	//		int []x = {0,0,1,-1};
-	//		int []y = {1,-1,0,0};
-	//		
-	//		LinkedList<Point> q = new LinkedList();
-	//		q.add(start);
-	//		int n = map.length;
-	//		int m = map[0].length();
-	//		int[][]dist = new int[n][m];
-	//		
-	//		for(int []a : dist)
-	//		{
-	//			Arrays.fill(a, -1);
-	//		}
-	//		
-	//		dist[start.x][start.y] = 0;
-	//		while(!q.isEmpty())
-	//		{
-	//			Point p = q.removefirst();
-	//			for(int i=0;i<4; i++)
-	//			{
-	//				int a = p.x + x[i];
-	//				int b = p.y + y[i];
-	//				if(a>)
-	//			}
-	//		}
-	//	}
-
 	public String getName() {
 		return "Garlic"; // must match the class name
 	}
 
 	public String getCommand() {
 		//if token is in corridor roll
-		if(!note)
+
+		if(questionAsked) System.out.println("asked true");
+		else System.out.println("asked false");
+
+		if(map.isCorridor(player.getToken().getPosition()) && !moveOver)
 		{
-			note = true;
-			return "notes";
-		}
-		if(map.isCorridor(player.getToken().getPosition()) && !moveOver && !roll)
-		{
-			roll = true;
 			return "roll";
 		}
-		if(player.getToken().isInRoom())
+		if(player.getToken().isInRoom() && !questionAsked)
 		{
-			if(!moveOver)
+			System.out.println("fuck");
+			if(moveOver)
 			{
-				//error found for line just below
-				//				Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 102
-				//				at gameengine.Map.getRoom(Map.java:76)
-				//				at bots.Garlic.getCommand(Garlic.java:121)
-				//				at gameengine.UI.inputCommand(UI.java:207)
-				//				at gameengine.Cluedo.takeTurns(Cluedo.java:286)
-				//				at gameengine.Cluedo.main(Cluedo.java:345)
-				if((map.getRoom(player.getToken().getPosition()).toString())!=Names.ROOM_NAMES[9]) {//needs to not work if already asked question
-					return "question";
-				}
-				if((map.getRoom(player.getToken().getPosition()).toString())==Names.ROOM_NAMES[9]) {//needs to not work if already accused
-					return "accuse";
+				for(int i=0; i<Names.ROOM_NAMES.length; i++)
+				{
+					if(token.getRoom().hasName(Names.ROOM_CARD_NAMES[i])) {//needs to not work if already asked question
+						System.out.println("here? "+Names.ROOM_CARD_NAMES[i]);
+						questionAsked = true;
+						return "question";
+					}
+					else if(token.getRoom().hasName(Names.ROOM_NAMES[9])) {
+						return "accuse";
+					}
 				}
 			}
 			//if entered room question
@@ -139,8 +106,8 @@ public class Garlic implements BotAPI {
 		//if turn over done
 		else
 		{
+			questionAsked = true;
 			moveOver = false;
-			roll = false;
 			return "done";
 		}
 		return "notes";
@@ -153,10 +120,13 @@ public class Garlic implements BotAPI {
 			System.out.println(Names.ROOM_NAMES[i]+" "+RoomValues.get(Names.ROOM_NAMES[i]));
 		}
 		System.out.println("\n");
-		moveOver = true;
+
 		if(player.getToken().getName().equalsIgnoreCase("scarlett")) return "u";
 		if(player.getToken().getName().equalsIgnoreCase("white") || player.getToken().getName().equalsIgnoreCase("green")) return "d";
 		if(player.getToken().getName().equalsIgnoreCase("mustard")) return "r";*/
+
+		moveOver = true;
+		questionAsked = false;
 
 		//white start
 		if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
@@ -425,7 +395,7 @@ public class Garlic implements BotAPI {
 		return Names.WEAPON_NAMES[0];
 	}
 
-	public String getRoom() {
+	public String getRoom() {//TODO: is hasSeen correct here?
 		// Add your code here
 
 		if(!player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
@@ -560,5 +530,7 @@ public class Garlic implements BotAPI {
 	public void notifyResponse(Log response) {
 		// Add your code here
 	}
+
+
 
 }
