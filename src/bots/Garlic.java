@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
-
+import java.util.Queue;
 
 import gameengine.*;
 
@@ -29,6 +29,8 @@ public class Garlic implements BotAPI {
 	private Boolean moveOver;
 	private Token token;
 	private Boolean note = false;
+	private Boolean roll = false;
+	private Queue<String> q = new LinkedList<String>();
 
 	public Garlic (Player player, PlayersInfo playersInfo, Map map, Dice dice, Log log, Deck deck) {
 		this.player = player;
@@ -107,14 +109,22 @@ public class Garlic implements BotAPI {
 			note = true;
 			return "notes";
 		}
-		if(map.isCorridor(player.getToken().getPosition()) && !moveOver)
+		if(map.isCorridor(player.getToken().getPosition()) && !moveOver && !roll)
 		{
+			roll = true;
 			return "roll";
 		}
 		if(player.getToken().isInRoom())
 		{
 			if(!moveOver)
 			{
+				//error found for line just below
+				//				Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 102
+				//				at gameengine.Map.getRoom(Map.java:76)
+				//				at bots.Garlic.getCommand(Garlic.java:121)
+				//				at gameengine.UI.inputCommand(UI.java:207)
+				//				at gameengine.Cluedo.takeTurns(Cluedo.java:286)
+				//				at gameengine.Cluedo.main(Cluedo.java:345)
 				if((map.getRoom(player.getToken().getPosition()).toString())!=Names.ROOM_NAMES[9]) {//needs to not work if already asked question
 					return "question";
 				}
@@ -130,13 +140,14 @@ public class Garlic implements BotAPI {
 		else
 		{
 			moveOver = false;
+			roll = false;
 			return "done";
 		}
 		return "notes";
 	}
 
 	public String getMove() {
-		changeNum();
+		/*changeNum();
 		for(int i=0; i<Names.ROOM_NAMES.length;i++)
 		{
 			System.out.println(Names.ROOM_NAMES[i]+" "+RoomValues.get(Names.ROOM_NAMES[i]));
@@ -145,7 +156,31 @@ public class Garlic implements BotAPI {
 		moveOver = true;
 		if(player.getToken().getName().equalsIgnoreCase("scarlett")) return "u";
 		if(player.getToken().getName().equalsIgnoreCase("white") || player.getToken().getName().equalsIgnoreCase("green")) return "d";
-		if(player.getToken().getName().equalsIgnoreCase("mustard")) return "r";
+		if(player.getToken().getName().equalsIgnoreCase("mustard")) return "r";*/
+		if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9) {
+			//String arr[]= {"d,l,l,d,d,d,d,d,d,l,l,l,u"};
+			String j=null;
+			for(int i=0; i < 13 ; i++) {
+				if(i==0) j="d";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="d";
+				if(i==4) j="d";
+				if(i==5) j="d";
+				if(i==6) j="d";
+				if(i==7) j="d";
+				if(i==8) j="d";
+				if(i==9) j="l";
+				if(i==10) j="l";
+				if(i==11) j="l";
+				if(i==12) j="u";
+				q.add(j);
+			}
+		}
+		if(!q.isEmpty()) {
+			String local = q.remove();
+			return local;
+		}
 		return "l";
 	}
 
@@ -305,7 +340,7 @@ public class Garlic implements BotAPI {
 		}
 		return matchingCards.get().toString();
 	}
-	
+
 	private static ArrayList<Coordinates> possibleMoves(Coordinates current_tile) {
 		ArrayList<Coordinates> moves = new ArrayList<Coordinates>();
 		int x = current_tile.getRow(), y = current_tile.getCol();
@@ -326,7 +361,7 @@ public class Garlic implements BotAPI {
 			// can't move up
 			moves.add(new Coordinates(y+1, x));
 		}
-		
+
 		return moves;
 	}
 
