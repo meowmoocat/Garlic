@@ -157,8 +157,22 @@ public class Garlic implements BotAPI {
 		if(player.getToken().getName().equalsIgnoreCase("scarlett")) return "u";
 		if(player.getToken().getName().equalsIgnoreCase("white") || player.getToken().getName().equalsIgnoreCase("green")) return "d";
 		if(player.getToken().getName().equalsIgnoreCase("mustard")) return "r";*/
-		if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9) {
-			//String arr[]= {"d,l,l,d,d,d,d,d,d,l,l,l,u"};
+
+		//white start to kitchen
+		if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+			String j=null;
+			for(int i=0; i < 8 ; i++) {
+				if(i==0) j="d";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="d";
+				if(i==4) j="d";
+				if(i==5) j="d";
+				if(i==6) j="d";
+				if(i==7) j="r";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
 			String j=null;
 			for(int i=0; i < 13 ; i++) {
 				if(i==0) j="d";
@@ -177,6 +191,9 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}
+		
+		
+		
 		if(!q.isEmpty()) {
 			String local = q.remove();
 			return local;
