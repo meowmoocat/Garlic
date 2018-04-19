@@ -27,6 +27,7 @@ public class Garlic implements BotAPI {
 	private Deck deck;
 	private Boolean moveOver;
 	private Boolean questionAsked;
+	private Boolean roll = false;
 	private Token token;
 	private Queue<String> q = new LinkedList<String>();
 
@@ -78,8 +79,9 @@ public class Garlic implements BotAPI {
 		if(questionAsked) System.out.println("asked true");
 		else System.out.println("asked false");
 
-		if(map.isCorridor(player.getToken().getPosition()) && !moveOver)
+		if(map.isCorridor(player.getToken().getPosition()) && !moveOver && !roll)
 		{
+			roll=true;
 			return "roll";
 		}
 		if(player.getToken().isInRoom() && !questionAsked)
@@ -108,6 +110,7 @@ public class Garlic implements BotAPI {
 		{
 			questionAsked = true;
 			moveOver = false;
+			roll = false;
 			return "done";
 		}
 		return "notes";
