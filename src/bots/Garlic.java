@@ -120,10 +120,13 @@ public class Garlic implements BotAPI {
 			System.out.println(Names.ROOM_NAMES[i]+" "+RoomValues.get(Names.ROOM_NAMES[i]));
 		}
 		System.out.println("\n");
-		moveOver = true;
+
 		if(player.getToken().getName().equalsIgnoreCase("scarlett")) return "u";
 		if(player.getToken().getName().equalsIgnoreCase("white") || player.getToken().getName().equalsIgnoreCase("green")) return "d";
 		if(player.getToken().getName().equalsIgnoreCase("mustard")) return "r";*/
+
+		moveOver = true;
+		questionAsked = false;
 
 		//white start
 		if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
