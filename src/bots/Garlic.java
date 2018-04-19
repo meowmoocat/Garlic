@@ -120,16 +120,18 @@ public class Garlic implements BotAPI {
 			System.out.println(Names.ROOM_NAMES[i]+" "+RoomValues.get(Names.ROOM_NAMES[i]));
 		}
 		System.out.println("\n");
-
+		moveOver = true;
 		if(player.getToken().getName().equalsIgnoreCase("scarlett")) return "u";
 		if(player.getToken().getName().equalsIgnoreCase("white") || player.getToken().getName().equalsIgnoreCase("green")) return "d";
 		if(player.getToken().getName().equalsIgnoreCase("mustard")) return "r";*/
 
-		moveOver = true;
-		questionAsked = false;
-
 		//white start
 		if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
 			String j=null;
 			for(int i=0; i < 8 ; i++) {
 				if(i==0) j="d";
@@ -143,6 +145,11 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
 			String j=null;
 			for(int i=0; i < 13 ; i++) {
 				if(i==0) j="d";
@@ -161,6 +168,11 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
 			String j=null;
 			for(int i=0; i < 16 ; i++) {
 				if(i==0) j="d";
@@ -182,6 +194,11 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
 			String j=null;
 			for(int i=0; i < 22 ; i++) {
 				if(i==0) j="d";
@@ -209,6 +226,11 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==9 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
 			String j=null;
 			for(int i=0; i < 24 ; i++) {
 				if(i==0) j="d";
@@ -238,6 +260,11 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==14 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+			//green start
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
 			String j=null;
 			for(int i=0; i < 8 ; i++) {
 				if(i==0) j="d";
@@ -251,6 +278,11 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==14 && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
 			String j=null;
 			for(int i=0; i < 10 ; i++) {
 				if(i==0) j="d";
@@ -266,6 +298,11 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==14 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
 			String j=null;
 			for(int i=0; i < 13 ; i++) {
 				if(i==0) j="d";
@@ -284,6 +321,11 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==14 && !player.hasCard("library") && !player.hasSeen("library")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
 			String j=null;
 			for(int i=0; i < 19 ; i++) {
 				if(i==0) j="d";
@@ -308,6 +350,11 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}else if(player.getToken().getPosition().getRow()==0 && player.getToken().getPosition().getCol()==14 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
 			String j=null;
 			for(int i=0; i < 23 ; i++) {
 				if(i==0) j="d";
@@ -333,6 +380,242 @@ public class Garlic implements BotAPI {
 				if(i==20) j="d";
 				if(i==21) j="d";
 				if(i==22) j="l";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==6 && player.getToken().getPosition().getCol()==23 && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+			//peacock start
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
+			String j=null;
+			for(int i=0; i < 7 ; i++) {
+				if(i==0) j="l";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="l";
+				if(i==4) j="l";
+				if(i==5) j="u";
+				if(i==6) j="u";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==6 && player.getToken().getPosition().getCol()==23 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
+			String j=null;
+			for(int i=0; i < 9 ; i++) {
+				if(i==0) j="l";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="l";
+				if(i==4) j="l";
+				if(i==5) j="l";
+				if(i==6) j="l";
+				if(i==7) j="u";
+				if(i==8) j="l";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==6 && player.getToken().getPosition().getCol()==23 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
+			String j=null;
+			for(int i=0; i < 10 ; i++) {
+				if(i==0) j="l";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="l";
+				if(i==4) j="l";
+				if(i==5) j="l";
+				if(i==6) j="d";
+				if(i==7) j="d";
+				if(i==8) j="d";
+				if(i==9) j="r";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==6 && player.getToken().getPosition().getCol()==23 && !player.hasCard("library") && !player.hasSeen("library")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
+			String j=null;
+			for(int i=0; i < 18 ; i++) {
+				if(i==0) j="l";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="l";
+				if(i==4) j="l";
+				if(i==5) j="l";
+				if(i==6) j="l";
+				if(i==7) j="d";
+				if(i==8) j="d";
+				if(i==9) j="d";
+				if(i==10) j="d";
+				if(i==11) j="d";
+				if(i==12) j="d";
+				if(i==13) j="d";
+				if(i==14) j="d";
+				if(i==15) j="d";
+				if(i==16) j="d";
+				if(i==17) j="r";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==6 && player.getToken().getPosition().getCol()==23 && !player.hasCard("study") && !player.hasSeen("study")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
+			String j=null;
+			for(int i=0; i < 23 ; i++) {
+				if(i==0) j="l";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="l";
+				if(i==4) j="l";
+				if(i==5) j="l";
+				if(i==6) j="l";
+				if(i==7) j="d";
+				if(i==8) j="d";
+				if(i==9) j="d";
+				if(i==10) j="d";
+				if(i==11) j="d";
+				if(i==12) j="d";
+				if(i==13) j="d";
+				if(i==14) j="d";
+				if(i==15) j="d";
+				if(i==16) j="d";
+				if(i==17) j="d";
+				if(i==18) j="d";
+				if(i==19) j="d";
+				if(i==20) j="d";
+				if(i==21) j="r";
+				if(i==22) j="d";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==19 && player.getToken().getPosition().getCol()==23 && !player.hasCard("study") && !player.hasSeen("study")) {
+			//plum start
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
+			String j=null;
+			for(int i=0; i < 8 ; i++) {
+				if(i==0) j="l";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="l";
+				if(i==4) j="l";
+				if(i==5) j="l";
+				if(i==6) j="d";
+				if(i==7) j="d";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==19 && player.getToken().getPosition().getCol()==23 && !player.hasCard("hall") && !player.hasSeen("hall")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
+			String j=null;
+			for(int i=0; i < 10 ; i++) {
+				if(i==0) j="l";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="l";
+				if(i==4) j="l";
+				if(i==5) j="l";
+				if(i==6) j="l";
+				if(i==7) j="l";
+				if(i==8) j="d";
+				if(i==9) j="l";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==19 && player.getToken().getPosition().getCol()==23 && !player.hasCard("library") && !player.hasSeen("library")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
+			String j=null;
+			for(int i=0; i < 11 ; i++) {
+				if(i==0) j="l";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="l";
+				if(i==4) j="l";
+				if(i==5) j="l";
+				if(i==6) j="l";
+				if(i==7) j="u";
+				if(i==8) j="u";
+				if(i==9) j="u";
+				if(i==10) j="r";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==19 && player.getToken().getPosition().getCol()==23 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
+			String j=null;
+			for(int i=0; i < 19 ; i++) {
+				if(i==0) j="l";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="l";
+				if(i==4) j="l";
+				if(i==5) j="l";
+				if(i==6) j="l";
+				if(i==7) j="u";
+				if(i==8) j="u";
+				if(i==9) j="u";
+				if(i==10) j="u";
+				if(i==11) j="u";
+				if(i==12) j="u";
+				if(i==13) j="u";
+				if(i==14) j="u";
+				if(i==15) j="u";
+				if(i==16) j="u";
+				if(i==17) j="r";
+				if(i==18) j="r";
+				q.add(j);
+			}
+		}else if(player.getToken().getPosition().getRow()==19 && player.getToken().getPosition().getCol()==23 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+
+			if(!q.isEmpty()) {
+				q.clear();
+			}
+
+			String j=null;
+			for(int i=0; i < 21 ; i++) {
+				if(i==0) j="l";
+				if(i==1) j="l";
+				if(i==2) j="l";
+				if(i==3) j="l";
+				if(i==4) j="l";
+				if(i==5) j="l";
+				if(i==6) j="l";
+				if(i==7) j="l";
+				if(i==8) j="u";
+				if(i==9) j="u";
+				if(i==10) j="l";
+				if(i==11) j="l";
+				if(i==12) j="l";
+				if(i==13) j="l";
+				if(i==14) j="l";
+				if(i==15) j="l";
+				if(i==16) j="l";
+				if(i==17) j="l";
+				if(i==18) j="l";
+				if(i==19) j="d";
+				if(i==20) j="d";
 				q.add(j);
 			}
 		}
