@@ -739,8 +739,8 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}
-		
-		
+
+
 		//TODO
 		if(roomOut && !room.equals("null"))
 		{
@@ -749,7 +749,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-System.out.println("ballroom");
+				System.out.println("ballroom");
 				String j=null;
 				for(int i=0; i < 7 ; i++) {
 					if(i==0) j="d";
@@ -965,7 +965,7 @@ System.out.println("ballroom");
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-System.out.println("kitchen");
+				System.out.println("kitchen");
 				String j=null;
 				for(int i=0; i < 7 ; i++) {
 					if(i==0) j="l";
@@ -2331,16 +2331,16 @@ System.out.println("kitchen");
 				}
 			}
 		}
-		
+
 		room = "null";
-		
+
 		if(!q.isEmpty()) {
 			System.out.println(q);
 			String local = q.remove();
 			System.out.println("local: "+local);
 			return local;
 		}
-		
+
 		return "l";
 	}
 
@@ -2383,8 +2383,8 @@ System.out.println("kitchen");
 		if(!player.hasCard("pistol") && !player.hasSeen("pistol")) {
 			return "pistol";
 		}
-		if(!player.hasCard("candelstick") && !player.hasSeen("candelstick")) {
-			return "candelstick";
+		if(!player.hasCard("candlestick") && !player.hasSeen("candlestick")) {
+			return "candlestick";
 		}
 		if(!player.hasCard("lead pipe") && !player.hasSeen("lead pipe")) {
 			return "lead pipe";
