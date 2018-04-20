@@ -74,10 +74,16 @@ public class Garlic implements BotAPI {
 
 	public String getCommand() {
 		//if token is in corridor roll
-
-		if (token.isInRoom()) System.out.println(token.getRoom().toString());
+		
+		System.out.println("fuck");
+		
+		if(token.isInRoom()) System.out.println(token.getRoom().toString());
 
 		if(map.isCorridor(token.getPosition()) && !moveOver)
+		{
+			return "roll";
+		}
+		if(token.isInRoom() && !moveOver)
 		{
 			return "roll";
 		}
