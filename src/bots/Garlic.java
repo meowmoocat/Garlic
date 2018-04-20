@@ -1477,7 +1477,87 @@ public class Garlic implements BotAPI {
 	}
 
 	public String getDoor() {
-		// Add your code here
+		if(player.getToken().getRoom().toString()=="ballroom" && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+			return "4";
+		}
+		else if(player.getToken().getRoom().toString()=="ballroom" && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
+			    return "3";
+		}
+		else if(player.getToken().getRoom().toString()=="ballroom" && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
+			return "3";
+		}
+		else if(player.getToken().getRoom().toString()=="ballroom" && !player.hasCard("library") && !player.hasSeen("library")){
+				return "3";
+		}
+		else if(player.getToken().getRoom().toString()=="ballroom" && !player.hasCard("hall") && !player.hasSeen("hall")){
+			return "2";
+		}
+		else if(player.getToken().getRoom().toString()=="ballroom" && !player.hasCard("lounge") && !player.hasSeen("lounge")){
+			return "2";
+		}
+		else if(player.getToken().getRoom().toString()=="ballroom" && !player.hasCard("dining") && !player.hasSeen("dining room")){
+			return "3";
+		}
+		else if(player.getToken().getRoom().toString()=="ballroom" && !player.hasCard("study") && !player.hasSeen("study")){
+			return "3";
+		}
+		else if(player.getToken().getRoom().toString()=="billiard room" && !player.hasCard("library") && !player.hasSeen("library")){
+			return "2";
+		}
+		else if(player.getToken().getRoom().toString()=="billiard room"){
+			return "1";
+		}
+		else if(player.getToken().getRoom().toString()=="library" && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
+			return "2";
+		}
+		else if(player.getToken().getRoom().toString()=="library"){
+			return "1";
+		}
+		else if(player.getToken().getRoom().toString()=="hall" && !player.hasCard("study") && !player.hasSeen("study")){
+			return "3";
+		}
+		else if(player.getToken().getRoom().toString()=="hall" && !player.hasCard("library") && !player.hasSeen("library")){
+			return "2";
+		}
+		else if(player.getToken().getRoom().toString()=="hall" && !player.hasCard("lounge") && !player.hasSeen("lounge")){
+			return "1";
+		}
+		else if(player.getToken().getRoom().toString()=="hall" && !player.hasCard("dining room") && !player.hasSeen("dining room")){
+			return "1";
+		}
+		else if(player.getToken().getRoom().toString()=="hall" && !player.hasCard("ballroom") && !player.hasSeen("ballroom")){
+			return "1";
+		}
+		else if(player.getToken().getRoom().toString()=="hall" && !player.hasCard("billiard room") && !player.hasSeen("billiard")){
+			return "2";
+		}
+		else if(player.getToken().getRoom().toString()=="hall" && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
+			return "1";
+		}
+		else if(player.getToken().getRoom().toString()=="hall" && !player.hasCard("conservatory") && !player.hasSeen("conservatory")){
+			return "2";
+		}
+		else if(player.getToken().getRoom().toString()=="dining room" && !player.hasCard("lounge") && !player.hasSeen("lounge")){
+			return "1";
+		}
+		else if(player.getToken().getRoom().toString()=="dining room" && !player.hasCard("hall") && !player.hasSeen("hall")){
+			return "1";
+		}
+		else if(player.getToken().getRoom().toString()=="dining room" && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
+			return "2";
+		}
+		else if(player.getToken().getRoom().toString()=="dining room" && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
+			return "2";
+		}
+		else if(player.getToken().getRoom().toString()=="dining room" && !player.hasCard("library") && !player.hasSeen("library")){
+			return "1";
+		}
+		else if(player.getToken().getRoom().toString()=="dining room" && !player.hasCard("ballroom") && !player.hasSeen("ballroom")){
+			return "1";
+		}
+		else if(player.getToken().getRoom().toString()=="dining room" && !player.hasCard("study") && !player.hasSeen("study")){
+			return "1";
+		}
 		return "1";
 	}
 
