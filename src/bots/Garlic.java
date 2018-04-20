@@ -75,10 +75,6 @@ public class Garlic implements BotAPI {
 	public String getCommand() {
 		//if token is in corridor roll
 		
-		System.out.println("fuck");
-		
-		if(token.isInRoom()) System.out.println(token.getRoom().toString());
-
 		if(map.isCorridor(token.getPosition()) && !moveOver)
 		{
 			return "roll";
@@ -94,7 +90,6 @@ public class Garlic implements BotAPI {
 				for(int i=0; i<Names.ROOM_NAMES.length; i++)
 				{
 					if(token.getRoom().hasName(Names.ROOM_CARD_NAMES[i])) {//needs to not work if already asked question
-						System.out.println("here? "+Names.ROOM_CARD_NAMES[i]);
 						questionAsked = true;
 						return "question";
 					}
@@ -738,7 +733,10 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}
-		if(token.isInRoom())
+
+
+			
+		if(token.isInRoom() && !moveOver)
 		{
 			if(token.getRoom().hasName("kitchen") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 				//from kitchen to ballroom
