@@ -78,6 +78,8 @@ public class Garlic implements BotAPI {
 	public String getCommand() {
 		//if token is in corridor roll
 
+		System.out.println("\nGarlic");
+		
 		if(token.isInRoom())
 		{
 			room = token.getRoom().toString();
@@ -131,7 +133,8 @@ public class Garlic implements BotAPI {
 		moveOver = true;
 		questionAsked = false;
 
-
+		System.out.println("current room: "+room);
+		
 		if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 			//white start
 			String j=null;

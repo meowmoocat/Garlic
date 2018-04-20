@@ -28,6 +28,7 @@ public class Bot3 implements BotAPI {
 	private Boolean moveOver;
 	private Boolean questionAsked;
 	private Boolean roomOut;
+	private Boolean checkNotes;
 	private Token token;
 	private String room;
 	private Queue<String> q = new LinkedList<String>();
@@ -41,6 +42,7 @@ public class Bot3 implements BotAPI {
 		this.deck = deck;
 		moveOver = false;
 		questionAsked = false;
+		checkNotes = true;
 		this.token = player.getToken();
 		roomOut = false;
 
@@ -78,6 +80,14 @@ public class Bot3 implements BotAPI {
 	public String getCommand() {
 		//if token is in corridor roll
 
+		System.out.println("\nbot3");
+		
+		if(checkNotes)
+		{
+			checkNotes = false;
+			return "notes";
+		}
+		
 		if(token.isInRoom())
 		{
 			room = token.getRoom().toString();
@@ -118,6 +128,7 @@ public class Bot3 implements BotAPI {
 		//if turn over done
 		else
 		{
+			checkNotes = true;
 			roomOut = false;
 			questionAsked = true;
 			moveOver = false;
@@ -131,6 +142,7 @@ public class Bot3 implements BotAPI {
 		moveOver = true;
 		questionAsked = false;
 
+		System.out.println("current room: "+room);
 
 		if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 			//white start
@@ -2026,9 +2038,8 @@ public class Bot3 implements BotAPI {
 					if(i==9) j="r";
 					if(i==10) j="r";
 					if(i==11) j="r";
-					if(i==12) j="r";
-					if(i==13) j="u";
-					if(i==14) j="r";
+					if(i==12) j="u";
+					if(i==13) j="r";
 					q.add(j);
 				}
 			}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
