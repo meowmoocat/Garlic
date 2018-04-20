@@ -27,6 +27,7 @@ public class Garlic implements BotAPI {
 	private Deck deck;
 	private Boolean moveOver;
 	private Boolean questionAsked;
+	private Boolean roomOut;
 	private Token token;
 	private Queue<String> q = new LinkedList<String>();
 
@@ -40,6 +41,7 @@ public class Garlic implements BotAPI {
 		moveOver = false;
 		questionAsked = false;
 		this.token = player.getToken();
+		roomOut = false;
 
 		RoomValues.put("Kitchen", 0);
 		RoomValues.put("Ballroom", 0);
@@ -79,6 +81,12 @@ public class Garlic implements BotAPI {
 		{
 			return "roll";
 		}
+		if(token.isInRoom() && !moveOver)
+		{
+			System.out.println("fuck");
+			roomOut = true;
+			return "roll";
+		}
 		if(token.isInRoom() && !questionAsked)
 		{
 			if(moveOver)
@@ -101,6 +109,7 @@ public class Garlic implements BotAPI {
 		//if turn over done
 		else
 		{
+			roomOut = false;
 			questionAsked = true;
 			moveOver = false;
 			return "done";
@@ -720,7 +729,11 @@ public class Garlic implements BotAPI {
 				q.add(j);
 			}
 		}
-		if(token.isInRoom())
+		
+		if(roomOut) System.out.println("yes");
+		if(!roomOut) System.out.println("no");
+		//TODO
+		if(roomOut)
 		{
 			if(token.getRoom().hasName("kitchen") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 				//from kitchen to ballroom
@@ -1138,7 +1151,6 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-
 				String j=null;
 				for(int i=0; i < 19 ; i++) {
 					if(i==0) j="d";
