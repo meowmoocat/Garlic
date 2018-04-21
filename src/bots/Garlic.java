@@ -76,6 +76,31 @@ public class Garlic implements BotAPI {
 		}
 	}
 
+	private void checkMurder()
+	{
+		int counter = 0;
+		
+		for(int i=0; i<Names.ROOM_CARD_NAMES.length; i++)
+		{
+			if(!player.hasCard(Names.ROOM_CARD_NAMES[i]) && !player.hasSeen(Names.ROOM_CARD_NAMES[i])) counter ++;
+		}
+		if(counter == 1) murderRoom = true;
+		
+		counter = 0;
+		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
+		{
+			if(!player.hasCard(Names.SUSPECT_NAMES[i]) && !player.hasSeen(Names.SUSPECT_NAMES[i])) counter ++;
+		}
+		if(counter == 1) murderSuspect = true;
+		
+		counter = 0;
+		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
+		{
+			if(!player.hasCard(Names.WEAPON_NAMES[i]) && !player.hasSeen(Names.WEAPON_NAMES[i])) counter ++;
+		}
+		if(counter == 1) murderWeapon = true;
+	}
+	
 	public String getName() {
 		return "Garlic"; // must match the class name
 	}
@@ -85,6 +110,7 @@ public class Garlic implements BotAPI {
 
 		System.out.println("\nGarlic");
 		
+		checkMurder();
 		if(checkNotes)
 		{
 			checkNotes = false;
@@ -174,11 +200,6 @@ public class Garlic implements BotAPI {
 		questionAsked = false;
 
 		System.out.println("current room: "+room);
-		
-		if(murderWeapon && murderRoom && murderSuspect)
-		{
-			//move to the cellar
-		}
 		
 		if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 			//white start
@@ -2379,7 +2400,7 @@ public class Garlic implements BotAPI {
 				}
 			}
 			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-			
+				
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -2490,6 +2511,7 @@ public class Garlic implements BotAPI {
 					q.add(j);
 				}
 			}
+		}
 			else if(room.equalsIgnoreCase("dining room") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
 		
 				if(!q.isEmpty()) {
@@ -2503,9 +2525,7 @@ public class Garlic implements BotAPI {
 					
 					q.add(j);
 				}
-			}
 		}
-		
 
 		room = "null";
 

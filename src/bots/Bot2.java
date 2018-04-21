@@ -76,6 +76,31 @@ public class Bot2 implements BotAPI {
 		}
 	}
 
+	private void checkMurder()
+	{
+		int counter = 0;
+		
+		for(int i=0; i<Names.ROOM_CARD_NAMES.length; i++)
+		{
+			if(!player.hasCard(Names.ROOM_CARD_NAMES[i]) && !player.hasSeen(Names.ROOM_CARD_NAMES[i])) counter ++;
+		}
+		if(counter == 1) murderRoom = true;
+		
+		counter = 0;
+		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
+		{
+			if(!player.hasCard(Names.SUSPECT_NAMES[i]) && !player.hasSeen(Names.SUSPECT_NAMES[i])) counter ++;
+		}
+		if(counter == 1) murderSuspect = true;
+		
+		counter = 0;
+		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
+		{
+			if(!player.hasCard(Names.WEAPON_NAMES[i]) && !player.hasSeen(Names.WEAPON_NAMES[i])) counter ++;
+		}
+		if(counter == 1) murderWeapon = true;
+	}
+	
 	public String getName() {
 		return "Bot2"; // must match the class name
 	}
@@ -85,6 +110,7 @@ public class Bot2 implements BotAPI {
 
 		System.out.println("\nBot2");
 		
+		checkMurder();
 		if(checkNotes)
 		{
 			checkNotes = false;
