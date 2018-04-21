@@ -2352,13 +2352,12 @@ public class Bot2 implements BotAPI {
 						if(i==10) j="u";
 						if(i==11) j="u";
 						if(i==12) j="u";
-						if(i==13) j="u";
+						if(i==13) j="l";
 						if(i==14) j="l";
 						if(i==15) j="l";
 						if(i==16) j="l";
-						if(i==17) j="l";
+						if(i==17) j="u";
 						if(i==18) j="u";
-						if(i==19) j="u";
 						q.add(j);
 					}
 				}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
