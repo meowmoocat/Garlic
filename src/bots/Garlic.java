@@ -28,6 +28,8 @@ public class Garlic implements BotAPI {
 	private Boolean moveOver;
 	private Boolean questionAsked;
 	private Boolean roomOut;
+	private Boolean checkNotes;
+	private Boolean murderWeapon, murderRoom, murderSuspect;
 	private Token token;
 	private String room;
 	private Queue<String> q = new LinkedList<String>();
@@ -43,6 +45,9 @@ public class Garlic implements BotAPI {
 		questionAsked = false;
 		this.token = player.getToken();
 		roomOut = false;
+		murderWeapon = false;
+		murderRoom = false;
+		murderSuspect = false;
 
 		RoomValues.put("Kitchen", 0);
 		RoomValues.put("Ballroom", 0);
@@ -80,6 +85,12 @@ public class Garlic implements BotAPI {
 
 		System.out.println("\nGarlic");
 		
+		if(checkNotes)
+		{
+			checkNotes = false;
+			return "notes";
+		}
+		
 		if(token.isInRoom())
 		{
 			room = token.getRoom().toString();
@@ -88,6 +99,7 @@ public class Garlic implements BotAPI {
 		{
 			room = "null";
 		}
+		
 		if(map.isCorridor(token.getPosition()) && !moveOver)
 		{
 			return "roll";
@@ -108,7 +120,8 @@ public class Garlic implements BotAPI {
 						questionAsked = true;
 						return "question";
 					}
-					else if(room.equalsIgnoreCase(Names.ROOM_NAMES[9])) {
+					if(murderWeapon && murderRoom && murderSuspect && room.equalsIgnoreCase("Cellar"))
+					{
 						return "accuse";
 					}
 				}

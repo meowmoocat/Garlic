@@ -29,6 +29,7 @@ public class Bot3 implements BotAPI {
 	private Boolean questionAsked;
 	private Boolean roomOut;
 	private Boolean checkNotes;
+	private Boolean murderWeapon, murderRoom, murderSuspect;
 	private Token token;
 	private String room;
 	private Queue<String> q = new LinkedList<String>();
@@ -42,9 +43,11 @@ public class Bot3 implements BotAPI {
 		this.deck = deck;
 		moveOver = false;
 		questionAsked = false;
-		checkNotes = true;
 		this.token = player.getToken();
 		roomOut = false;
+		murderWeapon = false;
+		murderRoom = false;
+		murderSuspect = false;
 
 		RoomValues.put("Kitchen", 0);
 		RoomValues.put("Ballroom", 0);
@@ -80,7 +83,7 @@ public class Bot3 implements BotAPI {
 	public String getCommand() {
 		//if token is in corridor roll
 
-		System.out.println("\nbot3");
+		System.out.println("\nBot3");
 		
 		if(checkNotes)
 		{
@@ -96,6 +99,7 @@ public class Bot3 implements BotAPI {
 		{
 			room = "null";
 		}
+		
 		if(map.isCorridor(token.getPosition()) && !moveOver)
 		{
 			return "roll";
@@ -116,7 +120,8 @@ public class Bot3 implements BotAPI {
 						questionAsked = true;
 						return "question";
 					}
-					else if(room.equalsIgnoreCase(Names.ROOM_NAMES[9])) {
+					if(murderWeapon && murderRoom && murderSuspect && room.equalsIgnoreCase("Cellar"))
+					{
 						return "accuse";
 					}
 				}
@@ -128,7 +133,6 @@ public class Bot3 implements BotAPI {
 		//if turn over done
 		else
 		{
-			checkNotes = true;
 			roomOut = false;
 			questionAsked = true;
 			moveOver = false;
@@ -143,7 +147,7 @@ public class Bot3 implements BotAPI {
 		questionAsked = false;
 
 		System.out.println("current room: "+room);
-
+		
 		if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 			//white start
 			String j=null;
@@ -2038,8 +2042,9 @@ public class Bot3 implements BotAPI {
 					if(i==9) j="r";
 					if(i==10) j="r";
 					if(i==11) j="r";
-					if(i==12) j="u";
-					if(i==13) j="r";
+					if(i==12) j="r";
+					if(i==13) j="u";
+					if(i==14) j="r";
 					q.add(j);
 				}
 			}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {

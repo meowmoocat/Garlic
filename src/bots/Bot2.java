@@ -28,6 +28,8 @@ public class Bot2 implements BotAPI {
 	private Boolean moveOver;
 	private Boolean questionAsked;
 	private Boolean roomOut;
+	private Boolean checkNotes;
+	private Boolean murderWeapon, murderRoom, murderSuspect;
 	private Token token;
 	private String room;
 	private Queue<String> q = new LinkedList<String>();
@@ -43,6 +45,9 @@ public class Bot2 implements BotAPI {
 		questionAsked = false;
 		this.token = player.getToken();
 		roomOut = false;
+		murderWeapon = false;
+		murderRoom = false;
+		murderSuspect = false;
 
 		RoomValues.put("Kitchen", 0);
 		RoomValues.put("Ballroom", 0);
@@ -78,7 +83,13 @@ public class Bot2 implements BotAPI {
 	public String getCommand() {
 		//if token is in corridor roll
 
-		System.out.println("\nbot2");
+		System.out.println("\nBot2");
+		
+		if(checkNotes)
+		{
+			checkNotes = false;
+			return "notes";
+		}
 		
 		if(token.isInRoom())
 		{
@@ -88,6 +99,7 @@ public class Bot2 implements BotAPI {
 		{
 			room = "null";
 		}
+		
 		if(map.isCorridor(token.getPosition()) && !moveOver)
 		{
 			return "roll";
@@ -108,7 +120,8 @@ public class Bot2 implements BotAPI {
 						questionAsked = true;
 						return "question";
 					}
-					else if(room.equalsIgnoreCase(Names.ROOM_NAMES[9])) {
+					if(murderWeapon && murderRoom && murderSuspect && room.equalsIgnoreCase("Cellar"))
+					{
 						return "accuse";
 					}
 				}
@@ -132,9 +145,9 @@ public class Bot2 implements BotAPI {
 
 		moveOver = true;
 		questionAsked = false;
-		
-		System.out.println("current room: "+room);
 
+		System.out.println("current room: "+room);
+		
 		if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 			//white start
 			String j=null;
