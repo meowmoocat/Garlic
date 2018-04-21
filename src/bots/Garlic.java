@@ -2812,100 +2812,132 @@ public class Garlic implements BotAPI {
 	}
 
 	public String getDoor() {
-		if(token.getRoom().hasName("ballroom") && murderRoom) {
+		if(token.getRoom().hasName("ballroom") && murderRoom && murderSuspect && murderWeapon) { 
+			System.out.println("ballroom to cellar");
 			return "2";
 		}
-		else if(token.getRoom().hasName("hall") && murderRoom) {
+		else if(token.getRoom().hasName("hall") && murderRoom && murderSuspect && murderWeapon) {
+			System.out.println("hall to cellar");
 			return "2";
 		}
-		else if(token.getRoom().hasName("dining room") && murderRoom) {
+		else if(token.getRoom().hasName("dining room") && murderRoom && murderSuspect && murderWeapon) {
+			System.out.println("dining to cellar");
 			return "1";
 		}
-		else if(token.getRoom().hasName("library") && murderRoom){
+		else if(token.getRoom().hasName("library") && murderRoom && murderSuspect && murderWeapon){
+			System.out.println("lib to cellar");
 			return "1";
 		}
-		else if(token.getRoom().hasName("billiard room") && murderRoom){
+		else if(token.getRoom().hasName("billiard room") && murderRoom && murderSuspect && murderWeapon){
+			System.out.println("billiard to cellar");
 			return "1";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+			System.out.println("ballroom to conserv");
 			return "4";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
+			System.out.println("ballroom to billia");
 			return "3";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
+			System.out.println("ballroom to kitch");
 			return "1";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("library") && !player.hasSeen("library")){
+			System.out.println("ballroom to lib");
 			return "3";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("hall") && !player.hasSeen("hall")){
+			System.out.println("ballroom to hall");
 			return "2";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
+			System.out.println("ballroom to lounge");
 			return "2";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")){
+			System.out.println("ballroom to dining");
 			return "2";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("study") && !player.hasSeen("study")){
+			System.out.println("ballroom to study");
 			return "3";
 		}
 		else if(token.getRoom().hasName("billiard room") && !player.hasCard("library") && !player.hasSeen("library")){
+			System.out.println("ballroom to lib");
 			return "2";
 		}
 		else if(token.getRoom().hasName("billiard room")){
+			System.out.println("ballroom to ????");
 			return "1";
 		}
 		else if(token.getRoom().hasName("library") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
+			System.out.println("lib to bill");
 			return "2";
 		}
 		else if(token.getRoom().hasName("library")){
+			System.out.println("lib to ???");
 			return "1";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("study") && !player.hasSeen("study")){
+			System.out.println("hall to study");
 			return "3";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("library") && !player.hasSeen("library")){
+			System.out.println("hall to lib");
 			return "2";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
+			System.out.println("hall to loung");
 			return "1";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("dining room") && !player.hasSeen("dining room")){
+			System.out.println("hall to dining");
 			return "1";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")){
+			System.out.println("hall to ball");
 			return "1";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
+			System.out.println("hall to bill");
 			return "2";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
+			System.out.println("hall to kitch");
 			return "1";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")){
+			System.out.println("hall to cons");
 			return "2";
 		}
 		else if(token.getRoom().hasName("dining room") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
-			return "1";
-		}
-		else if(token.getRoom().hasName("dining room") && !player.hasCard("hall") && !player.hasSeen("hall")){
-			return "1";
-		}
-		else if(token.getRoom().hasName("dining room") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
-			return "2";
-		}
-		else if(token.getRoom().hasName("dining room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
-			return "2";
-		}
-		else if(token.getRoom().hasName("dining room") && !player.hasCard("library") && !player.hasSeen("library")){
+			System.out.println("dingn to loung");
 			return "1";
 		}
 		else if(token.getRoom().hasName("dining room") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")){
+			System.out.println("din to ball");
 			return "2";
 		}
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("hall") && !player.hasSeen("hall")){
+			System.out.println("din to hall");
+			return "1";
+		}
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
+			System.out.println("din to kitch");
+			return "2";
+		}
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
+			System.out.println("din to bill");
+			return "2";
+		}
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("library") && !player.hasSeen("library")){
+			System.out.println("din to lib");
+			return "1";
+		}
 		else if(token.getRoom().hasName("dining room") && !player.hasCard("study") && !player.hasSeen("study")){
+			System.out.println("din to study");
 			return "1";
 		}
 
