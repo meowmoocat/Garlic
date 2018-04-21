@@ -2371,7 +2371,7 @@ public class Bot3 implements BotAPI {
 			return "green";
 		}
 		if(!player.hasCard("mustard") && !player.hasSeen("mustard")) {
-			return "plum";
+			return "mustard";
 		}
 		if(!player.hasCard("peacock") && !player.hasSeen("peacock")) {
 			return "peacock";
