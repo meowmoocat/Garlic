@@ -79,20 +79,20 @@ public class Garlic implements BotAPI {
 	private void checkMurder()
 	{
 		int counter = 0;
-		
+
 		for(int i=0; i<Names.ROOM_CARD_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.ROOM_CARD_NAMES[i]) && !player.hasSeen(Names.ROOM_CARD_NAMES[i])) counter ++;
 		}
 		if(counter == 1) murderRoom = true;
-		
+
 		counter = 0;
 		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.SUSPECT_NAMES[i]) && !player.hasSeen(Names.SUSPECT_NAMES[i])) counter ++;
 		}
 		if(counter == 1) murderSuspect = true;
-		
+
 		counter = 0;
 		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
 		{
@@ -100,7 +100,7 @@ public class Garlic implements BotAPI {
 		}
 		if(counter == 1) murderWeapon = true;
 	}
-	
+
 	public String getName() {
 		return "Garlic"; // must match the class name
 	}
@@ -109,14 +109,18 @@ public class Garlic implements BotAPI {
 		//if token is in corridor roll
 
 		System.out.println("\nGarlic");
-		
+
 		checkMurder();
+		if(murderRoom) System.out.println("murderRoom: true");
+		if(murderSuspect) System.out.println("murderSuspect: true");
+		if(murderWeapon) System.out.println("murderWeapon: true");
+
 		if(checkNotes)
 		{
 			checkNotes = false;
 			return "notes";
 		}
-		
+
 		if(token.isInRoom())
 		{
 			room = token.getRoom().toString();
@@ -125,38 +129,34 @@ public class Garlic implements BotAPI {
 		{
 			room = "null";
 		}
-		
+
 		if(map.isCorridor(token.getPosition()) && !moveOver)
 		{
 			return "roll";
 		}
 		if(token.isInRoom() && !moveOver)
 		{
-			
+
 			if(room.equalsIgnoreCase("lounge") && !player.hasCard("conservatory") && !player.hasSeen("conservatory"))
 			{
-				System.out.println("fuck");
 				questionAsked = false;
 				moveOver = true;
 				return "passage";
 			}
 			else if(room.equalsIgnoreCase("study") && !player.hasCard("kitchen") && !player.hasSeen("kitchen"))
 			{
-				System.out.println("fuck");
 				questionAsked = false;
 				moveOver = true;
 				return "passage";
 			}
 			if(room.equalsIgnoreCase("conservatory") && !player.hasCard("lounge") && !player.hasSeen("lounge"))
 			{
-				System.out.println("fuck");
 				questionAsked = false;
 				moveOver = true;
 				return "passage";
 			}
 			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("study") && !player.hasSeen("study"))
 			{
-				System.out.println("fuck");
 				questionAsked = false;
 				moveOver = true;
 				return "passage";
@@ -204,11 +204,17 @@ public class Garlic implements BotAPI {
 		moveOver = true;
 		questionAsked = false;
 
-		System.out.println("current room: "+room);
-		
+
+
 		if(murderWeapon && murderRoom && murderSuspect)
 		{
+			System.out.println("room: "+room);
+			System.out.println("????????????????????????????????????????????");
 			if(room.equalsIgnoreCase("kitchen")) {
+				if(!q.isEmpty()) {
+					q.clear();
+				}
+				System.out.println("kitchen");
 				String j=null;
 				for(int i=0; i < 20 ; i++) {
 					if(i==0) j="d";
@@ -234,6 +240,10 @@ public class Garlic implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("ballroom")) {
+				if(!q.isEmpty()) {
+					q.clear();
+				}
+				System.out.println("ball");
 				String j=null;
 				for(int i=0; i < 14 ; i++) {
 					if(i==0) j="d";
@@ -253,6 +263,10 @@ public class Garlic implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("conservatory")) {
+				if(!q.isEmpty()) {
+					q.clear();
+				}
+				System.out.println("conserv");
 				String j=null;
 				for(int i=0; i < 20 ; i++) {
 					if(i==0) j="d";
@@ -278,6 +292,10 @@ public class Garlic implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("dining room")) {
+				if(!q.isEmpty()) {
+					q.clear();
+				}
+				System.out.println("dining");
 				String j=null;
 				for(int i=0; i < 9 ; i++) {
 					if(i==0) j="d";
@@ -292,6 +310,10 @@ public class Garlic implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("billiard room")) {
+				if(!q.isEmpty()) {
+					q.clear();
+				}
+				System.out.println("billiard");
 				String j=null;
 				for(int i=0; i < 15 ; i++) {
 					if(i==0) j="l";
@@ -312,6 +334,10 @@ public class Garlic implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("library")) {
+				if(!q.isEmpty()) {
+					q.clear();
+				}
+				System.out.println("lib");
 				String j=null;
 				for(int i=0; i < 7 ; i++) {
 					if(i==0) j="l";
@@ -324,6 +350,10 @@ public class Garlic implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("lounge")) {
+				if(!q.isEmpty()) {
+					q.clear();
+				}
+				System.out.println("lounge");
 				String j=null;
 				for(int i=0; i < 9 ; i++) {
 					if(i==0) j="u";
@@ -338,6 +368,10 @@ public class Garlic implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("hall")) {
+				if(!q.isEmpty()) {
+					q.clear();
+				}
+				System.out.println("hall");
 				String j=null;
 				for(int i=0; i < 2 ; i++) {
 					if(i==0) j="u";
@@ -345,6 +379,10 @@ public class Garlic implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("study")) {
+				if(!q.isEmpty()) {
+					q.clear();
+				}
+				System.out.println("study");
 				String j=null;
 				for(int i=0; i < 10 ; i++) {
 					if(i==0) j="u";
@@ -361,2087 +399,571 @@ public class Garlic implements BotAPI {
 				}
 			}
 		}
-		
-		if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-			//white start
-			String j=null;
-			for(int i=0; i < 8 ; i++) {
-				if(i==0) j="d";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="d";
-				if(i==4) j="d";
-				if(i==5) j="d";
-				if(i==6) j="d";
-				if(i==7) j="r";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-
-			String j=null;
-			for(int i=0; i < 13 ; i++) {
-				if(i==0) j="d";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="d";
-				if(i==4) j="d";
-				if(i==5) j="d";
-				if(i==6) j="d";
-				if(i==7) j="d";
-				if(i==8) j="d";
-				if(i==9) j="l";
-				if(i==10) j="l";
-				if(i==11) j="l";
-				if(i==12) j="u";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-
-			String j=null;
-			for(int i=0; i < 16 ; i++) {
-				if(i==0) j="d";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="d";
-				if(i==4) j="d";
-				if(i==5) j="d";
-				if(i==6) j="d";
-				if(i==7) j="d";
-				if(i==8) j="d";
-				if(i==9) j="d";
-				if(i==10) j="d";
-				if(i==11) j="r";
-				if(i==12) j="d";
-				if(i==13) j="d";
-				if(i==14) j="d";
-				if(i==15) j="l";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-
-			String j=null;
-			for(int i=0; i < 22 ; i++) {
-				if(i==0) j="d";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="d";
-				if(i==4) j="d";
-				if(i==5) j="d";
-				if(i==6) j="d";
-				if(i==7) j="d";
-				if(i==8) j="d";
-				if(i==9) j="d";
-				if(i==10) j="d";
-				if(i==11) j="r";
-				if(i==12) j="r";
-				if(i==13) j="r";
-				if(i==14) j="r";
-				if(i==15) j="r";
-				if(i==16) j="r";
-				if(i==17) j="r";
-				if(i==18) j="r";
-				if(i==19) j="r";
-				if(i==20) j="r";
-				if(i==21) j="r";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-
-			String j=null;
-			for(int i=0; i < 24 ; i++) {
-				if(i==0) j="d";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="d";
-				if(i==4) j="d";
-				if(i==5) j="d";
-				if(i==6) j="d";
-				if(i==7) j="d";
-				if(i==8) j="d";
-				if(i==9) j="d";
-				if(i==10) j="d";
-				if(i==11) j="r";
-				if(i==12) j="d";
-				if(i==13) j="d";
-				if(i==14) j="d";
-				if(i==15) j="d";
-				if(i==16) j="d";
-				if(i==17) j="d";
-				if(i==18) j="d";
-				if(i==19) j="d";
-				if(i==20) j="d";
-				if(i==21) j="l";
-				if(i==22) j="l";
-				if(i==23) j="d";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-			//green start
-
-			String j=null;
-			for(int i=0; i < 8 ; i++) {
-				if(i==0) j="d";
-				if(i==1) j="r";
-				if(i==2) j="r";
-				if(i==3) j="d";
-				if(i==4) j="d";
-				if(i==5) j="d";
-				if(i==6) j="d";
-				if(i==7) j="l";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-
-			System.out.println("conservatory");
-			String j=null;
-			for(int i=0; i < 10 ; i++) {
-				if(i==0) j="d";
-				if(i==1) j="r";
-				if(i==2) j="r";
-				if(i==3) j="d";
-				if(i==4) j="d";
-				if(i==5) j="d";
-				if(i==6) j="d";
-				if(i==7) j="r";
-				if(i==8) j="r";
-				if(i==9) j="u";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-
-			String j=null;
-			for(int i=0; i < 13 ; i++) {
-				if(i==0) j="d";
-				if(i==1) j="r";
-				if(i==2) j="r";
-				if(i==3) j="d";
-				if(i==4) j="d";
-				if(i==5) j="d";
-				if(i==6) j="d";
-				if(i==7) j="d";
-				if(i==8) j="d";
-				if(i==9) j="d";
-				if(i==10) j="d";
-				if(i==11) j="r";
-				if(i==12) j="r";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("library") && !player.hasSeen("library")) {
-
-			String j=null;
-			for(int i=0; i < 19 ; i++) {
-				if(i==0) j="d";
-				if(i==1) j="r";
-				if(i==2) j="r";
-				if(i==3) j="d";
-				if(i==4) j="d";
-				if(i==5) j="d";
-				if(i==6) j="d";
-				if(i==7) j="d";
-				if(i==8) j="d";
-				if(i==9) j="d";
-				if(i==10) j="d";
-				if(i==11) j="d";
-				if(i==12) j="d";
-				if(i==13) j="d";
-				if(i==14) j="d";
-				if(i==15) j="d";
-				if(i==16) j="d";
-				if(i==17) j="d";
-				if(i==18) j="r";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-
-			String j=null;
-			for(int i=0; i < 23 ; i++) {
-				if(i==0) j="d";
-				if(i==1) j="r";
-				if(i==2) j="r";
-				if(i==3) j="d";
-				if(i==4) j="d";
-				if(i==5) j="d";
-				if(i==6) j="d";
-				if(i==7) j="d";
-				if(i==8) j="d";
-				if(i==9) j="d";
-				if(i==10) j="l";
-				if(i==11) j="l";
-				if(i==12) j="l";
-				if(i==13) j="l";
-				if(i==14) j="l";
-				if(i==15) j="l";
-				if(i==16) j="l";
-				if(i==17) j="l";
-				if(i==18) j="d";
-				if(i==19) j="d";
-				if(i==20) j="d";
-				if(i==21) j="d";
-				if(i==22) j="l";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-			//peacock start
-			String j=null;
-			for(int i=0; i < 7 ; i++) {
-				if(i==0) j="l";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="l";
-				if(i==4) j="l";
-				if(i==5) j="u";
-				if(i==6) j="u";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-
-			String j=null;
-			for(int i=0; i < 9 ; i++) {
-				if(i==0) j="l";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="l";
-				if(i==4) j="l";
-				if(i==5) j="l";
-				if(i==6) j="l";
-				if(i==7) j="u";
-				if(i==8) j="l";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-
-			String j=null;
-			for(int i=0; i < 10 ; i++) {
-				if(i==0) j="l";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="l";
-				if(i==4) j="l";
-				if(i==5) j="l";
-				if(i==6) j="d";
-				if(i==7) j="d";
-				if(i==8) j="d";
-				if(i==9) j="r";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("library") && !player.hasSeen("library")) {
-
-			String j=null;
-			for(int i=0; i < 18 ; i++) {
-				if(i==0) j="l";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="l";
-				if(i==4) j="l";
-				if(i==5) j="l";
-				if(i==6) j="l";
-				if(i==7) j="d";
-				if(i==8) j="d";
-				if(i==9) j="d";
-				if(i==10) j="d";
-				if(i==11) j="d";
-				if(i==12) j="d";
-				if(i==13) j="d";
-				if(i==14) j="d";
-				if(i==15) j="d";
-				if(i==16) j="d";
-				if(i==17) j="r";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("study") && !player.hasSeen("study")) {
-
-			String j=null;
-			for(int i=0; i < 23 ; i++) {
-				if(i==0) j="l";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="l";
-				if(i==4) j="l";
-				if(i==5) j="l";
-				if(i==6) j="l";
-				if(i==7) j="d";
-				if(i==8) j="d";
-				if(i==9) j="d";
-				if(i==10) j="d";
-				if(i==11) j="d";
-				if(i==12) j="d";
-				if(i==13) j="d";
-				if(i==14) j="d";
-				if(i==15) j="d";
-				if(i==16) j="d";
-				if(i==17) j="d";
-				if(i==18) j="d";
-				if(i==19) j="d";
-				if(i==20) j="d";
-				if(i==21) j="r";
-				if(i==22) j="d";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("study") && !player.hasSeen("study")) {
-			//plum start
-			String j=null;
-			for(int i=0; i < 8 ; i++) {
-				if(i==0) j="l";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="l";
-				if(i==4) j="l";
-				if(i==5) j="l";
-				if(i==6) j="d";
-				if(i==7) j="d";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("hall") && !player.hasSeen("hall")) {
-
-			String j=null;
-			for(int i=0; i < 10 ; i++) {
-				if(i==0) j="l";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="l";
-				if(i==4) j="l";
-				if(i==5) j="l";
-				if(i==6) j="l";
-				if(i==7) j="l";
-				if(i==8) j="d";
-				if(i==9) j="l";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("library") && !player.hasSeen("library")) {
-
-			String j=null;
-			for(int i=0; i < 11 ; i++) {
-				if(i==0) j="l";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="l";
-				if(i==4) j="l";
-				if(i==5) j="l";
-				if(i==6) j="l";
-				if(i==7) j="u";
-				if(i==8) j="u";
-				if(i==9) j="u";
-				if(i==10) j="r";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-
-			String j=null;
-			for(int i=0; i < 19 ; i++) {
-				if(i==0) j="l";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="l";
-				if(i==4) j="l";
-				if(i==5) j="l";
-				if(i==6) j="l";
-				if(i==7) j="u";
-				if(i==8) j="u";
-				if(i==9) j="u";
-				if(i==10) j="u";
-				if(i==11) j="u";
-				if(i==12) j="u";
-				if(i==13) j="u";
-				if(i==14) j="u";
-				if(i==15) j="u";
-				if(i==16) j="u";
-				if(i==17) j="r";
-				if(i==18) j="r";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-
-			String j=null;
-			for(int i=0; i < 21 ; i++) {
-				if(i==0) j="l";
-				if(i==1) j="l";
-				if(i==2) j="l";
-				if(i==3) j="l";
-				if(i==4) j="l";
-				if(i==5) j="l";
-				if(i==6) j="l";
-				if(i==7) j="l";
-				if(i==8) j="u";
-				if(i==9) j="u";
-				if(i==10) j="l";
-				if(i==11) j="l";
-				if(i==12) j="l";
-				if(i==13) j="l";
-				if(i==14) j="l";
-				if(i==15) j="l";
-				if(i==16) j="l";
-				if(i==17) j="l";
-				if(i==18) j="l";
-				if(i==19) j="d";
-				if(i==20) j="d";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-			//scarlett start
-			String j=null;
-			for(int i=0; i < 8 ; i++) {
-				if(i==0) j="u";
-				if(i==1) j="u";
-				if(i==2) j="u";
-				if(i==3) j="u";
-				if(i==4) j="u";
-				if(i==5) j="u";
-				if(i==6) j="l";
-				if(i==7) j="d";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-
-			String j=null;
-			for(int i=0; i < 10 ; i++) {
-				if(i==0) j="u";
-				if(i==1) j="u";
-				if(i==2) j="u";
-				if(i==3) j="u";
-				if(i==4) j="u";
-				if(i==5) j="u";
-				if(i==6) j="u";
-				if(i==7) j="u";
-				if(i==8) j="l";
-				if(i==9) j="u";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("hall") && !player.hasSeen("hall")) {
-
-			String j=null;
-			for(int i=0; i < 12 ; i++) {
-				if(i==0) j="u";
-				if(i==1) j="u";
-				if(i==2) j="u";
-				if(i==3) j="u";
-				if(i==4) j="u";
-				if(i==5) j="u";
-				if(i==6) j="u";
-				if(i==7) j="r";
-				if(i==8) j="r";
-				if(i==9) j="r";
-				if(i==10) j="r";
-				if(i==11) j="d";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("library") && !player.hasSeen("library")) {
-
-			String j=null;
-			for(int i=0; i < 18 ; i++) {
-				if(i==0) j="u";
-				if(i==1) j="u";
-				if(i==2) j="u";
-				if(i==3) j="u";
-				if(i==4) j="u";
-				if(i==5) j="u";
-				if(i==6) j="u";
-				if(i==7) j="r";
-				if(i==8) j="r";
-				if(i==9) j="r";
-				if(i==10) j="r";
-				if(i==11) j="r";
-				if(i==12) j="r";
-				if(i==13) j="r";
-				if(i==14) j="r";
-				if(i==15) j="r";
-				if(i==16) j="u";
-				if(i==17) j="r";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-
-			String j=null;
-			for(int i=0; i < 19 ; i++) {
-				if(i==0) j="u";
-				if(i==1) j="u";
-				if(i==2) j="u";
-				if(i==3) j="u";
-				if(i==4) j="u";
-				if(i==5) j="u";
-				if(i==6) j="u";
-				if(i==7) j="u";
-				if(i==8) j="r";
-				if(i==9) j="r";
-				if(i==10) j="u";
-				if(i==11) j="u";
-				if(i==12) j="u";
-				if(i==13) j="u";
-				if(i==14) j="u";
-				if(i==15) j="u";
-				if(i==16) j="u";
-				if(i==17) j="u";
-				if(i==18) j="u";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-			//mustard start
-			String j=null;
-			for(int i=0; i < 8 ; i++) {
-				if(i==0) j="r";
-				if(i==1) j="r";
-				if(i==2) j="r";
-				if(i==3) j="r";
-				if(i==4) j="r";
-				if(i==5) j="r";
-				if(i==6) j="d";
-				if(i==7) j="d";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-
-			String j=null;
-			for(int i=0; i < 8 ; i++) {
-				if(i==0) j="r";
-				if(i==1) j="r";
-				if(i==2) j="r";
-				if(i==3) j="r";
-				if(i==4) j="r";
-				if(i==5) j="r";
-				if(i==6) j="u";
-				if(i==7) j="u";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("hall") && !player.hasSeen("hall")) {
-
-			String j=null;
-			for(int i=0; i < 12 ; i++) {
-				if(i==0) j="r";
-				if(i==1) j="r";
-				if(i==2) j="r";
-				if(i==3) j="r";
-				if(i==4) j="r";
-				if(i==5) j="r";
-				if(i==6) j="r";
-				if(i==7) j="r";
-				if(i==8) j="r";
-				if(i==9) j="r";
-				if(i==10) j="r";
-				if(i==11) j="d";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("library") && !player.hasSeen("library")) {
-
-			String j=null;
-			for(int i=0; i < 18 ; i++) {
-				if(i==0) j="r";
-				if(i==1) j="r";
-				if(i==2) j="r";
-				if(i==3) j="r";
-				if(i==4) j="r";
-				if(i==5) j="r";
-				if(i==6) j="r";
-				if(i==7) j="r";
-				if(i==8) j="r";
-				if(i==9) j="r";
-				if(i==10) j="r";
-				if(i==11) j="r";
-				if(i==12) j="r";
-				if(i==13) j="r";
-				if(i==14) j="r";
-				if(i==15) j="r";
-				if(i==16) j="u";
-				if(i==17) j="r";
-				q.add(j);
-			}
-		}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-
-			String j=null;
-			for(int i=0; i < 19 ; i++) {
-				if(i==0) j="r";
-				if(i==1) j="r";
-				if(i==2) j="r";
-				if(i==3) j="r";
-				if(i==4) j="r";
-				if(i==5) j="r";
-				if(i==6) j="r";
-				if(i==7) j="r";
-				if(i==8) j="r";
-				if(i==9) j="u";
-				if(i==10) j="u";
-				if(i==11) j="u";
-				if(i==12) j="u";
-				if(i==13) j="u";
-				if(i==14) j="u";
-				if(i==15) j="u";
-				if(i==16) j="u";
-				if(i==17) j="u";
-				if(i==18) j="u";
-				q.add(j);
-			}
-		}
-
-
-		//TODO
-		if(roomOut && !room.equals("null"))
-		{
-			if(room.equalsIgnoreCase("kitchen") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//from kitchen to ballroom
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("ballroom");
+		else {
+			if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+				//white start
 				String j=null;
-				for(int i=0; i < 7 ; i++) {
+				for(int i=0; i < 8 ; i++) {
 					if(i==0) j="d";
-					if(i==1) j="r";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="r";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-				//from kitchen to dining room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 11 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="r";
-					if(i==6) j="d";
-					if(i==7) j="d";
-					if(i==8) j="d";
-					if(i==9) j="d";
-					if(i==10) j="l";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-				//from kitchen to billiard room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 17 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="r";
-					if(i==6) j="r";
-					if(i==7) j="r";
-					if(i==8) j="r";
-					if(i==9) j="r";
-					if(i==10) j="r";
-					if(i==11) j="r";
-					if(i==12) j="r";
-					if(i==13) j="r";
-					if(i==14) j="r";
-					if(i==15) j="d";
-					if(i==16) j="r";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("hall") && !player.hasSeen("hall")) {
-				//from kitchen to hall
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 19 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="r";
-					if(i==6) j="r";
-					if(i==7) j="d";
-					if(i==8) j="d";
-					if(i==9) j="d";
-					if(i==10) j="d";
-					if(i==11) j="d";
-					if(i==12) j="d";
-					if(i==13) j="d";
-					if(i==14) j="d";
-					if(i==15) j="d";
-					if(i==16) j="r";
-					if(i==17) j="r";
-					if(i==18) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				//from kitchen to lounge
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 19 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="r";
-					if(i==6) j="d";
-					if(i==7) j="d";
-					if(i==8) j="d";
-					if(i==9) j="d";
-					if(i==10) j="d";
-					if(i==11) j="d";
-					if(i==12) j="d";
-					if(i==13) j="d";
-					if(i==14) j="d";
-					if(i==15) j="d";
-					if(i==16) j="l";
-					if(i==17) j="l";
-					if(i==18) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-				//from kitchen to conservatory
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("conservatory");
-				String j=null;
-				for(int i=0; i < 20 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="r";
-					if(i==6) j="r";
-					if(i==7) j="r";
-					if(i==8) j="r";
-					if(i==9) j="r";
-					if(i==10) j="r";
-					if(i==11) j="r";
-					if(i==12) j="r";
-					if(i==13) j="r";
-					if(i==14) j="r";
-					if(i==15) j="u";
-					if(i==16) j="u";
-					if(i==17) j="u";
-					if(i==18) j="r";
-					if(i==19) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("library") && !player.hasSeen("library")) {
-				//from kitchen to library
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 23 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="r";
-					if(i==6) j="r";
-					if(i==7) j="r";
-					if(i==8) j="r";
-					if(i==9) j="r";
-					if(i==10) j="r";
-					if(i==11) j="r";
-					if(i==12) j="r";
-					if(i==13) j="r";
-					if(i==14) j="d";
-					if(i==15) j="d";
-					if(i==16) j="d";
-					if(i==17) j="d";
-					if(i==18) j="d";
-					if(i==19) j="d";
-					if(i==20) j="d";
-					if(i==21) j="d";
-					if(i==22) j="r";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-				//from ballroom to conservatory
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("ballroom to conservatory");
-				String j=null;
-				for(int i=0; i < 4 ; i++) {
-					if(i==0) j="r";
-					if(i==1) j="r";
-					if(i==2) j="r";
-					if(i==3) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-				//from ballroom to billiard room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 6 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="r";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-				//from ballroom to kitchen
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("kitchen");
-				String j=null;
-				for(int i=0; i < 7 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="d";
-					if(i==2) j="d";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="l";
-					if(i==6) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("library") && !player.hasSeen("library")) {
-				//from ballroom to library
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 12 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="r";
-					if(i==3) j="r";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="d";
 					if(i==4) j="d";
 					if(i==5) j="d";
 					if(i==6) j="d";
-					if(i==7) j="d";
-					if(i==8) j="d";
-					if(i==9) j="d";
-					if(i==10) j="d";
-					if(i==11) j="r";
+					if(i==7) j="r";
 					q.add(j);
 				}
-			}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("hall") && !player.hasSeen("hall")) {
-				//from ballroom to hall
-				if(!q.isEmpty()) {
-					q.clear();
-				}
+			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
 
 				String j=null;
 				for(int i=0; i < 13 ; i++) {
 					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="d";
+					if(i==1) j="l";
+					if(i==2) j="l";
 					if(i==3) j="d";
 					if(i==4) j="d";
 					if(i==5) j="d";
 					if(i==6) j="d";
 					if(i==7) j="d";
 					if(i==8) j="d";
-					if(i==9) j="d";
-					if(i==10) j="r";
-					if(i==11) j="r";
-					if(i==12) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				//from ballroom to lounge
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 15 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="d";
-					if(i==3) j="d";
-					if(i==4) j="d";
-					if(i==5) j="d";
-					if(i==6) j="d";
-					if(i==7) j="d";
-					if(i==8) j="d";
-					if(i==9) j="d";
+					if(i==9) j="l";
 					if(i==10) j="l";
 					if(i==11) j="l";
-					if(i==12) j="l";
-					if(i==13) j="d";
-					if(i==14) j="d";
+					if(i==12) j="u";
 					q.add(j);
 				}
-			}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-				//from ballroom to dining room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
+			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
 
 				String j=null;
-				for(int i=0; i < 15 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="d";
-					if(i==3) j="d";
-					if(i==4) j="d";
-					if(i==5) j="d";
-					if(i==6) j="d";
-					if(i==7) j="d";
-					if(i==8) j="d";
-					if(i==9) j="d";
-					if(i==10) j="l";
-					if(i==11) j="l";
-					if(i==12) j="l";
-					if(i==13) j="u";
-					if(i==14) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("study") && !player.hasSeen("study")) {
-				//from ballroom to study
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 17 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="d";
-					if(i==5) j="d";
-					if(i==6) j="d";
-					if(i==7) j="d";
-					if(i==8) j="d";
-					if(i==9) j="d";
-					if(i==10) j="d";
-					if(i==11) j="d";
-					if(i==12) j="d";
-					if(i==13) j="d";
-					if(i==14) j="d";
-					if(i==15) j="r";
-					if(i==16) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//from conservatory to ballroom
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("ballroom");
-				String j=null;
-				for(int i=0; i < 4 ; i++) {
+				for(int i=0; i < 16 ; i++) {
 					if(i==0) j="d";
 					if(i==1) j="l";
 					if(i==2) j="l";
-					if(i==3) j="l";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-				//from conservatory to billiard room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 7 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="d";
-					if(i==3) j="l";
-					if(i==4) j="d";
-					if(i==5) j="d";
-					if(i==6) j="r";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("library") && !player.hasSeen("library")) {
-				//from conservatory to library
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 15 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="d";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="d";
-					if(i==6) j="d";
-					if(i==7) j="d";
-					if(i==8) j="d";
-					if(i==9) j="d";
-					if(i==10) j="d";
-					if(i==11) j="d";
-					if(i==12) j="d";
-					if(i==13) j="d";
-					if(i==14) j="r";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-				//from conservatory to dining room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				String j=null;
-				for(int i=0; i < 19 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="d";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="d";
-					if(i==6) j="d";
-					if(i==7) j="l";
-					if(i==8) j="l";
-					if(i==9) j="l";
-					if(i==10) j="l";
-					if(i==11) j="l";
-					if(i==12) j="l";
-					if(i==13) j="l";
-					if(i==14) j="l";
-					if(i==15) j="d";
-					if(i==16) j="d";
-					if(i==17) j="d";
-					if(i==18) j="l";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-				//from conservatory to kitchen
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("kitchen");
-
-				String j=null;
-				for(int i=0; i < 20 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="l";
-					if(i==2) j="d";
 					if(i==3) j="d";
 					if(i==4) j="d";
-					if(i==5) j="l";
-					if(i==6) j="l";
-					if(i==7) j="l";
-					if(i==8) j="l";
-					if(i==9) j="l";
-					if(i==10) j="l";
-					if(i==11) j="l";
-					if(i==12) j="l";
-					if(i==13) j="l";
-					if(i==14) j="l";
-					if(i==15) j="l";
-					if(i==16) j="l";
-					if(i==17) j="l";
-					if(i==18) j="u";
-					if(i==19) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("study") && !player.hasSeen("study")) {
-				//from conservatory to study
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 20 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="d";
-					if(i==3) j="l";
-					if(i==4) j="l";
 					if(i==5) j="d";
 					if(i==6) j="d";
 					if(i==7) j="d";
 					if(i==8) j="d";
 					if(i==9) j="d";
 					if(i==10) j="d";
-					if(i==11) j="d";
+					if(i==11) j="r";
 					if(i==12) j="d";
 					if(i==13) j="d";
 					if(i==14) j="d";
-					if(i==15) j="d";
-					if(i==16) j="d";
-					if(i==17) j="d";
+					if(i==15) j="l";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+
+				String j=null;
+				for(int i=0; i < 22 ; i++) {
+					if(i==0) j="d";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="d";
+					if(i==4) j="d";
+					if(i==5) j="d";
+					if(i==6) j="d";
+					if(i==7) j="d";
+					if(i==8) j="d";
+					if(i==9) j="d";
+					if(i==10) j="d";
+					if(i==11) j="r";
+					if(i==12) j="r";
+					if(i==13) j="r";
+					if(i==14) j="r";
+					if(i==15) j="r";
+					if(i==16) j="r";
+					if(i==17) j="r";
 					if(i==18) j="r";
-					if(i==19) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("hall") && !player.hasSeen("hall")) {
-				//from conservatory to hall
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 20 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="d";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="d";
-					if(i==6) j="d";
-					if(i==7) j="d";
-					if(i==8) j="d";
-					if(i==9) j="d";
-					if(i==10) j="d";
-					if(i==11) j="d";
-					if(i==12) j="d";
-					if(i==13) j="d";
-					if(i==14) j="d";
-					if(i==15) j="l";
-					if(i==16) j="l";
-					if(i==17) j="l";
-					if(i==18) j="l";
-					if(i==19) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("library") && !player.hasSeen("library")) {
-				//from billiard room to library
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 4 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="l";
-					if(i==2) j="l";
-					if(i==3) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//from billiard room to ballroom
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("ballroom");
-				String j=null;
-				for(int i=0; i < 20 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="l";
-					if(i==2) j="l";
-					if(i==3) j="l";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-				//from billiard room to conservatory
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("conservatory");
-				String j=null;
-				for(int i=0; i < 7 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="u";
-					if(i==2) j="u";
-					if(i==3) j="r";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-				//from billiard room to dining room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 14 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="l";
-					if(i==2) j="l";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="l";
-					if(i==6) j="l";
-					if(i==7) j="l";
-					if(i==8) j="l";
-					if(i==9) j="l";
-					if(i==10) j="d";
-					if(i==11) j="d";
-					if(i==12) j="d";
-					if(i==13) j="l";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("study") && !player.hasSeen("study")) {
-				//from billiard room to study
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 15 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="l";
-					if(i==2) j="d";
-					if(i==3) j="d";
-					if(i==4) j="d";
-					if(i==5) j="d";
-					if(i==6) j="d";
-					if(i==7) j="d";
-					if(i==8) j="d";
-					if(i==9) j="d";
-					if(i==10) j="d";
-					if(i==11) j="d";
-					if(i==12) j="d";
-					if(i==13) j="r";
-					if(i==14) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("hall") && !player.hasSeen("hall")) {
-				//from billiard room to hall
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 15 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="l";
-					if(i==2) j="l";
-					if(i==3) j="d";
-					if(i==4) j="d";
-					if(i==5) j="d";
-					if(i==6) j="d";
-					if(i==7) j="d";
-					if(i==8) j="d";
-					if(i==9) j="d";
-					if(i==10) j="d";
-					if(i==11) j="l";
-					if(i==12) j="l";
-					if(i==13) j="l";
-					if(i==14) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-				//from billiard room to kitchen
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("kitchen");
-
-				String j=null;
-				for(int i=0; i < 17 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="u";
-					if(i==2) j="l";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="l";
-					if(i==6) j="l";
-					if(i==7) j="l";
-					if(i==8) j="l";
-					if(i==9) j="l";
-					if(i==10) j="l";
-					if(i==11) j="l";
-					if(i==12) j="l";
-					if(i==13) j="l";
-					if(i==14) j="l";
-					if(i==15) j="u";
-					if(i==16) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				//from billiard room to lounge
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 22 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="l";
-					if(i==2) j="l";
-					if(i==3) j="d";
-					if(i==4) j="d";
-					if(i==5) j="d";
-					if(i==6) j="d";
-					if(i==7) j="d";
-					if(i==8) j="d";
-					if(i==9) j="d";
-					if(i==10) j="d";
-					if(i==11) j="l";
-					if(i==12) j="l";
-					if(i==13) j="l";
-					if(i==14) j="l";
-					if(i==15) j="l";
-					if(i==16) j="l";
-					if(i==17) j="l";
-					if(i==18) j="l";
-					if(i==19) j="l";
-					if(i==20) j="d";
-					if(i==21) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("library") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-				//from library to billiard room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 4 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="r";
-					if(i==2) j="r";
-					if(i==3) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("library") && !player.hasCard("study") && !player.hasSeen("study")) {
-				//from library to study
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 7 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="d";
-					if(i==2) j="d";
-					if(i==3) j="d";
-					if(i==4) j="d";
-					if(i==5) j="r";
-					if(i==6) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("library") && !player.hasCard("hall") && !player.hasSeen("hall")) {
-				//from library to hall
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 7 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="l";
-					if(i==2) j="d";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="l";
-					if(i==6) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("library") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//from library to ballroom
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("ballroom");
-				String j=null;
-				for(int i=0; i < 12 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="u";
-					if(i==2) j="u";
-					if(i==3) j="u";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="l";
-					if(i==9) j="l";
-					if(i==10) j="u";
-					if(i==11) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("library") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				//from library to lounge
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 14 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="l";
-					if(i==2) j="d";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="l";
-					if(i==6) j="l";
-					if(i==7) j="l";
-					if(i==8) j="l";
-					if(i==9) j="l";
-					if(i==10) j="l";
-					if(i==11) j="l";
-					if(i==12) j="d";
-					if(i==13) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("library") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-				//from library to dining room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 14 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="l";
-					if(i==2) j="d";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="l";
-					if(i==6) j="l";
-					if(i==7) j="l";
-					if(i==8) j="l";
-					if(i==9) j="l";
-					if(i==10) j="l";
-					if(i==11) j="l";
-					if(i==12) j="u";
-					if(i==13) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("library") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-				//from library to conservatory
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("conservatory");
-				String j=null;
-				for(int i=0; i < 15 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="u";
-					if(i==2) j="u";
-					if(i==3) j="u";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
-					if(i==9) j="u";
-					if(i==10) j="r";
-					if(i==11) j="r";
-					if(i==12) j="u";
-					if(i==13) j="u";
-					if(i==14) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("library") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-				//from library to kitchen
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("kitchen");
-
-				String j=null;
-				for(int i=0; i < 23 ; i++) {
-					if(i==0) j="l";
-					if(i==1) j="u";
-					if(i==2) j="u";
-					if(i==3) j="u";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
-					if(i==9) j="l";
-					if(i==10) j="l";
-					if(i==11) j="l";
-					if(i==12) j="l";
-					if(i==13) j="l";
-					if(i==14) j="l";
-					if(i==15) j="l";
-					if(i==16) j="l";
-					if(i==17) j="l";
-					if(i==18) j="l";
-					if(i==19) j="l";
-					if(i==20) j="l";
-					if(i==21) j="u";
-					if(i==22) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("study") && !player.hasCard("hall") && !player.hasSeen("hall")) {
-				//from study to hall
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 4 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="l";
-					if(i==2) j="l";
-					if(i==3) j="l";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("study") && !player.hasCard("library") && !player.hasSeen("library")) {
-				//from study to library
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 7 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="u";
-					if(i==2) j="u";
-					if(i==3) j="l";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="r";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("study") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-				//from study to billiard room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 15 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="l";
-					if(i==2) j="u";
-					if(i==3) j="u";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
-					if(i==9) j="u";
-					if(i==10) j="u";
-					if(i==11) j="u";
-					if(i==12) j="u";
-					if(i==13) j="r";
-					if(i==14) j="r";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("study") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				//from study to lounge
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 17 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="u";
-					if(i==2) j="u";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="u";
-					if(i==6) j="l";
-					if(i==7) j="l";
-					if(i==8) j="l";
-					if(i==9) j="l";
-					if(i==10) j="l";
-					if(i==11) j="l";
-					if(i==12) j="l";
-					if(i==13) j="l";
-					if(i==14) j="l";
-					if(i==15) j="d";
-					if(i==16) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("study") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-				//from study to dining room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 17 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="u";
-					if(i==2) j="u";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="u";
-					if(i==6) j="l";
-					if(i==7) j="l";
-					if(i==8) j="l";
-					if(i==9) j="l";
-					if(i==10) j="l";
-					if(i==11) j="l";
-					if(i==12) j="l";
-					if(i==13) j="l";
-					if(i==14) j="l";
-					if(i==15) j="u";
-					if(i==16) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("study") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//from study to ballroom
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("ballroom");
-				String j=null;
-				for(int i=0; i < 17 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="l";
-					if(i==2) j="u";
-					if(i==3) j="u";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
-					if(i==9) j="u";
-					if(i==10) j="u";
-					if(i==11) j="u";
-					if(i==12) j="u";
-					if(i==13) j="l";
-					if(i==14) j="l";
-					if(i==15) j="u";
-					if(i==16) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("study") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-				//from study to conservatory
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("conservatory");
-				String j=null;
-				for(int i=0; i < 20 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="l";
-					if(i==2) j="u";
-					if(i==3) j="u";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
-					if(i==9) j="u";
-					if(i==10) j="u";
-					if(i==11) j="u";
-					if(i==12) j="u";
-					if(i==13) j="u";
-					if(i==14) j="u";
-					if(i==15) j="r";
-					if(i==16) j="r";
-					if(i==17) j="u";
-					if(i==18) j="u";
-					if(i==19) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("hall") && !player.hasCard("study") && !player.hasSeen("study")) {
-				//from hall to study
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 4 ; i++) {
-					if(i==0) j="r";
-					if(i==1) j="r";
-					if(i==2) j="r";
-					if(i==3) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("hall") && !player.hasCard("library") && !player.hasSeen("library")) {
-				//from hall to library
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 7 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="r";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="u";
-					if(i==6) j="r";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("hall") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				//from hall to lounge
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 8 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="l";
-					if(i==2) j="l";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="l";
-					if(i==6) j="d";
-					if(i==7) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("hall") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-				//from hall to dining room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 8 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="l";
-					if(i==2) j="l";
-					if(i==3) j="l";
-					if(i==4) j="l";
-					if(i==5) j="l";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("hall") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//from hall to ballroom
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("ballroom");
-				String j=null;
-				for(int i=0; i < 13; i++) {
-					if(i==0) j="u";
-					if(i==1) j="l";
-					if(i==2) j="l";
-					if(i==3) j="u";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
-					if(i==9) j="u";
-					if(i==10) j="u";
-					if(i==11) j="u";
-					if(i==12) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("hall") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-				//from hall to billiard room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 15 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="r";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
-					if(i==9) j="u";
-					if(i==10) j="u";
-					if(i==11) j="u";
-					if(i==12) j="r";
-					if(i==13) j="r";
-					if(i==14) j="r";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("hall") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-				//from hall to kitchen
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("kitchen");
-
-				String j=null;
-				for(int i=0; i < 19 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="l";
-					if(i==2) j="l";
-					if(i==3) j="u";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
-					if(i==9) j="u";
-					if(i==10) j="u";
-					if(i==11) j="u";
-					if(i==12) j="l";
-					if(i==13) j="l";
-					if(i==14) j="l";
-					if(i==15) j="l";
-					if(i==16) j="l";
-					if(i==17) j="u";
-					if(i==18) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("hall") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-				//from hall to conservatory
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("conservatory");
-				String j=null;
-				for(int i=0; i < 20 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="r";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
-					if(i==9) j="u";
-					if(i==10) j="u";
-					if(i==11) j="u";
-					if(i==12) j="u";
-					if(i==13) j="u";
-					if(i==14) j="u";
-					if(i==15) j="r";
-					if(i==16) j="r";
-					if(i==17) j="u";
-					if(i==18) j="u";
-					if(i==19) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-				//from lounge to dining room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 4 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="u";
-					if(i==2) j="u";
-					if(i==3) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("hall") && !player.hasSeen("hall")) {
-				//from lounge to hall
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 8; i++) {
-					if(i==0) j="u";
-					if(i==1) j="u";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="r";
-					if(i==6) j="r";
-					if(i==7) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("library") && !player.hasSeen("library")) {
-				//from lounge to library
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 14 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="u";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="r";
-					if(i==6) j="r";
-					if(i==7) j="r";
-					if(i==8) j="r";
-					if(i==9) j="r";
-					if(i==10) j="r";
-					if(i==11) j="r";
-					if(i==12) j="r";
-					if(i==13) j="u";
-					if(i==14) j="r";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//from lounge to ballroom
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("ballroom");
-				String j=null;
-				for(int i=0; i < 15 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="u";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
-					if(i==9) j="u";
-					if(i==10) j="u";
-					if(i==11) j="u";
-					if(i==12) j="u";
-					if(i==13) j="u";
-					if(i==14) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("study") && !player.hasSeen("study")) {
-				//from lounge to study
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 17; i++) {
-					if(i==0) j="u";
-					if(i==1) j="u";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="r";
-					if(i==6) j="r";
-					if(i==7) j="r";
-					if(i==8) j="r";
-					if(i==9) j="r";
-					if(i==10) j="r";
-					if(i==11) j="r";
-					if(i==12) j="d";
-					if(i==13) j="d";
-					if(i==14) j="d";
-					if(i==15) j="r";
-					if(i==16) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-				//from lounge to 
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("kitchen");
-
-				String j=null;
-				for(int i=0; i < 19 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="r";
-					if(i==2) j="r";
-					if(i==3) j="u";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
-					if(i==9) j="u";
-					if(i==10) j="u";
-					if(i==11) j="u";
-					if(i==12) j="u";
-					if(i==13) j="u";
-					if(i==14) j="l";
-					if(i==15) j="l";
-					if(i==16) j="l";
-					if(i==17) j="l";
-					if(i==18) j="u";
-					if(i==19) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-				//from lounge to billiard room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 22 ; i++) {
-					if(i==0) j="u";
-					if(i==1) j="r";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="u";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
-					if(i==9) j="u";
-					if(i==10) j="u";
-					if(i==11) j="u";
-					if(i==12) j="u";
-					if(i==13) j="u";
-					if(i==14) j="u";
-					if(i==15) j="u";
-					if(i==16) j="u";
-					if(i==17) j="u";
-					if(i==18) j="u";
 					if(i==19) j="r";
 					if(i==20) j="r";
 					if(i==21) j="r";
 					q.add(j);
 				}
-			}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				//from dining room to lounge
-				if(!q.isEmpty()) {
-					q.clear();
-				}
+			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
 
 				String j=null;
-				for(int i=0; i < 4 ; i++) {
+				for(int i=0; i < 24 ; i++) {
 					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="d";
+					if(i==1) j="l";
+					if(i==2) j="l";
 					if(i==3) j="d";
+					if(i==4) j="d";
+					if(i==5) j="d";
+					if(i==6) j="d";
+					if(i==7) j="d";
+					if(i==8) j="d";
+					if(i==9) j="d";
+					if(i==10) j="d";
+					if(i==11) j="r";
+					if(i==12) j="d";
+					if(i==13) j="d";
+					if(i==14) j="d";
+					if(i==15) j="d";
+					if(i==16) j="d";
+					if(i==17) j="d";
+					if(i==18) j="d";
+					if(i==19) j="d";
+					if(i==20) j="d";
+					if(i==21) j="l";
+					if(i==22) j="l";
+					if(i==23) j="d";
 					q.add(j);
 				}
-			}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("hall") && !player.hasSeen("hall")) {
-				//from dining room to hall
-				if(!q.isEmpty()) {
-					q.clear();
-				}
+			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+				//green start
 
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
 					if(i==0) j="d";
-					if(i==1) j="d";
+					if(i==1) j="r";
+					if(i==2) j="r";
+					if(i==3) j="d";
+					if(i==4) j="d";
+					if(i==5) j="d";
+					if(i==6) j="d";
+					if(i==7) j="l";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+
+				String j=null;
+				for(int i=0; i < 10 ; i++) {
+					if(i==0) j="d";
+					if(i==1) j="r";
+					if(i==2) j="r";
+					if(i==3) j="d";
+					if(i==4) j="d";
+					if(i==5) j="d";
+					if(i==6) j="d";
+					if(i==7) j="r";
+					if(i==8) j="r";
+					if(i==9) j="u";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+
+				String j=null;
+				for(int i=0; i < 13 ; i++) {
+					if(i==0) j="d";
+					if(i==1) j="r";
+					if(i==2) j="r";
+					if(i==3) j="d";
+					if(i==4) j="d";
+					if(i==5) j="d";
+					if(i==6) j="d";
+					if(i==7) j="d";
+					if(i==8) j="d";
+					if(i==9) j="d";
+					if(i==10) j="d";
+					if(i==11) j="r";
+					if(i==12) j="r";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("library") && !player.hasSeen("library")) {
+
+				String j=null;
+				for(int i=0; i < 19 ; i++) {
+					if(i==0) j="d";
+					if(i==1) j="r";
+					if(i==2) j="r";
+					if(i==3) j="d";
+					if(i==4) j="d";
+					if(i==5) j="d";
+					if(i==6) j="d";
+					if(i==7) j="d";
+					if(i==8) j="d";
+					if(i==9) j="d";
+					if(i==10) j="d";
+					if(i==11) j="d";
+					if(i==12) j="d";
+					if(i==13) j="d";
+					if(i==14) j="d";
+					if(i==15) j="d";
+					if(i==16) j="d";
+					if(i==17) j="d";
+					if(i==18) j="r";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+
+				String j=null;
+				for(int i=0; i < 23 ; i++) {
+					if(i==0) j="d";
+					if(i==1) j="r";
+					if(i==2) j="r";
+					if(i==3) j="d";
+					if(i==4) j="d";
+					if(i==5) j="d";
+					if(i==6) j="d";
+					if(i==7) j="d";
+					if(i==8) j="d";
+					if(i==9) j="d";
+					if(i==10) j="l";
+					if(i==11) j="l";
+					if(i==12) j="l";
+					if(i==13) j="l";
+					if(i==14) j="l";
+					if(i==15) j="l";
+					if(i==16) j="l";
+					if(i==17) j="l";
+					if(i==18) j="d";
+					if(i==19) j="d";
+					if(i==20) j="d";
+					if(i==21) j="d";
+					if(i==22) j="l";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+				//peacock start
+				String j=null;
+				for(int i=0; i < 7 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="u";
+					if(i==6) j="u";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+
+				String j=null;
+				for(int i=0; i < 9 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="l";
+					if(i==6) j="l";
+					if(i==7) j="u";
+					if(i==8) j="l";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+
+				String j=null;
+				for(int i=0; i < 10 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="l";
+					if(i==6) j="d";
+					if(i==7) j="d";
+					if(i==8) j="d";
+					if(i==9) j="r";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("library") && !player.hasSeen("library")) {
+
+				String j=null;
+				for(int i=0; i < 18 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="l";
+					if(i==6) j="l";
+					if(i==7) j="d";
+					if(i==8) j="d";
+					if(i==9) j="d";
+					if(i==10) j="d";
+					if(i==11) j="d";
+					if(i==12) j="d";
+					if(i==13) j="d";
+					if(i==14) j="d";
+					if(i==15) j="d";
+					if(i==16) j="d";
+					if(i==17) j="r";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("study") && !player.hasSeen("study")) {
+
+				String j=null;
+				for(int i=0; i < 23 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="l";
+					if(i==6) j="l";
+					if(i==7) j="d";
+					if(i==8) j="d";
+					if(i==9) j="d";
+					if(i==10) j="d";
+					if(i==11) j="d";
+					if(i==12) j="d";
+					if(i==13) j="d";
+					if(i==14) j="d";
+					if(i==15) j="d";
+					if(i==16) j="d";
+					if(i==17) j="d";
+					if(i==18) j="d";
+					if(i==19) j="d";
+					if(i==20) j="d";
+					if(i==21) j="r";
+					if(i==22) j="d";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("study") && !player.hasSeen("study")) {
+				//plum start
+				String j=null;
+				for(int i=0; i < 8 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="l";
+					if(i==6) j="d";
+					if(i==7) j="d";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("hall") && !player.hasSeen("hall")) {
+
+				String j=null;
+				for(int i=0; i < 10 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="l";
+					if(i==6) j="l";
+					if(i==7) j="l";
+					if(i==8) j="d";
+					if(i==9) j="l";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("library") && !player.hasSeen("library")) {
+
+				String j=null;
+				for(int i=0; i < 11 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="l";
+					if(i==6) j="l";
+					if(i==7) j="u";
+					if(i==8) j="u";
+					if(i==9) j="u";
+					if(i==10) j="r";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+
+				String j=null;
+				for(int i=0; i < 19 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="l";
+					if(i==6) j="l";
+					if(i==7) j="u";
+					if(i==8) j="u";
+					if(i==9) j="u";
+					if(i==10) j="u";
+					if(i==11) j="u";
+					if(i==12) j="u";
+					if(i==13) j="u";
+					if(i==14) j="u";
+					if(i==15) j="u";
+					if(i==16) j="u";
+					if(i==17) j="r";
+					if(i==18) j="r";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+
+				String j=null;
+				for(int i=0; i < 21 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="l";
+					if(i==6) j="l";
+					if(i==7) j="l";
+					if(i==8) j="u";
+					if(i==9) j="u";
+					if(i==10) j="l";
+					if(i==11) j="l";
+					if(i==12) j="l";
+					if(i==13) j="l";
+					if(i==14) j="l";
+					if(i==15) j="l";
+					if(i==16) j="l";
+					if(i==17) j="l";
+					if(i==18) j="l";
+					if(i==19) j="d";
+					if(i==20) j="d";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+				//scarlett start
+				String j=null;
+				for(int i=0; i < 8 ; i++) {
+					if(i==0) j="u";
+					if(i==1) j="u";
+					if(i==2) j="u";
+					if(i==3) j="u";
+					if(i==4) j="u";
+					if(i==5) j="u";
+					if(i==6) j="l";
+					if(i==7) j="d";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+
+				String j=null;
+				for(int i=0; i < 10 ; i++) {
+					if(i==0) j="u";
+					if(i==1) j="u";
+					if(i==2) j="u";
+					if(i==3) j="u";
+					if(i==4) j="u";
+					if(i==5) j="u";
+					if(i==6) j="u";
+					if(i==7) j="u";
+					if(i==8) j="l";
+					if(i==9) j="u";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("hall") && !player.hasSeen("hall")) {
+
+				String j=null;
+				for(int i=0; i < 12 ; i++) {
+					if(i==0) j="u";
+					if(i==1) j="u";
+					if(i==2) j="u";
+					if(i==3) j="u";
+					if(i==4) j="u";
+					if(i==5) j="u";
+					if(i==6) j="u";
+					if(i==7) j="r";
+					if(i==8) j="r";
+					if(i==9) j="r";
+					if(i==10) j="r";
+					if(i==11) j="d";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("library") && !player.hasSeen("library")) {
+
+				String j=null;
+				for(int i=0; i < 18 ; i++) {
+					if(i==0) j="u";
+					if(i==1) j="u";
+					if(i==2) j="u";
+					if(i==3) j="u";
+					if(i==4) j="u";
+					if(i==5) j="u";
+					if(i==6) j="u";
+					if(i==7) j="r";
+					if(i==8) j="r";
+					if(i==9) j="r";
+					if(i==10) j="r";
+					if(i==11) j="r";
+					if(i==12) j="r";
+					if(i==13) j="r";
+					if(i==14) j="r";
+					if(i==15) j="r";
+					if(i==16) j="u";
+					if(i==17) j="r";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+
+				String j=null;
+				for(int i=0; i < 19 ; i++) {
+					if(i==0) j="u";
+					if(i==1) j="u";
+					if(i==2) j="u";
+					if(i==3) j="u";
+					if(i==4) j="u";
+					if(i==5) j="u";
+					if(i==6) j="u";
+					if(i==7) j="u";
+					if(i==8) j="r";
+					if(i==9) j="r";
+					if(i==10) j="u";
+					if(i==11) j="u";
+					if(i==12) j="u";
+					if(i==13) j="u";
+					if(i==14) j="u";
+					if(i==15) j="u";
+					if(i==16) j="u";
+					if(i==17) j="u";
+					if(i==18) j="u";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+				//mustard start
+				String j=null;
+				for(int i=0; i < 8 ; i++) {
+					if(i==0) j="r";
+					if(i==1) j="r";
+					if(i==2) j="r";
+					if(i==3) j="r";
+					if(i==4) j="r";
+					if(i==5) j="r";
+					if(i==6) j="d";
+					if(i==7) j="d";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+
+				String j=null;
+				for(int i=0; i < 8 ; i++) {
+					if(i==0) j="r";
+					if(i==1) j="r";
+					if(i==2) j="r";
+					if(i==3) j="r";
+					if(i==4) j="r";
+					if(i==5) j="r";
+					if(i==6) j="u";
+					if(i==7) j="u";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("hall") && !player.hasSeen("hall")) {
+
+				String j=null;
+				for(int i=0; i < 12 ; i++) {
+					if(i==0) j="r";
+					if(i==1) j="r";
 					if(i==2) j="r";
 					if(i==3) j="r";
 					if(i==4) j="r";
 					if(i==5) j="r";
 					if(i==6) j="r";
-					if(i==7) j="d";
+					if(i==7) j="r";
+					if(i==8) j="r";
+					if(i==9) j="r";
+					if(i==10) j="r";
+					if(i==11) j="d";
 					q.add(j);
 				}
-			}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-				//from dining room to kitchen
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("kitchen");
+			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("library") && !player.hasSeen("library")) {
 
 				String j=null;
-				for(int i=0; i < 11 ; i++) {
+				for(int i=0; i < 18 ; i++) {
 					if(i==0) j="r";
-					if(i==1) j="u";
-					if(i==2) j="u";
-					if(i==3) j="u";
-					if(i==4) j="u";
-					if(i==5) j="l";
-					if(i==6) j="l";
-					if(i==7) j="l";
-					if(i==8) j="l";
-					if(i==9) j="u";
-					if(i==10) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-				//from dining room to billiard room
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 14; i++) {
-					if(i==0) j="r";
-					if(i==1) j="u";
-					if(i==2) j="u";
-					if(i==3) j="u";
+					if(i==1) j="r";
+					if(i==2) j="r";
+					if(i==3) j="r";
 					if(i==4) j="r";
 					if(i==5) j="r";
 					if(i==6) j="r";
@@ -2452,18 +974,18 @@ public class Garlic implements BotAPI {
 					if(i==11) j="r";
 					if(i==12) j="r";
 					if(i==13) j="r";
+					if(i==14) j="r";
+					if(i==15) j="r";
+					if(i==16) j="u";
+					if(i==17) j="r";
 					q.add(j);
 				}
-			}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("library") && !player.hasSeen("library")) {
-				//from dining room to 
-				if(!q.isEmpty()) {
-					q.clear();
-				}
+			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 
 				String j=null;
-				for(int i=0; i < 14 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
+				for(int i=0; i < 19 ; i++) {
+					if(i==0) j="r";
+					if(i==1) j="r";
 					if(i==2) j="r";
 					if(i==3) j="r";
 					if(i==4) j="r";
@@ -2471,231 +993,1715 @@ public class Garlic implements BotAPI {
 					if(i==6) j="r";
 					if(i==7) j="r";
 					if(i==8) j="r";
-					if(i==9) j="r";
-					if(i==10) j="r";
-					if(i==11) j="r";
-					if(i==12) j="u";
-					if(i==13) j="r";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//from dining room to ballroom
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("ballroom");
-				String j=null;
-				for(int i=0; i < 15 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="u";
-					if(i==6) j="u";
-					if(i==7) j="u";
-					if(i==8) j="u";
 					if(i==9) j="u";
 					if(i==10) j="u";
 					if(i==11) j="u";
 					if(i==12) j="u";
 					if(i==13) j="u";
 					if(i==14) j="u";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("study") && !player.hasSeen("study")) {
-				//from dining room to study
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-
-				String j=null;
-				for(int i=0; i < 17 ; i++) {
-					if(i==0) j="d";
-					if(i==1) j="d";
-					if(i==2) j="r";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="r";
-					if(i==6) j="r";
-					if(i==7) j="r";
-					if(i==8) j="r";
-					if(i==9) j="r";
-					if(i==10) j="r";
-					if(i==11) j="r";
-					if(i==12) j="d";
-					if(i==13) j="d";
-					if(i==14) j="d";
-					if(i==15) j="r";
-					if(i==16) j="d";
-					q.add(j);
-				}
-			}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-				//from dining room to conservatory
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("conservatory");
-				String j=null;
-				for(int i=0; i < 19 ; i++) {
-					if(i==0) j="r";
-					if(i==1) j="u";
-					if(i==2) j="u";
-					if(i==3) j="u";
-					if(i==4) j="r";
-					if(i==5) j="r";
-					if(i==6) j="r";
-					if(i==7) j="r";
-					if(i==8) j="r";
-					if(i==9) j="r";
-					if(i==10) j="r";
-					if(i==11) j="r";
-					if(i==12) j="u";
-					if(i==13) j="u";
-					if(i==14) j="r";
-					if(i==15) j="r";
+					if(i==15) j="u";
 					if(i==16) j="u";
 					if(i==17) j="u";
 					if(i==18) j="u";
 					q.add(j);
 				}
 			}
-			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-				
-				if(!q.isEmpty()) {
-					q.clear();
+
+
+			//TODO
+			if(roomOut && !room.equals("null"))
+			{
+				if(room.equalsIgnoreCase("kitchen") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+					//from kitchen to ballroom
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 7 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="r";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+					//from kitchen to dining room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 11 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="l";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+					//from kitchen to billiard room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 17 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="r";
+						if(i==7) j="r";
+						if(i==8) j="r";
+						if(i==9) j="r";
+						if(i==10) j="r";
+						if(i==11) j="r";
+						if(i==12) j="r";
+						if(i==13) j="r";
+						if(i==14) j="r";
+						if(i==15) j="d";
+						if(i==16) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("hall") && !player.hasSeen("hall")) {
+					//from kitchen to hall
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 19 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="r";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="d";
+						if(i==11) j="d";
+						if(i==12) j="d";
+						if(i==13) j="d";
+						if(i==14) j="d";
+						if(i==15) j="d";
+						if(i==16) j="r";
+						if(i==17) j="r";
+						if(i==18) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+					//from kitchen to lounge
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 19 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="d";
+						if(i==11) j="d";
+						if(i==12) j="d";
+						if(i==13) j="d";
+						if(i==14) j="d";
+						if(i==15) j="d";
+						if(i==16) j="l";
+						if(i==17) j="l";
+						if(i==18) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+					//from kitchen to conservatory
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 20 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="r";
+						if(i==7) j="r";
+						if(i==8) j="r";
+						if(i==9) j="r";
+						if(i==10) j="r";
+						if(i==11) j="r";
+						if(i==12) j="r";
+						if(i==13) j="r";
+						if(i==14) j="r";
+						if(i==15) j="u";
+						if(i==16) j="u";
+						if(i==17) j="u";
+						if(i==18) j="r";
+						if(i==19) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("library") && !player.hasSeen("library")) {
+					//from kitchen to library
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 23 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="r";
+						if(i==7) j="r";
+						if(i==8) j="r";
+						if(i==9) j="r";
+						if(i==10) j="r";
+						if(i==11) j="r";
+						if(i==12) j="r";
+						if(i==13) j="r";
+						if(i==14) j="d";
+						if(i==15) j="d";
+						if(i==16) j="d";
+						if(i==17) j="d";
+						if(i==18) j="d";
+						if(i==19) j="d";
+						if(i==20) j="d";
+						if(i==21) j="d";
+						if(i==22) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+					//from ballroom to conservatory
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 4 ; i++) {
+						if(i==0) j="r";
+						if(i==1) j="r";
+						if(i==2) j="r";
+						if(i==3) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+					//from ballroom to billiard room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 6 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
+					//from ballroom to kitchen
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 7 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="l";
+						if(i==6) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("library") && !player.hasSeen("library")) {
+					//from ballroom to library
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 12 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="d";
+						if(i==5) j="d";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="d";
+						if(i==11) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("hall") && !player.hasSeen("hall")) {
+					//from ballroom to hall
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 13 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="d";
+						if(i==4) j="d";
+						if(i==5) j="d";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="r";
+						if(i==11) j="r";
+						if(i==12) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+					//from ballroom to lounge
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 15 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="d";
+						if(i==4) j="d";
+						if(i==5) j="d";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="l";
+						if(i==11) j="l";
+						if(i==12) j="l";
+						if(i==13) j="d";
+						if(i==14) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+					//from ballroom to dining room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 15 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="d";
+						if(i==4) j="d";
+						if(i==5) j="d";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="l";
+						if(i==11) j="l";
+						if(i==12) j="l";
+						if(i==13) j="u";
+						if(i==14) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("study") && !player.hasSeen("study")) {
+					//from ballroom to study
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 17 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="d";
+						if(i==5) j="d";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="d";
+						if(i==11) j="d";
+						if(i==12) j="d";
+						if(i==13) j="d";
+						if(i==14) j="d";
+						if(i==15) j="r";
+						if(i==16) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+					//from conservatory to ballroom
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 4 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="l";
+						if(i==2) j="l";
+						if(i==3) j="l";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+					//from conservatory to billiard room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 7 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="l";
+						if(i==4) j="d";
+						if(i==5) j="d";
+						if(i==6) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("library") && !player.hasSeen("library")) {
+					//from conservatory to library
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 15 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="d";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="d";
+						if(i==11) j="d";
+						if(i==12) j="d";
+						if(i==13) j="d";
+						if(i==14) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+					//from conservatory to dining room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 19 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="d";
+						if(i==6) j="d";
+						if(i==7) j="l";
+						if(i==8) j="l";
+						if(i==9) j="l";
+						if(i==10) j="l";
+						if(i==11) j="l";
+						if(i==12) j="l";
+						if(i==13) j="l";
+						if(i==14) j="l";
+						if(i==15) j="d";
+						if(i==16) j="d";
+						if(i==17) j="d";
+						if(i==18) j="l";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
+					//from conservatory to kitchen
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 20 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="l";
+						if(i==2) j="d";
+						if(i==3) j="d";
+						if(i==4) j="d";
+						if(i==5) j="l";
+						if(i==6) j="l";
+						if(i==7) j="l";
+						if(i==8) j="l";
+						if(i==9) j="l";
+						if(i==10) j="l";
+						if(i==11) j="l";
+						if(i==12) j="l";
+						if(i==13) j="l";
+						if(i==14) j="l";
+						if(i==15) j="l";
+						if(i==16) j="l";
+						if(i==17) j="l";
+						if(i==18) j="u";
+						if(i==19) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("study") && !player.hasSeen("study")) {
+					//from conservatory to study
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 20 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="d";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="d";
+						if(i==11) j="d";
+						if(i==12) j="d";
+						if(i==13) j="d";
+						if(i==14) j="d";
+						if(i==15) j="d";
+						if(i==16) j="d";
+						if(i==17) j="d";
+						if(i==18) j="r";
+						if(i==19) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("hall") && !player.hasSeen("hall")) {
+					//from conservatory to hall
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 20 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="d";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="d";
+						if(i==11) j="d";
+						if(i==12) j="d";
+						if(i==13) j="d";
+						if(i==14) j="d";
+						if(i==15) j="l";
+						if(i==16) j="l";
+						if(i==17) j="l";
+						if(i==18) j="l";
+						if(i==19) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("library") && !player.hasSeen("library")) {
+					//from billiard room to library
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 4 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="l";
+						if(i==2) j="l";
+						if(i==3) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+					//from billiard room to ballroom
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 20 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="l";
+						if(i==2) j="l";
+						if(i==3) j="l";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+					//from billiard room to conservatory
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 7 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="u";
+						if(i==2) j="u";
+						if(i==3) j="r";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+					//from billiard room to dining room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 14 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="l";
+						if(i==2) j="l";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="l";
+						if(i==6) j="l";
+						if(i==7) j="l";
+						if(i==8) j="l";
+						if(i==9) j="l";
+						if(i==10) j="d";
+						if(i==11) j="d";
+						if(i==12) j="d";
+						if(i==13) j="l";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("study") && !player.hasSeen("study")) {
+					//from billiard room to study
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 15 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="l";
+						if(i==2) j="d";
+						if(i==3) j="d";
+						if(i==4) j="d";
+						if(i==5) j="d";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="d";
+						if(i==11) j="d";
+						if(i==12) j="d";
+						if(i==13) j="r";
+						if(i==14) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("hall") && !player.hasSeen("hall")) {
+					//from billiard room to hall
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 15 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="l";
+						if(i==2) j="l";
+						if(i==3) j="d";
+						if(i==4) j="d";
+						if(i==5) j="d";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="d";
+						if(i==11) j="l";
+						if(i==12) j="l";
+						if(i==13) j="l";
+						if(i==14) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
+					//from billiard room to kitchen
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 17 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="u";
+						if(i==2) j="l";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="l";
+						if(i==6) j="l";
+						if(i==7) j="l";
+						if(i==8) j="l";
+						if(i==9) j="l";
+						if(i==10) j="l";
+						if(i==11) j="l";
+						if(i==12) j="l";
+						if(i==13) j="l";
+						if(i==14) j="l";
+						if(i==15) j="u";
+						if(i==16) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+					//from billiard room to lounge
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 22 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="l";
+						if(i==2) j="l";
+						if(i==3) j="d";
+						if(i==4) j="d";
+						if(i==5) j="d";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						if(i==8) j="d";
+						if(i==9) j="d";
+						if(i==10) j="d";
+						if(i==11) j="l";
+						if(i==12) j="l";
+						if(i==13) j="l";
+						if(i==14) j="l";
+						if(i==15) j="l";
+						if(i==16) j="l";
+						if(i==17) j="l";
+						if(i==18) j="l";
+						if(i==19) j="l";
+						if(i==20) j="d";
+						if(i==21) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("library") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+					//from library to billiard room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 4 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="r";
+						if(i==2) j="r";
+						if(i==3) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("library") && !player.hasCard("study") && !player.hasSeen("study")) {
+					//from library to study
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 7 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="d";
+						if(i==4) j="d";
+						if(i==5) j="r";
+						if(i==6) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("library") && !player.hasCard("hall") && !player.hasSeen("hall")) {
+					//from library to hall
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 7 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="l";
+						if(i==2) j="d";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="l";
+						if(i==6) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("library") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+					//from library to ballroom
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 12 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="u";
+						if(i==2) j="u";
+						if(i==3) j="u";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="l";
+						if(i==9) j="l";
+						if(i==10) j="u";
+						if(i==11) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("library") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+					//from library to lounge
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 14 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="l";
+						if(i==2) j="d";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="l";
+						if(i==6) j="l";
+						if(i==7) j="l";
+						if(i==8) j="l";
+						if(i==9) j="l";
+						if(i==10) j="l";
+						if(i==11) j="l";
+						if(i==12) j="d";
+						if(i==13) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("library") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+					//from library to dining room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 14 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="l";
+						if(i==2) j="d";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="l";
+						if(i==6) j="l";
+						if(i==7) j="l";
+						if(i==8) j="l";
+						if(i==9) j="l";
+						if(i==10) j="l";
+						if(i==11) j="l";
+						if(i==12) j="u";
+						if(i==13) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("library") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+					//from library to conservatory
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 15 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="u";
+						if(i==2) j="u";
+						if(i==3) j="u";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="u";
+						if(i==10) j="r";
+						if(i==11) j="r";
+						if(i==12) j="u";
+						if(i==13) j="u";
+						if(i==14) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("library") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
+					//from library to kitchen
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 23 ; i++) {
+						if(i==0) j="l";
+						if(i==1) j="u";
+						if(i==2) j="u";
+						if(i==3) j="u";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="l";
+						if(i==10) j="l";
+						if(i==11) j="l";
+						if(i==12) j="l";
+						if(i==13) j="l";
+						if(i==14) j="l";
+						if(i==15) j="l";
+						if(i==16) j="l";
+						if(i==17) j="l";
+						if(i==18) j="l";
+						if(i==19) j="l";
+						if(i==20) j="l";
+						if(i==21) j="u";
+						if(i==22) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("study") && !player.hasCard("hall") && !player.hasSeen("hall")) {
+					//from study to hall
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 4 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="l";
+						if(i==2) j="l";
+						if(i==3) j="l";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("study") && !player.hasCard("library") && !player.hasSeen("library")) {
+					//from study to library
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 7 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="u";
+						if(i==2) j="u";
+						if(i==3) j="l";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("study") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+					//from study to billiard room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 15 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="l";
+						if(i==2) j="u";
+						if(i==3) j="u";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="u";
+						if(i==10) j="u";
+						if(i==11) j="u";
+						if(i==12) j="u";
+						if(i==13) j="r";
+						if(i==14) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("study") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+					//from study to lounge
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 17 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="u";
+						if(i==2) j="u";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="u";
+						if(i==6) j="l";
+						if(i==7) j="l";
+						if(i==8) j="l";
+						if(i==9) j="l";
+						if(i==10) j="l";
+						if(i==11) j="l";
+						if(i==12) j="l";
+						if(i==13) j="l";
+						if(i==14) j="l";
+						if(i==15) j="d";
+						if(i==16) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("study") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+					//from study to dining room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 17 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="u";
+						if(i==2) j="u";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="u";
+						if(i==6) j="l";
+						if(i==7) j="l";
+						if(i==8) j="l";
+						if(i==9) j="l";
+						if(i==10) j="l";
+						if(i==11) j="l";
+						if(i==12) j="l";
+						if(i==13) j="l";
+						if(i==14) j="l";
+						if(i==15) j="u";
+						if(i==16) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("study") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+					//from study to ballroom
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 17 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="l";
+						if(i==2) j="u";
+						if(i==3) j="u";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="u";
+						if(i==10) j="u";
+						if(i==11) j="u";
+						if(i==12) j="u";
+						if(i==13) j="l";
+						if(i==14) j="l";
+						if(i==15) j="u";
+						if(i==16) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("study") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+					//from study to conservatory
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 20 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="l";
+						if(i==2) j="u";
+						if(i==3) j="u";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="u";
+						if(i==10) j="u";
+						if(i==11) j="u";
+						if(i==12) j="u";
+						if(i==13) j="u";
+						if(i==14) j="u";
+						if(i==15) j="r";
+						if(i==16) j="r";
+						if(i==17) j="u";
+						if(i==18) j="u";
+						if(i==19) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("hall") && !player.hasCard("study") && !player.hasSeen("study")) {
+					//from hall to study
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 4 ; i++) {
+						if(i==0) j="r";
+						if(i==1) j="r";
+						if(i==2) j="r";
+						if(i==3) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("hall") && !player.hasCard("library") && !player.hasSeen("library")) {
+					//from hall to library
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 7 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="r";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="u";
+						if(i==6) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("hall") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+					//from hall to lounge
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 8 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="l";
+						if(i==2) j="l";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="l";
+						if(i==6) j="d";
+						if(i==7) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("hall") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+					//from hall to dining room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 8 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="l";
+						if(i==2) j="l";
+						if(i==3) j="l";
+						if(i==4) j="l";
+						if(i==5) j="l";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("hall") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+					//from hall to ballroom
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 13; i++) {
+						if(i==0) j="u";
+						if(i==1) j="l";
+						if(i==2) j="l";
+						if(i==3) j="u";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="u";
+						if(i==10) j="u";
+						if(i==11) j="u";
+						if(i==12) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("hall") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+					//from hall to billiard room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 15 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="r";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="u";
+						if(i==10) j="u";
+						if(i==11) j="u";
+						if(i==12) j="r";
+						if(i==13) j="r";
+						if(i==14) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("hall") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
+					//from hall to kitchen
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 19 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="l";
+						if(i==2) j="l";
+						if(i==3) j="u";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="u";
+						if(i==10) j="u";
+						if(i==11) j="u";
+						if(i==12) j="l";
+						if(i==13) j="l";
+						if(i==14) j="l";
+						if(i==15) j="l";
+						if(i==16) j="l";
+						if(i==17) j="u";
+						if(i==18) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("hall") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+					//from hall to conservatory
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 20 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="r";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="u";
+						if(i==10) j="u";
+						if(i==11) j="u";
+						if(i==12) j="u";
+						if(i==13) j="u";
+						if(i==14) j="u";
+						if(i==15) j="r";
+						if(i==16) j="r";
+						if(i==17) j="u";
+						if(i==18) j="u";
+						if(i==19) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+					//from lounge to dining room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 4 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="u";
+						if(i==2) j="u";
+						if(i==3) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("hall") && !player.hasSeen("hall")) {
+					//from lounge to hall
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 8; i++) {
+						if(i==0) j="u";
+						if(i==1) j="u";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="r";
+						if(i==7) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("library") && !player.hasSeen("library")) {
+					//from lounge to library
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 14 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="u";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="r";
+						if(i==7) j="r";
+						if(i==8) j="r";
+						if(i==9) j="r";
+						if(i==10) j="r";
+						if(i==11) j="r";
+						if(i==12) j="u";
+						if(i==13) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+					//from lounge to ballroom
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 15 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="u";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="u";
+						if(i==10) j="u";
+						if(i==11) j="u";
+						if(i==12) j="u";
+						if(i==13) j="u";
+						if(i==14) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("study") && !player.hasSeen("study")) {
+					//from lounge to study
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 17; i++) {
+						if(i==0) j="u";
+						if(i==1) j="u";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="r";
+						if(i==7) j="r";
+						if(i==8) j="r";
+						if(i==9) j="r";
+						if(i==10) j="r";
+						if(i==11) j="r";
+						if(i==12) j="d";
+						if(i==13) j="d";
+						if(i==14) j="d";
+						if(i==15) j="r";
+						if(i==16) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
+					//from lounge to 
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 19 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="r";
+						if(i==2) j="r";
+						if(i==3) j="u";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="u";
+						if(i==10) j="u";
+						if(i==11) j="u";
+						if(i==12) j="u";
+						if(i==13) j="u";
+						if(i==14) j="l";
+						if(i==15) j="l";
+						if(i==16) j="l";
+						if(i==17) j="l";
+						if(i==18) j="u";
+						if(i==19) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("lounge") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+					//from lounge to billiard room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 22 ; i++) {
+						if(i==0) j="u";
+						if(i==1) j="r";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="u";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="u";
+						if(i==10) j="u";
+						if(i==11) j="u";
+						if(i==12) j="u";
+						if(i==13) j="u";
+						if(i==14) j="u";
+						if(i==15) j="u";
+						if(i==16) j="u";
+						if(i==17) j="u";
+						if(i==18) j="u";
+						if(i==19) j="r";
+						if(i==20) j="r";
+						if(i==21) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+					//from dining room to lounge
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 4 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("hall") && !player.hasSeen("hall")) {
+					//from dining room to hall
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 8 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="r";
+						if(i==7) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
+					//from dining room to kitchen
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 11 ; i++) {
+						if(i==0) j="r";
+						if(i==1) j="u";
+						if(i==2) j="u";
+						if(i==3) j="u";
+						if(i==4) j="u";
+						if(i==5) j="l";
+						if(i==6) j="l";
+						if(i==7) j="l";
+						if(i==8) j="l";
+						if(i==9) j="u";
+						if(i==10) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+					//from dining room to billiard room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 14; i++) {
+						if(i==0) j="r";
+						if(i==1) j="u";
+						if(i==2) j="u";
+						if(i==3) j="u";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="r";
+						if(i==7) j="r";
+						if(i==8) j="r";
+						if(i==9) j="r";
+						if(i==10) j="r";
+						if(i==11) j="r";
+						if(i==12) j="r";
+						if(i==13) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("library") && !player.hasSeen("library")) {
+					//from dining room to 
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 14 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="r";
+						if(i==7) j="r";
+						if(i==8) j="r";
+						if(i==9) j="r";
+						if(i==10) j="r";
+						if(i==11) j="r";
+						if(i==12) j="u";
+						if(i==13) j="r";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+					//from dining room to ballroom
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 15 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="u";
+						if(i==6) j="u";
+						if(i==7) j="u";
+						if(i==8) j="u";
+						if(i==9) j="u";
+						if(i==10) j="u";
+						if(i==11) j="u";
+						if(i==12) j="u";
+						if(i==13) j="u";
+						if(i==14) j="u";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("study") && !player.hasSeen("study")) {
+					//from dining room to study
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+
+					String j=null;
+					for(int i=0; i < 17 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="r";
+						if(i==3) j="r";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="r";
+						if(i==7) j="r";
+						if(i==8) j="r";
+						if(i==9) j="r";
+						if(i==10) j="r";
+						if(i==11) j="r";
+						if(i==12) j="d";
+						if(i==13) j="d";
+						if(i==14) j="d";
+						if(i==15) j="r";
+						if(i==16) j="d";
+						q.add(j);
+					}
+				}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+					//from dining room to conservatory
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 19 ; i++) {
+						if(i==0) j="r";
+						if(i==1) j="u";
+						if(i==2) j="u";
+						if(i==3) j="u";
+						if(i==4) j="r";
+						if(i==5) j="r";
+						if(i==6) j="r";
+						if(i==7) j="r";
+						if(i==8) j="r";
+						if(i==9) j="r";
+						if(i==10) j="r";
+						if(i==11) j="r";
+						if(i==12) j="u";
+						if(i==13) j="u";
+						if(i==14) j="r";
+						if(i==15) j="r";
+						if(i==16) j="u";
+						if(i==17) j="u";
+						if(i==18) j="u";
+						q.add(j);
+					}
 				}
-				System.out.println("kitchen");
-				String j=null;
-				for(int i=0; i < 2; i++) {
-					if(i==0) j="d";
-					if(i==1) j="u";
-					
-					q.add(j);
+				else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
+
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="d";
+						if(i==1) j="u";
+
+						q.add(j);
+					}
+				}
+
+				else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="l";
+						if(i==1) j="r";
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="d";
+						if(i==1) j="u";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="l";
+						if(i==1) j="r";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("library") && !player.hasCard("library") && !player.hasSeen("library")) {
+
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="l";
+						if(i==1) j="r";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("study") && !player.hasCard("study") && !player.hasSeen("study")) {
+
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="u";
+						if(i==1) j="d";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("hall") && !player.hasCard("hall") && !player.hasSeen("hall")) {
+					//from dining room to conservatory
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="u";
+						if(i==1) j="d";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("lounge") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="u";
+						if(i==1) j="d";
+
+						q.add(j);
+					}
 				}
 			}
-			
-			else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-			
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("ballroom");
-				String j=null;
-				for(int i=0; i < 2; i++) {
-					if(i==0) j="l";
-					if(i==1) j="r";
-					q.add(j);
-				}
-			}
-			else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-			
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("conservatory");
-				String j=null;
-				for(int i=0; i < 2; i++) {
-					if(i==0) j="d";
-					if(i==1) j="u";
-					
-					q.add(j);
-				}
-			}
-			else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-			
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("billiard room");
-				String j=null;
-				for(int i=0; i < 2; i++) {
-					if(i==0) j="l";
-					if(i==1) j="r";
-					
-					q.add(j);
-				}
-			}
-			else if(room.equalsIgnoreCase("library") && !player.hasCard("library") && !player.hasSeen("library")) {
-			
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("library");
-				String j=null;
-				for(int i=0; i < 2; i++) {
-					if(i==0) j="l";
-					if(i==1) j="r";
-					
-					q.add(j);
-				}
-			}
-			else if(room.equalsIgnoreCase("study") && !player.hasCard("study") && !player.hasSeen("study")) {
-				
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("study");
-				String j=null;
-				for(int i=0; i < 2; i++) {
-					if(i==0) j="u";
-					if(i==1) j="d";
-					
-					q.add(j);
-				}
-			}
-			else if(room.equalsIgnoreCase("hall") && !player.hasCard("hall") && !player.hasSeen("hall")) {
-				//from dining room to conservatory
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("hall");
-				String j=null;
-				for(int i=0; i < 2; i++) {
-					if(i==0) j="u";
-					if(i==1) j="d";
-					
-					q.add(j);
-				}
-			}
-			else if(room.equalsIgnoreCase("lounge") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				System.out.println("lounge");
-				String j=null;
-				for(int i=0; i < 2; i++) {
-					if(i==0) j="u";
-					if(i==1) j="d";
-					
-					q.add(j);
-				}
-			}
-		}
 			else if(room.equalsIgnoreCase("dining room") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-		
+
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("lounge");
 				String j=null;
 				for(int i=0; i < 2; i++) {
 					if(i==0) j="d";
 					if(i==1) j="u";
-					
+
 					q.add(j);
 				}
+			}
 		}
 
+		System.out.println(q);
 		room = "null";
 
 		if(!q.isEmpty()) {
-			System.out.println(q);
 			String local = q.remove();
-			System.out.println("local: "+local);
 			return local;
 		}
+
 
 		return "l";
 	}
@@ -2703,49 +2709,80 @@ public class Garlic implements BotAPI {
 	public String getSuspect() {
 		// Add your code here
 		//TODO: check case
-		if(!player.hasCard("plum") && !player.hasSeen("plum")) {
-			return "plum";
+		if(murderSuspect)
+		{
+			if(!player.hasCard("plum") && !player.hasSeen("plum")) {
+				return "plum";
+			}
+			if(!player.hasCard("white") && !player.hasSeen("white")) {
+				return "white";
+			}
+			if(!player.hasCard("scarlett") && !player.hasSeen("scarlett")) {
+				return "scarlett";
+			}
+			if(!player.hasCard("green") && !player.hasSeen("green")) {
+				return "green";
+			}
+			if(!player.hasCard("mustard") && !player.hasSeen("mustard")) {
+				return "mustard";
+			}
+			if(!player.hasCard("peacock") && !player.hasSeen("peacock")) {
+				return "peacock";
+			}
 		}
-		if(!player.hasCard("white") && !player.hasSeen("white")) {
-			return "white";
+		else
+		{
+			Boolean found = false;
+			while(!found)
+			{
+				int random = (int) (Math.random() * 6);
+
+				if(!player.hasCard(Names.SUSPECT_NAMES[random]) && !player.hasSeen(Names.SUSPECT_NAMES[random])) {
+					found = true;
+					return Names.SUSPECT_NAMES[random];
+				}
+			}
 		}
-		if(!player.hasCard("scarlett") && !player.hasSeen("scarlett")) {
-			return "scarlett";
-		}
-		if(!player.hasCard("green") && !player.hasSeen("green")) {
-			return "green";
-		}
-		if(!player.hasCard("mustard") && !player.hasSeen("mustard")) {
-			return "mustard";
-		}
-		if(!player.hasCard("peacock") && !player.hasSeen("peacock")) {
-			return "peacock";
-		}
+
 		return Names.SUSPECT_NAMES[0];
 	}
 
 	public String getWeapon() {
 		// Add your code here
+		if(murderWeapon)
+		{
+			if(!player.hasCard("rope") && !player.hasSeen("rope")) {
+				return "rope";
+			}
+			if(!player.hasCard("dagger") && !player.hasSeen("dagger")) {
+				return "dagger";
+			}
+			if(!player.hasCard("wrench") && !player.hasSeen("wrench")) {
+				return "wrench";
+			}
+			if(!player.hasCard("pistol") && !player.hasSeen("pistol")) {
+				return "pistol";
+			}
+			if(!player.hasCard("candlestick") && !player.hasSeen("candlestick")) {
+				return "candlestick";
+			}
+			if(!player.hasCard("lead pipe") && !player.hasSeen("lead pipe")) {
+				return "lead pipe";
+			}
+		}
+		else
+		{
+			Boolean found = false;
+			while(!found)
+			{
+				int random = (int) (Math.random() * 6);
 
-		if(!player.hasCard("rope") && !player.hasSeen("rope")) {
-			return "rope";
+				if(!player.hasCard(Names.WEAPON_NAMES[random]) && !player.hasSeen(Names.WEAPON_NAMES[random])) {
+					found = true;
+					return Names.WEAPON_NAMES[random];
+				}
+			}
 		}
-		if(!player.hasCard("dagger") && !player.hasSeen("dagger")) {
-			return "dagger";
-		}
-		if(!player.hasCard("wrench") && !player.hasSeen("wrench")) {
-			return "wrench";
-		}
-		if(!player.hasCard("pistol") && !player.hasSeen("pistol")) {
-			return "pistol";
-		}
-		if(!player.hasCard("candlestick") && !player.hasSeen("candlestick")) {
-			return "candlestick";
-		}
-		if(!player.hasCard("lead pipe") && !player.hasSeen("lead pipe")) {
-			return "lead pipe";
-		}
-
 		return Names.WEAPON_NAMES[0];
 	}
 
@@ -2882,7 +2919,7 @@ public class Garlic implements BotAPI {
 			return "green";
 		}
 		if(player.hasCard("mustard") && matchingCards.contains("mustard")) {
-			return "plum";
+			return "mustard";
 		}
 		if(player.hasCard("peacock") && matchingCards.contains("peacock")) {
 			return "peacock";
