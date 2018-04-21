@@ -2370,7 +2370,7 @@ public class Garlic implements BotAPI {
 				}
 			}
 			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-				//from dining room to conservatory
+			
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -2378,14 +2378,14 @@ public class Garlic implements BotAPI {
 				String j=null;
 				for(int i=0; i < 2; i++) {
 					if(i==0) j="d";
-					if(i==0) j="u";
+					if(i==1) j="u";
 					
 					q.add(j);
 				}
 			}
 			
 			else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//from dining room to conservatory
+			
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -2393,12 +2393,12 @@ public class Garlic implements BotAPI {
 				String j=null;
 				for(int i=0; i < 2; i++) {
 					if(i==0) j="l";
-					if(i==0) j="r";
+					if(i==1) j="r";
 					q.add(j);
 				}
 			}
 			else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-				//from dining room to conservatory
+			
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -2406,13 +2406,13 @@ public class Garlic implements BotAPI {
 				String j=null;
 				for(int i=0; i < 2; i++) {
 					if(i==0) j="d";
-					if(i==0) j="u";
+					if(i==1) j="u";
 					
 					q.add(j);
 				}
 			}
 			else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-				//from dining room to conservatory
+			
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -2420,13 +2420,13 @@ public class Garlic implements BotAPI {
 				String j=null;
 				for(int i=0; i < 2; i++) {
 					if(i==0) j="l";
-					if(i==0) j="r";
+					if(i==1) j="r";
 					
 					q.add(j);
 				}
 			}
 			else if(room.equalsIgnoreCase("library") && !player.hasCard("library") && !player.hasSeen("library")) {
-				//from dining room to conservatory
+			
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -2434,13 +2434,13 @@ public class Garlic implements BotAPI {
 				String j=null;
 				for(int i=0; i < 2; i++) {
 					if(i==0) j="l";
-					if(i==0) j="r";
+					if(i==1) j="r";
 					
 					q.add(j);
 				}
 			}
 			else if(room.equalsIgnoreCase("study") && !player.hasCard("study") && !player.hasSeen("study")) {
-				//from dining room to conservatory
+				
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -2448,7 +2448,7 @@ public class Garlic implements BotAPI {
 				String j=null;
 				for(int i=0; i < 2; i++) {
 					if(i==0) j="u";
-					if(i==0) j="d";
+					if(i==1) j="d";
 					
 					q.add(j);
 				}
@@ -2462,13 +2462,13 @@ public class Garlic implements BotAPI {
 				String j=null;
 				for(int i=0; i < 2; i++) {
 					if(i==0) j="u";
-					if(i==0) j="d";
+					if(i==1) j="d";
 					
 					q.add(j);
 				}
 			}
 			else if(room.equalsIgnoreCase("lounge") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				//from dining room to conservatory
+				
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -2476,13 +2476,13 @@ public class Garlic implements BotAPI {
 				String j=null;
 				for(int i=0; i < 2; i++) {
 					if(i==0) j="u";
-					if(i==0) j="d";
+					if(i==1) j="d";
 					
 					q.add(j);
 				}
 			}
 			else if(room.equalsIgnoreCase("dining room") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-				//from dining room to conservatory
+		
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -2490,7 +2490,7 @@ public class Garlic implements BotAPI {
 				String j=null;
 				for(int i=0; i < 2; i++) {
 					if(i==0) j="d";
-					if(i==0) j="u";
+					if(i==1) j="u";
 					
 					q.add(j);
 				}
