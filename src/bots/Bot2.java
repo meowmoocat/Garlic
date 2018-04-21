@@ -2481,6 +2481,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}
+		}
 			else if(room.equalsIgnoreCase("dining room") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
 		
 				if(!q.isEmpty()) {
