@@ -202,6 +202,162 @@ public class Garlic implements BotAPI {
 
 		System.out.println("current room: "+room);
 		
+		if(murderWeapon && murderRoom && murderSuspect)
+		{
+			if(room.equalsIgnoreCase("kitchen")) {
+				String j=null;
+				for(int i=0; i < 20 ; i++) {
+					if(i==0) j="d";
+					if(i==1) j="d";
+					if(i==2) j="r";
+					if(i==3) j="r";
+					if(i==4) j="r";
+					if(i==5) j="r";
+					if(i==6) j="r";
+					if(i==7) j="d";
+					if(i==8) j="d";
+					if(i==9) j="d";
+					if(i==10) j="d";
+					if(i==11) j="d";
+					if(i==12) j="d";
+					if(i==13) j="d";
+					if(i==14) j="d";
+					if(i==15) j="d";
+					if(i==16) j="r";
+					if(i==17) j="r";
+					if(i==18) j="r";
+					if(i==19) j="u";
+					q.add(j);
+				}
+			}if(room.equalsIgnoreCase("ballroom")) {
+				String j=null;
+				for(int i=0; i < 14 ; i++) {
+					if(i==0) j="d";
+					if(i==1) j="d";
+					if(i==2) j="d";
+					if(i==3) j="d";
+					if(i==4) j="d";
+					if(i==5) j="d";
+					if(i==6) j="d";
+					if(i==7) j="d";
+					if(i==8) j="d";
+					if(i==9) j="d";
+					if(i==10) j="r";
+					if(i==11) j="r";
+					if(i==12) j="r";
+					if(i==13) j="u";
+					q.add(j);
+				}
+			}if(room.equalsIgnoreCase("conservatory")) {
+				String j=null;
+				for(int i=0; i < 20 ; i++) {
+					if(i==0) j="d";
+					if(i==1) j="d";
+					if(i==2) j="d";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="d";
+					if(i==6) j="d";
+					if(i==7) j="d";
+					if(i==8) j="d";
+					if(i==9) j="d";
+					if(i==10) j="d";
+					if(i==11) j="d";
+					if(i==12) j="d";
+					if(i==13) j="d";
+					if(i==14) j="d";
+					if(i==15) j="l";
+					if(i==16) j="l";
+					if(i==17) j="l";
+					if(i==18) j="l";
+					if(i==19) j="u";
+					q.add(j);
+				}
+			}if(room.equalsIgnoreCase("dining room")) {
+				String j=null;
+				for(int i=0; i < 9 ; i++) {
+					if(i==0) j="d";
+					if(i==1) j="d";
+					if(i==2) j="r";
+					if(i==3) j="r";
+					if(i==4) j="r";
+					if(i==5) j="r";
+					if(i==6) j="r";
+					if(i==7) j="r";
+					if(i==8) j="u";
+					q.add(j);
+				}
+			}if(room.equalsIgnoreCase("billiard room")) {
+				String j=null;
+				for(int i=0; i < 15 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="d";
+					if(i==4) j="d";
+					if(i==5) j="d";
+					if(i==6) j="d";
+					if(i==7) j="d";
+					if(i==8) j="d";
+					if(i==9) j="d";
+					if(i==10) j="d";
+					if(i==11) j="l";
+					if(i==12) j="l";
+					if(i==13) j="l";
+					if(i==14) j="u";
+					q.add(j);
+				}
+			}if(room.equalsIgnoreCase("library")) {
+				String j=null;
+				for(int i=0; i < 7 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="d";
+					if(i==3) j="r";
+					if(i==4) j="r";
+					if(i==5) j="r";
+					if(i==6) j="u";
+					q.add(j);
+				}
+			}if(room.equalsIgnoreCase("lounge")) {
+				String j=null;
+				for(int i=0; i < 9 ; i++) {
+					if(i==0) j="u";
+					if(i==1) j="u";
+					if(i==2) j="r";
+					if(i==3) j="r";
+					if(i==4) j="r";
+					if(i==5) j="r";
+					if(i==6) j="r";
+					if(i==7) j="r";
+					if(i==8) j="u";
+					q.add(j);
+				}
+			}if(room.equalsIgnoreCase("hall")) {
+				String j=null;
+				for(int i=0; i < 2 ; i++) {
+					if(i==0) j="u";
+					if(i==1) j="u";
+					q.add(j);
+				}
+			}if(room.equalsIgnoreCase("study")) {
+				String j=null;
+				for(int i=0; i < 10 ; i++) {
+					if(i==0) j="u";
+					if(i==1) j="u";
+					if(i==2) j="u";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="u";
+					if(i==6) j="l";
+					if(i==7) j="l";
+					if(i==8) j="l";
+					if(i==9) j="u";
+					q.add(j);
+				}
+			}
+		}
+		
 		if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 			//white start
 			String j=null;
