@@ -136,24 +136,28 @@ public class Garlic implements BotAPI {
 			if(room.equalsIgnoreCase("lounge") && !player.hasCard("conservatory") && !player.hasSeen("conservatory"))
 			{
 				System.out.println("fuck");
+				questionAsked = false;
 				moveOver = true;
 				return "passage";
 			}
 			else if(room.equalsIgnoreCase("study") && !player.hasCard("kitchen") && !player.hasSeen("kitchen"))
 			{
 				System.out.println("fuck");
+				questionAsked = false;
 				moveOver = true;
 				return "passage";
 			}
 			if(room.equalsIgnoreCase("conservatory") && !player.hasCard("lounge") && !player.hasSeen("lounge"))
 			{
 				System.out.println("fuck");
+				questionAsked = false;
 				moveOver = true;
 				return "passage";
 			}
 			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("study") && !player.hasSeen("study"))
 			{
 				System.out.println("fuck");
+				questionAsked = false;
 				moveOver = true;
 				return "passage";
 			}
