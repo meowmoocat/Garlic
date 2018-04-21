@@ -2544,10 +2544,10 @@ public class Garlic implements BotAPI {
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="r";
-						if(i==1) j="u";
+						if(i==1) j="r";
 						if(i==2) j="u";
 						if(i==3) j="u";
-						if(i==4) j="r";
+						if(i==4) j="u";
 						if(i==5) j="r";
 						if(i==6) j="r";
 						if(i==7) j="r";
@@ -2555,12 +2555,12 @@ public class Garlic implements BotAPI {
 						if(i==9) j="r";
 						if(i==10) j="r";
 						if(i==11) j="r";
-						if(i==12) j="u";
+						if(i==12) j="r";
 						if(i==13) j="u";
-						if(i==14) j="r";
-						if(i==15) j="r";
+						if(i==14) j="u";
+						if(i==15) j="u";
 						if(i==16) j="u";
-						if(i==17) j="u";
+						if(i==17) j="r";
 						if(i==18) j="u";
 						q.add(j);
 					}
