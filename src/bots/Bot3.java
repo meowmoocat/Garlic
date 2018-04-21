@@ -43,7 +43,7 @@ public class Bot3 implements BotAPI {
 		this.deck = deck;
 		moveOver = false;
 		questionAsked = false;
-		this.token = player.getToken();
+		this.token = token;
 		roomOut = false;
 		murderWeapon = false;
 		murderRoom = false;
@@ -2820,91 +2820,91 @@ public class Bot3 implements BotAPI {
 	}
 
 	public String getDoor() {
-		if(player.getToken().getRoom().hasName("ballroom") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+		if(token.getRoom().hasName("ballroom") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
 			return "4";
 		}
-		else if(player.getToken().getRoom().hasName("ballroom") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
+		else if(token.getRoom().hasName("ballroom") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
 			return "3";
 		}
-		else if(player.getToken().getRoom().hasName("ballroom") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
+		else if(token.getRoom().hasName("ballroom") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
 			return "1";
 		}
-		else if(player.getToken().getRoom().hasName("ballroom") && !player.hasCard("library") && !player.hasSeen("library")){
+		else if(token.getRoom().hasName("ballroom") && !player.hasCard("library") && !player.hasSeen("library")){
 			return "3";
 		}
-		else if(player.getToken().getRoom().hasName("ballroom") && !player.hasCard("hall") && !player.hasSeen("hall")){
+		else if(token.getRoom().hasName("ballroom") && !player.hasCard("hall") && !player.hasSeen("hall")){
 			return "2";
 		}
-		else if(player.getToken().getRoom().hasName("ballroom") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
+		else if(token.getRoom().hasName("ballroom") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
 			return "2";
 		}
-		else if(player.getToken().getRoom().hasName("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")){
+		else if(token.getRoom().hasName("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")){
 			return "2";
 		}
-		else if(player.getToken().getRoom().hasName("ballroom") && !player.hasCard("study") && !player.hasSeen("study")){
+		else if(token.getRoom().hasName("ballroom") && !player.hasCard("study") && !player.hasSeen("study")){
 			return "3";
 		}
-		else if(player.getToken().getRoom().hasName("billiard room") && !player.hasCard("library") && !player.hasSeen("library")){
+		else if(token.getRoom().hasName("billiard room") && !player.hasCard("library") && !player.hasSeen("library")){
 			return "2";
 		}
-		else if(player.getToken().getRoom().hasName("billiard room")){
+		else if(token.getRoom().hasName("billiard room")){
 			return "1";
 		}
-		else if(player.getToken().getRoom().hasName("library") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
+		else if(token.getRoom().hasName("library") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
 			return "2";
 		}
-		else if(player.getToken().getRoom().hasName("library")){
+		else if(token.getRoom().hasName("library")){
 			return "1";
 		}
-		else if(player.getToken().getRoom().hasName("hall") && !player.hasCard("study") && !player.hasSeen("study")){
+		else if(token.getRoom().hasName("hall") && !player.hasCard("study") && !player.hasSeen("study")){
 			return "3";
 		}
-		else if(player.getToken().getRoom().hasName("hall") && !player.hasCard("library") && !player.hasSeen("library")){
+		else if(token.getRoom().hasName("hall") && !player.hasCard("library") && !player.hasSeen("library")){
 			return "2";
 		}
-		else if(player.getToken().getRoom().hasName("hall") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
+		else if(token.getRoom().hasName("hall") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
 			return "1";
 		}
-		else if(player.getToken().getRoom().hasName("hall") && !player.hasCard("dining room") && !player.hasSeen("dining room")){
+		else if(token.getRoom().hasName("hall") && !player.hasCard("dining room") && !player.hasSeen("dining room")){
 			return "1";
 		}
-		else if(player.getToken().getRoom().hasName("hall") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")){
+		else if(token.getRoom().hasName("hall") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")){
 			return "1";
 		}
-		else if(player.getToken().getRoom().hasName("hall") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
+		else if(token.getRoom().hasName("hall") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
 			return "2";
 		}
-		else if(player.getToken().getRoom().hasName("hall") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
+		else if(token.getRoom().hasName("hall") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
 			return "1";
 		}
-		else if(player.getToken().getRoom().hasName("hall") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")){
+		else if(token.getRoom().hasName("hall") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")){
 			return "2";
 		}
-		else if(player.getToken().getRoom().hasName("dining room") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
 			return "1";
 		}
-		else if(player.getToken().getRoom().hasName("dining room") && !player.hasCard("hall") && !player.hasSeen("hall")){
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("hall") && !player.hasSeen("hall")){
 			return "1";
 		}
-		else if(player.getToken().getRoom().hasName("dining room") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
 			return "2";
 		}
-		else if(player.getToken().getRoom().hasName("dining room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
 			return "2";
 		}
-		else if(player.getToken().getRoom().hasName("dining room") && !player.hasCard("library") && !player.hasSeen("library")){
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("library") && !player.hasSeen("library")){
 			return "1";
 		}
-		else if(player.getToken().getRoom().hasName("dining room") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")){
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")){
 			return "2";
 		}
-		else if(player.getToken().getRoom().hasName("dining room") && !player.hasCard("study") && !player.hasSeen("study")){
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("study") && !player.hasSeen("study")){
 			return "1";
 		}
-		else if(player.getToken().getRoom().hasName("ballroom") && !player.hasCard("ballroom") && !player.hasSeen("study")) {
+		else if(token.getRoom().hasName("ballroom") && !player.hasCard("ballroom") && !player.hasSeen("study")) {
 			return "2";
 		}
-		else if(player.getToken().getRoom().hasName("hall") && !player.hasCard("hall") && !player.hasSeen("hall")) {
+		else if(token.getRoom().hasName("hall") && !player.hasCard("hall") && !player.hasSeen("hall")) {
 			return "2";
 		}
 		return "1";
