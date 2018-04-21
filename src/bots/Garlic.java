@@ -43,7 +43,7 @@ public class Garlic implements BotAPI {
 		this.deck = deck;
 		moveOver = false;
 		questionAsked = false;
-		this.token = token;
+		this.token = player.getToken();
 		roomOut = false;
 		murderWeapon = false;
 		murderRoom = false;
