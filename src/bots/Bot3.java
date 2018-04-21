@@ -28,7 +28,7 @@ public class Bot3 implements BotAPI {
 	private Boolean moveOver;
 	private Boolean questionAsked;
 	private Boolean roomOut;
-	private Boolean checkNotes;
+	private Boolean checkNotes = true;
 	private Boolean murderWeapon, murderRoom, murderSuspect;
 	private Token token;
 	private String room;
@@ -107,8 +107,31 @@ public class Bot3 implements BotAPI {
 		if(token.isInRoom() && !moveOver)
 		{
 			System.out.println("fuck");
-			roomOut = true;
-			return "roll";
+			if(room.equalsIgnoreCase("lounge") && !player.hasCard("conservatory") && !player.hasSeen("conservatory"))
+			{
+				moveOver = true;
+				return "passage";
+			}
+			else if(room.equalsIgnoreCase("study") && !player.hasCard("kitchen") && !player.hasSeen("kitchen"))
+			{
+				moveOver = true;
+				return "passage";
+			}
+			if(room.equalsIgnoreCase("conservatory") && !player.hasCard("lounge") && !player.hasSeen("lounge"))
+			{
+				moveOver = true;
+				return "passage";
+			}
+			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("study") && !player.hasSeen("study"))
+			{
+				moveOver = true;
+				return "passage";
+			}
+			else
+			{
+				roomOut = true;
+				return "roll";
+			}
 		}
 		if(token.isInRoom() && !questionAsked)
 		{
