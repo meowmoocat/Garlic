@@ -108,7 +108,7 @@ public class Bot2 implements BotAPI {
 	public String getCommand() {
 		//if token is in corridor roll
 
-		System.out.println("\nBot2");
+		System.out.println("\nBot2 "+token.getName());
 
 		checkMurder();
 		if(murderRoom) System.out.println("murderRoom: true");
@@ -343,9 +343,9 @@ public class Bot2 implements BotAPI {
 					if(i==0) j="l";
 					if(i==1) j="l";
 					if(i==2) j="d";
-					if(i==3) j="r";
-					if(i==4) j="r";
-					if(i==5) j="r";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="l";
 					if(i==6) j="u";
 					q.add(j);
 				}
