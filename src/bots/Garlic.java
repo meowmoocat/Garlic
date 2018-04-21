@@ -186,6 +186,7 @@ public class Garlic implements BotAPI {
 		//if turn over done
 		else
 		{
+			checkNotes = true;
 			roomOut = false;
 			questionAsked = true;
 			moveOver = false;

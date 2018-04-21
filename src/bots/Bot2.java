@@ -159,6 +159,7 @@ public class Bot2 implements BotAPI {
 			}
 			else
 			{
+				checkNotes = true;
 				roomOut = true;
 				return "roll";
 			}
