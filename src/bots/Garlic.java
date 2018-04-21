@@ -2893,11 +2893,20 @@ public class Garlic implements BotAPI {
 		else if(token.getRoom().hasName("dining room") && !player.hasCard("study") && !player.hasSeen("study")){
 			return "1";
 		}
-		else if(token.getRoom().hasName("ballroom") && !player.hasCard("ballroom") && !player.hasSeen("study")) {
+		else if(token.getRoom().hasName("ballroom") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 			return "2";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("hall") && !player.hasSeen("hall")) {
 			return "2";
+		}
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+			return "1";
+		}
+		else if(token.getRoom().hasName("library") && !player.hasCard("library") && !player.hasSeen("library")){
+			return "1";
+		}
+		else if(token.getRoom().hasName("billiard room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
+			return "1";
 		}
 		return "1";
 	}
