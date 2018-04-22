@@ -111,9 +111,9 @@ public class Garlic implements BotAPI {
 		System.out.println("\nGarlic "+token.getName());
 
 		checkMurder();
-		if(murderRoom) System.out.println("murderRoom: true");
-		if(murderSuspect) System.out.println("murderSuspect: true");
-		if(murderWeapon) System.out.println("murderWeapon: true");
+//		if(murderRoom) System.out.println("murderRoom: true");
+//		if(murderSuspect) System.out.println("murderSuspect: true");
+//		if(murderWeapon) System.out.println("murderWeapon: true");
 
 		if(checkNotes)
 		{
@@ -208,13 +208,13 @@ public class Garlic implements BotAPI {
 
 		if(murderWeapon && murderRoom && murderSuspect)
 		{
-			System.out.println("room: "+room);
-			System.out.println("????????????????????????????????????????????");
+//			System.out.println("room: "+room);
+//			System.out.println("????????????????????????????????????????????");
 			if(room.equalsIgnoreCase("kitchen")) {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("kitchen");
+				System.out.println("kitchen to cellar");
 				String j=null;
 				for(int i=0; i < 20 ; i++) {
 					if(i==0) j="d";
@@ -243,7 +243,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("ball");
+//				System.out.println("ball");
 				String j=null;
 				for(int i=0; i < 14 ; i++) {
 					if(i==0) j="d";
@@ -266,7 +266,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("conserv");
+				System.out.println("conservatory to cellar");
 				String j=null;
 				for(int i=0; i < 20 ; i++) {
 					if(i==0) j="d";
@@ -295,7 +295,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("dining");
+//				System.out.println("dining");
 				String j=null;
 				for(int i=0; i < 9 ; i++) {
 					if(i==0) j="d";
@@ -313,7 +313,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("billiard");
+//				System.out.println("billiard");
 				String j=null;
 				for(int i=0; i < 15 ; i++) {
 					if(i==0) j="l";
@@ -337,7 +337,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("lib");
+//				System.out.println("lib");
 				String j=null;
 				for(int i=0; i < 7 ; i++) {
 					if(i==0) j="l";
@@ -353,7 +353,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("lounge");
+				System.out.println("lounge to cellar");
 				String j=null;
 				for(int i=0; i < 9 ; i++) {
 					if(i==0) j="u";
@@ -371,7 +371,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("hall");
+//				System.out.println("hall");
 				String j=null;
 				for(int i=0; i < 2 ; i++) {
 					if(i==0) j="u";
@@ -382,7 +382,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("study");
+				System.out.println("study to cellar");
 				String j=null;
 				for(int i=0; i < 10 ; i++) {
 					if(i==0) j="u";
@@ -1016,6 +1016,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
+					System.out.println("kitchen to ballroom");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="d";
@@ -1032,7 +1033,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+					System.out.println("kitchen to dining room");
 					String j=null;
 					for(int i=0; i < 11 ; i++) {
 						if(i==0) j="d";
@@ -1053,7 +1054,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("kitchen to billiard room");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="d";
@@ -1080,7 +1081,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("kitchen to hall");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="d";
@@ -1109,7 +1110,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("kitchen to lounge");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="d";
@@ -1138,6 +1139,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
+					System.out.println("kitchen to conservatory");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="d";
@@ -1167,7 +1169,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("kitchen to library");
 					String j=null;
 					for(int i=0; i < 23 ; i++) {
 						if(i==0) j="d";
@@ -1245,7 +1247,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("ballroom to library");
 					String j=null;
 					for(int i=0; i < 12 ; i++) {
 						if(i==0) j="d";
@@ -1267,7 +1269,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("ballroom to hall");
 					String j=null;
 					for(int i=0; i < 13 ; i++) {
 						if(i==0) j="d";
@@ -1290,7 +1292,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("ballroom to lounge");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="d";
@@ -1315,7 +1317,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("ballroom to dining room");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="d";
@@ -1380,7 +1382,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("conservatory to billiard room");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="d";
@@ -1397,7 +1399,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("conservatory to library");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="d";
@@ -1422,6 +1424,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
+					System.out.println("conservatory to dining room");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="d";
@@ -1480,7 +1483,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("conservatory to study");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="d";
@@ -1510,7 +1513,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("conservatory to hall");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="d";
@@ -1555,7 +1558,7 @@ public class Garlic implements BotAPI {
 						q.clear();
 					}
 					String j=null;
-					for(int i=0; i < 20 ; i++) {
+					for(int i=0; i < 6 ; i++) {
 						if(i==0) j="l";
 						if(i==1) j="l";
 						if(i==2) j="l";
@@ -1686,7 +1689,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("billiard room to lounge");
 					String j=null;
 					for(int i=0; i < 22 ; i++) {
 						if(i==0) j="l";
@@ -1892,7 +1895,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("study to hall");
 					String j=null;
 					for(int i=0; i < 4 ; i++) {
 						if(i==0) j="u";
@@ -1906,7 +1909,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("study to library");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="u";
@@ -1923,7 +1926,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("study to billiard room");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="u";
@@ -1948,7 +1951,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("study to lounge");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="u";
@@ -1975,7 +1978,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("study to dining room");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="u";
@@ -2002,6 +2005,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
+					System.out.println("study to ballroom");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="u";
@@ -2028,6 +2032,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
+					System.out.println("study to conservatory");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="u";
@@ -2057,7 +2062,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("hall to study");
 					String j=null;
 					for(int i=0; i < 4 ; i++) {
 						if(i==0) j="r";
@@ -2071,7 +2076,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+					System.out.println("hall to library");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="u";
@@ -2088,7 +2093,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+					System.out.println("hall to lounge");
 					String j=null;
 					for(int i=0; i < 8 ; i++) {
 						if(i==0) j="u";
@@ -2106,7 +2111,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+					System.out.println("hall to dining room");
 					String j=null;
 					for(int i=0; i < 8 ; i++) {
 						if(i==0) j="u";
@@ -2124,6 +2129,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
+					System.out.println("hall to ballroom");
 					String j=null;
 					for(int i=0; i < 13; i++) {
 						if(i==0) j="u";
@@ -2146,7 +2152,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+					System.out.println("hall to billiard room");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="u";
@@ -2171,7 +2177,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+					System.out.println("hall to kitchen");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="u";
@@ -2200,6 +2206,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
+					System.out.println("hall to conservatory");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="u";
@@ -2229,7 +2236,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+					System.out.println("lounge to dining room");
 					String j=null;
 					for(int i=0; i < 4 ; i++) {
 						if(i==0) j="u";
@@ -2243,7 +2250,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("lounge to hall");
 					String j=null;
 					for(int i=0; i < 8; i++) {
 						if(i==0) j="u";
@@ -2261,7 +2268,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("lounge to library");
 					String j=null;
 					for(int i=0; i < 14 ; i++) {
 						if(i==0) j="u";
@@ -2285,6 +2292,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
+					System.out.println("lounge to ballroom");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="u";
@@ -2309,7 +2317,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("lounge to study");
 					String j=null;
 					for(int i=0; i < 17; i++) {
 						if(i==0) j="u";
@@ -2336,7 +2344,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("lounge to kitchen");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="u";
@@ -2365,7 +2373,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("lounge to billiard room");
 					String j=null;
 					for(int i=0; i < 22 ; i++) {
 						if(i==0) j="u";
@@ -2466,7 +2474,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-
+System.out.println("dining room to billiard room");
 					String j=null;
 					for(int i=0; i < 14; i++) {
 						if(i==0) j="r";
@@ -2541,6 +2549,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
+					System.out.println("dining room to conservatory");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="r";
@@ -2813,7 +2822,7 @@ public class Garlic implements BotAPI {
 
 	public String getDoor() {
 		if(token.getRoom().hasName("ballroom") && murderRoom && murderSuspect && murderWeapon) { 
-			System.out.println("ballroom to cellar");
+//			System.out.println("ballroom to cellar");
 			return "2";
 		}
 		else if(token.getRoom().hasName("hall") && murderRoom && murderSuspect && murderWeapon) {
@@ -2825,7 +2834,7 @@ public class Garlic implements BotAPI {
 			return "1";
 		}
 		else if(token.getRoom().hasName("library") && murderRoom && murderSuspect && murderWeapon){
-			System.out.println("lib to cellar");
+//			System.out.println("lib to cellar");
 			return "1";
 		}
 		else if(token.getRoom().hasName("billiard room") && murderRoom && murderSuspect && murderWeapon){
@@ -2865,11 +2874,11 @@ public class Garlic implements BotAPI {
 			return "3";
 		}
 		else if(token.getRoom().hasName("billiard room") && !player.hasCard("library") && !player.hasSeen("library")){
-			System.out.println("ballroom to lib");
+			System.out.println("bill to lib");
 			return "2";
 		}
 		else if(token.getRoom().hasName("billiard room")){
-			System.out.println("ballroom to ????");
+			System.out.println("bill to ????");
 			return "1";
 		}
 		else if(token.getRoom().hasName("library") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
@@ -2940,7 +2949,12 @@ public class Garlic implements BotAPI {
 			System.out.println("din to study");
 			return "1";
 		}
-
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")){
+			System.out.println("din to conservatory");
+			return "2";
+		}
+		else System.out.println(room+" to ?");
+		
 		return "1";
 	}
 
