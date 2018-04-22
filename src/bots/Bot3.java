@@ -111,9 +111,9 @@ public class Bot3 implements BotAPI {
 		System.out.println("\nBot3 "+token.getName());
 
 		checkMurder();
-//		if(murderRoom) System.out.println("murderRoom: true");
-//		if(murderSuspect) System.out.println("murderSuspect: true");
-//		if(murderWeapon) System.out.println("murderWeapon: true");
+		//		if(murderRoom) System.out.println("murderRoom: true");
+		//		if(murderSuspect) System.out.println("murderSuspect: true");
+		//		if(murderWeapon) System.out.println("murderWeapon: true");
 
 		if(checkNotes)
 		{
@@ -208,8 +208,8 @@ public class Bot3 implements BotAPI {
 
 		if(murderWeapon && murderRoom && murderSuspect)
 		{
-//			System.out.println("room: "+room);
-//			System.out.println("????????????????????????????????????????????");
+			//			System.out.println("room: "+room);
+			//			System.out.println("????????????????????????????????????????????");
 			if(room.equalsIgnoreCase("kitchen")) {
 				if(!q.isEmpty()) {
 					q.clear();
@@ -243,7 +243,7 @@ public class Bot3 implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-//				System.out.println("ball");
+				//				System.out.println("ball");
 				String j=null;
 				for(int i=0; i < 14 ; i++) {
 					if(i==0) j="d";
@@ -295,7 +295,7 @@ public class Bot3 implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-//				System.out.println("dining");
+				//				System.out.println("dining");
 				String j=null;
 				for(int i=0; i < 9 ; i++) {
 					if(i==0) j="d";
@@ -313,7 +313,7 @@ public class Bot3 implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-//				System.out.println("billiard");
+				//				System.out.println("billiard");
 				String j=null;
 				for(int i=0; i < 15 ; i++) {
 					if(i==0) j="l";
@@ -337,7 +337,7 @@ public class Bot3 implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-//				System.out.println("lib");
+				//				System.out.println("lib");
 				String j=null;
 				for(int i=0; i < 7 ; i++) {
 					if(i==0) j="l";
@@ -371,7 +371,7 @@ public class Bot3 implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-//				System.out.println("hall");
+				//				System.out.println("hall");
 				String j=null;
 				for(int i=0; i < 2 ; i++) {
 					if(i==0) j="u";
@@ -1054,7 +1054,7 @@ public class Bot3 implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("kitchen to billiard room");
+					System.out.println("kitchen to billiard room");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="d";
@@ -1081,7 +1081,7 @@ System.out.println("kitchen to billiard room");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("kitchen to hall");
+					System.out.println("kitchen to hall");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="d";
@@ -1110,7 +1110,7 @@ System.out.println("kitchen to hall");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("kitchen to lounge");
+					System.out.println("kitchen to lounge");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="d";
@@ -1169,7 +1169,7 @@ System.out.println("kitchen to lounge");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("kitchen to library");
+					System.out.println("kitchen to library");
 					String j=null;
 					for(int i=0; i < 23 ; i++) {
 						if(i==0) j="d";
@@ -1242,12 +1242,29 @@ System.out.println("kitchen to library");
 						if(i==6) j="u";
 						q.add(j);
 					}
+				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+					//from ballroom to dining room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					System.out.println("ballroom to dining room");
+					String j=null;
+					for(int i=0; i < 7 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="d";
+						if(i==4) j="d";
+						if(i==5) j="l";
+						if(i==6) j="l";
+						q.add(j);
+					}
 				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("library") && !player.hasSeen("library")) {
 					//from ballroom to library
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("ballroom to library");
+					System.out.println("ballroom to library");
 					String j=null;
 					for(int i=0; i < 12 ; i++) {
 						if(i==0) j="d";
@@ -1269,7 +1286,7 @@ System.out.println("ballroom to library");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("ballroom to hall");
+					System.out.println("ballroom to hall");
 					String j=null;
 					for(int i=0; i < 13 ; i++) {
 						if(i==0) j="d";
@@ -1292,7 +1309,7 @@ System.out.println("ballroom to hall");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("ballroom to lounge");
+					System.out.println("ballroom to lounge");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="d";
@@ -1310,31 +1327,6 @@ System.out.println("ballroom to lounge");
 						if(i==12) j="l";
 						if(i==13) j="d";
 						if(i==14) j="d";
-						q.add(j);
-					}
-				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-					//from ballroom to dining room
-					if(!q.isEmpty()) {
-						q.clear();
-					}
-System.out.println("ballroom to dining room");
-					String j=null;
-					for(int i=0; i < 15 ; i++) {
-						if(i==0) j="d";
-						if(i==1) j="d";
-						if(i==2) j="d";
-						if(i==3) j="d";
-						if(i==4) j="d";
-						if(i==5) j="d";
-						if(i==6) j="d";
-						if(i==7) j="d";
-						if(i==8) j="d";
-						if(i==9) j="d";
-						if(i==10) j="l";
-						if(i==11) j="l";
-						if(i==12) j="l";
-						if(i==13) j="u";
-						if(i==14) j="u";
 						q.add(j);
 					}
 				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("study") && !player.hasSeen("study")) {
@@ -1382,7 +1374,7 @@ System.out.println("ballroom to dining room");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("conservatory to billiard room");
+					System.out.println("conservatory to billiard room");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="d";
@@ -1399,7 +1391,7 @@ System.out.println("conservatory to billiard room");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("conservatory to library");
+					System.out.println("conservatory to library");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="d";
@@ -1483,7 +1475,7 @@ System.out.println("conservatory to library");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("conservatory to study");
+					System.out.println("conservatory to study");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="d";
@@ -1513,7 +1505,7 @@ System.out.println("conservatory to study");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("conservatory to hall");
+					System.out.println("conservatory to hall");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="d";
@@ -1689,7 +1681,7 @@ System.out.println("conservatory to hall");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("billiard room to lounge");
+					System.out.println("billiard room to lounge");
 					String j=null;
 					for(int i=0; i < 22 ; i++) {
 						if(i==0) j="l";
@@ -1895,7 +1887,7 @@ System.out.println("billiard room to lounge");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("study to hall");
+					System.out.println("study to hall");
 					String j=null;
 					for(int i=0; i < 4 ; i++) {
 						if(i==0) j="u";
@@ -1909,7 +1901,7 @@ System.out.println("study to hall");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("study to library");
+					System.out.println("study to library");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="u";
@@ -1926,7 +1918,7 @@ System.out.println("study to library");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("study to billiard room");
+					System.out.println("study to billiard room");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="u";
@@ -1951,7 +1943,7 @@ System.out.println("study to billiard room");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("study to lounge");
+					System.out.println("study to lounge");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="u";
@@ -1978,7 +1970,7 @@ System.out.println("study to lounge");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("study to dining room");
+					System.out.println("study to dining room");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="u";
@@ -2062,7 +2054,7 @@ System.out.println("study to dining room");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("hall to study");
+					System.out.println("hall to study");
 					String j=null;
 					for(int i=0; i < 4 ; i++) {
 						if(i==0) j="r";
@@ -2250,7 +2242,7 @@ System.out.println("hall to study");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("lounge to hall");
+					System.out.println("lounge to hall");
 					String j=null;
 					for(int i=0; i < 8; i++) {
 						if(i==0) j="u";
@@ -2268,7 +2260,7 @@ System.out.println("lounge to hall");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("lounge to library");
+					System.out.println("lounge to library");
 					String j=null;
 					for(int i=0; i < 14 ; i++) {
 						if(i==0) j="u";
@@ -2317,7 +2309,7 @@ System.out.println("lounge to library");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("lounge to study");
+					System.out.println("lounge to study");
 					String j=null;
 					for(int i=0; i < 17; i++) {
 						if(i==0) j="u";
@@ -2344,7 +2336,7 @@ System.out.println("lounge to study");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("lounge to kitchen");
+					System.out.println("lounge to kitchen");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="u";
@@ -2373,7 +2365,7 @@ System.out.println("lounge to kitchen");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("lounge to billiard room");
+					System.out.println("lounge to billiard room");
 					String j=null;
 					for(int i=0; i < 22 ; i++) {
 						if(i==0) j="u";
@@ -2474,7 +2466,7 @@ System.out.println("lounge to billiard room");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("dining room to billiard room");
+					System.out.println("dining room to billiard room");
 					String j=null;
 					for(int i=0; i < 14; i++) {
 						if(i==0) j="r";
@@ -2822,7 +2814,7 @@ System.out.println("dining room to billiard room");
 
 	public String getDoor() {
 		if(token.getRoom().hasName("ballroom") && murderRoom && murderSuspect && murderWeapon) { 
-//			System.out.println("ballroom to cellar");
+			//			System.out.println("ballroom to cellar");
 			return "2";
 		}
 		else if(token.getRoom().hasName("hall") && murderRoom && murderSuspect && murderWeapon) {
@@ -2834,7 +2826,7 @@ System.out.println("dining room to billiard room");
 			return "1";
 		}
 		else if(token.getRoom().hasName("library") && murderRoom && murderSuspect && murderWeapon){
-//			System.out.println("lib to cellar");
+			//			System.out.println("lib to cellar");
 			return "1";
 		}
 		else if(token.getRoom().hasName("billiard room") && murderRoom && murderSuspect && murderWeapon){
@@ -2853,6 +2845,10 @@ System.out.println("dining room to billiard room");
 			System.out.println("ballroom to kitch");
 			return "1";
 		}
+		else if(token.getRoom().hasName("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")){
+			System.out.println("ballroom to dining");
+			return "2";
+		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("library") && !player.hasSeen("library")){
 			System.out.println("ballroom to lib");
 			return "3";
@@ -2863,10 +2859,6 @@ System.out.println("dining room to billiard room");
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
 			System.out.println("ballroom to lounge");
-			return "2";
-		}
-		else if(token.getRoom().hasName("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")){
-			System.out.println("ballroom to dining");
 			return "2";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("study") && !player.hasSeen("study")){
@@ -2954,7 +2946,7 @@ System.out.println("dining room to billiard room");
 			return "2";
 		}
 		else System.out.println(room+" to ?");
-		
+
 		return "1";
 	}
 
