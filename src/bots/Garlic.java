@@ -1,16 +1,12 @@
 package bots;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
 import gameengine.*;
 
 public class Garlic implements BotAPI {
-
-
-	private HashMap<String, Integer> RoomValues = new HashMap<>();
 
 
 	// The public API of Bot must not change
@@ -32,6 +28,9 @@ public class Garlic implements BotAPI {
 	private Boolean murderWeapon, murderRoom, murderSuspect;
 	private Token token;
 	private String room;
+	private String possWeapon, possRoom, possSuspect;
+	private int checkCardsCounterPrev;
+	private int checkCardsCounterCurr;
 	private Queue<String> q = new LinkedList<String>();
 
 	public Garlic (Player player, PlayersInfo playersInfo, Map map, Dice dice, Log log, Deck deck) {
@@ -48,32 +47,8 @@ public class Garlic implements BotAPI {
 		murderWeapon = false;
 		murderRoom = false;
 		murderSuspect = false;
-
-		RoomValues.put("Kitchen", 0);
-		RoomValues.put("Ballroom", 0);
-		RoomValues.put("Conservatory", 0);
-		RoomValues.put("Billiard Room", 0);
-		RoomValues.put("Library", 0);
-		RoomValues.put("Study", 0);
-		RoomValues.put("Hall", 0);
-		RoomValues.put("Lounge", 0);
-		RoomValues.put("Dining Room", 0);
-		RoomValues.put("Cellar", 0);
-	}
-
-	private void changeNum()
-	{
-		for(int i=0; i<Names.ROOM_CARD_NAMES.length; i++)
-		{
-			if(!player.hasCard(Names.ROOM_CARD_NAMES[i]))
-			{
-				if(RoomValues.containsKey(Names.ROOM_NAMES[i]))
-				{
-					RoomValues.get(Names.ROOM_CARD_NAMES[i]);
-					RoomValues.put(Names.ROOM_CARD_NAMES[i], 1);
-				}
-			}
-		}
+		checkCardsCounterPrev = 0;
+		checkCardsCounterCurr = 0;
 	}
 
 	private void checkMurder()
@@ -83,6 +58,7 @@ public class Garlic implements BotAPI {
 		for(int i=0; i<Names.ROOM_CARD_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.ROOM_CARD_NAMES[i]) && !player.hasSeen(Names.ROOM_CARD_NAMES[i])) counter ++;
+			else checkCardsCounterCurr ++;
 		}
 		if(counter == 1) murderRoom = true;
 
@@ -90,6 +66,7 @@ public class Garlic implements BotAPI {
 		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.SUSPECT_NAMES[i]) && !player.hasSeen(Names.SUSPECT_NAMES[i])) counter ++;
+			else checkCardsCounterCurr ++;
 		}
 		if(counter == 1) murderSuspect = true;
 
@@ -97,6 +74,7 @@ public class Garlic implements BotAPI {
 		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.WEAPON_NAMES[i]) && !player.hasSeen(Names.WEAPON_NAMES[i])) counter ++;
+			else checkCardsCounterCurr ++;
 		}
 		if(counter == 1) murderWeapon = true;
 	}
@@ -110,7 +88,7 @@ public class Garlic implements BotAPI {
 
 		System.out.println("\nGarlic "+token.getName());
 
-		checkMurder();
+		
 //		if(murderRoom) System.out.println("murderRoom: true");
 //		if(murderSuspect) System.out.println("murderSuspect: true");
 //		if(murderWeapon) System.out.println("murderWeapon: true");
@@ -118,20 +96,46 @@ public class Garlic implements BotAPI {
 		if(checkNotes)
 		{
 			checkNotes = false;
+			System.out.println("notes");
 			return "notes";
 		}
 
 		if(token.isInRoom())
 		{
 			room = token.getRoom().toString();
+			possRoom = room;
 		}
 		else
 		{
 			room = "null";
 		}
 
+
+		if(token.isInRoom() && !questionAsked)
+		{
+			if(moveOver)
+			{
+				for(int i=0; i<Names.ROOM_NAMES.length; i++)
+				{
+					if(room.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i])) {//needs to not work if already asked question
+						questionAsked = true;
+						System.out.println("question");
+						return "question";
+					}
+					if(murderWeapon && murderRoom && murderSuspect && room.equalsIgnoreCase("Cellar"))
+					{
+						System.out.println("accuse");
+						return "accuse";
+					}
+				}
+			}
+			//if entered room question
+			//if in middle accuse
+			//if start turn & in room -> roll || passage
+		}
 		if(map.isCorridor(token.getPosition()) && !moveOver)
 		{
+			System.out.println("roll");
 			return "roll";
 		}
 		if(token.isInRoom() && !moveOver)
@@ -141,62 +145,47 @@ public class Garlic implements BotAPI {
 			{
 				questionAsked = false;
 				moveOver = true;
+				System.out.println("passage: lounge to conservatory");
 				return "passage";
 			}
 			else if(room.equalsIgnoreCase("study") && !player.hasCard("kitchen") && !player.hasSeen("kitchen"))
 			{
 				questionAsked = false;
 				moveOver = true;
+				System.out.println("passage: study to kitchen");
 				return "passage";
 			}
 			if(room.equalsIgnoreCase("conservatory") && !player.hasCard("lounge") && !player.hasSeen("lounge"))
 			{
 				questionAsked = false;
 				moveOver = true;
+				System.out.println("passage: conservatory to lounge");
 				return "passage";
 			}
 			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("study") && !player.hasSeen("study"))
 			{
 				questionAsked = false;
 				moveOver = true;
+				System.out.println("passage: kitchen to study");
 				return "passage";
 			}
 			else
 			{
+				System.out.println("roll");
 				roomOut = true;
 				return "roll";
 			}
 		}
-		if(token.isInRoom() && !questionAsked)
-		{
-			if(moveOver)
-			{
-				for(int i=0; i<Names.ROOM_NAMES.length; i++)
-				{
-					if(room.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i])) {//needs to not work if already asked question
-						questionAsked = true;
-						return "question";
-					}
-					if(murderWeapon && murderRoom && murderSuspect && room.equalsIgnoreCase("Cellar"))
-					{
-						return "accuse";
-					}
-				}
-			}
-			//if entered room question
-			//if in middle accuse
-			//if start turn & in room -> roll || passage
-		}
-		//if turn over done
 		else
 		{
+			checkMurder();
+			System.out.println("done");
 			checkNotes = true;
 			roomOut = false;
 			questionAsked = true;
 			moveOver = false;
 			return "done";
 		}
-		return "notes";
 	}
 
 	public String getMove() {
@@ -1242,6 +1231,23 @@ System.out.println("kitchen to library");
 						if(i==6) j="u";
 						q.add(j);
 					}
+				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+					//from ballroom to dining room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+System.out.println("ballroom to dining room");
+					String j=null;
+					for(int i=0; i < 7 ; i++) {
+						if(i==0) j="d";
+						if(i==1) j="d";
+						if(i==2) j="d";
+						if(i==3) j="d";
+						if(i==4) j="d";
+						if(i==5) j="l";
+						if(i==6) j="l";
+						q.add(j);
+					}
 				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("library") && !player.hasSeen("library")) {
 					//from ballroom to library
 					if(!q.isEmpty()) {
@@ -1310,31 +1316,6 @@ System.out.println("ballroom to lounge");
 						if(i==12) j="l";
 						if(i==13) j="d";
 						if(i==14) j="d";
-						q.add(j);
-					}
-				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-					//from ballroom to dining room
-					if(!q.isEmpty()) {
-						q.clear();
-					}
-System.out.println("ballroom to dining room");
-					String j=null;
-					for(int i=0; i < 15 ; i++) {
-						if(i==0) j="d";
-						if(i==1) j="d";
-						if(i==2) j="d";
-						if(i==3) j="d";
-						if(i==4) j="d";
-						if(i==5) j="d";
-						if(i==6) j="d";
-						if(i==7) j="d";
-						if(i==8) j="d";
-						if(i==9) j="d";
-						if(i==10) j="l";
-						if(i==11) j="l";
-						if(i==12) j="l";
-						if(i==13) j="u";
-						if(i==14) j="u";
 						q.add(j);
 					}
 				}else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("study") && !player.hasSeen("study")) {
@@ -2739,6 +2720,7 @@ System.out.println("dining room to billiard room");
 
 				if(!player.hasCard(Names.SUSPECT_NAMES[random]) && !player.hasSeen(Names.SUSPECT_NAMES[random])) {
 					found = true;
+					possSuspect = Names.SUSPECT_NAMES[random];
 					return Names.SUSPECT_NAMES[random];
 				}
 			}
@@ -2779,6 +2761,7 @@ System.out.println("dining room to billiard room");
 
 				if(!player.hasCard(Names.WEAPON_NAMES[random]) && !player.hasSeen(Names.WEAPON_NAMES[random])) {
 					found = true;
+					possWeapon = Names.WEAPON_NAMES[random];
 					return Names.WEAPON_NAMES[random];
 				}
 			}
@@ -2787,7 +2770,7 @@ System.out.println("dining room to billiard room");
 	}
 
 	public String getRoom() {//TODO: is hasSeen correct here?
-		// Add your code here
+//		 Add your code here
 
 		if(!player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
 			return "kitchen";
@@ -2853,6 +2836,10 @@ System.out.println("dining room to billiard room");
 			System.out.println("ballroom to kitch");
 			return "1";
 		}
+		else if(token.getRoom().hasName("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")){
+			System.out.println("ballroom to dining");
+			return "2";
+		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("library") && !player.hasSeen("library")){
 			System.out.println("ballroom to lib");
 			return "3";
@@ -2863,10 +2850,6 @@ System.out.println("dining room to billiard room");
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
 			System.out.println("ballroom to lounge");
-			return "2";
-		}
-		else if(token.getRoom().hasName("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")){
-			System.out.println("ballroom to dining");
 			return "2";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("study") && !player.hasSeen("study")){
@@ -3025,30 +3008,6 @@ System.out.println("dining room to billiard room");
 			return "dining room";
 		}
 		return matchingCards.get().toString();
-	}
-
-	private static ArrayList<Coordinates> possibleMoves(Coordinates current_tile) {
-		ArrayList<Coordinates> moves = new ArrayList<Coordinates>();
-		int x = current_tile.getRow(), y = current_tile.getCol();
-		int current_type = Map.MAP[x][y];
-		if (! ((x - 1) < 0) && !(current_type == Map.C && Map.MAP[x-1][y] == Map.X)) {
-			// can't move up
-			moves.add(new Coordinates(y, x-1));
-		}
-		if (! ((x + 1) > Map.NUM_ROWS) && !(current_type == Map.C && Map.MAP[x+1][y] == Map.X)) {
-			// can't move up
-			moves.add(new Coordinates(y, x+1));
-		}
-		if (! ((y - 1) < 0) && !(current_type == Map.C && Map.MAP[x][y-1] == Map.X)) {
-			// can't move up
-			moves.add(new Coordinates(y-1, x));
-		}
-		if (! ((y + 1) < Map.NUM_COLS) && !(current_type == Map.C && Map.MAP[x][y+1] == Map.X)) {
-			// can't move up
-			moves.add(new Coordinates(y+1, x));
-		}
-
-		return moves;
 	}
 
 	public void notifyResponse(Log response) {
