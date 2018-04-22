@@ -2568,8 +2568,8 @@ System.out.println("dining room to billiard room");
 						q.add(j);
 					}
 				}
-
-				else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+				else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) 
+				{
 
 					if(!q.isEmpty()) {
 						q.clear();
@@ -2581,7 +2581,8 @@ System.out.println("dining room to billiard room");
 						q.add(j);
 					}
 				}
-				else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+				else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) 
+				{
 
 					if(!q.isEmpty()) {
 						q.clear();
@@ -2594,7 +2595,8 @@ System.out.println("dining room to billiard room");
 						q.add(j);
 					}
 				}
-				else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
+				else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) 
+				{
 
 					if(!q.isEmpty()) {
 						q.clear();
@@ -2607,7 +2609,8 @@ System.out.println("dining room to billiard room");
 						q.add(j);
 					}
 				}
-				else if(room.equalsIgnoreCase("library") && !player.hasCard("library") && !player.hasSeen("library")) {
+				else if(room.equalsIgnoreCase("library") && !player.hasCard("library") && !player.hasSeen("library")) 
+				{
 
 					if(!q.isEmpty()) {
 						q.clear();
@@ -2620,7 +2623,8 @@ System.out.println("dining room to billiard room");
 						q.add(j);
 					}
 				}
-				else if(room.equalsIgnoreCase("study") && !player.hasCard("study") && !player.hasSeen("study")) {
+				else if(room.equalsIgnoreCase("study") && !player.hasCard("study") && !player.hasSeen("study")) 
+				{
 
 					if(!q.isEmpty()) {
 						q.clear();
@@ -2633,8 +2637,9 @@ System.out.println("dining room to billiard room");
 						q.add(j);
 					}
 				}
-				else if(room.equalsIgnoreCase("hall") && !player.hasCard("hall") && !player.hasSeen("hall")) {
-					//from dining room to conservatory
+				else if(room.equalsIgnoreCase("hall") && !player.hasCard("hall") && !player.hasSeen("hall")) 
+				{
+					
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2646,7 +2651,8 @@ System.out.println("dining room to billiard room");
 						q.add(j);
 					}
 				}
-				else if(room.equalsIgnoreCase("lounge") && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
+				else if(room.equalsIgnoreCase("lounge") && !player.hasCard("lounge") && !player.hasSeen("lounge")) 
+				{
 
 					if(!q.isEmpty()) {
 						q.clear();
@@ -2659,18 +2665,19 @@ System.out.println("dining room to billiard room");
 						q.add(j);
 					}
 				}
-			}
-			else if(room.equalsIgnoreCase("dining room") && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
+				else if(room.equalsIgnoreCase("dining room") && !player.hasCard("dining room") && !player.hasSeen("dining room")) 
+				{
 
-				if(!q.isEmpty()) {
-					q.clear();
-				}
-				String j=null;
-				for(int i=0; i < 2; i++) {
-					if(i==0) j="d";
-					if(i==1) j="u";
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="d";
+						if(i==1) j="u";
 
-					q.add(j);
+						q.add(j);
+					}
 				}
 			}
 		}
@@ -2932,7 +2939,7 @@ System.out.println("dining room to billiard room");
 			System.out.println("din to study");
 			return "1";
 		}
-		else if(token.getRoom().hasName("dining room") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")){
+		else if(token.getRoom().hasName("Dining Room") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")){
 			System.out.println("din to conservatory");
 			return "2";
 		}
