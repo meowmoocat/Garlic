@@ -115,7 +115,7 @@ public class Garlic implements BotAPI {
 			return "notes";
 		}
 
-		if(token.isInRoom() && !token.getRoom().toString().equalsIgnoreCase("Cellar"))
+		if(token.isInRoom() && !token.getRoom().toString().equalsIgnoreCase("Cellar")) //this is to update room and possRoom correctly
 		{
 			room = token.getRoom().toString();
 			possRoom = room;
@@ -130,13 +130,13 @@ public class Garlic implements BotAPI {
 		}
 
 
-		if(token.isInRoom() && !questionAsked)
+		if(token.isInRoom() && !questionAsked)	//if token is a room and the bot hasn't asked a question
 		{
 			//			if(moveOver)
 			//			{
 			for(int i=0; i<Names.ROOM_NAMES.length; i++)
 			{
-				if(room.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i])) {//needs to not work if already asked question
+				if(room.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i])) {			//if the bot is ready to question
 					questionAsked = true;
 					//System.out.println("question");
 					//System.out.println("weapon: "+possWeapon);
@@ -144,7 +144,7 @@ public class Garlic implements BotAPI {
 					//System.out.println("suspect: "+possSuspect);
 					return "question";
 				}
-				if(((murderWeapon && murderRoom && murderSuspect) || guess) && room.equalsIgnoreCase("Cellar"))
+				if(((murderWeapon && murderRoom && murderSuspect) || guess) && room.equalsIgnoreCase("Cellar"))//for accuse
 				{
 					//System.out.println("accuse");
 					return "accuse";
