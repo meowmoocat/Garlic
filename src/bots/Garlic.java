@@ -29,8 +29,13 @@ public class Garlic implements BotAPI {
 	private Token token;
 	private String room;
 	private String possWeapon, possRoom, possSuspect;
-	private int checkCardsCounterPrev;
-	private int checkCardsCounterCurr;
+	private String currentPlayer;
+	private String otherPlayer1 = "null";
+	private String otherPlayer2 = "null";
+	private String otherPlayer3 = "null";
+	private Boolean guess;
+	private int otherPlayersNum = 0;
+	private int counterNotifyReply = 0;
 	private Queue<String> q = new LinkedList<String>();
 
 	public Garlic (Player player, PlayersInfo playersInfo, Map map, Dice dice, Log log, Deck deck) {
@@ -47,8 +52,7 @@ public class Garlic implements BotAPI {
 		murderWeapon = false;
 		murderRoom = false;
 		murderSuspect = false;
-		checkCardsCounterPrev = 0;
-		checkCardsCounterCurr = 0;
+		guess = false;
 	}
 
 	private void checkMurder()
@@ -58,7 +62,6 @@ public class Garlic implements BotAPI {
 		for(int i=0; i<Names.ROOM_CARD_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.ROOM_CARD_NAMES[i]) && !player.hasSeen(Names.ROOM_CARD_NAMES[i])) counter ++;
-			else checkCardsCounterCurr ++;
 		}
 		if(counter == 1) murderRoom = true;
 
@@ -66,7 +69,6 @@ public class Garlic implements BotAPI {
 		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.SUSPECT_NAMES[i]) && !player.hasSeen(Names.SUSPECT_NAMES[i])) counter ++;
-			else checkCardsCounterCurr ++;
 		}
 		if(counter == 1) murderSuspect = true;
 
@@ -74,7 +76,6 @@ public class Garlic implements BotAPI {
 		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.WEAPON_NAMES[i]) && !player.hasSeen(Names.WEAPON_NAMES[i])) counter ++;
-			else checkCardsCounterCurr ++;
 		}
 		if(counter == 1) murderWeapon = true;
 	}
@@ -88,6 +89,7 @@ public class Garlic implements BotAPI {
 
 		System.out.println("\nGarlic "+token.getName());
 
+		checkMurder();
 		
 //		if(murderRoom) System.out.println("murderRoom: true");
 //		if(murderSuspect) System.out.println("murderSuspect: true");
@@ -95,15 +97,20 @@ public class Garlic implements BotAPI {
 
 		if(checkNotes)
 		{
+//			questionAsked = false;
 			checkNotes = false;
 			System.out.println("notes");
 			return "notes";
 		}
 
-		if(token.isInRoom())
+		if(token.isInRoom() && !token.getRoom().toString().equalsIgnoreCase("Cellar"))
 		{
 			room = token.getRoom().toString();
 			possRoom = room;
+		}
+		else if(token.isInRoom() && token.getRoom().toString().equalsIgnoreCase("Cellar"))
+		{
+			room = token.getRoom().toString();
 		}
 		else
 		{
@@ -113,22 +120,25 @@ public class Garlic implements BotAPI {
 
 		if(token.isInRoom() && !questionAsked)
 		{
-			if(moveOver)
-			{
+//			if(moveOver)
+//			{
 				for(int i=0; i<Names.ROOM_NAMES.length; i++)
 				{
 					if(room.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i])) {//needs to not work if already asked question
 						questionAsked = true;
 						System.out.println("question");
+						System.out.println("weapon: "+possWeapon);
+						System.out.println("room; "+possRoom);
+						System.out.println("suspect: "+possSuspect);
 						return "question";
 					}
-					if(murderWeapon && murderRoom && murderSuspect && room.equalsIgnoreCase("Cellar"))
+					if(((murderWeapon && murderRoom && murderSuspect) || guess) && room.equalsIgnoreCase("Cellar"))
 					{
 						System.out.println("accuse");
 						return "accuse";
 					}
 				}
-			}
+//			}
 			//if entered room question
 			//if in middle accuse
 			//if start turn & in room -> roll || passage
@@ -141,28 +151,28 @@ public class Garlic implements BotAPI {
 		if(token.isInRoom() && !moveOver)
 		{
 
-			if(room.equalsIgnoreCase("lounge") && !player.hasCard("conservatory") && !player.hasSeen("conservatory"))
+			if(room.equalsIgnoreCase("lounge") && !player.hasCard("conservatory") && !player.hasSeen("conservatory") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
 				System.out.println("passage: lounge to conservatory");
 				return "passage";
 			}
-			else if(room.equalsIgnoreCase("study") && !player.hasCard("kitchen") && !player.hasSeen("kitchen"))
+			else if(room.equalsIgnoreCase("study") && !player.hasCard("kitchen") && !player.hasSeen("kitchen") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
 				System.out.println("passage: study to kitchen");
 				return "passage";
 			}
-			if(room.equalsIgnoreCase("conservatory") && !player.hasCard("lounge") && !player.hasSeen("lounge"))
+			if(room.equalsIgnoreCase("conservatory") && !player.hasCard("lounge") && !player.hasSeen("lounge") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
 				System.out.println("passage: conservatory to lounge");
 				return "passage";
 			}
-			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("study") && !player.hasSeen("study"))
+			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("study") && !player.hasSeen("study") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
@@ -178,12 +188,12 @@ public class Garlic implements BotAPI {
 		}
 		else
 		{
-			checkMurder();
 			System.out.println("done");
 			checkNotes = true;
 			roomOut = false;
 			questionAsked = true;
 			moveOver = false;
+			counterNotifyReply = 0;
 			return "done";
 		}
 	}
@@ -193,9 +203,10 @@ public class Garlic implements BotAPI {
 		moveOver = true;
 		questionAsked = false;
 
+if(guess)System.out.println("guess true");
+else System.out.println("guess false");
 
-
-		if(murderWeapon && murderRoom && murderSuspect)
+		if((murderWeapon && murderRoom && murderSuspect) || guess)
 		{
 //			System.out.println("room: "+room);
 //			System.out.println("????????????????????????????????????????????");
@@ -2682,7 +2693,7 @@ System.out.println("dining room to billiard room");
 			}
 		}
 
-		System.out.println(q);
+		
 		room = "null";
 
 		if(!q.isEmpty()) {
@@ -2697,24 +2708,35 @@ System.out.println("dining room to billiard room");
 	public String getSuspect() {
 		// Add your code here
 		//TODO: check case
-		if(murderSuspect)
+		if(guess)
+		{
+			System.out.println("guessSuspect!!!!!!!!!!!!!!!!!!!!!");
+			return possSuspect;
+		}
+		else if(murderSuspect)
 		{
 			if(!player.hasCard("plum") && !player.hasSeen("plum")) {
+				possSuspect = "plum";
 				return "plum";
 			}
 			if(!player.hasCard("white") && !player.hasSeen("white")) {
+				possSuspect = "white";
 				return "white";
 			}
 			if(!player.hasCard("scarlett") && !player.hasSeen("scarlett")) {
+				possSuspect = "scarlett";
 				return "scarlett";
 			}
 			if(!player.hasCard("green") && !player.hasSeen("green")) {
+				possSuspect = "green";
 				return "green";
 			}
 			if(!player.hasCard("mustard") && !player.hasSeen("mustard")) {
+				possSuspect = "mustard";
 				return "mustard";
 			}
 			if(!player.hasCard("peacock") && !player.hasSeen("peacock")) {
+				possSuspect = "peacock";
 				return "peacock";
 			}
 		}
@@ -2728,34 +2750,45 @@ System.out.println("dining room to billiard room");
 				if(!player.hasCard(Names.SUSPECT_NAMES[random]) && !player.hasSeen(Names.SUSPECT_NAMES[random])) {
 					found = true;
 					possSuspect = Names.SUSPECT_NAMES[random];
-					return Names.SUSPECT_NAMES[random];
+					break;
 				}
 			}
 		}
 
-		return Names.SUSPECT_NAMES[0];
+		return possSuspect;
 	}
 
 	public String getWeapon() {
 		// Add your code here
-		if(murderWeapon)
+		if(guess)
+		{
+			System.out.println("guessWeapon!!!!!!!!!!!!!!!!!!!!!");
+			return possWeapon;
+		}
+		else if(murderWeapon)
 		{
 			if(!player.hasCard("rope") && !player.hasSeen("rope")) {
+				possWeapon = "rope";
 				return "rope";
 			}
 			if(!player.hasCard("dagger") && !player.hasSeen("dagger")) {
+				possWeapon = "dagger";
 				return "dagger";
 			}
 			if(!player.hasCard("wrench") && !player.hasSeen("wrench")) {
+				possWeapon = "wrench";
 				return "wrench";
 			}
 			if(!player.hasCard("pistol") && !player.hasSeen("pistol")) {
+				possWeapon = "pistol";
 				return "pistol";
 			}
 			if(!player.hasCard("candlestick") && !player.hasSeen("candlestick")) {
+				possWeapon = "candlestick";
 				return "candlestick";
 			}
 			if(!player.hasCard("lead pipe") && !player.hasSeen("lead pipe")) {
+				possWeapon = "lead pipe";
 				return "lead pipe";
 			}
 		}
@@ -2769,16 +2802,20 @@ System.out.println("dining room to billiard room");
 				if(!player.hasCard(Names.WEAPON_NAMES[random]) && !player.hasSeen(Names.WEAPON_NAMES[random])) {
 					found = true;
 					possWeapon = Names.WEAPON_NAMES[random];
-					return Names.WEAPON_NAMES[random];
+					break;
 				}
 			}
 		}
-		return Names.WEAPON_NAMES[0];
+		return possWeapon;
 	}
 
 	public String getRoom() {//TODO: is hasSeen correct here?
 //		 Add your code here
-
+		if(guess)
+		{
+			System.out.println("guessRoom!!!!!!!!!!!!!!!!!!!!!");
+			return possRoom;
+		}
 		if(!player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
 			return "kitchen";
 		}
@@ -2811,23 +2848,23 @@ System.out.println("dining room to billiard room");
 	}
 
 	public String getDoor() {
-		if(token.getRoom().hasName("ballroom") && murderRoom && murderSuspect && murderWeapon) { 
-//			System.out.println("ballroom to cellar");
+		if(token.getRoom().hasName("ballroom") && ((murderRoom && murderSuspect && murderWeapon) || guess)) { 
+			System.out.println("ballroom to cellar");
 			return "2";
 		}
-		else if(token.getRoom().hasName("hall") && murderRoom && murderSuspect && murderWeapon) {
+		else if(token.getRoom().hasName("hall") && ((murderRoom && murderSuspect && murderWeapon) || guess)) {
 			System.out.println("hall to cellar");
 			return "2";
 		}
-		else if(token.getRoom().hasName("dining room") && murderRoom && murderSuspect && murderWeapon) {
+		else if(token.getRoom().hasName("dining room") && ((murderRoom && murderSuspect && murderWeapon) || guess)) {
 			System.out.println("dining to cellar");
 			return "1";
 		}
-		else if(token.getRoom().hasName("library") && murderRoom && murderSuspect && murderWeapon){
-//			System.out.println("lib to cellar");
+		else if(token.getRoom().hasName("library") && ((murderRoom && murderSuspect && murderWeapon) || guess)){
+			System.out.println("lib to cellar");
 			return "1";
 		}
-		else if(token.getRoom().hasName("billiard room") && murderRoom && murderSuspect && murderWeapon){
+		else if(token.getRoom().hasName("billiard room") && ((murderRoom && murderSuspect && murderWeapon) || guess)){
 			System.out.println("billiard to cellar");
 			return "1";
 		}
@@ -3030,27 +3067,77 @@ System.out.println("dining room to billiard room");
 	@Override
 	public void notifyPlayerName(String playerName) {
 		// TODO Auto-generated method stub
-
+		
+		if(!playerName.equalsIgnoreCase("Garlic"))
+		{
+			if(otherPlayer1.equals("null"))
+			{
+				otherPlayer1 = playerName;
+				otherPlayersNum ++;
+			}
+			else if(otherPlayer2.equals("null"))
+			{
+				otherPlayer2 = playerName;
+				otherPlayersNum ++;
+			}
+			else if(otherPlayer3.equals("null"))
+			{
+				otherPlayer3 = playerName;
+				otherPlayersNum ++;
+			}
+		}
+		System.out.println("playerNum: "+ otherPlayersNum);
 	}
 
 	@Override
 	public void notifyTurnOver(String playerName, String position) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void notifyQuery(String playerName, String query) {
 		// TODO Auto-generated method stub
-
+		
+		currentPlayer = playerName;
 	}
 
 	@Override
 	public void notifyReply(String playerName, boolean cardShown) {
-		// TODO Auto-generated method stub
+	
+		if(currentPlayer.equalsIgnoreCase("Garlic"))
+		{
+			if(playerName.equals(otherPlayer1))
+			{
+				if(!cardShown) 
+				{
+					System.out.println(playerName+" : "+otherPlayer1+" true");
+					counterNotifyReply++;
+				}
+			}
+			else if(playerName.equals(otherPlayer2))
+			{
+				if(!cardShown) 
+				{
+					System.out.println(playerName+" : "+otherPlayer1+" true");
+					counterNotifyReply++;
+				}
+			}
+			else if(playerName.equals(otherPlayer3))
+			{
+				if(!cardShown) counterNotifyReply++;
+			}
+		}
 
+		if(counterNotifyReply == otherPlayersNum)
+		{
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			guess = true;
+		}
+		
+		if(cardShown) System.out.print("true ");
+		else System.out.print("false ");
+		
+//		if(currentPlayer.equalsIgnoreCase("Garlic") && !cardShown)
 	}
-
-
 
 }
