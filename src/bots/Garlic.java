@@ -1,3 +1,10 @@
+/*
+ * Created by Garlic
+ * Anna Davison: 16382333
+ * James Kearns: 15467662
+ * Orla Keating: 15205679
+ */
+
 package bots;
 
 import java.util.ArrayList;
@@ -56,6 +63,10 @@ public class Garlic implements BotAPI {
 		guess = false;
 	}
 
+	/*
+	 * checks if all other possibilities are eliminated
+	 * and it changes booleans
+	 */
 	private void checkMurder()
 	{
 		int counter = 0;
@@ -88,19 +99,19 @@ public class Garlic implements BotAPI {
 	public String getCommand() {
 		//if token is in corridor roll
 
-		System.out.println("\nGarlic "+token.getName());
+		//System.out.println("\nGarlic "+token.getName());
 
 		checkMurder();
 
-//				if(murderRoom) System.out.println("murderRoom: true");
-//				if(murderSuspect) System.out.println("murderSuspect: true");
-//				if(murderWeapon) System.out.println("murderWeapon: true");
+		//				if(murderRoom) //System.out.println("murderRoom: true");
+		//				if(murderSuspect) //System.out.println("murderSuspect: true");
+		//				if(murderWeapon) //System.out.println("murderWeapon: true");
 
 		if(checkNotes)
 		{
 			//			questionAsked = false;
 			checkNotes = false;
-			System.out.println("notes");
+			//System.out.println("notes");
 			return "notes";
 		}
 
@@ -127,15 +138,15 @@ public class Garlic implements BotAPI {
 			{
 				if(room.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i])) {//needs to not work if already asked question
 					questionAsked = true;
-					System.out.println("question");
-					System.out.println("weapon: "+possWeapon);
-					System.out.println("room; "+possRoom);
-					System.out.println("suspect: "+possSuspect);
+					//System.out.println("question");
+					//System.out.println("weapon: "+possWeapon);
+					//System.out.println("room; "+possRoom);
+					//System.out.println("suspect: "+possSuspect);
 					return "question";
 				}
 				if(((murderWeapon && murderRoom && murderSuspect) || guess) && room.equalsIgnoreCase("Cellar"))
 				{
-					System.out.println("accuse");
+					//System.out.println("accuse");
 					return "accuse";
 				}
 			}
@@ -146,50 +157,50 @@ public class Garlic implements BotAPI {
 		}
 		if(map.isCorridor(token.getPosition()) && !moveOver)
 		{
-			System.out.println("roll");
+			//System.out.println("roll");
 			return "roll";
 		}
-		if(token.isInRoom() && !moveOver)
+		if(token.isInRoom() && !moveOver)		//for passages and roll
 		{
 
 			if(room.equalsIgnoreCase("lounge") && !player.hasCard("conservatory") && !player.hasSeen("conservatory") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
-				System.out.println("passage: lounge to conservatory");
+				//System.out.println("passage: lounge to conservatory");
 				return "passage";
 			}
 			else if(room.equalsIgnoreCase("study") && !player.hasCard("kitchen") && !player.hasSeen("kitchen") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
-				System.out.println("passage: study to kitchen");
+				//System.out.println("passage: study to kitchen");
 				return "passage";
 			}
 			if(room.equalsIgnoreCase("conservatory") && !player.hasCard("lounge") && !player.hasSeen("lounge") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
-				System.out.println("passage: conservatory to lounge");
+				//System.out.println("passage: conservatory to lounge");
 				return "passage";
 			}
 			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("study") && !player.hasSeen("study") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
-				System.out.println("passage: kitchen to study");
+				//System.out.println("passage: kitchen to study");
 				return "passage";
 			}
 			else
 			{
-				System.out.println("roll");
+				//System.out.println("roll");
 				roomOut = true;
 				return "roll";
 			}
 		}
 		else
 		{
-			System.out.println("done");
+			//System.out.println("done");
 			checkNotes = true;
 			roomOut = false;
 			questionAsked = true;
@@ -204,20 +215,17 @@ public class Garlic implements BotAPI {
 		moveOver = true;
 		questionAsked = false;
 
-		if(guess)System.out.println("guess true");
-		else System.out.println("guess false");
-
 		//if you know all the murder items or if you happened to query the right answer
 		if((murderWeapon && murderRoom && murderSuspect) || guess)
 		{
-			//			System.out.println("room: "+room);
-			//			System.out.println("????????????????????????????????????????????");
+			//			//System.out.println("room: "+room);
+			//			//System.out.println("????????????????????????????????????????????");
 			if(room.equalsIgnoreCase("kitchen")) {
 				//kitchen to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("kitchen to cellar");
+				//System.out.println("kitchen to cellar");
 				String j=null;
 				for(int i=0; i < 20 ; i++) {
 					if(i==0) j="d";
@@ -247,7 +255,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				//				System.out.println("ball");
+				//				//System.out.println("ball");
 				String j=null;
 				for(int i=0; i < 14 ; i++) {
 					if(i==0) j="d";
@@ -271,7 +279,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("conservatory to cellar");
+				//System.out.println("conservatory to cellar");
 				String j=null;
 				for(int i=0; i < 20 ; i++) {
 					if(i==0) j="d";
@@ -301,7 +309,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				//				System.out.println("dining");
+				//				//System.out.println("dining");
 				String j=null;
 				for(int i=0; i < 9 ; i++) {
 					if(i==0) j="d";
@@ -320,7 +328,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				//				System.out.println("billiard");
+				//				//System.out.println("billiard");
 				String j=null;
 				for(int i=0; i < 15 ; i++) {
 					if(i==0) j="l";
@@ -345,7 +353,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				//				System.out.println("lib");
+				//				//System.out.println("lib");
 				String j=null;
 				for(int i=0; i < 7 ; i++) {
 					if(i==0) j="l";
@@ -362,7 +370,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("lounge to cellar");
+				//System.out.println("lounge to cellar");
 				String j=null;
 				for(int i=0; i < 9 ; i++) {
 					if(i==0) j="u";
@@ -381,7 +389,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				//				System.out.println("hall");
+				//				//System.out.println("hall");
 				String j=null;
 				for(int i=0; i < 2 ; i++) {
 					if(i==0) j="u";
@@ -393,7 +401,7 @@ public class Garlic implements BotAPI {
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-				System.out.println("study to cellar");
+				//System.out.println("study to cellar");
 				String j=null;
 				for(int i=0; i < 10 ; i++) {
 					if(i==0) j="u";
@@ -1027,7 +1035,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("kitchen to ballroom");
+					//System.out.println("kitchen to ballroom");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="d";
@@ -1044,7 +1052,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("kitchen to dining room");
+					//System.out.println("kitchen to dining room");
 					String j=null;
 					for(int i=0; i < 11 ; i++) {
 						if(i==0) j="d";
@@ -1065,7 +1073,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("kitchen to billiard room");
+					//System.out.println("kitchen to billiard room");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="d";
@@ -1092,7 +1100,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("kitchen to hall");
+					//System.out.println("kitchen to hall");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="d";
@@ -1121,7 +1129,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("kitchen to lounge");
+					//System.out.println("kitchen to lounge");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="d";
@@ -1150,7 +1158,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("kitchen to conservatory");
+					//System.out.println("kitchen to conservatory");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="d";
@@ -1180,7 +1188,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("kitchen to library");
+					//System.out.println("kitchen to library");
 					String j=null;
 					for(int i=0; i < 23 ; i++) {
 						if(i==0) j="d";
@@ -1258,7 +1266,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("ballroom to dining room");
+					//System.out.println("ballroom to dining room");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="d";
@@ -1275,7 +1283,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("ballroom to library");
+					//System.out.println("ballroom to library");
 					String j=null;
 					for(int i=0; i < 12 ; i++) {
 						if(i==0) j="d";
@@ -1297,7 +1305,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("ballroom to hall");
+					//System.out.println("ballroom to hall");
 					String j=null;
 					for(int i=0; i < 13 ; i++) {
 						if(i==0) j="d";
@@ -1320,7 +1328,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("ballroom to lounge");
+					//System.out.println("ballroom to lounge");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="d";
@@ -1385,7 +1393,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("conservatory to billiard room");
+					//System.out.println("conservatory to billiard room");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="d";
@@ -1402,7 +1410,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("conservatory to library");
+					//System.out.println("conservatory to library");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="d";
@@ -1427,7 +1435,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("conservatory to dining room");
+					//System.out.println("conservatory to dining room");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="d";
@@ -1486,7 +1494,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("conservatory to study");
+					//System.out.println("conservatory to study");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="d";
@@ -1516,7 +1524,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("conservatory to hall");
+					//System.out.println("conservatory to hall");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="d";
@@ -1692,7 +1700,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("billiard room to lounge");
+					//System.out.println("billiard room to lounge");
 					String j=null;
 					for(int i=0; i < 22 ; i++) {
 						if(i==0) j="l";
@@ -1898,7 +1906,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("study to hall");
+					//System.out.println("study to hall");
 					String j=null;
 					for(int i=0; i < 4 ; i++) {
 						if(i==0) j="u";
@@ -1912,7 +1920,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("study to library");
+					//System.out.println("study to library");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="u";
@@ -1929,7 +1937,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("study to billiard room");
+					//System.out.println("study to billiard room");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="u";
@@ -1954,7 +1962,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("study to lounge");
+					//System.out.println("study to lounge");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="u";
@@ -1981,7 +1989,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("study to dining room");
+					//System.out.println("study to dining room");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="u";
@@ -2008,7 +2016,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("study to ballroom");
+					//System.out.println("study to ballroom");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="u";
@@ -2035,7 +2043,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("study to conservatory");
+					//System.out.println("study to conservatory");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="u";
@@ -2065,7 +2073,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("hall to study");
+					//System.out.println("hall to study");
 					String j=null;
 					for(int i=0; i < 4 ; i++) {
 						if(i==0) j="r";
@@ -2079,7 +2087,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("hall to library");
+					//System.out.println("hall to library");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="u";
@@ -2096,7 +2104,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("hall to lounge");
+					//System.out.println("hall to lounge");
 					String j=null;
 					for(int i=0; i < 8 ; i++) {
 						if(i==0) j="u";
@@ -2114,7 +2122,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("hall to dining room");
+					//System.out.println("hall to dining room");
 					String j=null;
 					for(int i=0; i < 8 ; i++) {
 						if(i==0) j="u";
@@ -2132,7 +2140,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("hall to ballroom");
+					//System.out.println("hall to ballroom");
 					String j=null;
 					for(int i=0; i < 13; i++) {
 						if(i==0) j="u";
@@ -2155,7 +2163,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("hall to billiard room");
+					//System.out.println("hall to billiard room");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="u";
@@ -2180,7 +2188,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("hall to kitchen");
+					//System.out.println("hall to kitchen");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="u";
@@ -2209,7 +2217,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("hall to conservatory");
+					//System.out.println("hall to conservatory");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="u";
@@ -2239,7 +2247,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("lounge to dining room");
+					//System.out.println("lounge to dining room");
 					String j=null;
 					for(int i=0; i < 4 ; i++) {
 						if(i==0) j="u";
@@ -2253,7 +2261,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("lounge to hall");
+					//System.out.println("lounge to hall");
 					String j=null;
 					for(int i=0; i < 8; i++) {
 						if(i==0) j="u";
@@ -2271,7 +2279,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("lounge to library");
+					//System.out.println("lounge to library");
 					String j=null;
 					for(int i=0; i < 14 ; i++) {
 						if(i==0) j="u";
@@ -2295,7 +2303,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("lounge to ballroom");
+					//System.out.println("lounge to ballroom");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="u";
@@ -2320,7 +2328,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("lounge to study");
+					//System.out.println("lounge to study");
 					String j=null;
 					for(int i=0; i < 17; i++) {
 						if(i==0) j="u";
@@ -2347,7 +2355,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("lounge to kitchen");
+					//System.out.println("lounge to kitchen");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="u";
@@ -2376,7 +2384,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("lounge to billiard room");
+					//System.out.println("lounge to billiard room");
 					String j=null;
 					for(int i=0; i < 22 ; i++) {
 						if(i==0) j="u";
@@ -2477,7 +2485,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("dining room to billiard room");
+					//System.out.println("dining room to billiard room");
 					String j=null;
 					for(int i=0; i < 14; i++) {
 						if(i==0) j="r";
@@ -2552,7 +2560,7 @@ public class Garlic implements BotAPI {
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-					System.out.println("dining room to conservatory");
+					//System.out.println("dining room to conservatory");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="r";
@@ -2716,15 +2724,15 @@ public class Garlic implements BotAPI {
 		return "l";
 	}
 
+	//guess checks if you have guessed correctly and returns the guess for the suspect
 	public String getSuspect() {
-		// Add your code here
-		//TODO: check case
+		//TODO: this is a marker to get here quicker
 		if(guess)
 		{
-			System.out.println("guessSuspect!!!!!!!!!!!!!!!!!!!!!");
+			//System.out.println("guessSuspect!!!!!!!!!!!!!!!!!!!!!");
 			return guessSuspect;
 		}
-		else if(murderSuspect)
+		else if(murderSuspect) //returns the murderer if all other possibilities have been eliminated
 		{
 			if(!player.hasCard("plum") && !player.hasSeen("plum")) {
 				possSuspect = "plum";
@@ -2770,13 +2778,12 @@ public class Garlic implements BotAPI {
 	}
 
 	public String getWeapon() {
-		// Add your code here
-		if(guess)
+		if(guess)//if guess is correct then returns that guess for final accuse
 		{
-			System.out.println("guessWeapon!!!!!!!!!!!!!!!!!!!!!");
+			//System.out.println("guessWeapon!!!!!!!!!!!!!!!!!!!!!");
 			return guessWeapon;
 		}
-		else if(murderWeapon)
+		else if(murderWeapon) //if all other possibilities have been eliminated
 		{
 			if(!player.hasCard("rope") && !player.hasSeen("rope")) {
 				possWeapon = "rope";
@@ -2820,13 +2827,14 @@ public class Garlic implements BotAPI {
 		return possWeapon;
 	}
 
-	public String getRoom() {//TODO: is hasSeen correct here?
-		//		 Add your code here
+	public String getRoom() {
+		//if the guess is correct return the guess
 		if(guess)
 		{
-			System.out.println("guessRoom!!!!!!!!!!!!!!!!!!!!!");
+			//System.out.println("guessRoom!!!!!!!!!!!!!!!!!!!!!");
 			return guessRoom;
 		}
+		//it return the correct room if the bot hasn't seen it
 		if(!player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
 			return "kitchen";
 		}
@@ -2855,147 +2863,151 @@ public class Garlic implements BotAPI {
 			return "dining room";
 		}
 
-		return Names.ROOM_NAMES[0];
+		return "";
 	}
 
+	//selects the doors for certain paths
 	public String getDoor() {
+		//first 5 are the doors to send you to cellar
 		if(token.getRoom().hasName("ballroom") && ((murderRoom && murderSuspect && murderWeapon) || guess)) { 
-			System.out.println("ballroom to cellar");
+			//System.out.println("ballroom to cellar");
 			return "2";
 		}
 		else if(token.getRoom().hasName("hall") && ((murderRoom && murderSuspect && murderWeapon) || guess)) {
-			System.out.println("hall to cellar");
+			//System.out.println("hall to cellar");
 			return "2";
 		}
 		else if(token.getRoom().hasName("dining room") && ((murderRoom && murderSuspect && murderWeapon) || guess)) {
-			System.out.println("dining to cellar");
+			//System.out.println("dining to cellar");
 			return "1";
 		}
 		else if(token.getRoom().hasName("library") && ((murderRoom && murderSuspect && murderWeapon) || guess)){
-			System.out.println("lib to cellar");
+			//System.out.println("lib to cellar");
 			return "1";
 		}
 		else if(token.getRoom().hasName("billiard room") && ((murderRoom && murderSuspect && murderWeapon) || guess)){
-			System.out.println("billiard to cellar");
+			//System.out.println("billiard to cellar");
 			return "1";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-			System.out.println("ballroom to conserv");
+			//System.out.println("ballroom to conserv");
 			return "4";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
-			System.out.println("ballroom to billia");
+			//System.out.println("ballroom to billia");
 			return "3";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
-			System.out.println("ballroom to kitch");
+			//System.out.println("ballroom to kitch");
 			return "1";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("dining room") && !player.hasSeen("dining room")){
-			System.out.println("ballroom to dining");
+			//System.out.println("ballroom to dining");
 			return "2";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("library") && !player.hasSeen("library")){
-			System.out.println("ballroom to lib");
+			//System.out.println("ballroom to lib");
 			return "3";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("hall") && !player.hasSeen("hall")){
-			System.out.println("ballroom to hall");
+			//System.out.println("ballroom to hall");
 			return "2";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
-			System.out.println("ballroom to lounge");
+			//System.out.println("ballroom to lounge");
 			return "2";
 		}
 		else if(token.getRoom().hasName("ballroom") && !player.hasCard("study") && !player.hasSeen("study")){
-			System.out.println("ballroom to study");
+			//System.out.println("ballroom to study");
 			return "3";
 		}
 		else if(token.getRoom().hasName("billiard room") && !player.hasCard("library") && !player.hasSeen("library")){
-			System.out.println("bill to lib");
+			//System.out.println("bill to lib");
 			return "2";
 		}
 		else if(token.getRoom().hasName("billiard room")){
-			System.out.println("bill to ????");
+			//System.out.println("bill to ????");
 			return "1";
 		}
 		else if(token.getRoom().hasName("library") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
-			System.out.println("lib to bill");
+			//System.out.println("lib to bill");
 			return "2";
 		}
 		else if(token.getRoom().hasName("library")){
-			System.out.println("lib to ???");
+			//System.out.println("lib to ???");
 			return "1";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("study") && !player.hasSeen("study")){
-			System.out.println("hall to study");
+			//System.out.println("hall to study");
 			return "3";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("library") && !player.hasSeen("library")){
-			System.out.println("hall to lib");
+			//System.out.println("hall to lib");
 			return "2";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
-			System.out.println("hall to loung");
+			//System.out.println("hall to loung");
 			return "1";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("dining room") && !player.hasSeen("dining room")){
-			System.out.println("hall to dining");
+			//System.out.println("hall to dining");
 			return "1";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")){
-			System.out.println("hall to ball");
+			//System.out.println("hall to ball");
 			return "1";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
-			System.out.println("hall to bill");
+			//System.out.println("hall to bill");
 			return "2";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
-			System.out.println("hall to kitch");
+			//System.out.println("hall to kitch");
 			return "1";
 		}
 		else if(token.getRoom().hasName("hall") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")){
-			System.out.println("hall to cons");
+			//System.out.println("hall to cons");
 			return "2";
 		}
 		else if(token.getRoom().hasName("dining room") && !player.hasCard("lounge") && !player.hasSeen("lounge")){
-			System.out.println("dingn to loung");
+			//System.out.println("dingn to loung");
 			return "1";
 		}
 		else if(token.getRoom().hasName("dining room") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")){
-			System.out.println("din to ball");
+			//System.out.println("din to ball");
 			return "2";
 		}
 		else if(token.getRoom().hasName("dining room") && !player.hasCard("hall") && !player.hasSeen("hall")){
-			System.out.println("din to hall");
+			//System.out.println("din to hall");
 			return "1";
 		}
 		else if(token.getRoom().hasName("dining room") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")){
-			System.out.println("din to kitch");
+			//System.out.println("din to kitch");
 			return "2";
 		}
 		else if(token.getRoom().hasName("dining room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")){
-			System.out.println("din to bill");
+			//System.out.println("din to bill");
 			return "2";
 		}
 		else if(token.getRoom().hasName("dining room") && !player.hasCard("library") && !player.hasSeen("library")){
-			System.out.println("din to lib");
+			//System.out.println("din to lib");
 			return "1";
 		}
 		else if(token.getRoom().hasName("dining room") && !player.hasCard("study") && !player.hasSeen("study")){
-			System.out.println("din to study");
+			//System.out.println("din to study");
 			return "1";
 		}
 		else if(token.getRoom().hasName("Dining Room") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")){
-			System.out.println("din to conservatory");
+			//System.out.println("din to conservatory");
 			return "2";
 		}
-		else System.out.println(room+" to ?");
+//		else //System.out.println(room+" to ?");
 
-		return "1";
+			return "1";
 	}
 
+	
+	//returns one of your cards when another player guesses
 	public String getCard(Cards matchingCards) {
 		if(player.hasCard("plum") && matchingCards.contains("plum")) {
 			return "plum";
@@ -3028,8 +3040,8 @@ public class Garlic implements BotAPI {
 		if(player.hasCard("pistol") && matchingCards.contains("pistol")) {
 			return "pistol";
 		}
-		if(player.hasCard("candelstick") && matchingCards.contains("candelstick")) {
-			return "candelstick";
+		if(player.hasCard("candlestick") && matchingCards.contains("candlestick")) {
+			return "candlestick";
 		}
 		if(player.hasCard("lead pipe") && matchingCards.contains("lead pipe")) {
 			return "lead pipe";
@@ -3075,6 +3087,10 @@ public class Garlic implements BotAPI {
 		return null;
 	}
 
+	/*
+	 * It stores the names of the other players locally 
+	 * plus it counts the number of other players.
+	 */
 	@Override
 	public void notifyPlayerName(String playerName) {
 		// TODO Auto-generated method stub
@@ -3097,21 +3113,25 @@ public class Garlic implements BotAPI {
 				otherPlayersNum ++;
 			}
 		}
-		System.out.println("playerNum: "+ otherPlayersNum);
+		//System.out.println("playerNum: "+ otherPlayersNum);
 	}
 
 	@Override
 	public void notifyTurnOver(String playerName, String position) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void notifyQuery(String playerName, String query) {
-		// TODO Auto-generated method stub
-
 		currentPlayer = playerName;
 	}
 
+	
+	/*
+	 * Checks if the other players don’t show a card on our bots turn and 
+	 * if all players don’t show a card then guess is true and the 
+	 * current guess is stored in guessWeapon, guessSuspect and guessRoom. 
+	 * The bot is now ready to move to the cellar and accuse.
+	 */
 	@Override
 	public void notifyReply(String playerName, boolean cardShown) {
 
@@ -3121,7 +3141,7 @@ public class Garlic implements BotAPI {
 			{
 				if(!cardShown) 
 				{
-					System.out.println(playerName+" : "+otherPlayer1+" true");
+					//System.out.println(playerName+" : "+otherPlayer1+" true");
 					counterNotifyReply++;
 				}
 			}
@@ -3129,7 +3149,7 @@ public class Garlic implements BotAPI {
 			{
 				if(!cardShown) 
 				{
-					System.out.println(playerName+" : "+otherPlayer1+" true");
+					//System.out.println(playerName+" : "+otherPlayer1+" true");
 					counterNotifyReply++;
 				}
 			}
@@ -3141,15 +3161,15 @@ public class Garlic implements BotAPI {
 
 		if(counterNotifyReply == otherPlayersNum)
 		{
-			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			guessWeapon = possWeapon;
 			guessRoom = possRoom;
 			guessSuspect = possSuspect;	
 			guess = true;
 		}
 
-		if(cardShown) System.out.print("true ");
-		else System.out.print("false ");
+		//		if(cardShown) //System.out.print("true ");
+		//		else //System.out.print("false ");
 
 		//		if(currentPlayer.equalsIgnoreCase("Garlic") && !cardShown)
 	}

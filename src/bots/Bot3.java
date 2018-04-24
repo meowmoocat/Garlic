@@ -2980,8 +2980,8 @@ public class Bot3 implements BotAPI {
 		if(player.hasCard("pistol") && matchingCards.contains("pistol")) {
 			return "pistol";
 		}
-		if(player.hasCard("candelstick") && matchingCards.contains("candelstick")) {
-			return "candelstick";
+		if(player.hasCard("candlestick") && matchingCards.contains("candlestick")) {
+			return "candlestick";
 		}
 		if(player.hasCard("lead pipe") && matchingCards.contains("lead pipe")) {
 			return "lead pipe";
