@@ -91,14 +91,14 @@ public class Garlic implements BotAPI {
 		System.out.println("\nGarlic "+token.getName());
 
 		checkMurder();
-		
-//		if(murderRoom) System.out.println("murderRoom: true");
-//		if(murderSuspect) System.out.println("murderSuspect: true");
-//		if(murderWeapon) System.out.println("murderWeapon: true");
+
+//				if(murderRoom) System.out.println("murderRoom: true");
+//				if(murderSuspect) System.out.println("murderSuspect: true");
+//				if(murderWeapon) System.out.println("murderWeapon: true");
 
 		if(checkNotes)
 		{
-//			questionAsked = false;
+			//			questionAsked = false;
 			checkNotes = false;
 			System.out.println("notes");
 			return "notes";
@@ -121,25 +121,25 @@ public class Garlic implements BotAPI {
 
 		if(token.isInRoom() && !questionAsked)
 		{
-//			if(moveOver)
-//			{
-				for(int i=0; i<Names.ROOM_NAMES.length; i++)
-				{
-					if(room.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i])) {//needs to not work if already asked question
-						questionAsked = true;
-						System.out.println("question");
-						System.out.println("weapon: "+possWeapon);
-						System.out.println("room; "+possRoom);
-						System.out.println("suspect: "+possSuspect);
-						return "question";
-					}
-					if(((murderWeapon && murderRoom && murderSuspect) || guess) && room.equalsIgnoreCase("Cellar"))
-					{
-						System.out.println("accuse");
-						return "accuse";
-					}
+			//			if(moveOver)
+			//			{
+			for(int i=0; i<Names.ROOM_NAMES.length; i++)
+			{
+				if(room.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i])) {//needs to not work if already asked question
+					questionAsked = true;
+					System.out.println("question");
+					System.out.println("weapon: "+possWeapon);
+					System.out.println("room; "+possRoom);
+					System.out.println("suspect: "+possSuspect);
+					return "question";
 				}
-//			}
+				if(((murderWeapon && murderRoom && murderSuspect) || guess) && room.equalsIgnoreCase("Cellar"))
+				{
+					System.out.println("accuse");
+					return "accuse";
+				}
+			}
+			//			}
 			//if entered room question
 			//if in middle accuse
 			//if start turn & in room -> roll || passage
@@ -204,14 +204,16 @@ public class Garlic implements BotAPI {
 		moveOver = true;
 		questionAsked = false;
 
-if(guess)System.out.println("guess true");
-else System.out.println("guess false");
+		if(guess)System.out.println("guess true");
+		else System.out.println("guess false");
 
+		//if you know all the murder items or if you happened to query the right answer
 		if((murderWeapon && murderRoom && murderSuspect) || guess)
 		{
-//			System.out.println("room: "+room);
-//			System.out.println("????????????????????????????????????????????");
+			//			System.out.println("room: "+room);
+			//			System.out.println("????????????????????????????????????????????");
 			if(room.equalsIgnoreCase("kitchen")) {
+				//kitchen to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -241,10 +243,11 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("ballroom")) {
+				//ballroom to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-//				System.out.println("ball");
+				//				System.out.println("ball");
 				String j=null;
 				for(int i=0; i < 14 ; i++) {
 					if(i==0) j="d";
@@ -264,6 +267,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("conservatory")) {
+				//conservatory to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -293,10 +297,11 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("dining room")) {
+				//dining room to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-//				System.out.println("dining");
+				//				System.out.println("dining");
 				String j=null;
 				for(int i=0; i < 9 ; i++) {
 					if(i==0) j="d";
@@ -311,10 +316,11 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("billiard room")) {
+				//billiard room to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-//				System.out.println("billiard");
+				//				System.out.println("billiard");
 				String j=null;
 				for(int i=0; i < 15 ; i++) {
 					if(i==0) j="l";
@@ -335,10 +341,11 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("library")) {
+				//library to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-//				System.out.println("lib");
+				//				System.out.println("lib");
 				String j=null;
 				for(int i=0; i < 7 ; i++) {
 					if(i==0) j="l";
@@ -351,6 +358,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("lounge")) {
+				//lounge to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -369,10 +377,11 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("hall")) {
+				//hall to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
-//				System.out.println("hall");
+				//				System.out.println("hall");
 				String j=null;
 				for(int i=0; i < 2 ; i++) {
 					if(i==0) j="u";
@@ -380,6 +389,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("study")) {
+				//study to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -402,7 +412,7 @@ else System.out.println("guess false");
 		}
 		else {
 			if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//white start
+				//white start to ballroom
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
 					if(i==0) j="d";
@@ -416,7 +426,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-
+				//white start to kitchen
 				String j=null;
 				for(int i=0; i < 13 ; i++) {
 					if(i==0) j="d";
@@ -435,7 +445,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-
+				//white start to dining room
 				String j=null;
 				for(int i=0; i < 16 ; i++) {
 					if(i==0) j="d";
@@ -457,7 +467,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-
+				//white start to billiard room
 				String j=null;
 				for(int i=0; i < 22 ; i++) {
 					if(i==0) j="d";
@@ -485,7 +495,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-
+				//white start to lounge
 				String j=null;
 				for(int i=0; i < 24 ; i++) {
 					if(i==0) j="d";
@@ -515,7 +525,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//green start
+				//green start to ballroom
 
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
@@ -530,7 +540,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-
+				//green start to conservatory
 				String j=null;
 				for(int i=0; i < 10 ; i++) {
 					if(i==0) j="d";
@@ -546,7 +556,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-
+				//green start to billiard room
 				String j=null;
 				for(int i=0; i < 13 ; i++) {
 					if(i==0) j="d";
@@ -565,7 +575,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("library") && !player.hasSeen("library")) {
-
+				//green start to library
 				String j=null;
 				for(int i=0; i < 19 ; i++) {
 					if(i==0) j="d";
@@ -590,7 +600,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-
+				//green start to dining room
 				String j=null;
 				for(int i=0; i < 23 ; i++) {
 					if(i==0) j="d";
@@ -619,7 +629,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-				//peacock start
+				//peacock start to conservatory
 				String j=null;
 				for(int i=0; i < 7 ; i++) {
 					if(i==0) j="l";
@@ -632,7 +642,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-
+				//peacock start to ballroom
 				String j=null;
 				for(int i=0; i < 9 ; i++) {
 					if(i==0) j="l";
@@ -647,7 +657,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-
+				//peacock start to billiard room
 				String j=null;
 				for(int i=0; i < 10 ; i++) {
 					if(i==0) j="l";
@@ -663,7 +673,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("library") && !player.hasSeen("library")) {
-
+				//peacock start to library
 				String j=null;
 				for(int i=0; i < 18 ; i++) {
 					if(i==0) j="l";
@@ -687,7 +697,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("study") && !player.hasSeen("study")) {
-
+				//peacock start to study
 				String j=null;
 				for(int i=0; i < 23 ; i++) {
 					if(i==0) j="l";
@@ -716,7 +726,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("study") && !player.hasSeen("study")) {
-				//plum start
+				//plum start to study
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
 					if(i==0) j="l";
@@ -730,7 +740,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("hall") && !player.hasSeen("hall")) {
-
+				//plum start to hall
 				String j=null;
 				for(int i=0; i < 10 ; i++) {
 					if(i==0) j="l";
@@ -746,7 +756,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("library") && !player.hasSeen("library")) {
-
+				//plum start to library
 				String j=null;
 				for(int i=0; i < 11 ; i++) {
 					if(i==0) j="l";
@@ -763,7 +773,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-
+				//plum start to billiard room
 				String j=null;
 				for(int i=0; i < 19 ; i++) {
 					if(i==0) j="l";
@@ -788,7 +798,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-
+				//plum start to study lounge
 				String j=null;
 				for(int i=0; i < 21 ; i++) {
 					if(i==0) j="l";
@@ -815,7 +825,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				//scarlett start
+				//scarlett start to lounge
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
 					if(i==0) j="u";
@@ -829,7 +839,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-
+				//scarlett start to dining room
 				String j=null;
 				for(int i=0; i < 10 ; i++) {
 					if(i==0) j="u";
@@ -845,7 +855,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("hall") && !player.hasSeen("hall")) {
-
+				//scarlett start to hall
 				String j=null;
 				for(int i=0; i < 12 ; i++) {
 					if(i==0) j="u";
@@ -863,7 +873,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("library") && !player.hasSeen("library")) {
-
+				//scarlett start to library
 				String j=null;
 				for(int i=0; i < 18 ; i++) {
 					if(i==0) j="u";
@@ -887,7 +897,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-
+				//scarlett start to ballroom
 				String j=null;
 				for(int i=0; i < 19 ; i++) {
 					if(i==0) j="u";
@@ -912,7 +922,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				//mustard start
+				//mustard start to lounge
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
 					if(i==0) j="r";
@@ -926,7 +936,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-
+				//mustard start to dining room
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
 					if(i==0) j="r";
@@ -940,7 +950,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("hall") && !player.hasSeen("hall")) {
-
+				//mustard start to hall
 				String j=null;
 				for(int i=0; i < 12 ; i++) {
 					if(i==0) j="r";
@@ -958,7 +968,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("library") && !player.hasSeen("library")) {
-
+				//mustard start to library
 				String j=null;
 				for(int i=0; i < 18 ; i++) {
 					if(i==0) j="r";
@@ -982,7 +992,7 @@ else System.out.println("guess false");
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-
+				//mustard start to ballroom
 				String j=null;
 				for(int i=0; i < 19 ; i++) {
 					if(i==0) j="r";
@@ -1055,7 +1065,7 @@ else System.out.println("guess false");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("kitchen to billiard room");
+					System.out.println("kitchen to billiard room");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="d";
@@ -1082,7 +1092,7 @@ System.out.println("kitchen to billiard room");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("kitchen to hall");
+					System.out.println("kitchen to hall");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="d";
@@ -1111,7 +1121,7 @@ System.out.println("kitchen to hall");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("kitchen to lounge");
+					System.out.println("kitchen to lounge");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="d";
@@ -1170,7 +1180,7 @@ System.out.println("kitchen to lounge");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("kitchen to library");
+					System.out.println("kitchen to library");
 					String j=null;
 					for(int i=0; i < 23 ; i++) {
 						if(i==0) j="d";
@@ -1248,7 +1258,7 @@ System.out.println("kitchen to library");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("ballroom to dining room");
+					System.out.println("ballroom to dining room");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="d";
@@ -1265,7 +1275,7 @@ System.out.println("ballroom to dining room");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("ballroom to library");
+					System.out.println("ballroom to library");
 					String j=null;
 					for(int i=0; i < 12 ; i++) {
 						if(i==0) j="d";
@@ -1287,7 +1297,7 @@ System.out.println("ballroom to library");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("ballroom to hall");
+					System.out.println("ballroom to hall");
 					String j=null;
 					for(int i=0; i < 13 ; i++) {
 						if(i==0) j="d";
@@ -1310,7 +1320,7 @@ System.out.println("ballroom to hall");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("ballroom to lounge");
+					System.out.println("ballroom to lounge");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="d";
@@ -1375,7 +1385,7 @@ System.out.println("ballroom to lounge");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("conservatory to billiard room");
+					System.out.println("conservatory to billiard room");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="d";
@@ -1392,7 +1402,7 @@ System.out.println("conservatory to billiard room");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("conservatory to library");
+					System.out.println("conservatory to library");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="d";
@@ -1476,7 +1486,7 @@ System.out.println("conservatory to library");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("conservatory to study");
+					System.out.println("conservatory to study");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="d";
@@ -1506,7 +1516,7 @@ System.out.println("conservatory to study");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("conservatory to hall");
+					System.out.println("conservatory to hall");
 					String j=null;
 					for(int i=0; i < 20 ; i++) {
 						if(i==0) j="d";
@@ -1682,7 +1692,7 @@ System.out.println("conservatory to hall");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("billiard room to lounge");
+					System.out.println("billiard room to lounge");
 					String j=null;
 					for(int i=0; i < 22 ; i++) {
 						if(i==0) j="l";
@@ -1888,7 +1898,7 @@ System.out.println("billiard room to lounge");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("study to hall");
+					System.out.println("study to hall");
 					String j=null;
 					for(int i=0; i < 4 ; i++) {
 						if(i==0) j="u";
@@ -1902,7 +1912,7 @@ System.out.println("study to hall");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("study to library");
+					System.out.println("study to library");
 					String j=null;
 					for(int i=0; i < 7 ; i++) {
 						if(i==0) j="u";
@@ -1919,7 +1929,7 @@ System.out.println("study to library");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("study to billiard room");
+					System.out.println("study to billiard room");
 					String j=null;
 					for(int i=0; i < 15 ; i++) {
 						if(i==0) j="u";
@@ -1944,7 +1954,7 @@ System.out.println("study to billiard room");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("study to lounge");
+					System.out.println("study to lounge");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="u";
@@ -1971,7 +1981,7 @@ System.out.println("study to lounge");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("study to dining room");
+					System.out.println("study to dining room");
 					String j=null;
 					for(int i=0; i < 17 ; i++) {
 						if(i==0) j="u";
@@ -2055,7 +2065,7 @@ System.out.println("study to dining room");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("hall to study");
+					System.out.println("hall to study");
 					String j=null;
 					for(int i=0; i < 4 ; i++) {
 						if(i==0) j="r";
@@ -2243,7 +2253,7 @@ System.out.println("hall to study");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("lounge to hall");
+					System.out.println("lounge to hall");
 					String j=null;
 					for(int i=0; i < 8; i++) {
 						if(i==0) j="u";
@@ -2261,7 +2271,7 @@ System.out.println("lounge to hall");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("lounge to library");
+					System.out.println("lounge to library");
 					String j=null;
 					for(int i=0; i < 14 ; i++) {
 						if(i==0) j="u";
@@ -2310,7 +2320,7 @@ System.out.println("lounge to library");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("lounge to study");
+					System.out.println("lounge to study");
 					String j=null;
 					for(int i=0; i < 17; i++) {
 						if(i==0) j="u";
@@ -2337,7 +2347,7 @@ System.out.println("lounge to study");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("lounge to kitchen");
+					System.out.println("lounge to kitchen");
 					String j=null;
 					for(int i=0; i < 19 ; i++) {
 						if(i==0) j="u";
@@ -2366,7 +2376,7 @@ System.out.println("lounge to kitchen");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("lounge to billiard room");
+					System.out.println("lounge to billiard room");
 					String j=null;
 					for(int i=0; i < 22 ; i++) {
 						if(i==0) j="u";
@@ -2467,7 +2477,7 @@ System.out.println("lounge to billiard room");
 					if(!q.isEmpty()) {
 						q.clear();
 					}
-System.out.println("dining room to billiard room");
+					System.out.println("dining room to billiard room");
 					String j=null;
 					for(int i=0; i < 14; i++) {
 						if(i==0) j="r";
@@ -2487,7 +2497,7 @@ System.out.println("dining room to billiard room");
 						q.add(j);
 					}
 				}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("library") && !player.hasSeen("library")) {
-					//from dining room to 
+					//from dining room to library
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2568,7 +2578,7 @@ System.out.println("dining room to billiard room");
 					}
 				}
 				else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-
+					//from kitchen to kitchen
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2582,7 +2592,7 @@ System.out.println("dining room to billiard room");
 				}
 				else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) 
 				{
-
+					//from ballroom to ballroom
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2595,7 +2605,7 @@ System.out.println("dining room to billiard room");
 				}
 				else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) 
 				{
-
+					//from conservatory to conservatory
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2609,7 +2619,7 @@ System.out.println("dining room to billiard room");
 				}
 				else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) 
 				{
-
+					//from billiard room to billiard room
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2623,7 +2633,7 @@ System.out.println("dining room to billiard room");
 				}
 				else if(room.equalsIgnoreCase("library") && !player.hasCard("library") && !player.hasSeen("library")) 
 				{
-
+					//from library to library
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2637,7 +2647,7 @@ System.out.println("dining room to billiard room");
 				}
 				else if(room.equalsIgnoreCase("study") && !player.hasCard("study") && !player.hasSeen("study")) 
 				{
-
+					//from study to study
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2651,7 +2661,7 @@ System.out.println("dining room to billiard room");
 				}
 				else if(room.equalsIgnoreCase("hall") && !player.hasCard("hall") && !player.hasSeen("hall")) 
 				{
-					
+					//from hall to hall
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2665,7 +2675,7 @@ System.out.println("dining room to billiard room");
 				}
 				else if(room.equalsIgnoreCase("lounge") && !player.hasCard("lounge") && !player.hasSeen("lounge")) 
 				{
-
+					//from lounge to lounge
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2679,7 +2689,7 @@ System.out.println("dining room to billiard room");
 				}
 				else if(room.equalsIgnoreCase("dining room") && !player.hasCard("dining room") && !player.hasSeen("dining room")) 
 				{
-
+					//from dining room to dining room
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2694,9 +2704,9 @@ System.out.println("dining room to billiard room");
 			}
 		}
 
-		
-		room = "null";
 
+		room = "null";
+		//pop from queue
 		if(!q.isEmpty()) {
 			String local = q.remove();
 			return local;
@@ -2811,7 +2821,7 @@ System.out.println("dining room to billiard room");
 	}
 
 	public String getRoom() {//TODO: is hasSeen correct here?
-//		 Add your code here
+		//		 Add your code here
 		if(guess)
 		{
 			System.out.println("guessRoom!!!!!!!!!!!!!!!!!!!!!");
@@ -2982,7 +2992,7 @@ System.out.println("dining room to billiard room");
 			return "2";
 		}
 		else System.out.println(room+" to ?");
-		
+
 		return "1";
 	}
 
@@ -3068,7 +3078,7 @@ System.out.println("dining room to billiard room");
 	@Override
 	public void notifyPlayerName(String playerName) {
 		// TODO Auto-generated method stub
-		
+
 		if(!playerName.equalsIgnoreCase("Garlic"))
 		{
 			if(otherPlayer1.equals("null"))
@@ -3098,13 +3108,13 @@ System.out.println("dining room to billiard room");
 	@Override
 	public void notifyQuery(String playerName, String query) {
 		// TODO Auto-generated method stub
-		
+
 		currentPlayer = playerName;
 	}
 
 	@Override
 	public void notifyReply(String playerName, boolean cardShown) {
-	
+
 		if(currentPlayer.equalsIgnoreCase("Garlic"))
 		{
 			if(playerName.equals(otherPlayer1))
@@ -3131,16 +3141,17 @@ System.out.println("dining room to billiard room");
 
 		if(counterNotifyReply == otherPlayersNum)
 		{
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			guessWeapon = possWeapon;
 			guessRoom = possRoom;
-			guessSuspect = possSuspect;
+			guessSuspect = possSuspect;	
 			guess = true;
 		}
-		
+
 		if(cardShown) System.out.print("true ");
 		else System.out.print("false ");
-		
-//		if(currentPlayer.equalsIgnoreCase("Garlic") && !cardShown)
+
+		//		if(currentPlayer.equalsIgnoreCase("Garlic") && !cardShown)
 	}
 
 }
