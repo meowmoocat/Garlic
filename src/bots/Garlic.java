@@ -29,6 +29,7 @@ public class Garlic implements BotAPI {
 	private Token token;
 	private String room;
 	private String possWeapon, possRoom, possSuspect;
+	private String guessWeapon, guessRoom, guessSuspect;
 	private String currentPlayer;
 	private String otherPlayer1 = "null";
 	private String otherPlayer2 = "null";
@@ -2711,7 +2712,7 @@ System.out.println("dining room to billiard room");
 		if(guess)
 		{
 			System.out.println("guessSuspect!!!!!!!!!!!!!!!!!!!!!");
-			return possSuspect;
+			return guessSuspect;
 		}
 		else if(murderSuspect)
 		{
@@ -2763,7 +2764,7 @@ System.out.println("dining room to billiard room");
 		if(guess)
 		{
 			System.out.println("guessWeapon!!!!!!!!!!!!!!!!!!!!!");
-			return possWeapon;
+			return guessWeapon;
 		}
 		else if(murderWeapon)
 		{
@@ -2814,7 +2815,7 @@ System.out.println("dining room to billiard room");
 		if(guess)
 		{
 			System.out.println("guessRoom!!!!!!!!!!!!!!!!!!!!!");
-			return possRoom;
+			return guessRoom;
 		}
 		if(!player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
 			return "kitchen";
@@ -3130,7 +3131,9 @@ System.out.println("dining room to billiard room");
 
 		if(counterNotifyReply == otherPlayersNum)
 		{
-			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			guessWeapon = possWeapon;
+			guessRoom = possRoom;
+			guessSuspect = possSuspect;
 			guess = true;
 		}
 		
