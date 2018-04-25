@@ -36,6 +36,7 @@ public class Garlic implements BotAPI {
 	private Token token;
 	private String room;
 	private String possWeapon, possRoom, possSuspect;
+	private String possGuesWeapon, possGuessRoom, possGuessSuspect;
 	private String guessWeapon, guessRoom, guessSuspect;
 	private String currentPlayer;
 	private String otherPlayer1 = "null";
@@ -532,7 +533,22 @@ public class Garlic implements BotAPI {
 					if(i==23) j="d";
 					q.add(j);
 				}
-			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9) {
+				//white start to ballroom
+				String j=null;
+				for(int i=0; i < 8 ; i++) {
+					if(i==0) j="d";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="d";
+					if(i==4) j="d";
+					if(i==5) j="d";
+					if(i==6) j="d";
+					if(i==7) j="r";
+					q.add(j);
+				}
+			}
+			else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 				//green start to ballroom
 
 				String j=null;
@@ -636,6 +652,22 @@ public class Garlic implements BotAPI {
 					if(i==22) j="l";
 					q.add(j);
 				}
+			}
+			else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14) {
+				//green start to ballroom
+
+				String j=null;
+				for(int i=0; i < 8 ; i++) {
+					if(i==0) j="d";
+					if(i==1) j="r";
+					if(i==2) j="r";
+					if(i==3) j="d";
+					if(i==4) j="d";
+					if(i==5) j="d";
+					if(i==6) j="d";
+					if(i==7) j="l";
+					q.add(j);
+				}
 			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
 				//peacock start to conservatory
 				String j=null;
@@ -731,6 +763,19 @@ public class Garlic implements BotAPI {
 					if(i==20) j="d";
 					if(i==21) j="r";
 					if(i==22) j="d";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23) {
+				//peacock start to conservatory
+				String j=null;
+				for(int i=0; i < 7 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="u";
+					if(i==6) j="u";
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("study") && !player.hasSeen("study")) {
@@ -832,6 +877,20 @@ public class Garlic implements BotAPI {
 					if(i==20) j="d";
 					q.add(j);
 				}
+			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23) {
+				//plum start to study
+				String j=null;
+				for(int i=0; i < 8 ; i++) {
+					if(i==0) j="l";
+					if(i==1) j="l";
+					if(i==2) j="l";
+					if(i==3) j="l";
+					if(i==4) j="l";
+					if(i==5) j="l";
+					if(i==6) j="d";
+					if(i==7) j="d";
+					q.add(j);
+				}
 			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
 				//scarlett start to lounge
 				String j=null;
@@ -929,6 +988,20 @@ public class Garlic implements BotAPI {
 					if(i==18) j="u";
 					q.add(j);
 				}
+			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7) {
+				//scarlett start to lounge
+				String j=null;
+				for(int i=0; i < 8 ; i++) {
+					if(i==0) j="u";
+					if(i==1) j="u";
+					if(i==2) j="u";
+					if(i==3) j="u";
+					if(i==4) j="u";
+					if(i==5) j="u";
+					if(i==6) j="l";
+					if(i==7) j="d";
+					q.add(j);
+				}
 			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
 				//mustard start to lounge
 				String j=null;
@@ -1022,6 +1095,20 @@ public class Garlic implements BotAPI {
 					if(i==16) j="u";
 					if(i==17) j="u";
 					if(i==18) j="u";
+					q.add(j);
+				}
+			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0) {
+				//mustard start to lounge
+				String j=null;
+				for(int i=0; i < 8 ; i++) {
+					if(i==0) j="r";
+					if(i==1) j="r";
+					if(i==2) j="r";
+					if(i==3) j="r";
+					if(i==4) j="r";
+					if(i==5) j="r";
+					if(i==6) j="d";
+					if(i==7) j="d";
 					q.add(j);
 				}
 			}
@@ -3259,8 +3346,8 @@ public class Garlic implements BotAPI {
 
 	
 	/*
-	 * Checks if the other players don’t show a card on our bots turn and 
-	 * if all players don’t show a card then guess is true and the 
+	 * Checks if the other players don't show a card on our bots turn and 
+	 * if all players don't show a card then guess is true and the 
 	 * current guess is stored in guessWeapon, guessSuspect and guessRoom. 
 	 * The bot is now ready to move to the cellar and accuse.
 	 */
@@ -3294,10 +3381,13 @@ public class Garlic implements BotAPI {
 		if(counterNotifyReply == otherPlayersNum)
 		{
 			//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			guessWeapon = possWeapon;
-			guessRoom = possRoom;
-			guessSuspect = possSuspect;	
-			guess = true;
+			if(!player.hasCard(room))
+			{
+				guessWeapon = possWeapon;
+				guessRoom = possRoom;
+				guessSuspect = possSuspect;	
+				guess = true;
+			}
 		}
 
 		//		if(cardShown) //System.out.print("true ");
