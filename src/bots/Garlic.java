@@ -1027,10 +1027,134 @@ public class Garlic implements BotAPI {
 			}
 
 
-			//TODO
+			//TODO this is a marker
 			if(roomOut && !room.equals("null"))
 			{
-				if(room.equalsIgnoreCase("kitchen") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
+				if(room.equalsIgnoreCase("kitchen") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
+					//from kitchen to kitchen
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="d";
+						if(i==1) j="u";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) 
+				{
+					//from ballroom to ballroom
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="l";
+						if(i==1) j="r";
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) 
+				{
+					//from conservatory to conservatory
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="d";
+						if(i==1) j="u";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) 
+				{
+					//from billiard room to billiard room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="l";
+						if(i==1) j="r";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("library") && !player.hasCard("library") && !player.hasSeen("library")) 
+				{
+					//from library to library
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="l";
+						if(i==1) j="r";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("study") && !player.hasCard("study") && !player.hasSeen("study")) 
+				{
+					//from study to study
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="u";
+						if(i==1) j="d";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("hall") && !player.hasCard("hall") && !player.hasSeen("hall")) 
+				{
+					//from hall to hall
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="u";
+						if(i==1) j="d";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("lounge") && !player.hasCard("lounge") && !player.hasSeen("lounge")) 
+				{
+					//from lounge to lounge
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="u";
+						if(i==1) j="d";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("dining room") && !player.hasCard("dining room") && !player.hasSeen("dining room")) 
+				{
+					//from dining room to dining room
+					if(!q.isEmpty()) {
+						q.clear();
+					}
+					String j=null;
+					for(int i=0; i < 2; i++) {
+						if(i==0) j="d";
+						if(i==1) j="u";
+
+						q.add(j);
+					}
+				}
+				else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
 					//from kitchen to ballroom
 					if(!q.isEmpty()) {
 						q.clear();
@@ -2869,6 +2993,7 @@ public class Garlic implements BotAPI {
 	//selects the doors for certain paths
 	public String getDoor() {
 		//first 5 are the doors to send you to cellar
+
 		if(token.getRoom().hasName("ballroom") && ((murderRoom && murderSuspect && murderWeapon) || guess)) { 
 			//System.out.println("ballroom to cellar");
 			return "2";
@@ -2889,7 +3014,14 @@ public class Garlic implements BotAPI {
 			//System.out.println("billiard to cellar");
 			return "1";
 		}
-		else if(token.getRoom().hasName("ballroom") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
+		for(int i=0; i<Names.ROOM_CARD_NAMES.length; i++)
+		{
+			if(token.getRoom().hasName(Names.ROOM_CARD_NAMES[i]) && !player.hasCard(Names.ROOM_CARD_NAMES[i])&& !player.hasSeen(Names.ROOM_CARD_NAMES[i]))
+			{
+				return "1";
+			}
+		}
+		if(token.getRoom().hasName("ballroom") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
 			//System.out.println("ballroom to conserv");
 			return "4";
 		}

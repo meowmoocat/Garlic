@@ -1,3 +1,10 @@
+/*
+ * Created by Bot2
+ * Anna Davison: 16382333
+ * James Kearns: 15467662
+ * Orla Keating: 15205679
+ */
+
 package bots;
 
 import java.util.ArrayList;
@@ -29,8 +36,14 @@ public class Bot2 implements BotAPI {
 	private Token token;
 	private String room;
 	private String possWeapon, possRoom, possSuspect;
-	private int checkCardsCounterPrev;
-	private int checkCardsCounterCurr;
+	private String guessWeapon, guessRoom, guessSuspect;
+	private String currentPlayer;
+	private String otherPlayer1 = "null";
+	private String otherPlayer2 = "null";
+	private String otherPlayer3 = "null";
+	private Boolean guess;
+	private int otherPlayersNum = 0;
+	private int counterNotifyReply = 0;
 	private Queue<String> q = new LinkedList<String>();
 
 	public Bot2 (Player player, PlayersInfo playersInfo, Map map, Dice dice, Log log, Deck deck) {
@@ -47,10 +60,13 @@ public class Bot2 implements BotAPI {
 		murderWeapon = false;
 		murderRoom = false;
 		murderSuspect = false;
-		checkCardsCounterPrev = 0;
-		checkCardsCounterCurr = 0;
+		guess = false;
 	}
 
+	/*
+	 * checks if all other possibilities are eliminated
+	 * and it changes booleans
+	 */
 	private void checkMurder()
 	{
 		int counter = 0;
@@ -58,7 +74,6 @@ public class Bot2 implements BotAPI {
 		for(int i=0; i<Names.ROOM_CARD_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.ROOM_CARD_NAMES[i]) && !player.hasSeen(Names.ROOM_CARD_NAMES[i])) counter ++;
-			else checkCardsCounterCurr ++;
 		}
 		if(counter == 1) murderRoom = true;
 
@@ -66,7 +81,6 @@ public class Bot2 implements BotAPI {
 		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.SUSPECT_NAMES[i]) && !player.hasSeen(Names.SUSPECT_NAMES[i])) counter ++;
-			else checkCardsCounterCurr ++;
 		}
 		if(counter == 1) murderSuspect = true;
 
@@ -74,7 +88,6 @@ public class Bot2 implements BotAPI {
 		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.WEAPON_NAMES[i]) && !player.hasSeen(Names.WEAPON_NAMES[i])) counter ++;
-			else checkCardsCounterCurr ++;
 		}
 		if(counter == 1) murderWeapon = true;
 	}
@@ -88,22 +101,28 @@ public class Bot2 implements BotAPI {
 
 		//System.out.println("\nBot2 "+token.getName());
 
+		checkMurder();
 
-		//		if(murderRoom) //System.out.println("murderRoom: true");
-		//		if(murderSuspect) //System.out.println("murderSuspect: true");
-		//		if(murderWeapon) //System.out.println("murderWeapon: true");
+		//				if(murderRoom) //System.out.println("murderRoom: true");
+		//				if(murderSuspect) //System.out.println("murderSuspect: true");
+		//				if(murderWeapon) //System.out.println("murderWeapon: true");
 
 		if(checkNotes)
 		{
+			//			questionAsked = false;
 			checkNotes = false;
 			//System.out.println("notes");
 			return "notes";
 		}
 
-		if(token.isInRoom())
+		if(token.isInRoom() && !token.getRoom().toString().equalsIgnoreCase("Cellar")) //this is to update room and possRoom correctly
 		{
 			room = token.getRoom().toString();
 			possRoom = room;
+		}
+		else if(token.isInRoom() && token.getRoom().toString().equalsIgnoreCase("Cellar"))
+		{
+			room = token.getRoom().toString();
 		}
 		else
 		{
@@ -111,24 +130,27 @@ public class Bot2 implements BotAPI {
 		}
 
 
-		if(token.isInRoom() && !questionAsked)
+		if(token.isInRoom() && !questionAsked)	//if token is a room and the bot hasn't asked a question
 		{
-			if(moveOver)
+			//			if(moveOver)
+			//			{
+			for(int i=0; i<Names.ROOM_NAMES.length; i++)
 			{
-				for(int i=0; i<Names.ROOM_NAMES.length; i++)
+				if(room.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i])) {			//if the bot is ready to question
+					questionAsked = true;
+					//System.out.println("question");
+					//System.out.println("weapon: "+possWeapon);
+					//System.out.println("room; "+possRoom);
+					//System.out.println("suspect: "+possSuspect);
+					return "question";
+				}
+				if(((murderWeapon && murderRoom && murderSuspect) || guess) && room.equalsIgnoreCase("Cellar"))//for accuse
 				{
-					if(room.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i])) {//needs to not work if already asked question
-						questionAsked = true;
-						//System.out.println("question");
-						return "question";
-					}
-					if(murderWeapon && murderRoom && murderSuspect && room.equalsIgnoreCase("Cellar"))
-					{
-						//System.out.println("accuse");
-						return "accuse";
-					}
+					//System.out.println("accuse");
+					return "accuse";
 				}
 			}
+			//			}
 			//if entered room question
 			//if in middle accuse
 			//if start turn & in room -> roll || passage
@@ -138,31 +160,31 @@ public class Bot2 implements BotAPI {
 			//System.out.println("roll");
 			return "roll";
 		}
-		if(token.isInRoom() && !moveOver)
+		if(token.isInRoom() && !moveOver)		//for passages and roll
 		{
 
-			if(room.equalsIgnoreCase("lounge") && !player.hasCard("conservatory") && !player.hasSeen("conservatory"))
+			if(room.equalsIgnoreCase("lounge") && !player.hasCard("conservatory") && !player.hasSeen("conservatory") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
 				//System.out.println("passage: lounge to conservatory");
 				return "passage";
 			}
-			else if(room.equalsIgnoreCase("study") && !player.hasCard("kitchen") && !player.hasSeen("kitchen"))
+			else if(room.equalsIgnoreCase("study") && !player.hasCard("kitchen") && !player.hasSeen("kitchen") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
 				//System.out.println("passage: study to kitchen");
 				return "passage";
 			}
-			if(room.equalsIgnoreCase("conservatory") && !player.hasCard("lounge") && !player.hasSeen("lounge"))
+			if(room.equalsIgnoreCase("conservatory") && !player.hasCard("lounge") && !player.hasSeen("lounge") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
 				//System.out.println("passage: conservatory to lounge");
 				return "passage";
 			}
-			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("study") && !player.hasSeen("study"))
+			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("study") && !player.hasSeen("study") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
@@ -178,12 +200,12 @@ public class Bot2 implements BotAPI {
 		}
 		else
 		{
-			checkMurder();
 			//System.out.println("done");
 			checkNotes = true;
 			roomOut = false;
 			questionAsked = true;
 			moveOver = false;
+			counterNotifyReply = 0;
 			return "done";
 		}
 	}
@@ -193,13 +215,13 @@ public class Bot2 implements BotAPI {
 		moveOver = true;
 		questionAsked = false;
 
-
-
-		if(murderWeapon && murderRoom && murderSuspect)
+		//if you know all the murder items or if you happened to query the right answer
+		if((murderWeapon && murderRoom && murderSuspect) || guess)
 		{
 			//			//System.out.println("room: "+room);
 			//			//System.out.println("????????????????????????????????????????????");
 			if(room.equalsIgnoreCase("kitchen")) {
+				//kitchen to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -229,6 +251,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("ballroom")) {
+				//ballroom to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -252,6 +275,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("conservatory")) {
+				//conservatory to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -281,6 +305,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("dining room")) {
+				//dining room to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -299,6 +324,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("billiard room")) {
+				//billiard room to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -323,6 +349,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("library")) {
+				//library to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -339,6 +366,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("lounge")) {
+				//lounge to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -357,6 +385,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("hall")) {
+				//hall to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -368,6 +397,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}if(room.equalsIgnoreCase("study")) {
+				//study to cellar
 				if(!q.isEmpty()) {
 					q.clear();
 				}
@@ -390,7 +420,7 @@ public class Bot2 implements BotAPI {
 		}
 		else {
 			if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//white start
+				//white start to ballroom
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
 					if(i==0) j="d";
@@ -404,7 +434,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-
+				//white start to kitchen
 				String j=null;
 				for(int i=0; i < 13 ; i++) {
 					if(i==0) j="d";
@@ -423,7 +453,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-
+				//white start to dining room
 				String j=null;
 				for(int i=0; i < 16 ; i++) {
 					if(i==0) j="d";
@@ -445,7 +475,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-
+				//white start to billiard room
 				String j=null;
 				for(int i=0; i < 22 ; i++) {
 					if(i==0) j="d";
@@ -473,7 +503,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==9 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-
+				//white start to lounge
 				String j=null;
 				for(int i=0; i < 24 ; i++) {
 					if(i==0) j="d";
@@ -503,7 +533,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-				//green start
+				//green start to ballroom
 
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
@@ -518,7 +548,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-
+				//green start to conservatory
 				String j=null;
 				for(int i=0; i < 10 ; i++) {
 					if(i==0) j="d";
@@ -534,7 +564,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-
+				//green start to billiard room
 				String j=null;
 				for(int i=0; i < 13 ; i++) {
 					if(i==0) j="d";
@@ -553,7 +583,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("library") && !player.hasSeen("library")) {
-
+				//green start to library
 				String j=null;
 				for(int i=0; i < 19 ; i++) {
 					if(i==0) j="d";
@@ -578,7 +608,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==0 && token.getPosition().getCol()==14 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-
+				//green start to dining room
 				String j=null;
 				for(int i=0; i < 23 ; i++) {
 					if(i==0) j="d";
@@ -607,7 +637,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) {
-				//peacock start
+				//peacock start to conservatory
 				String j=null;
 				for(int i=0; i < 7 ; i++) {
 					if(i==0) j="l";
@@ -620,7 +650,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-
+				//peacock start to ballroom
 				String j=null;
 				for(int i=0; i < 9 ; i++) {
 					if(i==0) j="l";
@@ -635,7 +665,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-
+				//peacock start to billiard room
 				String j=null;
 				for(int i=0; i < 10 ; i++) {
 					if(i==0) j="l";
@@ -651,7 +681,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("library") && !player.hasSeen("library")) {
-
+				//peacock start to library
 				String j=null;
 				for(int i=0; i < 18 ; i++) {
 					if(i==0) j="l";
@@ -675,7 +705,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==6 && token.getPosition().getCol()==23 && !player.hasCard("study") && !player.hasSeen("study")) {
-
+				//peacock start to study
 				String j=null;
 				for(int i=0; i < 23 ; i++) {
 					if(i==0) j="l";
@@ -704,7 +734,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("study") && !player.hasSeen("study")) {
-				//plum start
+				//plum start to study
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
 					if(i==0) j="l";
@@ -718,7 +748,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("hall") && !player.hasSeen("hall")) {
-
+				//plum start to hall
 				String j=null;
 				for(int i=0; i < 10 ; i++) {
 					if(i==0) j="l";
@@ -734,7 +764,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("library") && !player.hasSeen("library")) {
-
+				//plum start to library
 				String j=null;
 				for(int i=0; i < 11 ; i++) {
 					if(i==0) j="l";
@@ -751,7 +781,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) {
-
+				//plum start to billiard room
 				String j=null;
 				for(int i=0; i < 19 ; i++) {
 					if(i==0) j="l";
@@ -776,7 +806,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==19 && token.getPosition().getCol()==23 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-
+				//plum start to study lounge
 				String j=null;
 				for(int i=0; i < 21 ; i++) {
 					if(i==0) j="l";
@@ -803,7 +833,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				//scarlett start
+				//scarlett start to lounge
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
 					if(i==0) j="u";
@@ -817,7 +847,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-
+				//scarlett start to dining room
 				String j=null;
 				for(int i=0; i < 10 ; i++) {
 					if(i==0) j="u";
@@ -833,7 +863,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("hall") && !player.hasSeen("hall")) {
-
+				//scarlett start to hall
 				String j=null;
 				for(int i=0; i < 12 ; i++) {
 					if(i==0) j="u";
@@ -851,7 +881,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("library") && !player.hasSeen("library")) {
-
+				//scarlett start to library
 				String j=null;
 				for(int i=0; i < 18 ; i++) {
 					if(i==0) j="u";
@@ -875,7 +905,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==24 && token.getPosition().getCol()==7 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-
+				//scarlett start to ballroom
 				String j=null;
 				for(int i=0; i < 19 ; i++) {
 					if(i==0) j="u";
@@ -900,7 +930,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("lounge") && !player.hasSeen("lounge")) {
-				//mustard start
+				//mustard start to lounge
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
 					if(i==0) j="r";
@@ -914,7 +944,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("dining room") && !player.hasSeen("dining room")) {
-
+				//mustard start to dining room
 				String j=null;
 				for(int i=0; i < 8 ; i++) {
 					if(i==0) j="r";
@@ -928,7 +958,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("hall") && !player.hasSeen("hall")) {
-
+				//mustard start to hall
 				String j=null;
 				for(int i=0; i < 12 ; i++) {
 					if(i==0) j="r";
@@ -946,7 +976,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("library") && !player.hasSeen("library")) {
-
+				//mustard start to library
 				String j=null;
 				for(int i=0; i < 18 ; i++) {
 					if(i==0) j="r";
@@ -970,7 +1000,7 @@ public class Bot2 implements BotAPI {
 					q.add(j);
 				}
 			}else if(token.getPosition().getRow()==17 && token.getPosition().getCol()==0 && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) {
-
+				//mustard start to ballroom
 				String j=null;
 				for(int i=0; i < 19 ; i++) {
 					if(i==0) j="r";
@@ -2475,7 +2505,7 @@ public class Bot2 implements BotAPI {
 						q.add(j);
 					}
 				}else if(room.equalsIgnoreCase("dining room") && !player.hasCard("library") && !player.hasSeen("library")) {
-					//from dining room to 
+					//from dining room to library
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2556,7 +2586,7 @@ public class Bot2 implements BotAPI {
 					}
 				}
 				else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
-
+					//from kitchen to kitchen
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2570,7 +2600,7 @@ public class Bot2 implements BotAPI {
 				}
 				else if(room.equalsIgnoreCase("ballroom") && !player.hasCard("ballroom") && !player.hasSeen("ballroom")) 
 				{
-
+					//from ballroom to ballroom
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2583,7 +2613,7 @@ public class Bot2 implements BotAPI {
 				}
 				else if(room.equalsIgnoreCase("conservatory") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")) 
 				{
-
+					//from conservatory to conservatory
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2597,7 +2627,7 @@ public class Bot2 implements BotAPI {
 				}
 				else if(room.equalsIgnoreCase("billiard room") && !player.hasCard("billiard room") && !player.hasSeen("billiard room")) 
 				{
-
+					//from billiard room to billiard room
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2611,7 +2641,7 @@ public class Bot2 implements BotAPI {
 				}
 				else if(room.equalsIgnoreCase("library") && !player.hasCard("library") && !player.hasSeen("library")) 
 				{
-
+					//from library to library
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2625,7 +2655,7 @@ public class Bot2 implements BotAPI {
 				}
 				else if(room.equalsIgnoreCase("study") && !player.hasCard("study") && !player.hasSeen("study")) 
 				{
-
+					//from study to study
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2639,7 +2669,7 @@ public class Bot2 implements BotAPI {
 				}
 				else if(room.equalsIgnoreCase("hall") && !player.hasCard("hall") && !player.hasSeen("hall")) 
 				{
-
+					//from hall to hall
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2653,7 +2683,7 @@ public class Bot2 implements BotAPI {
 				}
 				else if(room.equalsIgnoreCase("lounge") && !player.hasCard("lounge") && !player.hasSeen("lounge")) 
 				{
-
+					//from lounge to lounge
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2667,7 +2697,7 @@ public class Bot2 implements BotAPI {
 				}
 				else if(room.equalsIgnoreCase("dining room") && !player.hasCard("dining room") && !player.hasSeen("dining room")) 
 				{
-
+					//from dining room to dining room
 					if(!q.isEmpty()) {
 						q.clear();
 					}
@@ -2682,9 +2712,9 @@ public class Bot2 implements BotAPI {
 			}
 		}
 
-		//System.out.println(q);
-		room = "null";
 
+		room = "null";
+		//pop from queue
 		if(!q.isEmpty()) {
 			String local = q.remove();
 			return local;
@@ -2694,27 +2724,38 @@ public class Bot2 implements BotAPI {
 		return "l";
 	}
 
+	//guess checks if you have guessed correctly and returns the guess for the suspect
 	public String getSuspect() {
-		// Add your code here
-		//TODO: check case
-		if(murderSuspect)
+		//TODO: this is a marker to get here quicker
+		if(guess)
+		{
+			//System.out.println("guessSuspect!!!!!!!!!!!!!!!!!!!!!");
+			return guessSuspect;
+		}
+		else if(murderSuspect) //returns the murderer if all other possibilities have been eliminated
 		{
 			if(!player.hasCard("plum") && !player.hasSeen("plum")) {
+				possSuspect = "plum";
 				return "plum";
 			}
 			if(!player.hasCard("white") && !player.hasSeen("white")) {
+				possSuspect = "white";
 				return "white";
 			}
 			if(!player.hasCard("scarlett") && !player.hasSeen("scarlett")) {
+				possSuspect = "scarlett";
 				return "scarlett";
 			}
 			if(!player.hasCard("green") && !player.hasSeen("green")) {
+				possSuspect = "green";
 				return "green";
 			}
 			if(!player.hasCard("mustard") && !player.hasSeen("mustard")) {
+				possSuspect = "mustard";
 				return "mustard";
 			}
 			if(!player.hasCard("peacock") && !player.hasSeen("peacock")) {
+				possSuspect = "peacock";
 				return "peacock";
 			}
 		}
@@ -2728,34 +2769,44 @@ public class Bot2 implements BotAPI {
 				if(!player.hasCard(Names.SUSPECT_NAMES[random]) && !player.hasSeen(Names.SUSPECT_NAMES[random])) {
 					found = true;
 					possSuspect = Names.SUSPECT_NAMES[random];
-					return Names.SUSPECT_NAMES[random];
+					break;
 				}
 			}
 		}
 
-		return Names.SUSPECT_NAMES[0];
+		return possSuspect;
 	}
 
 	public String getWeapon() {
-		// Add your code here
-		if(murderWeapon)
+		if(guess)//if guess is correct then returns that guess for final accuse
+		{
+			//System.out.println("guessWeapon!!!!!!!!!!!!!!!!!!!!!");
+			return guessWeapon;
+		}
+		else if(murderWeapon) //if all other possibilities have been eliminated
 		{
 			if(!player.hasCard("rope") && !player.hasSeen("rope")) {
+				possWeapon = "rope";
 				return "rope";
 			}
 			if(!player.hasCard("dagger") && !player.hasSeen("dagger")) {
+				possWeapon = "dagger";
 				return "dagger";
 			}
 			if(!player.hasCard("wrench") && !player.hasSeen("wrench")) {
+				possWeapon = "wrench";
 				return "wrench";
 			}
 			if(!player.hasCard("pistol") && !player.hasSeen("pistol")) {
+				possWeapon = "pistol";
 				return "pistol";
 			}
 			if(!player.hasCard("candlestick") && !player.hasSeen("candlestick")) {
+				possWeapon = "candlestick";
 				return "candlestick";
 			}
 			if(!player.hasCard("lead pipe") && !player.hasSeen("lead pipe")) {
+				possWeapon = "lead pipe";
 				return "lead pipe";
 			}
 		}
@@ -2769,16 +2820,21 @@ public class Bot2 implements BotAPI {
 				if(!player.hasCard(Names.WEAPON_NAMES[random]) && !player.hasSeen(Names.WEAPON_NAMES[random])) {
 					found = true;
 					possWeapon = Names.WEAPON_NAMES[random];
-					return Names.WEAPON_NAMES[random];
+					break;
 				}
 			}
 		}
-		return Names.WEAPON_NAMES[0];
+		return possWeapon;
 	}
 
-	public String getRoom() {//TODO: is hasSeen correct here?
-		//		 Add your code here
-
+	public String getRoom() {
+		//if the guess is correct return the guess
+		if(guess)
+		{
+			//System.out.println("guessRoom!!!!!!!!!!!!!!!!!!!!!");
+			return guessRoom;
+		}
+		//it return the correct room if the bot hasn't seen it
 		if(!player.hasCard("kitchen") && !player.hasSeen("kitchen")) {
 			return "kitchen";
 		}
@@ -2807,27 +2863,29 @@ public class Bot2 implements BotAPI {
 			return "dining room";
 		}
 
-		return Names.ROOM_NAMES[0];
+		return "";
 	}
 
+	//selects the doors for certain paths
 	public String getDoor() {
-		if(token.getRoom().hasName("ballroom") && murderRoom && murderSuspect && murderWeapon) { 
-			//			//System.out.println("ballroom to cellar");
+		//first 5 are the doors to send you to cellar
+		if(token.getRoom().hasName("ballroom") && ((murderRoom && murderSuspect && murderWeapon) || guess)) { 
+			//System.out.println("ballroom to cellar");
 			return "2";
 		}
-		else if(token.getRoom().hasName("hall") && murderRoom && murderSuspect && murderWeapon) {
+		else if(token.getRoom().hasName("hall") && ((murderRoom && murderSuspect && murderWeapon) || guess)) {
 			//System.out.println("hall to cellar");
 			return "2";
 		}
-		else if(token.getRoom().hasName("dining room") && murderRoom && murderSuspect && murderWeapon) {
+		else if(token.getRoom().hasName("dining room") && ((murderRoom && murderSuspect && murderWeapon) || guess)) {
 			//System.out.println("dining to cellar");
 			return "1";
 		}
-		else if(token.getRoom().hasName("library") && murderRoom && murderSuspect && murderWeapon){
-			//			//System.out.println("lib to cellar");
+		else if(token.getRoom().hasName("library") && ((murderRoom && murderSuspect && murderWeapon) || guess)){
+			//System.out.println("lib to cellar");
 			return "1";
 		}
-		else if(token.getRoom().hasName("billiard room") && murderRoom && murderSuspect && murderWeapon){
+		else if(token.getRoom().hasName("billiard room") && ((murderRoom && murderSuspect && murderWeapon) || guess)){
 			//System.out.println("billiard to cellar");
 			return "1";
 		}
@@ -2943,11 +3001,13 @@ public class Bot2 implements BotAPI {
 			//System.out.println("din to conservatory");
 			return "2";
 		}
-		else //System.out.println(room+" to ?");
+//		else //System.out.println(room+" to ?");
 
-		return "1";
+			return "1";
 	}
 
+	
+	//returns one of your cards when another player guesses
 	public String getCard(Cards matchingCards) {
 		if(player.hasCard("plum") && matchingCards.contains("plum")) {
 			return "plum";
@@ -3027,30 +3087,91 @@ public class Bot2 implements BotAPI {
 		return null;
 	}
 
+	/*
+	 * It stores the names of the other players locally 
+	 * plus it counts the number of other players.
+	 */
 	@Override
 	public void notifyPlayerName(String playerName) {
 		// TODO Auto-generated method stub
 
+		if(!playerName.equalsIgnoreCase("Bot2"))
+		{
+			if(otherPlayer1.equals("null"))
+			{
+				otherPlayer1 = playerName;
+				otherPlayersNum ++;
+			}
+			else if(otherPlayer2.equals("null"))
+			{
+				otherPlayer2 = playerName;
+				otherPlayersNum ++;
+			}
+			else if(otherPlayer3.equals("null"))
+			{
+				otherPlayer3 = playerName;
+				otherPlayersNum ++;
+			}
+		}
+		//System.out.println("playerNum: "+ otherPlayersNum);
 	}
 
 	@Override
 	public void notifyTurnOver(String playerName, String position) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void notifyQuery(String playerName, String query) {
-		// TODO Auto-generated method stub
-
+		currentPlayer = playerName;
 	}
 
+	
+	/*
+	 * Checks if the other players don’t show a card on our bots turn and 
+	 * if all players don’t show a card then guess is true and the 
+	 * current guess is stored in guessWeapon, guessSuspect and guessRoom. 
+	 * The bot is now ready to move to the cellar and accuse.
+	 */
 	@Override
 	public void notifyReply(String playerName, boolean cardShown) {
-		// TODO Auto-generated method stub
 
+		if(currentPlayer.equalsIgnoreCase("Bot2"))
+		{
+			if(playerName.equals(otherPlayer1))
+			{
+				if(!cardShown) 
+				{
+					//System.out.println(playerName+" : "+otherPlayer1+" true");
+					counterNotifyReply++;
+				}
+			}
+			else if(playerName.equals(otherPlayer2))
+			{
+				if(!cardShown) 
+				{
+					//System.out.println(playerName+" : "+otherPlayer1+" true");
+					counterNotifyReply++;
+				}
+			}
+			else if(playerName.equals(otherPlayer3))
+			{
+				if(!cardShown) counterNotifyReply++;
+			}
+		}
+
+		if(counterNotifyReply == otherPlayersNum)
+		{
+			//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			guessWeapon = possWeapon;
+			guessRoom = possRoom;
+			guessSuspect = possSuspect;	
+			guess = true;
+		}
+
+		//		if(cardShown) //System.out.print("true ");
+		//		else //System.out.print("false ");
+
+		//		if(currentPlayer.equalsIgnoreCase("Bot2") && !cardShown)
 	}
-
-
 
 }
