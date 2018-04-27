@@ -46,7 +46,7 @@ public class Garlic implements BotAPI {
 	private int otherPlayersNum = 0;
 	private int counterNotifyReply = 0;
 	private Queue<String> q = new LinkedList<String>();
-
+private int c;
 	public Garlic (Player player, PlayersInfo playersInfo, Map map, Dice dice, Log log, Deck deck) {
 		this.player = player;
 		this.playersInfo = playersInfo;
@@ -62,6 +62,7 @@ public class Garlic implements BotAPI {
 		murderRoom = false;
 		murderSuspect = false;
 		guess = false;
+		c=0;
 	}
 
 	/*
@@ -76,21 +77,42 @@ public class Garlic implements BotAPI {
 		{
 			if(!player.hasCard(Names.ROOM_CARD_NAMES[i]) && !player.hasSeen(Names.ROOM_CARD_NAMES[i])) counter ++;
 		}
-		if(counter == 1) murderRoom = true;
+		if(counter == 1) 
+		{	
+			murderRoom = true;
+			for(int i=0; i<Names.ROOM_CARD_NAMES.length; i++)
+			{
+				if(!player.hasCard(Names.ROOM_CARD_NAMES[i]) && !player.hasSeen(Names.ROOM_CARD_NAMES[i])) guessRoom = Names.ROOM_NAMES[i];
+			}
+		}
 
 		counter = 0;
 		for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.SUSPECT_NAMES[i]) && !player.hasSeen(Names.SUSPECT_NAMES[i])) counter ++;
 		}
-		if(counter == 1) murderSuspect = true;
-
+		if(counter == 1) 
+		{	
+			murderSuspect = true;
+			for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
+			{
+				if(!player.hasCard(Names.SUSPECT_NAMES[i]) && !player.hasSeen(Names.SUSPECT_NAMES[i])) guessSuspect = Names.SUSPECT_NAMES[i];
+			}
+		}
+		
 		counter = 0;
 		for(int i=0; i<Names.WEAPON_NAMES.length; i++)
 		{
 			if(!player.hasCard(Names.WEAPON_NAMES[i]) && !player.hasSeen(Names.WEAPON_NAMES[i])) counter ++;
 		}
-		if(counter == 1) murderWeapon = true;
+		if(counter == 1) 
+		{
+			murderWeapon = true;
+			for(int i=0; i<Names.WEAPON_NAMES.length; i++)
+			{
+				if(!player.hasCard(Names.WEAPON_NAMES[i]) && !player.hasSeen(Names.WEAPON_NAMES[i])) guessWeapon = Names.WEAPON_NAMES[i];
+			}
+		}
 	}
 
 	public String getName() {
@@ -100,7 +122,7 @@ public class Garlic implements BotAPI {
 	public String getCommand() {
 		//if token is in corridor roll
 
-		//System.out.println("\nGarlic "+token.getName());
+		System.out.println("\nGarlic "+token.getName());
 
 		checkMurder();
 
@@ -139,7 +161,7 @@ public class Garlic implements BotAPI {
 			{
 				if(room.equalsIgnoreCase(Names.ROOM_CARD_NAMES[i])) {			//if the bot is ready to question
 					questionAsked = true;
-					//System.out.println("question");
+					System.out.println("question");
 					//System.out.println("weapon: "+possWeapon);
 					//System.out.println("room; "+possRoom);
 					//System.out.println("suspect: "+possSuspect);
@@ -147,7 +169,7 @@ public class Garlic implements BotAPI {
 				}
 				if(((murderWeapon && murderRoom && murderSuspect) || guess) && room.equalsIgnoreCase("Cellar"))//for accuse
 				{
-					//System.out.println("accuse");
+					System.out.println("accuse" +" : "+ ++c);
 					return "accuse";
 				}
 			}
@@ -158,7 +180,7 @@ public class Garlic implements BotAPI {
 		}
 		if(map.isCorridor(token.getPosition()) && !moveOver)
 		{
-			//System.out.println("roll");
+			System.out.println("roll");
 			return "roll";
 		}
 		if(token.isInRoom() && !moveOver)		//for passages and roll
@@ -168,40 +190,40 @@ public class Garlic implements BotAPI {
 			{
 				questionAsked = false;
 				moveOver = true;
-				//System.out.println("passage: lounge to conservatory");
+				System.out.println("passage: lounge to conservatory");
 				return "passage";
 			}
 			else if(room.equalsIgnoreCase("study") && !player.hasCard("kitchen") && !player.hasSeen("kitchen") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
-				//System.out.println("passage: study to kitchen");
+				System.out.println("passage: study to kitchen");
 				return "passage";
 			}
 			if(room.equalsIgnoreCase("conservatory") && !player.hasCard("lounge") && !player.hasSeen("lounge") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
-				//System.out.println("passage: conservatory to lounge");
+				System.out.println("passage: conservatory to lounge");
 				return "passage";
 			}
 			else if(room.equalsIgnoreCase("kitchen") && !player.hasCard("study") && !player.hasSeen("study") && !guess)
 			{
 				questionAsked = false;
 				moveOver = true;
-				//System.out.println("passage: kitchen to study");
+				System.out.println("passage: kitchen to study");
 				return "passage";
 			}
 			else
 			{
-				//System.out.println("roll");
+				System.out.println("roll");
 				roomOut = true;
 				return "roll";
 			}
 		}
 		else
 		{
-			//System.out.println("done");
+			System.out.println("turns : "+ ++c +"\n");
 			checkNotes = true;
 			roomOut = false;
 			questionAsked = true;
@@ -2943,32 +2965,19 @@ public class Garlic implements BotAPI {
 			//System.out.println("guessSuspect!!!!!!!!!!!!!!!!!!!!!");
 			return guessSuspect;
 		}
+		else if(murderSuspect && (!murderRoom || !murderWeapon)) //if all other possibilities have been eliminated
+		{
+			for(int i=0; i<Names.SUSPECT_NAMES.length; i++)
+			{
+				if(player.hasCard(Names.SUSPECT_NAMES[i]))
+				{
+					return Names.SUSPECT_NAMES[i];
+				}
+			}
+		}
 		else if(murderSuspect) //returns the murderer if all other possibilities have been eliminated
 		{
-			if(!player.hasCard("plum") && !player.hasSeen("plum")) {
-				possSuspect = "plum";
-				return "plum";
-			}
-			if(!player.hasCard("white") && !player.hasSeen("white")) {
-				possSuspect = "white";
-				return "white";
-			}
-			if(!player.hasCard("scarlett") && !player.hasSeen("scarlett")) {
-				possSuspect = "scarlett";
-				return "scarlett";
-			}
-			if(!player.hasCard("green") && !player.hasSeen("green")) {
-				possSuspect = "green";
-				return "green";
-			}
-			if(!player.hasCard("mustard") && !player.hasSeen("mustard")) {
-				possSuspect = "mustard";
-				return "mustard";
-			}
-			if(!player.hasCard("peacock") && !player.hasSeen("peacock")) {
-				possSuspect = "peacock";
-				return "peacock";
-			}
+			return guessSuspect;
 		}
 		else
 		{
@@ -2994,32 +3003,19 @@ public class Garlic implements BotAPI {
 			//System.out.println("guessWeapon!!!!!!!!!!!!!!!!!!!!!");
 			return guessWeapon;
 		}
+		else if(murderWeapon && (!murderRoom || !murderSuspect)) //if all other possibilities have been eliminated
+		{
+			for(int i=0; i<Names.WEAPON_NAMES.length; i++)
+			{
+				if(player.hasCard(Names.WEAPON_NAMES[i]))
+				{
+					return Names.WEAPON_NAMES[i];
+				}
+			}
+		}
 		else if(murderWeapon) //if all other possibilities have been eliminated
 		{
-			if(!player.hasCard("rope") && !player.hasSeen("rope")) {
-				possWeapon = "rope";
-				return "rope";
-			}
-			if(!player.hasCard("dagger") && !player.hasSeen("dagger")) {
-				possWeapon = "dagger";
-				return "dagger";
-			}
-			if(!player.hasCard("wrench") && !player.hasSeen("wrench")) {
-				possWeapon = "wrench";
-				return "wrench";
-			}
-			if(!player.hasCard("pistol") && !player.hasSeen("pistol")) {
-				possWeapon = "pistol";
-				return "pistol";
-			}
-			if(!player.hasCard("candlestick") && !player.hasSeen("candlestick")) {
-				possWeapon = "candlestick";
-				return "candlestick";
-			}
-			if(!player.hasCard("lead pipe") && !player.hasSeen("lead pipe")) {
-				possWeapon = "lead pipe";
-				return "lead pipe";
-			}
+			return guessWeapon;
 		}
 		else
 		{
@@ -3216,16 +3212,16 @@ public class Garlic implements BotAPI {
 			//System.out.println("din to study");
 			return "1";
 		}
-		else if(token.getRoom().hasName("Dining Room") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")){
+		else if(token.getRoom().hasName("dining room") && !player.hasCard("conservatory") && !player.hasSeen("conservatory")){
 			//System.out.println("din to conservatory");
 			return "2";
 		}
-//		else //System.out.println(room+" to ?");
+		//		else //System.out.println(room+" to ?");
 
-			return "1";
+		return "1";
 	}
 
-	
+
 	//returns one of your cards when another player guesses
 	public String getCard(Cards matchingCards) {
 		if(player.hasCard("plum") && matchingCards.contains("plum")) {
@@ -3344,7 +3340,7 @@ public class Garlic implements BotAPI {
 		currentPlayer = playerName;
 	}
 
-	
+
 	/*
 	 * Checks if the other players don't show a card on our bots turn and 
 	 * if all players don't show a card then guess is true and the 
@@ -3380,14 +3376,52 @@ public class Garlic implements BotAPI {
 
 		if(counterNotifyReply == otherPlayersNum)
 		{
-			//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			if(!player.hasCard(room))
+//						System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			if(!player.hasCard(room) && !player.hasCard(possSuspect) && !player.hasCard(possWeapon))
 			{
+//								System.out.println("??????????????????????????????????????????????????????????????????????????");
 				guessWeapon = possWeapon;
 				guessRoom = possRoom;
 				guessSuspect = possSuspect;	
 				guess = true;
 			}
+			else if(!player.hasCard(room) && player.hasCard(possSuspect) && player.hasCard(possWeapon))
+			{
+				guessRoom = possRoom;
+				murderRoom = true;
+			}
+			else if(!player.hasCard(possSuspect) && player.hasCard(room) && player.hasCard(possWeapon))
+			{
+				guessSuspect = possSuspect;
+				murderSuspect = true;
+			}
+			else if(!player.hasCard(possWeapon) && player.hasCard(possSuspect) && player.hasCard(room))
+			{
+				guessWeapon = possWeapon;
+				murderWeapon = true;
+			}
+			else if(!player.hasCard(room) && !player.hasCard(possSuspect) && player.hasCard(possWeapon))
+			{
+				guessRoom = possRoom;
+				guessSuspect = possSuspect;	
+				murderRoom = true;
+				murderSuspect = true;
+			}
+			else if(!player.hasCard(room) && player.hasCard(possSuspect) && !player.hasCard(possWeapon))
+			{
+				guessRoom = possRoom;
+				guessWeapon = possWeapon;	
+				murderRoom = true;
+				murderWeapon = true;
+			}
+			else if(player.hasCard(room) && !player.hasCard(possSuspect) && !player.hasCard(possWeapon))
+			{
+				guessWeapon = possWeapon;
+				guessSuspect = possSuspect;	
+				murderSuspect = true;
+				murderWeapon = true;
+			}
+			
 		}
 
 		//		if(cardShown) //System.out.print("true ");
